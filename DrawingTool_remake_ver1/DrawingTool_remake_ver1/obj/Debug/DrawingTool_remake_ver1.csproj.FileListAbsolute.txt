@@ -1,0 +1,10 @@
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\bin\Debug\DrawingTool_remake_ver1.exe.config
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\bin\Debug\DrawingTool_remake_ver1.exe
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\bin\Debug\DrawingTool_remake_ver1.pdb
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.csprojAssemblyReference.cache
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.Form1.resources
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.Properties.Resources.resources
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.csproj.GenerateResource.cache
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.csproj.CoreCompileInputs.cache
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.exe
+C:\Users\재설치용 임시\source\repos\DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj\Debug\DrawingTool_remake_ver1.pdb
