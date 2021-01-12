@@ -1,0 +1,21 @@
+.vs/
+.test/
+ssltGUI/bin/
+ssltGUI/obj/
+sslt관련 문서/
+
+현수GUI/WindowsFormsApp4/obj/
+
+Semantic_AddGray2RGB/Semantic/obj/
+
+Semantic/Semantic/obj/
+Semantic_App/Semantic/obj/
+Semantic_App/Semantic/obj/
+
+*.pyc
+__pycache__
+
+*.exe
+*.pdb
+*.cache
+*.resources
