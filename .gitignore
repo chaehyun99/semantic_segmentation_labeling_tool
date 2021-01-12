@@ -1,4 +1,4 @@
-.vs/
+﻿.vs/
 .test/
 ssltGUI/bin/
 ssltGUI/obj/
@@ -7,6 +7,8 @@ sslt관련 문서/
 현수GUI/WindowsFormsApp4/obj/
 
 Semantic_AddGray2RGB/Semantic/obj/
+
+DrawingTool_remake_ver1\DrawingTool_remake_ver1\obj
 
 Semantic/Semantic/obj/
 Semantic_App/Semantic/obj/
