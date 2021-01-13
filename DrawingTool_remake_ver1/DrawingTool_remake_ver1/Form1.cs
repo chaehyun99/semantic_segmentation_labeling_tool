@@ -104,9 +104,9 @@ namespace DrawingTool_remake_ver1
         //이미지 배율(일단 원본 기준 배율로 설정)
 
         ///TODO: 테스트한다고 대충짰지만..
-        ///원하는 배율을 param으로 받는 setScale() 메소드 구현해야됨.
+        //원하는 배율을 param으로 받는 setScale() 메소드 구현해야됨.
 
-        
+
         //private double zoom_scale = 1.0F;
         private int zoom_scale = 1;                 //좌표부터 잡고 배율 바꾸기.
 
@@ -213,13 +213,63 @@ namespace DrawingTool_remake_ver1
         private Bitmap drawArea;
 
         private Rectangle srcImgRect;
-        /// 각종 좌표
-        ///Point cursor_pos_screen; //이건 그냥 e.X임. <삭제요망>
-        ///Point cursor_pos_pBox; //pBox기준의 커서좌표-> Get_mouse_pos_pBox()임.
-        //->cursor_pt_pBox = SetPos(PictureBox pBox); //param으로 준 픽쳐박스를 기준으로 한
-        ///Point imgRect_pos_pBox; // 애초에 이게 imgRect라고 생각하기로 함.
+
+        #region <이미지 확대상태에서 이동>
+
+        /// <summary>
+        /// 스크롤가능 여부
+        /// </summary>
+        private bool isScroll = false;
+
+        private Point move_startpt;
+        private Point move_endpt;
+
+        /// <summary>
+        /// 이미지를 커서의 이동에 따라 이동하고 보여줍니다.
+        /// </summary>
+        private void Move_srcImg_location()
+        {
+            if (false == isScroll)
+            {
+                return;
+            }
+
+            srcImgRect.X += move_endpt.X - move_startpt.X;
+            srcImgRect.Y += move_endpt.Y - move_startpt.Y;
+            Console.WriteLine("현재 srcImgRect.X, Y   " + srcImgRect.X + "," + srcImgRect.Y);
+            Console.WriteLine("현재 srcImgRect.Location" + srcImgRect.Location.ToString());
+            Console.WriteLine("현재 srcImgRect.특성     " + srcImgRect.ToString());
+            Console.WriteLine("==============");
+
+            pictureBox1.Refresh();
+        }
+        /// <summary>
+        /// 이미지의 위치를 특정 좌표로 이동 후 보여줍니다.
+        /// </summary>
+        /// <param name="new_location">이미지의 좌상단이 이동할 pictureBox 기준의 상대좌표.</param>
+        private void Move_srcImg_location(Point new_location)
+        {
+            srcImgRect.Location = new_location;
+
+            pictureBox1.Refresh();
+        }
 
 
+        #endregion
+
+        #region <커서 모드 변경>
+        private int cursor_mode = 2;
+
+        /// <summary>
+        /// 커서 모드를 변경합니다.
+        /// </summary>
+        /// <param name="num_mode">1:scroll, 2:paint</param>
+        private void Chan_cursor_mode(int num_mode)
+        {
+            cursor_mode = num_mode;
+            return;
+        }
+        #endregion
 
         #region <폼 기본 설정>
         public Form1()
@@ -263,12 +313,6 @@ namespace DrawingTool_remake_ver1
             
 
             ResizeRedraw = true;
-
-            //이미지영역 최초설정 (픽처박스와 동일하게)
-            srcImgRect = new Rectangle(0,0, pictureBox1.Width, pictureBox1.Height); //srcImgRect.location는 pictureBox1에 대한 상대좌표로 설정했음.
-
-
-            ///<설명>픽처박스(600,450)에 들어갈 기본 비트맵(1200,900)</설명>
             int _drawArea_w = pictureBox1.Width;
             int _drawArea_h = pictureBox1.Height; //일단 그대로 해보고 나중에 1200,900 넣어서 배율 구현
             drawArea = new Bitmap(_drawArea_w,_drawArea_h);
@@ -315,104 +359,156 @@ namespace DrawingTool_remake_ver1
         #region <마우스 down/이동/up>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            #region <sender 캐스팅 & 좌표지정>
-            //sender 캐스팅해서 받기(아마 픽쳐박스)
-            PictureBox picBox_down = (PictureBox)sender;
-            //커서 상태 따라 다른 기능(미구현)
-            //커서 좌표 갱신 (setPos() 함수로 받기 지정)
-            Point mousePos_down = Get_mouse_pos_pBox(picBox_down); //컨트롤 기준의 커서위치 지정
-            #endregion
-
-            //펜 좌표 설정
-            pen_startpt.X = (int)(mousePos_down.X / zoom_scale); //프로그램플로우 상 start pt가 처음으로 설정되는 곧.
-            pen_startpt.Y = (int)(mousePos_down.Y / zoom_scale);
-
-            if (e.Button == MouseButtons.Left)
+            switch (cursor_mode)
             {
-               
-                using (Graphics g = Graphics.FromImage(pictureBox1.Image)) //픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
-                {
+                case 1: //scroll mode
+                    isScroll = true;
+                    move_startpt = Get_mouse_pos_pBox(pictureBox1);
+                    break;
+                case 2: //paint mode
+                    #region <sender 캐스팅 & 좌표지정>
+                    //sender 캐스팅해서 받기(아마 픽쳐박스)
+                    PictureBox picBox_down = (PictureBox)sender;
+                    //커서 상태 따라 다른 기능(미구현)
+                    //커서 좌표 갱신 (setPos() 함수로 받기 지정)
+                    Point mousePos_down = Get_mouse_pos_pBox(picBox_down); //컨트롤 기준의 커서위치 지정
+                    #endregion
+
+                    //펜 좌표 설정
+                    pen_startpt.X = (int)((mousePos_down.X - srcImgRect.X) / zoom_scale ); //프로그램플로우 상 start pt가 처음으로 설정되는 곧.
+                    pen_startpt.Y = (int)((mousePos_down.Y - srcImgRect.Y) / zoom_scale );
                     
-                    Pen blackPen = new Pen(Color.Black, brush_Size);
-                    // Create rectangle.
-                    Rectangle rect = new Rectangle(pen_startpt.X, pen_startpt.Y, 1, 1);
+                    ///<해설>
+                    ///pen좌표*zoom배율+src의 좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
+                    /// </해설>
 
-                    // Draw rectangle to screen.
-                    g.DrawRectangle(blackPen, rect);
+                    if (e.Button == MouseButtons.Left)
+                    {
 
-                    ///
-                    ///Brush aBrush = (Brush)Brushes.Black;
-                    ///g.FillRectangle(aBrush, rect);
-                    ///
-                    pictureBox1.Refresh();
-                }
+                        using (Graphics g = Graphics.FromImage(pictureBox1.Image)) //픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
+                        {
 
+                            Pen blackPen = new Pen(Color.Black, brush_Size);
+                            // Create rectangle.
+                            Rectangle rect = new Rectangle(pen_startpt.X, pen_startpt.Y, 1, 1);
+
+                            // Draw rectangle to screen.
+                            g.DrawRectangle(blackPen, rect);
+
+                            ///
+                            ///Brush aBrush = (Brush)Brushes.Black;
+                            ///g.FillRectangle(aBrush, rect);
+                            ///
+                            pictureBox1.Refresh();
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("현재 마우스 좌측 버튼만 허용.");
+                    }
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                MessageBox.Show("현재 마우스 좌측 버튼만 허용.");
-            }
+
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-
-            //펜 끝점 설정
-            pen_endpt.X = pen_startpt.X;
-            pen_endpt.Y = pen_startpt.Y;
-
-            #region <sender 캐스팅 & 좌표지정>
-            //sender 캐스팅해서 받기
-            PictureBox picBox_move = (PictureBox)sender;
-            ///컨트롤내 커서 좌표 갱신(기존과 다르게 외부에서 참조하는걸로)
-            Point mousePos_move = Get_mouse_pos_pBox(picBox_move); //컨트롤 기준
-            #endregion
-
-            if (e.Button == MouseButtons.Left)
+            switch (cursor_mode)
             {
-                
+                case 1:
+                    move_endpt = Get_mouse_pos_pBox(pictureBox1);
+                    Move_srcImg_location(); 
+                    //isScroll = false면 그냥 반환되니까 커서좌표만 이동. true면 이미지도 같이 이동.
+                    move_startpt = move_endpt;
+                    break;
+                case 2:
+                    //펜 끝점 설정
+                    pen_endpt.X = pen_startpt.X;
+                    pen_endpt.Y = pen_startpt.Y;
 
-                //펜 위치 갱신하고 그리기
-                pen_startpt.X = (int)(mousePos_move.X / zoom_scale);
-                pen_startpt.Y = (int)(mousePos_move.Y / zoom_scale);
+                    #region <sender 캐스팅 & 좌표지정>
+                    //sender 캐스팅해서 받기
+                    PictureBox picBox_move = (PictureBox)sender;
+                    ///컨트롤내 커서 좌표 갱신(기존과 다르게 외부에서 참조하는걸로)
+                    Point mousePos_move = Get_mouse_pos_pBox(picBox_move); //컨트롤 기준
+                    #endregion
 
-                DrawShape();
+                    if (e.Button == MouseButtons.Left)
+                    {
 
 
-                ///이미지 확대된 배율에 맞게 갱신해야됨 조심할것.
-                //콘솔에서 좌표 확인?
+                        //펜 위치 갱신하고 그리기
+                        pen_startpt.X = (int)((mousePos_move.X - srcImgRect.X )/ zoom_scale);
+                        pen_startpt.Y = (int)((mousePos_move.Y - srcImgRect.Y )/ zoom_scale);
 
+                        ///<해설>
+                        ///pen좌표*zoom배율+src의 좌표 = mosPos 이니까 우변으로 넘기고 나누면 같아짐.
+                        /// </해설>
+
+                        DrawShape();
+
+
+                        ///이미지 확대된 배율에 맞게 갱신해야됨 조심할것.
+                        //콘솔에서 좌표 확인?
+
+                    }
+                    else
+                    {
+                        //안눌렀어도 좌표는 갱신은 됨.
+                    }
+
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                //안눌렀어도 좌표는 갱신은 됨.
-            }
+            
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            switch (cursor_mode)
             {
-                #region <sender 캐스팅 & 좌표지정>
-                //sender 형변환해서  받기
-                PictureBox picBox_up = (PictureBox)sender;
-                //커서 상태 토글
-                //커서 좌표 갱신(확대축소 고려하기)
-                Point mousePos_up = Get_mouse_pos_pBox(picBox_up);
-                #endregion
+                case 1:
 
-                //펜 위치 갱신하고 그리기
-                pen_startpt.X = (int)(mousePos_up.X / zoom_scale);
-                pen_startpt.Y = (int)(mousePos_up.Y / zoom_scale);
+                    isScroll = false;
+                    break;
+                case 2:
+
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        #region <sender 캐스팅 & 좌표지정>
+                        //sender 형변환해서  받기
+                        PictureBox picBox_up = (PictureBox)sender;
+                        //커서 상태 토글
+                        //커서 좌표 갱신(확대축소 고려하기)
+                        Point mousePos_up = Get_mouse_pos_pBox(picBox_up);
+                        #endregion
+
+                        //펜 위치 갱신하고 그리기
+                        pen_startpt.X = (int)((mousePos_up.X - srcImgRect.X) / zoom_scale);
+                        pen_startpt.Y = (int)((mousePos_up.Y - srcImgRect.Y) / zoom_scale);
+
+                        ///<해설>
+                        ///pen좌표*zoom배율+src의 좌표 = mosPos 니까 우변으로 넘기고 나누면 같아짐.
+                        /// </해설>
 
 
-                Console.WriteLine("L_mouseUP : (" + pen_startpt.X.ToString() + "," + pen_startpt.Y.ToString() + ")");
+                        Console.WriteLine("L_mouseUP : (" + pen_startpt.X.ToString() + "," + pen_startpt.Y.ToString() + ")");
 
+                    }
+                    else
+                    {
+                        MessageBox.Show("현재 마우스 좌측 버튼만 허용.");
+                    }
+
+                    break;
+                default:
+                    break;
             }
-            else
-            {
-                MessageBox.Show("현재 마우스 좌측 버튼만 허용.");
-            }
+
         }
 
         #endregion
@@ -427,7 +523,7 @@ namespace DrawingTool_remake_ver1
         {
             if (pictureBox1.Image != null) //빈 이미지면? 오류()
                 {
-                    e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic; //선 부드럽게
+                    //e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic; //선 부드럽게
 
                 ///<코드수정>
                 ///imgRect = new Rectangle(0,0, pictureBox1.Width, pictureBox1.Height);
@@ -497,8 +593,12 @@ namespace DrawingTool_remake_ver1
                 case Keys.Return:
                     break;
                 case Keys.Space:
+
+                    Move_srcImg_location(new Point(0,0));
+                    Console.WriteLine("이미지 강제이동: " + this.pictureBox1.Location.ToString());
+
                     srcImgRect = new Rectangle(this.PointToScreen(pictureBox1.Location).X, this.PointToScreen(pictureBox1.Location).Y, pictureBox1.Width, pictureBox1.Height);
-                    Console.WriteLine("마우스커서 강제이동:"+ srcImgRect.X+","+ srcImgRect.Y);
+                    Console.WriteLine("마우스커서 강제이동:"+ srcImgRect.ToString());
                     SetCursorPos(Convert.ToInt32(srcImgRect.X), Convert.ToInt32(srcImgRect.Y));
                     break;
                 case Keys.End:
@@ -825,5 +925,24 @@ namespace DrawingTool_remake_ver1
         }
         #endregion
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            switch (cursor_mode)
+            {
+                case 1:
+                    Chan_cursor_mode(2);
+                    break;
+                case 2:
+                    Chan_cursor_mode(1);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
