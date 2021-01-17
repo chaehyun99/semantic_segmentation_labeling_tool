@@ -238,10 +238,10 @@ namespace TestProject
                     isPaint = false;
 
                     /////////////////////////////////////
-                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.
-                    
+                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.                    
                     ////////////////////////////////////
-
+                    ///
+                    //rgb_imglist.add((Image)this.sourceBitmap.Clone());
 
                     break;
                 default:
@@ -454,6 +454,11 @@ namespace TestProject
         /// <returns></returns>
         public static Rectangle FitAspectRatio(PictureBox picBox, Bitmap srcImg)
         {
+            ////////////////////////////////Base on this feature
+            ///https://stackoverflow.com/questions/6565703/math-algorithm-fit-image-to-screen-retain-aspect-ratio
+            ////////////////////////////////
+
+
             Rectangle ret_Rectangle = new Rectangle();
 
             int W = srcImg.Width;
@@ -540,7 +545,7 @@ namespace TestProject
             using(Graphics targetGraphics = Graphics.FromImage(targetBitmap))
             {
 
-                ///targetGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear; //이미지 보간 처리.
+                ///targetGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear; //이미지 보간 처리-부드럽게
 
 
                 //targetGraphics.DrawImage(this.sourceBitmap, targetImgRect, sourceRectangle, GraphicsUnit.Pixel);
@@ -550,9 +555,16 @@ namespace TestProject
 
 
 
-                //TODO: 배율 변경시, 이미지 이동시, 이미지 수정시 마다 소스이미지를 새로 그려주는것이 겹치니까 함수로 뺄 수 있으면 빼기
-                //TODO: 확대 상태에서, 배율을 변경하고 커서로 이동(스크롤)하면 setScale()이 호출된 순간의 이미지 잔상이 남아있는 문제.
-                //특히, 잔상이 남는 영역이 제한되어있으므로 확인해 볼것.
+                //TODO: 소스이미지 갱신하고 픽쳐박스 띄우는 부분 함수로 뺄 수 있는지?
+
+                ///<해결된문제>: 확대 상태에서, 배율을 변경하고 커서로 이동(스크롤)하면 
+                ///setScale()이 호출된 순간의 이미지 잔상이 남아있음.
+                ///특히, 잔상이 남는 영역이 특정 영역만큼 제한되어있으므로 확인해 볼것.
+                ///
+                /// =>setScale 내의 drawImage 파라미터 수정.       
+                /// </해결된문제>
+
+
             }
 
 
@@ -639,7 +651,41 @@ namespace TestProject
 
             //타겟영역 갱신.
             e.Graphics.DrawImage(this.sourceBitmap, targetImgRect);
-            //TODO:인자가 this.sourceBitmap이면 중간에 저장하거나 했을때,
+
+            /// Q-인자가 this.sourceBitmap인데..마우스 이벤트중에 스냅샷을 저장할때 어떤 이미지를 어디에 clone하는가?
+            /// A-mouse_down에서 그리기가 끝날때, rgb_imglist.add(this.SourceBitmap.clone());
+            /// TODO: mouse_down..... isPaint=False; 뒤에 스냅샷 삽입.
+            /// 
+
+            
+
+            /////////////// Undo,Redo 작동방식? //////
+            /// 
+            ///1.1. 최신 작업내역에 해당하는 스냅샷Image는 stack_Undo의 Top에 있다.
+            ///
+            ///2.1. Undo를 누르면 stack_Undo의 Top을 꺼내서 stack_Redo에 삽입한다.
+            ///2.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
+            ///
+            ///3.1. 마우스 이벤트(그리기)를 통해 stack_Undo에 스냅샷이 추가 될때, stack_Redo는 클리어된다.(저장할 이유가 없다)
+            ///
+            ///4.1. Redo를 누르면 stack_Redo의 Top을 꺼내서 stack_Undo에 삽입한다.
+            ///4.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
+            ///
+            ///5.1. 다른썸네일을 클릭하는 순간, rgb_imglist.Add(stack_Undo.Top);
+            ///5.2. stack_redo&undo -> clear().
+            /////////////////
+            ///
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
