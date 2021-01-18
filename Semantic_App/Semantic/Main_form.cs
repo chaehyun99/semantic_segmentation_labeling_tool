@@ -76,7 +76,9 @@ namespace Semantic
                 Color.MediumTurquoise,  // 18=sofa
                 Color.Magenta,          // 19=train
                 Color.Gray,             // 20=tv/monitor
-                //이하 규격외 이미지 대상 테스트 전용.
+                ///이하 규격외 이미지 대상 테스트 전용.
+                ///ColorTable의 인덱스 관련된 오류가 있을때 주석 풀고 테스트.
+                /*
                 Color.Tan,
                 Color.Aqua,
                 Color.DarkCyan,
@@ -97,6 +99,7 @@ namespace Semantic
                 Color.Blue,
                 Color.Bisque,
                 Color.DarkGoldenrod//40
+                */
              };
 
         }
@@ -334,7 +337,7 @@ namespace Semantic
             ///bool a = Color.Black == Color.FromArgb(255, 0, 0, 0);
             /// MessageBox.Show("답은? " + a); // False. 이유는 아래에
             ////////////////////////////////////////////////////////////////////////////////////////////////
-            ///[참고][중요] Color.Black과  Color.FromArgb(255,0,0,0)의 ARGB값 동일, Name 다름
+            ///[참고] Color.Black과  Color.FromArgb(255,0,0,0)의 ARGB값 동일, Name 다름
             ///후자는 #FF000000, 전자는 Black. 따라서 비교할때는 Color.ToArgb()씌워서 비교
             /////////////////////////////////////////////////////////////////////////////////////////////////
           

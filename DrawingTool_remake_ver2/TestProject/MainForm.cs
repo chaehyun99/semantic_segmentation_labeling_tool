@@ -104,7 +104,7 @@ namespace TestProject
             InitializeComponent();
 
 
-            #region 이벤트를 설정한다.
+            #region 이벤트를 설정한다. -merge할때, openMenuItem, saveAsMenuItem 필요없음.
 
 
             this.openMenuItem.Click         += openMenuItem_Click;
@@ -141,14 +141,10 @@ namespace TestProject
 
                 case 2: //paint mode
 
-                    #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
 
                     //커서 좌표 갱신 
-
                     Point mousePos = e.Location;
-
-                    #endregion
 
                     //그리기 활성화
                     isPaint = true;
@@ -158,22 +154,32 @@ namespace TestProject
                     pen_startpt.Y = (int)((mousePos.Y - targetImgRect.Y) / zoomScale);
 
                     ///<해설>
-                    ///pen좌표*zoom배율+src의 좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
+                    ///pen좌표*zoom배율+targetRect좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
                     ///= 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안된단 뜻.
-                    /// </해설>
+                    ///</해설>
 
-                    using (Graphics g = Graphics.FromImage(sourceBitmap)) 
+
+                    #region 클릭만 했을때도 점(원) 그려짐.
+                    using (Pen myPen = new Pen(brush_Color, 1))
+                    using (Graphics g = Graphics.FromImage(sourceBitmap))
                     {
+                        Brush aBrush = new SolidBrush(brush_Color); //TODO: Yellow 대신에 brush_Color로.
 
-                        Pen blackPen = new Pen(Color.Black, brush_Size);
-                        // Create rectangle.
-                        Rectangle rect = new Rectangle(pen_startpt.X, pen_startpt.Y, 1, 1);
+                        /* //Create Circle */
+                        Rectangle rectDot = new Rectangle(pen_startpt.X - brush_Size / 2, pen_startpt.Y - brush_Size / 2, brush_Size, brush_Size);
 
-                        Brush aBrush = (Brush)Brushes.Black;
-                        g.FillRectangle(aBrush, rect);
+                        g.DrawEllipse(myPen, rectDot);
+                        g.FillEllipse(aBrush, rectDot);
+
+                        //Create rectangle.
+                       // g.FillRectangle(Brushes.Black, rect_dot);
+
+
+                        //g.DrawRectangle(aBrush, )
 
                         pictureBox2.Refresh();
                     }
+                    #endregion
                     break;
                 default:
                     break;
@@ -241,7 +247,7 @@ namespace TestProject
                     ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.                    
                     ////////////////////////////////////
                     ///
-                    //rgb_imglist.add((Image)this.sourceBitmap.Clone());
+                    //<UNDO_STACK_NAME>.add((Image)this.sourceBitmap.Clone());
 
                     break;
                 default:
@@ -260,7 +266,6 @@ namespace TestProject
         private void SetBrush_Size(int new_size)
         {
             brush_Size = new_size;
-            Console.WriteLine("브러시 크기변경: " + Convert.ToString(brush_Size));
             return;
         }
         #endregion
@@ -296,6 +301,10 @@ namespace TestProject
         /// <param name="g"></param>
         private void DrawFreeLine(Pen myPen, Graphics g)
         {
+            //펜선이 꺾일때 끊기지 않고 그려지게 함. 기본설정은 LineCap.Flat임.
+            myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
             g.DrawLine(myPen, pen_startpt, pen_endpt);
         }
 
@@ -544,10 +553,7 @@ namespace TestProject
 
             using(Graphics targetGraphics = Graphics.FromImage(targetBitmap))
             {
-
-                ///targetGraphics.InterpolationMode = InterpolationMode.HighQualityBilinear; //이미지 보간 처리-부드럽게
-
-
+                                    
                 //targetGraphics.DrawImage(this.sourceBitmap, targetImgRect, sourceRectangle, GraphicsUnit.Pixel);
                 targetGraphics.DrawImage(this.sourceBitmap, targetImgRect);
                 pictureBox2.Refresh();
@@ -645,19 +651,34 @@ namespace TestProject
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             //Rectangle rect = new Rectangle(0, 0, (int)Math.Round(this.sourceBitmap.Width * zoomScale), (int)Math.Round(this.sourceBitmap.Height * zoomScale));
-            
-            //보간모드 지정: google '최근방 이웃 보간법'
-            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+
+            #region 보간 방식 지정. 
+
+            //scale 1을 기준으로 변경
+            if (zoomScale < 1)
+            {
+                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            }
+            else
+            {
+                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+
+            #endregion
 
             //타겟영역 갱신.
             e.Graphics.DrawImage(this.sourceBitmap, targetImgRect);
 
-            /// Q-인자가 this.sourceBitmap인데..마우스 이벤트중에 스냅샷을 저장할때 어떤 이미지를 어디에 clone하는가?
-            /// A-mouse_down에서 그리기가 끝날때, rgb_imglist.add(this.SourceBitmap.clone());
-            /// TODO: mouse_down..... isPaint=False; 뒤에 스냅샷 삽입.
+
+
+                /// 
+            /// TODO: mouse_down..... isPaint=False; 뒤에 스냅샷 삽입하는 라인 작성.
+            /// 
+            /// <되돌리기_스택_이름>.add(this.SourceBitmap.clone());
             /// 
 
-            
 
             /////////////// Undo,Redo 작동방식? //////
             /// 
@@ -698,7 +719,7 @@ namespace TestProject
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (brush_Size == 5)
+            if (brush_Size == 10)
                 return;
 
             SetBrush_Size(brush_Size + 1);
