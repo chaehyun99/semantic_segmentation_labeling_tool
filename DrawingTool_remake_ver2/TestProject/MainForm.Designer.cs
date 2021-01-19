@@ -177,7 +177,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(528, 40);
+            this.button1.Location = new System.Drawing.Point(495, 42);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 24);
             this.button1.TabIndex = 8;
@@ -187,7 +187,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(460, 40);
+            this.button2.Location = new System.Drawing.Point(427, 42);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(62, 23);
             this.button2.TabIndex = 9;
@@ -197,7 +197,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(601, 33);
+            this.button3.Location = new System.Drawing.Point(577, 33);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(49, 40);
             this.button3.TabIndex = 10;
@@ -235,7 +235,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(73, 33);
             this.button6.TabIndex = 13;
-            this.button6.Text = "창에 맞춤";
+            this.button6.Text = "원위치";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
