@@ -67,7 +67,7 @@
             this.widthTextBox.Location = new System.Drawing.Point(52, 40);
             this.widthTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.widthTextBox.Name = "widthTextBox";
-            this.widthTextBox.Size = new System.Drawing.Size(60, 26);
+            this.widthTextBox.Size = new System.Drawing.Size(60, 35);
             this.widthTextBox.TabIndex = 1;
             this.widthTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -77,7 +77,7 @@
             this.heightTextBox.Location = new System.Drawing.Point(153, 40);
             this.heightTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.heightTextBox.Name = "heightTextBox";
-            this.heightTextBox.Size = new System.Drawing.Size(60, 26);
+            this.heightTextBox.Size = new System.Drawing.Size(60, 35);
             this.heightTextBox.TabIndex = 3;
             this.heightTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -94,13 +94,14 @@
             // menuStrip
             // 
             this.menuStrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.menuStrip.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip.Size = new System.Drawing.Size(784, 33);
             this.menuStrip.TabIndex = 4;
             // 
             // fileMenuItem
@@ -109,14 +110,14 @@
             this.openMenuItem,
             this.saveAsMenuItem});
             this.fileMenuItem.Name = "fileMenuItem";
-            this.fileMenuItem.Size = new System.Drawing.Size(65, 24);
+            this.fileMenuItem.Size = new System.Drawing.Size(98, 33);
             this.fileMenuItem.Text = "파일(&F)";
             // 
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
             this.openMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openMenuItem.Size = new System.Drawing.Size(240, 24);
+            this.openMenuItem.Size = new System.Drawing.Size(366, 38);
             this.openMenuItem.Text = "파일 열기(&O)...";
             // 
             // saveAsMenuItem
@@ -124,7 +125,7 @@
             this.saveAsMenuItem.Enabled = false;
             this.saveAsMenuItem.Name = "saveAsMenuItem";
             this.saveAsMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveAsMenuItem.Size = new System.Drawing.Size(240, 24);
+            this.saveAsMenuItem.Size = new System.Drawing.Size(366, 38);
             this.saveAsMenuItem.Text = "파일 저장하기(&S)...";
             // 
             // percentTextBox
@@ -133,7 +134,7 @@
             this.percentTextBox.Location = new System.Drawing.Point(256, 39);
             this.percentTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.percentTextBox.Name = "percentTextBox";
-            this.percentTextBox.Size = new System.Drawing.Size(60, 26);
+            this.percentTextBox.Size = new System.Drawing.Size(60, 35);
             this.percentTextBox.TabIndex = 6;
             this.percentTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 

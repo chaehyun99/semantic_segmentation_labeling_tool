@@ -4,6 +4,26 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
+/*
+ * TODO: 커서의 모양을 변경해주는 설정이 필요함.
+ * 
+ * 출처: https://kjun.kr/596 [kjun.kr (kjcoder.tistory.com)]
+ * 
+ * 기본적인 커서 변경은 Cursor 클래스로 제공됨.
+ * 
+ * 어떤 이벤트,메서드에서 변경하는가?
+ * -> pictureBox2_MouseEnter, pictureBox2_MouseLeave, SetBrush_Size
+ * 
+ * 1.이동모드 2. 수정모드
+ * 
+ * 3.수정모드에서 브러시 크기별로 이미지 저장해둔 다음, cursor로 불러오기.(그 방법은 다음과 같다)
+Image image = Bitmap.FromFile("pen.png");
+Bitmap bitmap = new Bitmap(image);
+Graphics graphics = Graphics.FromImage(bitmap);
+IntPtr handle = bitmap.GetHicon();
+Cursor penCursor = new Cursor(handle);
+    */
+
 namespace TestProject
 {
     /// <summary>
@@ -206,7 +226,6 @@ namespace TestProject
                 default:
                     break;
             }
-
         }
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
@@ -240,7 +259,6 @@ namespace TestProject
                 default:
                     break;
             }
-
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
@@ -279,7 +297,6 @@ namespace TestProject
         }
         #endregion
 
-
         #region <Group: 브러시 크기 조정>
 
         /// <summary>
@@ -289,6 +306,8 @@ namespace TestProject
         private void SetBrush_Size(int new_size)
         {
             brush_Size = new_size;
+            //만약 커서 표시해줄거면 여기서 갱신해줘야됨.
+
             return;
         }
         #endregion
@@ -309,7 +328,7 @@ namespace TestProject
             //targetImgRect.X += move_endpt.X - move_startpt.X; 
             //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
 
-            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
+            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y); 
 
             /*TODO: pictureBox와 targetImgRect간의 Width, Height 대소관계에 따라 limit 걸어주기.
              * 
@@ -331,7 +350,7 @@ namespace TestProject
 
                 2.세로 스크롤
                     2-a. pBox.Height >= tRect.Height
-	                    1-a와 마찬가지로 스크롤 불필요
+	                    1-a와 마찬가지로 스크롤 불필요d
 
                     2-b. pBox.Height  <  tRect.Height
 	                    상하 스크롤 가능,  1-b와 제한조건 비슷.
@@ -342,9 +361,6 @@ namespace TestProject
                 Move_srcImg_location()->pBox2.refresh()
                 =>Move_srcImg_location내부에서 체크하도록 수정.
               */
-
-
-
             pictureBox2.Refresh();
         }
         #endregion
@@ -403,10 +419,8 @@ namespace TestProject
                 {
                     this.sourceBitmap = LoadBitmap(this.openFileDialog.FileName);
 
-                    //이미지 불러올때마다 좌표 잡아주기.
+                    //이미지 불러올때마다 좌표 잡기.
                     targetImgRect.Location = new Point(0, 0);
-
-                    //TODO: zoomScale-FitAspectRatio-SetScale-targetImageRect 간에 의존도 낮추기. (+메소드랑 속성 중복부분 재확인)
 
                     SetImageScale(GetScale_fitImg2PicBox(pictureBox2, sourceBitmap), true, true, true);
 
@@ -513,7 +527,6 @@ namespace TestProject
 
         // ///////////////////////////////////////////////////////////////////////////////////// Function
 
-
         #region 이미지를 픽쳐박스에 맞게 자동으로 조절.
 
         ////////////////////////////////Base on this Article. 
@@ -527,7 +540,8 @@ namespace TestProject
         /// </summary>
         /// <param name="picBox"></param>
         /// <param name="srcImg"></param>
-        public void Fit_Img2picBox(PictureBox picBox, Bitmap srcImg)
+        /// <param name="isAlignCenter">이미지의 정렬방식 지정. 비활성화 시 좌상단 정렬.</param>
+        public void Fit_Img2picBox(PictureBox picBox, Bitmap srcImg, bool isAlignCenter)
         {
             /*
              * 1.picBox와 srcbitmapImage의 속성값으로 Ratio구하기.
@@ -541,24 +555,28 @@ namespace TestProject
             int W_screen = picBox.Width;
             int H_screen = picBox.Height;
 
-            Rectangle srcRect = new Rectangle(0, 0, W_origin, H_origin);
-
             Double ratio = GetScale_fitImg2PicBox(picBox, sourceBitmap);
 
             int W_new = (int)Math.Round(ratio * W_origin);
             int H_new = (int)Math.Round(ratio * H_origin);
 
-            /*주석 풀면 스케일된 이미지가 픽쳐박스의 중앙에 일치. 
-             * 이미지를 필러박스, 레터박스 두면서 띄울 수 있음.
-             * TODO: 뭔가 좌표 안맞아서 보류.
-            targetImgRect.X = (int)(picBox.Location.X + (W_screen - W_new) / 2);
-            targetImgRect.Y = (int)(picBox.Location.Y + (H_screen - H_new) / 2);
-            */
-            targetImgRect.X = 0;
-            targetImgRect.Y = 0;
+            //이미지 정렬위치
+            if (true == isAlignCenter)
+            {
 
+                targetImgRect.X = (int)((W_screen - W_new) / 2);
+                targetImgRect.Y = (int)((H_screen - H_new) / 2);
 
+            }
+            else
+            {
 
+                targetImgRect.X = 0;
+                targetImgRect.Y = 0;
+
+            }
+
+            //이미지 표시 크기
             targetImgRect.Width = W_new;
             targetImgRect.Height = H_new;
 
@@ -715,8 +733,6 @@ namespace TestProject
 
         #endregion
 
-
-
         #region 인터페이스 (버튼/화면 입출력)
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -837,14 +853,14 @@ namespace TestProject
         {
             #region 
             #endregion
-            Fit_Img2picBox(pictureBox2, sourceBitmap);            
+            //3번째 인자를 True로 지정하면 중앙 정렬.
+            Fit_Img2picBox(pictureBox2, sourceBitmap, true);            
 
             ////??
             //SetScale(GetRatio_picBox2Rect(pictureBox2, targetImgRect);
             //SetScale(GetRatio_picBox2Rect(pictureBox2,targetImgRect), true, true, true);
 
         }
-
         #endregion
     }
 }
