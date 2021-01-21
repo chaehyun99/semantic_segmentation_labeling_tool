@@ -168,54 +168,50 @@ namespace TestProject
 
         //////////////////////////////////////////////////////////////////////////////////////////////////// Method
 
-        #region <마우스 이벤트>
-
-        /// 
-        /// TODO: mouse_down..... isPaint=False; 뒤에 스냅샷 삽입하는 라인 작성.
-        /// 
-        /// <되돌리기_스택_이름>.add(this.SourceBitmap.clone());
-        /// 
-
         #region UNDO 및 REDO - Method
 
-        /////////////// Undo,Redo 작동방식? //////
+        /////////////// Undo,Redo 작동방식//////
         /// 
-        ///1.1. 최신 작업내역에 해당하는 스냅샷Image는 stack_Undo의 Top에 있다.
+        ///1.1. 제일 최근에 수정한 이미지는 항상 stackUndo에 저장되있고 pictureBox2에도 떠있다.
         ///
-        ///2.1. Undo를 누르면 stack_Undo의 Top을 꺼내서 stack_Redo에 삽입한다.
-        ///2.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
+        ///2.1. Undo()를 호출하면 stackUndo의 last를 복제해서 stackRedo에 삽입한다.
+        ///2.2. 그 다음 stackUndo의 새로운 last을 (pictureBox2)에 띄운다.
         ///
-        ///3.1. 마우스 이벤트(그리기)를 통해 stack_Undo에 스냅샷이 추가 될때, stack_Redo는 클리어된다.(저장할 이유가 없다)
+        ///etc. '이미지를 띄운다'고 함은 sourceBitmap(혹은 Original_opac)를 바꿔준 뒤 
+        ///     pictureBox2.Refresh()를 통해 pictureBox_Paint 이벤트를 발생시키는 것.
+        /// 
+        ///3.1. 마우스 이벤트(그리기)를 통해 stackUndo에 스냅샷이 추가 될때, redoStack은 비운다.(저장할 이유가 없다)
         ///
-        ///4.1. Redo를 누르면 stack_Redo의 Top을 꺼내서 stack_Undo에 삽입한다.
-        ///4.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
+        ///4.1. Redo()를 호출하면 stackRedo의 Last를 복제해서 stackUndo에 삽입한다.
+        ///4.2. 그 다음 stackUndo의 새로운 Last를 pictureBox2에 띄운다..
         ///
-        ///5.1. 다른썸네일을 클릭하는 순간, rgb_imglist.Add(stack_Undo.Top);
-        ///5.2. stack_redo&undo -> clear().
-        /////////////////
+        ///5.1. 다른썸네일을 클릭하는 순간(이미지를 새로 불러올때)마다 두 저장소를 비워준 뒤 stackUndo에 원본이미지를 복제해서 삽입한다. 
+        ///////////////////
         ///
 
         //1. UNDO 구현
         private void UNDO()
         {
             //되돌리기가 수행가능한 상태인지 확인.
-            if (stackUndo.Count <= 0)
+            if (stackUndo.Count <= 1) //UNDO의 Last를 항상 화면에 띄우는 이미지와 같게할 것이므로 최소 1스택.
             {
                 return;
             }
             //1.최신 작업내역을 꺼내어 stackRedo에 저장한 뒤   
-            stackRedo.AddLast(stackUndo.Last);
+            stackRedo.AddLast(new Bitmap(stackUndo.Last.Value));
             stackUndo.RemoveLast();
 
             //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
-            if (stackRedo.Count>_maxHistory_)
+            if (stackRedo.Count > _maxHistory_)
             {
                 stackRedo.RemoveFirst();
             }
 
             //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
-            this.sourceBitmap = stackUndo.Last.Value;
-            pictureBox2.Refresh();          
+
+            this.sourceBitmap = new Bitmap(stackUndo.Last.Value);
+
+            pictureBox2.Refresh();
 
         }
 
@@ -229,9 +225,8 @@ namespace TestProject
                 return;
             }
             //1.최신 Undo내역을 꺼내어 stackUndo에 저장한 뒤   
-            stackUndo.AddLast(stackRedo.Last);
+            stackUndo.AddLast(new Bitmap(stackRedo.Last.Value));
             stackRedo.RemoveLast();
-
             //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
             if (stackUndo.Count > _maxHistory_)
             {
@@ -239,12 +234,15 @@ namespace TestProject
             }
 
             //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
-            this.sourceBitmap = stackUndo.Last.Value;
+            this.sourceBitmap = new Bitmap(stackUndo.Last.Value);
             pictureBox2.Refresh();
 
         }
 
-        //3. INPUT_Action (굳이 만들 필요는 없음.깔끔한 코드를 위해)
+        /// <summary>
+        /// 이미지가 수정될 때마다 stackUndo에 복제본 삽입.
+        /// </summary>
+        /// <param name="src4Input"></param>
         private void Input_Action(Bitmap src4Input)
         {
             if (null == src4Input)
@@ -252,11 +250,11 @@ namespace TestProject
                 return;
             }
 
-            //1.새로운 액션이 생겼으므로 기존의 저장값을 날린다.
+            //1.새로운 수정내용이 생겼으므로 기존의 redo스택을 날린다.
             stackRedo.Clear();
 
             //2.입력받은 액션(src4Input)을 stackUndo에 저장.
-            stackUndo.AddLast(src4Input);
+            stackUndo.AddLast(new Bitmap(src4Input));
 
             //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
             if (stackUndo.Count > _maxHistory_)
@@ -264,9 +262,10 @@ namespace TestProject
                 stackUndo.RemoveFirst();
             }
         }
-
-
         #endregion
+
+
+        #region <마우스 이벤트>
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -387,11 +386,10 @@ namespace TestProject
                     //그리기 비활성화.
                     isPaint = false;
 
-                    /////////////////////////////////////
-                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.                    
-                    ////////////////////////////////////
+                    ///수정된 이미지를 복사하여(new Bitmap()을 사용함) undoStack에 저장.
+                    ///(Clone은 얕은복사라서 이미지 수정하면 스택에 저장된 스냅샷도 같이 수정되버림 ///
                     ///
-                    //<UNDO_STACK_NAME>.add((Image)this.sourceBitmap.Clone());
+                    Input_Action(sourceBitmap);
 
                     break;
                 default:
@@ -522,11 +520,22 @@ namespace TestProject
                 try
                 {
                     this.sourceBitmap = LoadBitmap(this.openFileDialog.FileName);
+                    
+                    # region 이미지를 새로 불러올때마다 해줘야되는것들은?
 
-                    //이미지 불러올때마다 좌표 잡기.
+                    //1.이미지 표시영역 초기화하기.
                     targetImgRect.Location = new Point(0, 0);
 
+                    //2.이미지 비율 다시 맞추기.
                     SetImageScale(GetScale_fitImg2PicBox(pictureBox2, sourceBitmap), true, true, true);
+
+                    //UNDO스택에 이미지 추가해주기.
+                    stackUndo.AddLast(new Bitmap(this.sourceBitmap));
+
+                    //(merge할때) picturebox2.Image = SetAlpha(original_opac. trackbar1.?);
+                    //TODO:나중에 확대랑 _paint merge하려면 매번 image갱신하는거 _paint에 집어넣고 refresh()호출하는걸로 바꿔야될듯?
+
+                    #endregion
 
                     this.saveAsMenuItem.Enabled = true;
 
@@ -966,5 +975,15 @@ namespace TestProject
 
         }
         #endregion
+
+        private void button_undo_Click(object sender, EventArgs e)
+        {
+            UNDO();
+        }
+
+        private void button_redo_Click(object sender, EventArgs e)
+        {
+            REDO();
+        }
     }
 }
