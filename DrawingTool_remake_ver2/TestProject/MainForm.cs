@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 /*
  * TODO: 커서의 모양을 변경해주는 설정이 필요함.
@@ -62,6 +63,33 @@ namespace TestProject
         /// 비트맵 수정: 끝점
         /// </summary>
         private Point pen_endpt;
+
+        #region UNDO 및 REDO - 필드
+
+        ///     ///     ///     ///     ///     ///
+        /// 최대 갯수가 제한된 stack처럼 사용.
+        /// 삽입과 출력은 last에서, 최대개수 초과시에만 first에서 제거.
+        /// 연결리스트의 Last를 스택의 Top처럼 사용.
+        ///     ///     ///    ///      ///     ///
+
+
+        //System.Collections.Generic.LinkedList<Bitmap> undoStack;
+        //System.Collections.Generic.LinkedList<Bitmap> redoStack;
+
+        LinkedList<Bitmap> stackUndo = new LinkedList<Bitmap>();
+        LinkedList<Bitmap> stackRedo = new LinkedList<Bitmap>();
+
+        /// <summary>
+        /// 이 값으로 저장할수 있는 UNDO,REDO횟수의 최댓값 조절.
+        /// 필요시 UNDO와 REDO를 별개로 해도 좋다.
+        /// </summary>
+        int _maxHistory_ = 20;
+
+        #endregion
+
+
+
+
 
         /// <summary>
         /// 그래픽 그리기가 가능 여부
@@ -148,6 +176,7 @@ namespace TestProject
         /// <되돌리기_스택_이름>.add(this.SourceBitmap.clone());
         /// 
 
+        #region UNDO 및 REDO - Method
 
         /////////////// Undo,Redo 작동방식? //////
         /// 
@@ -165,6 +194,80 @@ namespace TestProject
         ///5.2. stack_redo&undo -> clear().
         /////////////////
         ///
+
+        //1. UNDO 구현
+        private void UNDO()
+        {
+            //되돌리기가 수행가능한 상태인지 확인.
+            if (stackUndo.Count <= 0)
+            {
+                return;
+            }
+            //1.최신 작업내역을 꺼내어 stackRedo에 저장한 뒤   
+            stackRedo.AddLast(stackUndo.Last);
+            stackUndo.RemoveLast();
+
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackRedo.Count>_maxHistory_)
+            {
+                stackRedo.RemoveFirst();
+            }
+
+            //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
+            this.sourceBitmap = stackUndo.Last.Value;
+            pictureBox2.Refresh();          
+
+        }
+
+        //2. REDO 구현
+
+        private void REDO()
+        {
+            //되돌리기가 수행가능한 상태인지 확인.
+            if (stackRedo.Count <= 0)
+            {
+                return;
+            }
+            //1.최신 Undo내역을 꺼내어 stackUndo에 저장한 뒤   
+            stackUndo.AddLast(stackRedo.Last);
+            stackRedo.RemoveLast();
+
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackUndo.Count > _maxHistory_)
+            {
+                stackUndo.RemoveFirst();
+            }
+
+            //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
+            this.sourceBitmap = stackUndo.Last.Value;
+            pictureBox2.Refresh();
+
+        }
+
+        //3. INPUT_Action (굳이 만들 필요는 없음.깔끔한 코드를 위해)
+        private void Input_Action(Bitmap src4Input)
+        {
+            if (null == src4Input)
+            {
+                return;
+            }
+
+            //1.새로운 액션이 생겼으므로 기존의 저장값을 날린다.
+            stackRedo.Clear();
+
+            //2.입력받은 액션(src4Input)을 stackUndo에 저장.
+            stackUndo.AddLast(src4Input);
+
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackUndo.Count > _maxHistory_)
+            {
+                stackUndo.RemoveFirst();
+            }
+        }
+
+
+        #endregion
+
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
             switch (cursor_mode)
@@ -402,6 +505,7 @@ namespace TestProject
             }
         }
         #endregion
+
 
         #region 이미지 파일 입출력
         #region 파일 열기 메뉴 항목 클릭시 처리하기 - openMenuItem_Click(sender, e)
