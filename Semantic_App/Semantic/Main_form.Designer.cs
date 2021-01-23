@@ -37,6 +37,7 @@ namespace Semantic
             this.경로설정FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.percenttextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -45,9 +46,10 @@ namespace Semantic
             // 
             // Network_operation
             // 
-            this.Network_operation.Location = new System.Drawing.Point(440, 87);
+            this.Network_operation.Location = new System.Drawing.Point(308, 58);
+            this.Network_operation.Margin = new System.Windows.Forms.Padding(2);
             this.Network_operation.Name = "Network_operation";
-            this.Network_operation.Size = new System.Drawing.Size(139, 134);
+            this.Network_operation.Size = new System.Drawing.Size(97, 89);
             this.Network_operation.TabIndex = 16;
             this.Network_operation.Text = "시멘틱 구동";
             this.Network_operation.UseVisualStyleBackColor = true;
@@ -57,50 +59,51 @@ namespace Semantic
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(440, 255);
+            this.pictureBox1.Location = new System.Drawing.Point(308, 170);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1245, 563);
+            this.pictureBox1.Size = new System.Drawing.Size(872, 376);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(623, 87);
+            this.button2.Location = new System.Drawing.Point(436, 58);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(146, 134);
+            this.button2.Size = new System.Drawing.Size(102, 89);
             this.button2.TabIndex = 18;
             this.button2.Text = "이미지 저장";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // uiFp_Image
+            // uiPanelThumbnail
             // 
             this.uiPanelThumbnail.AutoScroll = true;
-            this.uiPanelThumbnail.Location = new System.Drawing.Point(36, 87);
-            this.uiPanelThumbnail.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.uiPanelThumbnail.Name = "uiFp_Image";
-            this.uiPanelThumbnail.Size = new System.Drawing.Size(381, 938);
+            this.uiPanelThumbnail.Location = new System.Drawing.Point(25, 58);
+            this.uiPanelThumbnail.Name = "uiPanelThumbnail";
+            this.uiPanelThumbnail.Size = new System.Drawing.Size(267, 625);
             this.uiPanelThumbnail.TabIndex = 19;
             this.uiPanelThumbnail.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.경로설정FToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1871, 33);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.menuStrip1.Size = new System.Drawing.Size(1310, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // 경로설정FToolStripMenuItem
             // 
             this.경로설정FToolStripMenuItem.Name = "경로설정FToolStripMenuItem";
-            this.경로설정FToolStripMenuItem.Size = new System.Drawing.Size(125, 29);
+            this.경로설정FToolStripMenuItem.Size = new System.Drawing.Size(85, 22);
             this.경로설정FToolStripMenuItem.Text = "경로 설정(F)";
             this.경로설정FToolStripMenuItem.Click += new System.EventHandler(this.경로설정FToolStripMenuItem_Click);
             // 
@@ -108,29 +111,39 @@ namespace Semantic
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(440, 255);
+            this.pictureBox2.Location = new System.Drawing.Point(308, 170);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1245, 563);
+            this.pictureBox2.Size = new System.Drawing.Size(872, 376);
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
             this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(1099, 126);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBar1.Location = new System.Drawing.Point(769, 84);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(149, 69);
+            this.trackBar1.Size = new System.Drawing.Size(104, 45);
             this.trackBar1.TabIndex = 24;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // percenttextBox
+            // 
+            this.percenttextBox.Location = new System.Drawing.Point(591, 126);
+            this.percenttextBox.Name = "percenttextBox";
+            this.percenttextBox.Size = new System.Drawing.Size(100, 21);
+            this.percenttextBox.TabIndex = 25;
+            this.percenttextBox.TextChanged += new System.EventHandler(this.percenttextBox_TextChanged);
+            // 
             // Main_form
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1871, 1050);
+            this.ClientSize = new System.Drawing.Size(1310, 700);
+            this.Controls.Add(this.percenttextBox);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.uiPanelThumbnail);
@@ -139,7 +152,6 @@ namespace Semantic
             this.Controls.Add(this.Network_operation);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Main_form";
             this.Text = "Main_form";
             this.Load += new System.EventHandler(this.Main_form_Load);
@@ -164,6 +176,7 @@ namespace Semantic
         private System.Windows.Forms.ToolStripMenuItem 경로설정FToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.TextBox percenttextBox;
     }
 }
 
