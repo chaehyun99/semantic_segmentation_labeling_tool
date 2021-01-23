@@ -496,13 +496,13 @@ namespace Semantic
 
             //선택된 원본 이미지로 변경
             pictureBox1.Image = img;
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
             //선택된 레이블링 이미지로 변경
             if (rgb_imglist != null && rgb_imglist.Count() != 0)
             {
                 pictureBox2.Image = rgb_imglist[idx];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
                 original_opac = (Bitmap)pictureBox2.Image.Clone();
                 pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
             }
@@ -538,7 +538,7 @@ namespace Semantic
             }
 
             pictureBox2.Image = rgb_imglist[0];
-            //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             original_opac = (Bitmap)pictureBox2.Image.Clone();
             pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
         }
