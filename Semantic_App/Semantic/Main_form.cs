@@ -9,26 +9,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Python.Runtime;
+#pragma warning disable CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Collections.Generic;
+#pragma warning restore CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
+#pragma warning disable CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Linq;
+#pragma warning restore CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
+#pragma warning disable CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Text;
+#pragma warning restore CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;//솔루션에서 PresentationCore.dll 참조추가 -JSW
+#pragma warning disable CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Diagnostics;
+#pragma warning restore CS0105 // using 지시문을 이전에 이 네임스페이스에서 사용했습니다.
 using System.Text.RegularExpressions;
 
 namespace Semantic
 {
-
     public partial class Main_form : Form
     {
-        #region Field
-        static class Constants
-        {
-            public const int Image_width = 300;
-            public const int Image_height = 150;
-        }
+        #region Field        
 
         List<string> imgList = null;
         List<Image> gray_imglist = new List<Image>();
@@ -44,7 +46,7 @@ namespace Semantic
         private int cursor_mode = 2, brush_Size = 1;
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
-        private double zoomScale=1;
+        private double zoomScale = 1;
 
 
         public static class ColorTable
@@ -79,6 +81,7 @@ namespace Semantic
                 ///이하 규격외 이미지 대상 테스트 전용.
                 ///ColorTable의 인덱스 관련된 오류가 있을때 주석 풀고 테스트.
                 /*
+                */
                 Color.Tan,
                 Color.Aqua,
                 Color.DarkCyan,
@@ -99,7 +102,6 @@ namespace Semantic
                 Color.Blue,
                 Color.Bisque,
                 Color.DarkGoldenrod//40
-                */
              };
 
         }
@@ -109,8 +111,8 @@ namespace Semantic
         public Main_form()
         {
             this.KeyPreview = true;
-            InitializeComponent();      
-            
+            InitializeComponent();
+
         }
         #endregion
 
@@ -176,7 +178,7 @@ namespace Semantic
 
         }
 
-        public static void Pythonnet_(string input_path, string output_path ,List<string> imgList)
+        public static void Pythonnet_(string input_path, string output_path, List<string> imgList)
         {
             // python 설치 경로
             var PYTHON_HOME = "";
@@ -206,7 +208,7 @@ namespace Semantic
             {
                 dynamic deeplab = Py.Import("python.deeplab");
                 OpenFileDialog dialog = new OpenFileDialog();
-                dynamic func = deeplab.Caclulating(input_path,output_path,imgList);
+                dynamic func = deeplab.Caclulating(input_path, output_path, imgList);
                 func.cal();
 
             }
@@ -227,11 +229,11 @@ namespace Semantic
                 whether_to_save_ = false;
             }
         }
-        
+
         public void Load_()
         {
             // 이미지 리스트 및 경로 초기화
-            this.uiFp_Image.Controls.Clear();
+            this.uiPanelThumbnail.Controls.Clear();
             pictureBox1.Image = null;
             imgList = null;
 
@@ -252,30 +254,30 @@ namespace Semantic
 
             for (int i = 0; i < imgList.Count; i++)
             {
-                Image img = Image.FromFile(input_file_path.SelectedPath+imgList[i]);
+                Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
 
-                Panel pPanel = new Panel();
-                pPanel.BackColor = Color.Black;
-                pPanel.Size = new Size(Constants.Image_width, Constants.Image_height);
-                pPanel.Padding = new System.Windows.Forms.Padding(4);
+                Panel panelThumbnail = new Panel();
+                panelThumbnail.BackColor = Color.Black;
+                panelThumbnail.Size = new Size(Constants.Thumbnail_Width, Constants.Thumbnail_Height);
+                panelThumbnail.Padding = new System.Windows.Forms.Padding(4);
 
-                PictureBox pBox = new PictureBox();
-                pBox.BackColor = Color.DimGray;
-                pBox.Dock = DockStyle.Fill;
-                pBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pBox.Image = img.GetThumbnailImage(Constants.Image_width, Constants.Image_height, null, IntPtr.Zero);
-                pBox.Click += PBox_Click;
-                pBox.Tag = i.ToString();
-                pPanel.Controls.Add(pBox);
+                PictureBox pBoxThumbnail = new PictureBox();
+                pBoxThumbnail.BackColor = Color.DimGray;
+                pBoxThumbnail.Dock = DockStyle.Fill;
+                pBoxThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
+                pBoxThumbnail.Image = img.GetThumbnailImage(Constants.Thumbnail_Width, Constants.Thumbnail_Height, null, IntPtr.Zero);
+                pBoxThumbnail.Click += PBoxThumbnail_Click;
+                pBoxThumbnail.Tag = i.ToString();
+                panelThumbnail.Controls.Add(pBoxThumbnail);
 
-                this.uiFp_Image.Controls.Add(pPanel);
+                this.uiPanelThumbnail.Controls.Add(panelThumbnail);
             }
 
             if (imgList.Count > 0)
             {
-                Panel pnl = this.uiFp_Image.Controls[0] as Panel;
+                Panel pnl = this.uiPanelThumbnail.Controls[0] as Panel;
                 PictureBox pb = pnl.Controls[0] as PictureBox;
-                PBox_Click(pb, null);
+                PBoxThumbnail_Click(pb, null);
             }
         }
         #endregion
@@ -326,6 +328,7 @@ namespace Semantic
         public Color Swap_G2RGB(Color co_Gray)
         {
             byte value2Swap = co_Gray.R; //R이든 G든 B든 상관x.
+            //Console.WriteLine("index확인: " + Convert.ToString(value2Swap));
             Color Ret_Color = ColorTable.Entry[value2Swap];
             return Ret_Color;
         }
@@ -340,7 +343,7 @@ namespace Semantic
             ///[참고] Color.Black과  Color.FromArgb(255,0,0,0)의 ARGB값 동일, Name 다름
             ///후자는 #FF000000, 전자는 Black. 따라서 비교할때는 Color.ToArgb()씌워서 비교
             /////////////////////////////////////////////////////////////////////////////////////////////////
-          
+
 
             Color Ret_Color = co_RGB;
 
@@ -353,11 +356,11 @@ namespace Semantic
                     break;
                 }
             }
-           
 
-            if ((Ret_Color.ToArgb().Equals(co_RGB.ToArgb()))&& !(Ret_Color.ToArgb().Equals(Color.Black.ToArgb())))
+
+            if ((Ret_Color.ToArgb().Equals(co_RGB.ToArgb())) && !(Ret_Color.ToArgb().Equals(Color.Black.ToArgb())))
             {
-                MessageBox.Show("ERR: 해당 픽셀의 적절한 인덱스값을 찾지못했습니다."+Convert.ToString(co_RGB.Name));
+                MessageBox.Show("ERR: 해당 픽셀의 적절한 인덱스값을 찾지못했습니다." + Convert.ToString(co_RGB.Name));
                 Ret_Color = Color.NavajoWhite;
             }
 
@@ -368,7 +371,7 @@ namespace Semantic
         {
 
             Bitmap img2Convert = image_ as Bitmap;
-            
+
             int x, y;
 
 
@@ -386,7 +389,7 @@ namespace Semantic
             //변환된 이미지를 띄울 창(pictureBox1)에 갱신해주면됨.
 
         }
-        
+
         private Image RGB2Gray_Click(Image image_)
         {
             Bitmap img2Convert = image_ as Bitmap;
@@ -407,12 +410,12 @@ namespace Semantic
                     ///퍼포먼스 개선방법 1.팔레트만 씌우는방법(불확실) 
                     ///2.getpixel쓰지말고 lockbit해서 메모리접근(공부필요,그러나 유의미) 3.둘 다 적용
 
-                    
+
                     Color pixelColor = img2Convert.GetPixel(x, y);
 
-                   // MessageBox.Show("받아온 픽셀의 색상" + Convert.ToString(pixelColor));
+                    // MessageBox.Show("받아온 픽셀의 색상" + Convert.ToString(pixelColor));
                     Color newColor_RGB = Swap_RGB2G(pixelColor);
-                    if (newColor_RGB== Color.NavajoWhite)
+                    if (newColor_RGB == Color.NavajoWhite)
                     {
                         MessageBox.Show("에러발생 X:" + x.ToString() + ",y:" + y.ToString());
                     }
@@ -461,7 +464,7 @@ namespace Semantic
         {
             if (original_opac != null)
             {
-                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
+                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha개선하고 picturebox2.refresh()넣어주기.
             }
         }
         #endregion
@@ -475,14 +478,14 @@ namespace Semantic
         }
 
         //좌측 이미지 목록 클릭시 동작
-        private void uiFp_Image_Paint(object sender, PaintEventArgs e) {}
-        public void PBox_Click(object sender, EventArgs e)
+        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
+        public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < this.uiFp_Image.Controls.Count; i++)
+            for (int i = 0; i < this.uiPanelThumbnail.Controls.Count; i++)
             {
-                if (this.uiFp_Image.Controls[i] is Panel)
+                if (this.uiPanelThumbnail.Controls[i] is Panel)
                 {
-                    Panel pnl = this.uiFp_Image.Controls[i] as Panel;
+                    Panel pnl = this.uiPanelThumbnail.Controls[i] as Panel;
                     pnl.BackColor = Color.Black;
                 }
             }
@@ -492,7 +495,7 @@ namespace Semantic
 
             int idx = Convert.ToInt32(pb.Tag.ToString());
 
-            Image img = Image.FromFile(input_file_path.SelectedPath+imgList[idx]);
+            Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
 
             //선택된 원본 이미지로 변경
             pictureBox1.Image = img;
@@ -519,21 +522,52 @@ namespace Semantic
                 return;
             }
 
-            if(gray_file_path.SelectedPath == string.Empty)
+            if (gray_file_path.SelectedPath == string.Empty)
             {
                 MessageBox.Show("그레이 스케일 저장 경로가 없습니다.");
                 Network_route_settings();
                 return;
             }
 
+            if (Constants.isTestmode == true)
+            {
+                MessageBox.Show("테스트모드로 실행합니다. 모델 구동을 생략하고 수정, 저장단계로 넘어갑니다.");
+                //대체할 코드
+                for (int index = 0; index < imgList.Count(); index++)
+                {
+                    gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
+
+
+                    rgb_imglist.Add(Image.FromFile(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
+
+
+                    //아예 rgb변환도 생략.
+                    //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
+
+                    /*테스트용 RGB 이미지 생성할때만 풀면됨
+                    rgb_imglist[0].Save(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
+                    MessageBox.Show("rgb테스트용 이미지 저장 완료");
+                    */
+                }
+
+                pictureBox2.Image = rgb_imglist[0];
+                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                original_opac = (Bitmap)pictureBox2.Image.Clone();
+                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha를 바꾸고 pictureBox2.refresh()넣기
+                return;
+            }
+
             MessageBox.Show("그레이 스케일 변환 중 입니다.");
-            Pythonnet_(input_file_path.SelectedPath,gray_file_path.SelectedPath,imgList);
+            Pythonnet_(input_file_path.SelectedPath, gray_file_path.SelectedPath, imgList);
             MessageBox.Show("그레이 스케일 변환 완료 !");
+
+
 
             //GrayScale 이미지 변수에 저장
             //Gray2RGB 이미지 변수에 저장
-            for (int index = 0; index < imgList.Count(); index++) {
-                gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count()-4,4)+ "_gray_img.png"));
+            for (int index = 0; index < imgList.Count(); index++)
+            {
+                gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
                 rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
             }
 
@@ -550,7 +584,7 @@ namespace Semantic
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Main_form_Load(object sender, EventArgs e)
@@ -697,7 +731,7 @@ namespace Semantic
 
 
                     pen_endpt = new Point((int)((mousePos.X - targetImgRect.X) / zoomScale), (int)((mousePos.Y - targetImgRect.Y) / zoomScale));
-                    Console.WriteLine("Move" + pen_startpt.X.ToString() +" "+ pen_startpt.Y.ToString());
+                    Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
                     pen_startpt = pen_endpt;
 
@@ -733,8 +767,8 @@ namespace Semantic
                     isPaint = false;
 
                     /////////////////////////////////////
-                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.
-
+                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stackUndo에 저장.
+                    ///그리고 그리기 액션이 있을대마다 redoStack.Clear()해주기.
                     ////////////////////////////////////
 
 
@@ -746,4 +780,15 @@ namespace Semantic
         #endregion
 
     }
+
+    static class Constants
+    {
+        public const int Thumbnail_Width = 300;
+        public const int Thumbnail_Height = 150;
+
+        public const bool isTestmode = false;
+        ///모델구동, rgb변환없이 작업 시작할 때 키고, 
+        ///모델구동, rgb변환해야되거나 공식적으로 올릴땐 false
+    }
+
 }

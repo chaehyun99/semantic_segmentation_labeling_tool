@@ -47,13 +47,15 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // widthLabel
             // 
-            this.widthLabel.Location = new System.Drawing.Point(16, 43);
+            this.widthLabel.Location = new System.Drawing.Point(3, 43);
             this.widthLabel.Margin = new System.Windows.Forms.Padding(0);
             this.widthLabel.Name = "widthLabel";
             this.widthLabel.Size = new System.Drawing.Size(50, 23);
@@ -64,7 +66,7 @@
             // widthTextBox
             // 
             this.widthTextBox.Enabled = false;
-            this.widthTextBox.Location = new System.Drawing.Point(52, 40);
+            this.widthTextBox.Location = new System.Drawing.Point(39, 40);
             this.widthTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.widthTextBox.Name = "widthTextBox";
             this.widthTextBox.Size = new System.Drawing.Size(60, 26);
@@ -74,7 +76,7 @@
             // heightTextBox
             // 
             this.heightTextBox.Enabled = false;
-            this.heightTextBox.Location = new System.Drawing.Point(153, 40);
+            this.heightTextBox.Location = new System.Drawing.Point(135, 40);
             this.heightTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.heightTextBox.Name = "heightTextBox";
             this.heightTextBox.Size = new System.Drawing.Size(60, 26);
@@ -83,7 +85,7 @@
             // 
             // heightLabel
             // 
-            this.heightLabel.Location = new System.Drawing.Point(120, 43);
+            this.heightLabel.Location = new System.Drawing.Point(102, 43);
             this.heightLabel.Margin = new System.Windows.Forms.Padding(0);
             this.heightLabel.Name = "heightLabel";
             this.heightLabel.Size = new System.Drawing.Size(50, 23);
@@ -100,7 +102,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip.Size = new System.Drawing.Size(778, 24);
             this.menuStrip.TabIndex = 4;
             // 
             // fileMenuItem
@@ -130,7 +132,7 @@
             // percentTextBox
             // 
             this.percentTextBox.Enabled = false;
-            this.percentTextBox.Location = new System.Drawing.Point(256, 39);
+            this.percentTextBox.Location = new System.Drawing.Point(230, 39);
             this.percentTextBox.Margin = new System.Windows.Forms.Padding(0);
             this.percentTextBox.Name = "percentTextBox";
             this.percentTextBox.Size = new System.Drawing.Size(60, 26);
@@ -139,7 +141,7 @@
             // 
             // percentLabel
             // 
-            this.percentLabel.Location = new System.Drawing.Point(226, 43);
+            this.percentLabel.Location = new System.Drawing.Point(200, 43);
             this.percentLabel.Margin = new System.Windows.Forms.Padding(0);
             this.percentLabel.Name = "percentLabel";
             this.percentLabel.Size = new System.Drawing.Size(50, 23);
@@ -167,7 +169,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(20, 80);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(740, 460);
+            this.pictureBox2.Size = new System.Drawing.Size(734, 389);
             this.pictureBox2.TabIndex = 7;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
@@ -177,27 +179,27 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(528, 40);
+            this.button1.Location = new System.Drawing.Point(578, 36);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 24);
+            this.button1.Size = new System.Drawing.Size(46, 34);
             this.button1.TabIndex = 8;
-            this.button1.Text = "브러시 +";
+            this.button1.Text = "붓 +";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(460, 40);
+            this.button2.Location = new System.Drawing.Point(531, 36);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(62, 23);
+            this.button2.Size = new System.Drawing.Size(41, 33);
             this.button2.TabIndex = 9;
-            this.button2.Text = "브러시 -";
+            this.button2.Text = "붓 -";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(601, 33);
+            this.button3.Location = new System.Drawing.Point(363, 31);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(49, 40);
             this.button3.TabIndex = 10;
@@ -209,7 +211,7 @@
             // 
             this.button4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.button4.Location = new System.Drawing.Point(656, 33);
+            this.button4.Location = new System.Drawing.Point(421, 31);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(49, 40);
             this.button4.TabIndex = 11;
@@ -221,7 +223,7 @@
             // 
             this.button5.BackColor = System.Drawing.Color.Red;
             this.button5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button5.Location = new System.Drawing.Point(711, 32);
+            this.button5.Location = new System.Drawing.Point(476, 31);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(49, 40);
             this.button5.TabIndex = 12;
@@ -231,18 +233,40 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(348, 35);
+            this.button6.Location = new System.Drawing.Point(304, 37);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(73, 33);
+            this.button6.Size = new System.Drawing.Size(53, 33);
             this.button6.TabIndex = 13;
-            this.button6.Text = "창에 맞춤";
+            this.button6.Text = "원위치";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(630, 38);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(59, 29);
+            this.button7.TabIndex = 14;
+            this.button7.Text = "Undo";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button_undo_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(695, 38);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(59, 29);
+            this.button8.TabIndex = 15;
+            this.button8.Text = "Redo";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button_redo_Click);
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(778, 490);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -292,6 +316,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 
