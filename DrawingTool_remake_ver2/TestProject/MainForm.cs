@@ -3,6 +3,27 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.Generic;
+
+/*
+ * TODO: 커서의 모양을 변경해주는 설정이 필요함.
+ * 
+ * 출처: https://kjun.kr/596 [kjun.kr (kjcoder.tistory.com)]
+ * 
+ * 기본적인 커서 변경은 Cursor 클래스로 제공됨.
+ * 
+ * 어떤 이벤트,메서드에서 변경하는가?
+ * -> pictureBox2_MouseEnter, pictureBox2_MouseLeave, SetBrush_Size
+ * 
+ * 1.이동모드 2. 수정모드
+ * 
+ * 3.수정모드에서 브러시 크기별로 이미지 저장해둔 다음, cursor로 불러오기.(그 방법은 다음과 같다)
+Image image = Bitmap.FromFile("pen.png");
+Bitmap bitmap = new Bitmap(image);
+Graphics graphics = Graphics.FromImage(bitmap);
+IntPtr handle = bitmap.GetHicon();
+Cursor penCursor = new Cursor(handle);
+    */
 
 namespace TestProject
 {
@@ -43,6 +64,33 @@ namespace TestProject
         /// </summary>
         private Point pen_endpt;
 
+        #region UNDO 및 REDO - 필드
+
+        ///     ///     ///     ///     ///     ///
+        /// 최대 갯수가 제한된 stack처럼 사용.
+        /// 삽입과 출력은 last에서, 최대개수 초과시에만 first에서 제거.
+        /// 연결리스트의 Last를 스택의 Top처럼 사용.
+        ///     ///     ///    ///      ///     ///
+
+
+        //System.Collections.Generic.LinkedList<Bitmap> undoStack;
+        //System.Collections.Generic.LinkedList<Bitmap> redoStack;
+
+        LinkedList<Bitmap> stackUndo = new LinkedList<Bitmap>();
+        LinkedList<Bitmap> stackRedo = new LinkedList<Bitmap>();
+
+        /// <summary>
+        /// 이 값으로 저장할수 있는 UNDO,REDO횟수의 최댓값 조절.
+        /// 필요시 UNDO와 REDO를 별개로 해도 좋다.
+        /// </summary>
+        int _maxHistory_ = 20;
+
+        #endregion
+
+
+
+
+
         /// <summary>
         /// 그래픽 그리기가 가능 여부
         /// </summary>
@@ -77,12 +125,6 @@ namespace TestProject
         /// 이미지 배율
         /// </summary>
         private double zoomScale;
-        //private double zoomPercent;
-
-        /// <summary>
-        /// 화면에 표시할 소스 이미지의 영역
-        /// </summary>
-        private Point[] srcImagePointArray;
 
         /// <summary>
         /// 브러시의 컬러
@@ -125,8 +167,103 @@ namespace TestProject
 
 
         //////////////////////////////////////////////////////////////////////////////////////////////////// Method
-        ////////////////////////////////////////////////////////////////////////////////////////// Private
-        //////////////////////////////////////////////////////////////////////////////// Event
+
+        #region UNDO 및 REDO - Method
+
+        /////////////// Undo,Redo 작동방식//////
+        /// 
+        ///1.1. 제일 최근에 수정한 이미지는 항상 stackUndo에 저장되있고 pictureBox2에도 떠있다.
+        ///
+        ///2.1. Undo()를 호출하면 stackUndo의 last를 복제해서 stackRedo에 삽입한다.
+        ///2.2. 그 다음 stackUndo의 새로운 last을 (pictureBox2)에 띄운다.
+        ///
+        ///etc. '이미지를 띄운다'고 함은 sourceBitmap(혹은 Original_opac)를 바꿔준 뒤 
+        ///     pictureBox2.Refresh()를 통해 pictureBox_Paint 이벤트를 발생시키는 것.
+        /// 
+        ///3.1. 마우스 이벤트(그리기)를 통해 stackUndo에 스냅샷이 추가 될때, redoStack은 비운다.(저장할 이유가 없다)
+        ///
+        ///4.1. Redo()를 호출하면 stackRedo의 Last를 복제해서 stackUndo에 삽입한다.
+        ///4.2. 그 다음 stackUndo의 새로운 Last를 pictureBox2에 띄운다..
+        ///
+        ///5.1. 다른썸네일을 클릭하는 순간(이미지를 새로 불러올때)마다 두 저장소를 비워준 뒤 stackUndo에 원본이미지를 복제해서 삽입한다. 
+        ///////////////////
+        ///
+
+        //1. UNDO 구현
+        private void UNDO()
+        {
+            //되돌리기가 수행가능한 상태인지 확인.
+            if (stackUndo.Count <= 1) //UNDO의 Last를 항상 화면에 띄우는 이미지와 같게할 것이므로 최소 1스택.
+            {
+                return;
+            }
+            //1.최신 작업내역을 꺼내어 stackRedo에 저장한 뒤   
+            stackRedo.AddLast(new Bitmap(stackUndo.Last.Value));
+            stackUndo.RemoveLast();
+
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackRedo.Count > _maxHistory_)
+            {
+                stackRedo.RemoveFirst();
+            }
+
+            //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
+
+            this.sourceBitmap = new Bitmap(stackUndo.Last.Value);
+
+            pictureBox2.Refresh();
+
+        }
+
+        //2. REDO 구현
+
+        private void REDO()
+        {
+            //되돌리기가 수행가능한 상태인지 확인.
+            if (stackRedo.Count <= 0)
+            {
+                return;
+            }
+            //1.최신 Undo내역을 꺼내어 stackUndo에 저장한 뒤   
+            stackUndo.AddLast(new Bitmap(stackRedo.Last.Value));
+            stackRedo.RemoveLast();
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackUndo.Count > _maxHistory_)
+            {
+                stackUndo.RemoveFirst();
+            }
+
+            //2.stackUndo에서 새로운 Top을 화면에 뿌려줌. = 비트맵 변경후 refresh.
+            this.sourceBitmap = new Bitmap(stackUndo.Last.Value);
+            pictureBox2.Refresh();
+
+        }
+
+        /// <summary>
+        /// 이미지가 수정될 때마다 stackUndo에 복제본 삽입.
+        /// </summary>
+        /// <param name="src4Input"></param>
+        private void Input_Action(Bitmap src4Input)
+        {
+            if (null == src4Input)
+            {
+                return;
+            }
+
+            //1.새로운 수정내용이 생겼으므로 기존의 redo스택을 날린다.
+            stackRedo.Clear();
+
+            //2.입력받은 액션(src4Input)을 stackUndo에 저장.
+            stackUndo.AddLast(new Bitmap(src4Input));
+
+            //ETC.모든 AddLast이후, 저장개수 검사 후 지정한 최댓값을 넘으면 오래된 순으로 제거.
+            if (stackUndo.Count > _maxHistory_)
+            {
+                stackUndo.RemoveFirst();
+            }
+        }
+        #endregion
+
 
         #region <마우스 이벤트>
 
@@ -155,7 +292,7 @@ namespace TestProject
 
                     ///<해설>
                     ///pen좌표*zoom배율+targetRect좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
-                    ///= 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안된단 뜻.
+                    ///-> 2배로 확대했으니 10cm 이동해도 원본에선 5cm 이동한 셈.
                     ///</해설>
 
 
@@ -163,19 +300,26 @@ namespace TestProject
                     using (Pen myPen = new Pen(brush_Color, 1))
                     using (Graphics g = Graphics.FromImage(sourceBitmap))
                     {
-                        Brush aBrush = new SolidBrush(brush_Color); //TODO: Yellow 대신에 brush_Color로.
+                        Brush aBrush = new SolidBrush(brush_Color); 
 
-                        /* //Create Circle */
-                        Rectangle rectDot = new Rectangle(pen_startpt.X - brush_Size / 2, pen_startpt.Y - brush_Size / 2, brush_Size, brush_Size);
+                        /* //Create Proper Circle */
+                        Rectangle rectDot = new Rectangle(pen_startpt.X - (brush_Size+2) / 2, pen_startpt.Y - (brush_Size+2) / 2, brush_Size+1, brush_Size+1);
 
-                        g.DrawEllipse(myPen, rectDot);
-                        g.FillEllipse(aBrush, rectDot);
+                        if(brush_Size==1)
+                        {
+                            rectDot = new Rectangle(pen_startpt.X - (brush_Size) / 2, pen_startpt.Y - (brush_Size) / 2, brush_Size, brush_Size);
+                            g.FillRectangle(aBrush, rectDot);
+                        }
+                        else if(brush_Size == 2)
+                        {
+                            rectDot = new Rectangle(pen_startpt.X - (brush_Size) / 2, pen_startpt.Y - (brush_Size) / 2, brush_Size-1, brush_Size-1);
+                            g.DrawRectangle(myPen, rectDot);
+                        }
+                        else
+                        {
+                            g.FillEllipse(aBrush, rectDot);
+                        }
 
-                        //Create rectangle.
-                       // g.FillRectangle(Brushes.Black, rect_dot);
-
-
-                        //g.DrawRectangle(aBrush, )
 
                         pictureBox2.Refresh();
                     }
@@ -184,11 +328,11 @@ namespace TestProject
                 default:
                     break;
             }
-
         }
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
+            //좌표를 호출한 컨트롤 기준으로(e.location) 잡아놓았음.
             switch (cursor_mode)
             {
                 case 1: //scroll mode
@@ -217,7 +361,6 @@ namespace TestProject
                 default:
                     break;
             }
-
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
@@ -243,11 +386,10 @@ namespace TestProject
                     //그리기 비활성화.
                     isPaint = false;
 
-                    /////////////////////////////////////
-                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 clone하여 stack에 저장.                    
-                    ////////////////////////////////////
+                    ///수정된 이미지를 복사하여(new Bitmap()을 사용함) undoStack에 저장.
+                    ///(Clone은 얕은복사라서 이미지 수정하면 스택에 저장된 스냅샷도 같이 수정되버림 ///
                     ///
-                    //<UNDO_STACK_NAME>.add((Image)this.sourceBitmap.Clone());
+                    Input_Action(sourceBitmap);
 
                     break;
                 default:
@@ -255,7 +397,6 @@ namespace TestProject
             }
         }
         #endregion
-
 
         #region <Group: 브러시 크기 조정>
 
@@ -266,6 +407,8 @@ namespace TestProject
         private void SetBrush_Size(int new_size)
         {
             brush_Size = new_size;
+            //만약 커서 표시해줄거면 여기서 갱신해줘야됨.
+
             return;
         }
         #endregion
@@ -286,8 +429,39 @@ namespace TestProject
             //targetImgRect.X += move_endpt.X - move_startpt.X; 
             //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
 
-            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
+            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y); 
 
+            /*TODO: pictureBox와 targetImgRect간의 Width, Height 대소관계에 따라 limit 걸어주기.
+             * 
+             * 원래 1-19일자 작업예정인데 중복코드 정리하느라 개념만 잡아놓고 하루 미룸.
+             * 
+                 * pictureBox2 -> pBox
+                 * targetImgRect -> tRect
+                 * (tRect.Width = srcImgBitmap.Width * zoomScale)         
+            
+                -고려할 속성&경우의 수
+
+                1. 가로 스크롤
+                    1-a. pBox.Width>=tRect.Width
+	                    이미 가로축에서 이미지가 모두 표현되었기에 스크롤 불필요.
+
+                    1-b pBox.Width < tRect.Width
+	                    좌우로 스크롤이 가능하지만 픽쳐박스가 tRect의 영역 밖으로 나가면 안됨.
+	                    ( tRect.Left <= pBox.Left ) & ( pBox.Right <= tRect.Right )
+
+                2.세로 스크롤
+                    2-a. pBox.Height >= tRect.Height
+	                    1-a와 마찬가지로 스크롤 불필요d
+
+                    2-b. pBox.Height  <  tRect.Height
+	                    상하 스크롤 가능,  1-b와 제한조건 비슷.
+	                    ( tRect.Top <= pBox.Top ) & ( pBox.Bottom <= tRect.Bottom )      
+            
+                기존 구현방식:
+                pBox2.mouse_move에서 cursorMode=1&isScroll=True 일때,
+                Move_srcImg_location()->pBox2.refresh()
+                =>Move_srcImg_location내부에서 체크하도록 수정.
+              */
             pictureBox2.Refresh();
         }
         #endregion
@@ -331,6 +505,7 @@ namespace TestProject
         #endregion
 
 
+        #region 이미지 파일 입출력
         #region 파일 열기 메뉴 항목 클릭시 처리하기 - openMenuItem_Click(sender, e)
 
         /// <summary>
@@ -340,23 +515,35 @@ namespace TestProject
         /// <param name="e">이벤트 인자</param>
         private void openMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.openFileDialog.ShowDialog() == DialogResult.OK)
+            if (this.openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
                     this.sourceBitmap = LoadBitmap(this.openFileDialog.FileName);
+                    
+                    # region 이미지를 새로 불러올때마다 해줘야되는것들은?
 
+                    //1.이미지 표시영역 초기화하기.
+                    targetImgRect.Location = new Point(0, 0);
 
-                    targetImgRect.Location = new Point(0,0);
-                    SetScale(1/Math.Max((double)sourceBitmap.Width/pictureBox2.Width, (double)sourceBitmap.Height/pictureBox2.Height), true, true, true);
+                    //2.이미지 비율 다시 맞추기.
+                    SetImageScale(GetScale_fitImg2PicBox(pictureBox2, sourceBitmap), true, true, true);
+
+                    //UNDO스택에 이미지 추가해주기.
+                    stackUndo.AddLast(new Bitmap(this.sourceBitmap));
+
+                    //(merge할때) picturebox2.Image = SetAlpha(original_opac. trackbar1.?);
+                    //TODO:나중에 확대랑 _paint merge하려면 매번 image갱신하는거 _paint에 집어넣고 refresh()호출하는걸로 바꿔야될듯?
+
+                    #endregion
 
                     this.saveAsMenuItem.Enabled = true;
 
-                    this.widthTextBox.Enabled   = true;
-                    this.heightTextBox.Enabled  = true;
+                    this.widthTextBox.Enabled = true;
+                    this.heightTextBox.Enabled = true;
                     this.percentTextBox.Enabled = true;
                 }
-                catch(Exception exception)
+                catch (Exception exception)
                 {
                     MessageBox.Show(exception.Message);
                 }
@@ -373,13 +560,15 @@ namespace TestProject
         /// <param name="e">이벤트 인자</param>
         private void saveAsMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (this.saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 SaveImage(this.sourceBitmap, this.saveFileDialog.FileName);
             }
         }
 
         #endregion
+        #endregion
+
         #region 너비 텍스트 박스 텍스트 변경시 처리하기 - widthTextBox_TextChanged(sender, e)
 
         /// <summary>
@@ -398,12 +587,10 @@ namespace TestProject
 
             if(double.TryParse(this.widthTextBox.Text, out width))
             {
-                SetScale(width / this.sourceBitmap.Width, false, true, true);
+                SetImageScale(width / this.sourceBitmap.Width, false, true, true);
             }
         }
         #endregion
-
-
         #region 높이 텍스트 박스 텍스트 변경시 처리하기 - heightTextBox_TextChanged(sender, e)
 
         /// <summary>
@@ -422,7 +609,7 @@ namespace TestProject
 
             if(double.TryParse(this.heightTextBox.Text, out height))
             {
-                SetScale(height / this.sourceBitmap.Height, true, false, true);
+                SetImageScale(height / this.sourceBitmap.Height, true, false, true);
             }
         }
 
@@ -445,7 +632,7 @@ namespace TestProject
 
             if(double.TryParse(this.percentTextBox.Text, out percent))
             {
-                SetScale(percent / 100, true, true, false);
+                SetImageScale(percent / 100, true, true, false);
             }
         }
 
@@ -453,58 +640,112 @@ namespace TestProject
 
         // ///////////////////////////////////////////////////////////////////////////////////// Function
 
-        #region 소스이미지가 픽쳐박스에 필러박스나 레터박스를 만들도록 하는 Rectangle 계산
+        #region 이미지를 픽쳐박스에 맞게 자동으로 조절.
+
+        ////////////////////////////////Base on this Article. 
+        ///https://stackoverflow.com/questions/6565703/math-algorithm-fit-image-to-screen-retain-aspect-ratio        ///
+        ////////////////////////////////
+
+
 
         /// <summary>
-        /// 화면비를 고정한 채로 픽쳐박스에 딱 맞게 들어가는 정사각형 객체를 계산해줍니다.
+        /// 이미지가 픽쳐박스에 완전히 들어가도록 비율을 조정.
         /// </summary>
         /// <param name="picBox"></param>
-        /// <param name="ImgRect"></param>
+        /// <param name="srcImg"></param>
+        /// <param name="isAlignCenter">이미지의 정렬방식 지정. 비활성화 시 좌상단 정렬.</param>
+        public void Fit_Img2picBox(PictureBox picBox, Bitmap srcImg, bool isAlignCenter)
+        {
+            /*
+             * 1.picBox와 srcbitmapImage의 속성값으로 Ratio구하기.
+             * 2.해당 ratio를 적용시킨 TargetImg설정.
+             * 3.zoomScale 값 변경
+             * 4.픽쳐박스 갱신
+             */
+
+            int W_origin = srcImg.Width;
+            int H_origin = srcImg.Height;
+            int W_screen = picBox.Width;
+            int H_screen = picBox.Height;
+
+            Double ratio = GetScale_fitImg2PicBox(picBox, sourceBitmap);
+
+            int W_new = (int)Math.Round(ratio * W_origin);
+            int H_new = (int)Math.Round(ratio * H_origin);
+
+            //이미지 정렬위치
+            if (true == isAlignCenter)
+            {
+
+                targetImgRect.X = (int)((W_screen - W_new) / 2);
+                targetImgRect.Y = (int)((H_screen - H_new) / 2);
+
+            }
+            else
+            {
+
+                targetImgRect.X = 0;
+                targetImgRect.Y = 0;
+
+            }
+
+            //이미지 표시 크기
+            targetImgRect.Width = W_new;
+            targetImgRect.Height = H_new;
+
+            //배율 저장하고 화면갱신
+            zoomScale = ratio;
+            pictureBox2.Refresh();
+
+            // 텍스트박스(넓이/높이/비율) 갱신
+            this.ignoreChanges = true;
+
+            this.widthTextBox.Text = W_new.ToString("0");
+            this.heightTextBox.Text = H_new.ToString("0");
+            int percent = (int)(ratio * 100);
+            this.percentTextBox.Text = percent.ToString("0");
+            /*
+            if (showWidth)
+            {
+                this.widthTextBox.Text = width.ToString("0");
+            }
+
+            if (showHeight)
+            {
+                this.heightTextBox.Text = height.ToString("0");
+            }
+
+            if (showPercent)
+            {
+                int percent = (int)(scale * 100);
+
+                this.percentTextBox.Text = percent.ToString("0");
+            }
+            */
+
+            this.ignoreChanges = false;
+
+        }
+
+        /// <summary>
+        /// pictureBox와 Bitmap 객체의 넓이비 또는 높이비 중 큰쪽을 반환합니다.
+        /// </summary>
+        /// <param name="picBox"></param>
+        /// <param name="srcImg"></param>
         /// <returns></returns>
-        public static Rectangle FitAspectRatio(PictureBox picBox, Bitmap srcImg)
+        public static Double GetScale_fitImg2PicBox(PictureBox picBox, Bitmap srcImg)
         {
-            ////////////////////////////////Base on this feature
-            ///https://stackoverflow.com/questions/6565703/math-algorithm-fit-image-to-screen-retain-aspect-ratio
-            ////////////////////////////////
+            Double ret_ratio;
 
+            int W_origin = srcImg.Width;
+            int H_origin = srcImg.Height;
+            int W_screen = picBox.Width;
+            int H_screen = picBox.Height;
 
-            Rectangle ret_Rectangle = new Rectangle();
-
-            int W = srcImg.Width;
-            int H = srcImg.Height;
-            int w = picBox.Width;
-            int h = picBox.Height;
-
-            Double ratio = Math.Max(W/w, H/h);
-
-            ret_Rectangle.X = (int) (picBox.Location.X + w * (1 - ratio) / 2);
-            ret_Rectangle.Y = (int) (picBox.Location.Y + h * (1 - ratio) / 2);
-            ret_Rectangle.Width = (int)Math.Round(w * ratio);
-            ret_Rectangle.Height = (int) Math.Round(h * ratio);
-
-            return ret_Rectangle;
+            ret_ratio = (((double)W_screen / (double)W_origin) < ((double)H_screen / (double)H_origin)) ? ((double)W_screen / (double)W_origin) : ((double)H_screen / (double)H_origin);
+            return ret_ratio;
         }
 
-        private static Rectangle FitAspectRatio(PictureBox picBox, Rectangle ImgRect)
-        {
-            Rectangle ret_Rectangle = new Rectangle();
-
-            int W = ImgRect.Width;
-            int H = ImgRect.Height;
-            int w = picBox.Width;
-            int h = picBox.Height;
-
-            Double ratio = Math.Max(W / w, H / h);
-
-            ret_Rectangle.X = (int)(picBox.Location.X + w * (1 - ratio) / 2);
-            ret_Rectangle.Y = (int)(picBox.Location.Y + h * (1 - ratio) / 2);
-            ret_Rectangle.Width = (int)Math.Round(w * ratio);
-            ret_Rectangle.Height = (int)Math.Round(h * ratio);
-
-            return ret_Rectangle;
-        }
-
-        
         #endregion
 
         #region 비트맵 로드하기 - LoadBitmap(filePath)
@@ -532,63 +773,37 @@ namespace TestProject
         /// <param name="showWidth">너비 표시 여부</param>
         /// <param name="showHeight">높이 표시 여부</param>
         /// <param name="showPercent">비율 표시 여부</param>
-        private void SetScale(double scale, bool showWidth , bool showHeight, bool showPercent)
+        private void SetImageScale(double scale, bool showWidth, bool showHeight, bool showPercent)
         {
-            //MessageBox.Show(" 최적 ratio: " + scale.ToString());
-            int width  = (int)(this.sourceBitmap.Width  * scale);
+            //1.
+            int width = (int)(this.sourceBitmap.Width * scale);
             int height = (int)(this.sourceBitmap.Height * scale);
 
-
-            zoomScale = scale;
-            targetImgRect.Width = width;
-            targetImgRect.Height = height;
-
-
-            if((width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
+            if ((width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
             {
                 return;
             }
-
-            Bitmap targetBitmap = new Bitmap(width, height); 
-
-            using(Graphics targetGraphics = Graphics.FromImage(targetBitmap))
-            {
-                                    
-                //targetGraphics.DrawImage(this.sourceBitmap, targetImgRect, sourceRectangle, GraphicsUnit.Pixel);
-                targetGraphics.DrawImage(this.sourceBitmap, targetImgRect);
-                pictureBox2.Refresh();
-
-
-
-
-                //TODO: 소스이미지 갱신하고 픽쳐박스 띄우는 부분 함수로 뺄 수 있는지?
-
-                ///<해결된문제>: 확대 상태에서, 배율을 변경하고 커서로 이동(스크롤)하면 
-                ///setScale()이 호출된 순간의 이미지 잔상이 남아있음.
-                ///특히, 잔상이 남는 영역이 특정 영역만큼 제한되어있으므로 확인해 볼것.
-                ///
-                /// =>setScale 내의 drawImage 파라미터 수정.       
-                /// </해결된문제>
-
-
-            }
-
-
-            //this.pictureBox2.Image = targetBitmap;
-
+            //2.
+            zoomScale = scale;
+            //3.
+            targetImgRect.Width = width;
+            targetImgRect.Height = height;
+            //4.
+            pictureBox2.Refresh();
+            //
             this.ignoreChanges = true;
 
-            if(showWidth)
+            if (showWidth)
             {
                 this.widthTextBox.Text = width.ToString("0");
             }
 
-            if(showHeight)
+            if (showHeight)
             {
                 this.heightTextBox.Text = height.ToString("0");
             }
 
-            if(showPercent)
+            if (showPercent)
             {
                 int percent = (int)(scale * 100);
 
@@ -597,6 +812,7 @@ namespace TestProject
 
             this.ignoreChanges = false;
         }
+
 
         #endregion
         #region 이미지 저장하기 - SaveImage(image, filePath)
@@ -630,16 +846,18 @@ namespace TestProject
 
         #endregion
 
+        #region 인터페이스 (버튼/화면 입출력)
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Bitmap init_srcImg = new Bitmap(300,300);
+            Bitmap init_srcImg = new Bitmap(300, 300);
 
             //원하는 초기 이미지 아래에 설정
 
             //
             this.sourceBitmap = init_srcImg;
 
-            SetScale(1, true, true, true);
+            SetImageScale(1, true, true, true);
         }
 
         /// <summary>
@@ -670,47 +888,9 @@ namespace TestProject
 
             //타겟영역 갱신.
             e.Graphics.DrawImage(this.sourceBitmap, targetImgRect);
-
-
-
-                /// 
-            /// TODO: mouse_down..... isPaint=False; 뒤에 스냅샷 삽입하는 라인 작성.
-            /// 
-            /// <되돌리기_스택_이름>.add(this.SourceBitmap.clone());
-            /// 
-
-
-            /////////////// Undo,Redo 작동방식? //////
-            /// 
-            ///1.1. 최신 작업내역에 해당하는 스냅샷Image는 stack_Undo의 Top에 있다.
-            ///
-            ///2.1. Undo를 누르면 stack_Undo의 Top을 꺼내서 stack_Redo에 삽입한다.
-            ///2.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
-            ///
-            ///3.1. 마우스 이벤트(그리기)를 통해 stack_Undo에 스냅샷이 추가 될때, stack_Redo는 클리어된다.(저장할 이유가 없다)
-            ///
-            ///4.1. Redo를 누르면 stack_Redo의 Top을 꺼내서 stack_Undo에 삽입한다.
-            ///4.2. 그 다음 stack_Undo의 새로운 Top을 (pictureBox2)에 띄운다.
-            ///
-            ///5.1. 다른썸네일을 클릭하는 순간, rgb_imglist.Add(stack_Undo.Top);
-            ///5.2. stack_redo&undo -> clear().
-            /////////////////
-            ///
-
-
-
-
-
-
-
-
-
-
-
         }
 
-
-        #region 브러시 크기 조절버튼
+        #region 브러시 크기 조절 - 현재 인터페이스: 버튼
 
         /// <summary>
         /// 브러시의 크기를 1늘립니다. 최대 5
@@ -740,7 +920,7 @@ namespace TestProject
         #endregion
 
         /// <summary>
-        /// 스크롤(이동)모드로 커서 설정
+        /// 커서를 화면 스크롤(이동)모드로 변경
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -749,7 +929,7 @@ namespace TestProject
             cursor_mode = 1;
         }
 
-        #region 수정 - 색상지정 버튼
+        #region 그리기:펜 색상변경 - 현재 인터페이스: 버튼
 
         /// <summary>
         /// 검은색 펜 설정
@@ -777,16 +957,33 @@ namespace TestProject
         }
         #endregion
 
+        /// <summary>
+        /// 이미지를 현재 픽쳐박스 크기에 맞게 되돌리는 기능.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
             #region 
             #endregion
-            FitAspectRatio(pictureBox2, targetImgRect);
-            targetImgRect.Location = new Point(0,0);
+            //3번째 인자를 True로 지정하면 중앙 정렬.
+            Fit_Img2picBox(pictureBox2, sourceBitmap, true);            
 
+            ////??
+            //SetScale(GetRatio_picBox2Rect(pictureBox2, targetImgRect);
+            //SetScale(GetRatio_picBox2Rect(pictureBox2,targetImgRect), true, true, true);
 
-            SetScale(1 / Math.Max((double)sourceBitmap.Width / pictureBox2.Width, (double)sourceBitmap.Height / pictureBox2.Height), true, true, true);
+        }
+        #endregion
 
+        private void button_undo_Click(object sender, EventArgs e)
+        {
+            UNDO();
+        }
+
+        private void button_redo_Click(object sender, EventArgs e)
+        {
+            REDO();
         }
     }
 }
