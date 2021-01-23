@@ -43,33 +43,6 @@ namespace TestProject
         /// </summary>
         private Point pen_endpt;
 
-<<<<<<< Updated upstream
-=======
-        #region UNDO 및 REDO - 필드
-
-        ///     ///     ///     ///     ///     ///
-        /// 최대 갯수가 제한된 stack처럼 사용.
-        /// 삽입과 출력은 last에서, 최대개수 초과시에만 first에서 제거.
-        /// 연결리스트의 Last를 스택의 Top처럼 사용.
-        ///     ///     ///    ///      ///     ///
-
-
-        LinkedList<Bitmap> stackUndo = new LinkedList<Bitmap>();
-        LinkedList<Bitmap> stackRedo = new LinkedList<Bitmap>();
-
-        /// <summary>
-        /// 이 값으로 저장할수 있는 UNDO,REDO횟수의 최댓값 조절.
-        /// 필요시 UNDO와 REDO를 별개로 해도 좋다.
-        /// </summary>
-        int _maxHistory_ = 20;
-
-        #endregion
-
-
-
-
-
->>>>>>> Stashed changes
         /// <summary>
         /// 그래픽 그리기가 가능 여부
         /// </summary>
@@ -372,26 +345,6 @@ namespace TestProject
                 try
                 {
                     this.sourceBitmap = LoadBitmap(this.openFileDialog.FileName);
-<<<<<<< Updated upstream
-=======
-                    
-                    # region 이미지를 새로 불러올때마다 해줘야되는것들은?
-
-                    /*
-                    //a1.이미지 표시영역 초기화하기.
-                    targetImgRect.Location = new Point(0, 0);
-
-                    //a2.이미지 비율 다시 맞추기.
-                    SetImageScale(GetScale_AutoFit(pictureBox2, sourceBitmap), true, true, true);
-                    */
-                    //혹은
-
-                    //b1.
-                    AutoFit(pictureBox2, sourceBitmap, true);
-                    pictureBox2.Refresh();
-                    //TODO: Autofit의 refresh()호출 여부에 따라 수정
-
->>>>>>> Stashed changes
 
 
                     targetImgRect.Location = new Point(0,0);
@@ -445,12 +398,7 @@ namespace TestProject
 
             if(double.TryParse(this.widthTextBox.Text, out width))
             {
-<<<<<<< Updated upstream
                 SetScale(width / this.sourceBitmap.Width, false, true, true);
-=======
-                SetImageScale(width / this.sourceBitmap.Width, false, true, true);
-                pictureBox2.Refresh();
->>>>>>> Stashed changes
             }
         }
         #endregion
@@ -474,12 +422,7 @@ namespace TestProject
 
             if(double.TryParse(this.heightTextBox.Text, out height))
             {
-<<<<<<< Updated upstream
                 SetScale(height / this.sourceBitmap.Height, true, false, true);
-=======
-                SetImageScale(height / this.sourceBitmap.Height, true, false, true);
-                pictureBox2.Refresh();
->>>>>>> Stashed changes
             }
         }
 
@@ -502,12 +445,7 @@ namespace TestProject
 
             if(double.TryParse(this.percentTextBox.Text, out percent))
             {
-<<<<<<< Updated upstream
                 SetScale(percent / 100, true, true, false);
-=======
-                SetImageScale(percent / 100, true, true, false);
-                pictureBox2.Refresh();
->>>>>>> Stashed changes
             }
         }
 
@@ -521,7 +459,6 @@ namespace TestProject
         /// 화면비를 고정한 채로 픽쳐박스에 딱 맞게 들어가는 정사각형 객체를 계산해줍니다.
         /// </summary>
         /// <param name="picBox"></param>
-<<<<<<< Updated upstream
         /// <param name="ImgRect"></param>
         /// <returns></returns>
         public static Rectangle FitAspectRatio(PictureBox picBox, Bitmap srcImg)
@@ -537,63 +474,6 @@ namespace TestProject
             int H = srcImg.Height;
             int w = picBox.Width;
             int h = picBox.Height;
-=======
-        /// <param name="srcImg"></param>
-        /// <param name="isAlignCenter">이미지의 정렬방식 지정. 비활성화 시 좌상단 정렬.</param>
-        public void AutoFit(PictureBox picBox, Bitmap srcImg, bool isAlignCenter)
-        {
-            /*
-             * 1.picBox와 srcbitmapImage의 속성값으로 새 zoomScale계산.
-             * 2.해당 zoomScale를 적용시킨 TargetImg설정.
-             * 3.픽쳐박스 갱신
-             */
-
-            /* Fix
-             * 1.받아온 속성값으로 zoomScale을 새로 계산해서 저장.
-             * 2. 이 계산을 GetScale_AutoFit이 함.
-             * 3. 픽쳐박스 갱신은 안함
-             */
-
-            int W_origin = srcImg.Width;
-            int H_origin = srcImg.Height;
-            int W_screen = picBox.Width;
-            int H_screen = picBox.Height;
-
-            //픽쳐박스의 최소(+최대) 크기가 지정되어있기만 하면 예외 상황을 만드는 값이 들어갈 일은 없을듯.
-            zoomScale = GetScale_AutoFit(picBox, sourceBitmap);
-
-            //TODO:아래 두줄 필요한지 아닌지 확실해지면 정리.
-            targetImgRect.Width = (int)Math.Round(zoomScale * W_origin);
-            targetImgRect.Height = (int)Math.Round(zoomScale * H_origin);
-
-            //이미지 정렬 옵션
-            if (true == isAlignCenter) 
-            {
-                //중앙정렬
-                targetImgRect.X = (int)((W_screen - targetImgRect.Width) / 2);
-                targetImgRect.Y = (int)((H_screen - targetImgRect.Height) / 2);
-
-            }
-            else
-            {
-                //픽쳐박스 좌상단
-                targetImgRect.X = 0;
-                targetImgRect.Y = 0;
-            }
-
-            //배율 입출력 인터페이스 갱신: ex) 텍스트박스(넓이/높이/비율)
-            this.ignoreChanges = true;
-
-            this.widthTextBox.Text = targetImgRect.Width.ToString("0");
-            this.heightTextBox.Text = targetImgRect.Height.ToString("0");
-            int percent = (int)(zoomScale * 100);
-            this.percentTextBox.Text = percent.ToString("0");
-            /*
-            if (showWidth)
-            {
-                this.widthTextBox.Text = width.ToString("0");
-            }
->>>>>>> Stashed changes
 
             Double ratio = Math.Max(W/w, H/h);
 
@@ -605,17 +485,7 @@ namespace TestProject
             return ret_Rectangle;
         }
 
-<<<<<<< Updated upstream
         private static Rectangle FitAspectRatio(PictureBox picBox, Rectangle ImgRect)
-=======
-        /// <summary>
-        /// pictureBox와 Bitmap 객체의 넓이비 또는 높이비 중 큰쪽을 반환합니다.
-        /// </summary>
-        /// <param name="picBox"></param>
-        /// <param name="srcImg"></param>
-        /// <returns></returns>
-        public static Double GetScale_AutoFit(PictureBox picBox, Bitmap srcImg)
->>>>>>> Stashed changes
         {
             Rectangle ret_Rectangle = new Rectangle();
 
@@ -656,7 +526,7 @@ namespace TestProject
         #region 스케일 설정하기 - SetScale(scale, showWidth, showHeight, showPercent)
 
         /// <summary>
-        /// 스케일 변경하고, 배율 입출력 인터페이스 갱신.
+        /// 스케일 설정하기
         /// </summary>
         /// <param name="scale">스케일</param>
         /// <param name="showWidth">너비 표시 여부</param>
@@ -668,7 +538,6 @@ namespace TestProject
             int width  = (int)(this.sourceBitmap.Width  * scale);
             int height = (int)(this.sourceBitmap.Height * scale);
 
-<<<<<<< Updated upstream
 
             zoomScale = scale;
             targetImgRect.Width = width;
@@ -707,21 +576,6 @@ namespace TestProject
 
             //this.pictureBox2.Image = targetBitmap;
 
-=======
-            if ((width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
-            {
-                return;
-            }
-            //2. !! 굳이 먼저 저장안하는 이유. 조건문에서 1보다 작아버리면 바꾸면 안되는 상황이니까.
-            zoomScale = scale;
-            //3. 어짜피 항상 소스이미지의 값 * zoomScale을 계산해야됨.
-            /*
-            targetImgRect.Width = width;
-            targetImgRect.Height = height;
-            */
-            //4.
-            pictureBox2.Refresh();
->>>>>>> Stashed changes
             this.ignoreChanges = true;
 
             if(showWidth)
@@ -785,13 +639,7 @@ namespace TestProject
             //
             this.sourceBitmap = init_srcImg;
 
-<<<<<<< Updated upstream
             SetScale(1, true, true, true);
-=======
-            SetImageScale(1, true, true, true);
-            pictureBox2.Refresh();
-            //AutoFit()+refresh로 바뀔여지 있음.
->>>>>>> Stashed changes
         }
 
         /// <summary>
@@ -933,19 +781,8 @@ namespace TestProject
         {
             #region 
             #endregion
-<<<<<<< Updated upstream
             FitAspectRatio(pictureBox2, targetImgRect);
             targetImgRect.Location = new Point(0,0);
-=======
-            //3번째 인자를 True로 지정하면 중앙 정렬.
-            AutoFit(pictureBox2, sourceBitmap, true);
-            pictureBox2.Refresh();
-            //TODO: AutoFit내부에서 refresh() 호출하는지 여부에 따라 AutoFit 참조되는 지점들 수정해주기.
-
-            ////??
-            //SetScale(GetRatio_picBox2Rect(pictureBox2, targetImgRect);
-            //SetScale(GetRatio_picBox2Rect(pictureBox2,targetImgRect), true, true, true);
->>>>>>> Stashed changes
 
 
             SetScale(1 / Math.Max((double)sourceBitmap.Width / pictureBox2.Width, (double)sourceBitmap.Height / pictureBox2.Height), true, true, true);

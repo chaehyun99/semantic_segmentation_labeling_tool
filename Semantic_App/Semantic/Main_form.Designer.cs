@@ -46,11 +46,7 @@ namespace Semantic
             // Network_operation
             // 
             this.Network_operation.Location = new System.Drawing.Point(308, 58);
-<<<<<<< Updated upstream
             this.Network_operation.Margin = new System.Windows.Forms.Padding(2);
-=======
-            this.Network_operation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
->>>>>>> Stashed changes
             this.Network_operation.Name = "Network_operation";
             this.Network_operation.Size = new System.Drawing.Size(97, 89);
             this.Network_operation.TabIndex = 16;
@@ -62,17 +58,10 @@ namespace Semantic
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-<<<<<<< Updated upstream
             this.pictureBox1.Location = new System.Drawing.Point(308, 170);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(872, 376);
-=======
-            this.pictureBox1.Location = new System.Drawing.Point(308, 151);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(681, 360);
->>>>>>> Stashed changes
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -80,11 +69,7 @@ namespace Semantic
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(436, 58);
-<<<<<<< Updated upstream
             this.button2.Margin = new System.Windows.Forms.Padding(2);
-=======
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
->>>>>>> Stashed changes
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 89);
             this.button2.TabIndex = 18;
@@ -92,23 +77,14 @@ namespace Semantic
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // uiPanelThumbnail
+            // uiFp_Image
             // 
-<<<<<<< Updated upstream
             this.uiFp_Image.AutoScroll = true;
             this.uiFp_Image.Location = new System.Drawing.Point(25, 58);
             this.uiFp_Image.Name = "uiFp_Image";
             this.uiFp_Image.Size = new System.Drawing.Size(267, 625);
             this.uiFp_Image.TabIndex = 19;
             this.uiFp_Image.Paint += new System.Windows.Forms.PaintEventHandler(this.uiFp_Image_Paint);
-=======
-            this.uiPanelThumbnail.AutoScroll = true;
-            this.uiPanelThumbnail.Location = new System.Drawing.Point(25, 58);
-            this.uiPanelThumbnail.Name = "uiPanelThumbnail";
-            this.uiPanelThumbnail.Size = new System.Drawing.Size(267, 625);
-            this.uiPanelThumbnail.TabIndex = 19;
-            this.uiPanelThumbnail.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
->>>>>>> Stashed changes
             // 
             // menuStrip1
             // 
@@ -118,11 +94,7 @@ namespace Semantic
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-<<<<<<< Updated upstream
             this.menuStrip1.Size = new System.Drawing.Size(1310, 24);
-=======
-            this.menuStrip1.Size = new System.Drawing.Size(1000, 24);
->>>>>>> Stashed changes
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -137,20 +109,12 @@ namespace Semantic
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-<<<<<<< Updated upstream
             this.pictureBox2.Location = new System.Drawing.Point(308, 170);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(872, 376);
-=======
-            this.pictureBox2.Location = new System.Drawing.Point(308, 151);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(681, 360);
->>>>>>> Stashed changes
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
-            this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
             this.pictureBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseDown);
             this.pictureBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseMove);
             this.pictureBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox2_MouseUp);
@@ -167,11 +131,7 @@ namespace Semantic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< Updated upstream
             this.ClientSize = new System.Drawing.Size(1310, 700);
-=======
-            this.ClientSize = new System.Drawing.Size(1000, 522);
->>>>>>> Stashed changes
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.uiFp_Image);
