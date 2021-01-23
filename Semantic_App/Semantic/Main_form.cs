@@ -33,20 +33,34 @@ namespace Semantic
         #region Field        
 
         List<string> imgList = null;
-        List<Image> gray_imglist = new List<Image>();
-        List<Image> rgb_imglist = new List<Image>();
-        Image original_opac = null;
+
+        //아래 두 리스트를 <Bitmap>으로 변경해야 소스
+        List<Bitmap> gray_imglist = new List<Bitmap>();
+        List<Bitmap> rgb_imglist = new List<Bitmap>();
+
+        ///original_opac -> sourceBitmapRgb로 변경
+        ///1. Bitmap 자료형으로 변경
+        ///2. 참조 전부찾아서 확인하고
+        ///3. 받아올때, 저장 넘겨줄때 꼼꼼히 확인.
+        private Bitmap sourceImgRgb = null;
+
+        //역할:픽쳐박스1에 띄워줄 원본이미지의 원본(?) 저장.
+        private Bitmap sourceImgOrigin = null;
 
         public static bool whether_to_save_ = false;
         public static FolderBrowserDialog input_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog gray_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog rgb_file_path = new FolderBrowserDialog();
 
-        private Rectangle targetImgRect = new Rectangle(0, 0, 1, 1);
         private int cursor_mode = 2, brush_Size = 1;
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
+
+        private Rectangle targetImgRect = new Rectangle(0, 0, 100, 100);
         private double zoomScale = 1;
+
+
+        private ImageAttributes imageAtt = new ImageAttributes(); //TODO:전역변수로 전환.
 
 
         public static class ColorTable
@@ -233,7 +247,7 @@ namespace Semantic
         public void Load_()
         {
             // 이미지 리스트 및 경로 초기화
-            this.uiPanelThumbnail.Controls.Clear();
+            this.LayoutPanelOfThumbnails.Controls.Clear();
             pictureBox1.Image = null;
             imgList = null;
 
@@ -252,6 +266,7 @@ namespace Semantic
             for (int index = 0; index < imgList.Count(); index++)
                 imgList[index] = imgList[index].Remove(0, input_file_path.SelectedPath.Count());
 
+            //썸넬 목록 갱신
             for (int i = 0; i < imgList.Count; i++)
             {
                 Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
@@ -270,12 +285,17 @@ namespace Semantic
                 pBoxThumbnail.Tag = i.ToString();
                 panelThumbnail.Controls.Add(pBoxThumbnail);
 
-                this.uiPanelThumbnail.Controls.Add(panelThumbnail);
+                this.LayoutPanelOfThumbnails.Controls.Add(panelThumbnail);
             }
 
-            if (imgList.Count > 0)
+            if (imgList.Count <= 0)
             {
-                Panel pnl = this.uiPanelThumbnail.Controls[0] as Panel;
+                return;
+            }
+            else
+            {
+                //?
+                Panel pnl = this.LayoutPanelOfThumbnails.Controls[0] as Panel;
                 PictureBox pb = pnl.Controls[0] as PictureBox;
                 PBoxThumbnail_Click(pb, null);
             }
@@ -367,10 +387,9 @@ namespace Semantic
             return Ret_Color;
         }
 
-        private Image Gray2RGB_Click(Image image_)
-        {
-
-            Bitmap img2Convert = image_ as Bitmap;
+        private Bitmap Gray2RGB_Click(Bitmap bmp_)
+        {            
+            Bitmap img2Convert = new Bitmap(bmp_);
 
             int x, y;
 
@@ -386,13 +405,13 @@ namespace Semantic
                 }
             }
             return img2Convert;
-            //변환된 이미지를 띄울 창(pictureBox1)에 갱신해주면됨.
+            //변환된 이미지를 띄울 창에 갱신해주면됨.
 
         }
 
-        private Image RGB2Gray_Click(Image image_)
+        private Bitmap RGB2Gray_Click(Bitmap bmp_)
         {
-            Bitmap img2Convert = image_ as Bitmap;
+            Bitmap img2Convert = new Bitmap(bmp_);
 
             int x, y;
 
@@ -429,173 +448,54 @@ namespace Semantic
                 img2Convert.SetPixel(i, 41, Color.Red);
             }*/
             return img2Convert;
-            //변환된 이미지를 띄울 창(pictureBox1)에 갱신해주면됨.
+            //변환된 이미지를 띄울 창에 갱신해주면됨.
         }
         #endregion
 
         #region Opacity Function
         //pictureBox2 알파값 조정 - 투명도 조절용
-        private Bitmap SetAlpha(Bitmap bmpIn, int alpha)
+        private void SetAlpha(int alpha)
         {
-            Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
+
+            //기존구조: 비트맵을 입력받고 그것을 변환해서 picturebox.image에 반환하였다.
+            //변경:비트맵을 새로그리는 것은 이미지 확대,이동,그리기에서도 공통되는 사항임.(메서드 추출?)
+            //이미지가 그려질 속성(좌표, 폭,높이, 투명도,(+표시할 클래스))만 변경하고
+            //그려주는것은 _paint 이벤트함수를 통해서 하는 구조
+
             float a = alpha / (float)trackBar1.Maximum;
-            Rectangle r = new Rectangle(0, 0, bmpIn.Width, bmpIn.Height);
 
             float[][] matrixItems = {
                 new float[] {1, 0, 0, 0, 0},
                 new float[] {0, 1, 0, 0, 0},
                 new float[] {0, 0, 1, 0, 0},
                 new float[] {0, 0, 0, a, 0},
-                new float[] {0, 0, 0, 0, 1}};
+                new float[] {0, 0, 0, 0, 1}
+            };
 
             ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
 
-            ImageAttributes imageAtt = new ImageAttributes();
-            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            //ImageAttributes imageAtt = new ImageAttributes(); //TODO:전역변수화
+            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap); 
 
-            using (Graphics g = Graphics.FromImage(bmpOut))
-                g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
+            //using (Graphics g = Graphics.FromImage(bmpOut))
+               // g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
 
-            return bmpOut;
+            return;
         }
 
         //트레이스바(투명도 비율 정보) 조정 - 투명도 조절용
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (original_opac != null)
+            if (null == sourceImgRgb)
             {
-                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha개선하고 picturebox2.refresh()넣어주기.
+                return;
             }
+            SetAlpha(trackBar1.Value); //TODO: SetAlpha개선하고 picturebox2.refresh()넣어주기.
+            Console.WriteLine("투명도 변경: " + Convert.ToString(trackBar1.Value));
+            pictureBox2.Refresh();
         }
         #endregion
 
-
-
-        #region Event Control
-        private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Network_route_settings();
-        }
-
-        //좌측 이미지 목록 클릭시 동작
-        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
-        public void PBoxThumbnail_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < this.uiPanelThumbnail.Controls.Count; i++)
-            {
-                if (this.uiPanelThumbnail.Controls[i] is Panel)
-                {
-                    Panel pnl = this.uiPanelThumbnail.Controls[i] as Panel;
-                    pnl.BackColor = Color.Black;
-                }
-            }
-
-            PictureBox pb = sender as PictureBox;
-            pb.Parent.BackColor = Color.Red;
-
-            int idx = Convert.ToInt32(pb.Tag.ToString());
-
-            Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
-
-            //선택된 원본 이미지로 변경
-            pictureBox1.Image = img;
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            //선택된 레이블링 이미지로 변경
-            if (rgb_imglist != null && rgb_imglist.Count() != 0)
-            {
-                pictureBox2.Image = rgb_imglist[idx];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                original_opac = (Bitmap)pictureBox2.Image.Clone();
-                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-            }
-            //UiTxt_File.Text = this.imgList[idx];
-        }
-
-        private void Network_operation_Click(object sender, EventArgs e)
-        {
-            //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            //Console.WriteLine(Environment.CurrentDirectory);
-            if (imgList == null || imgList.Count() == 0)
-            {
-                MessageBox.Show("불러올 이미지가 없습니다.");
-                return;
-            }
-
-            if (gray_file_path.SelectedPath == string.Empty)
-            {
-                MessageBox.Show("그레이 스케일 저장 경로가 없습니다.");
-                Network_route_settings();
-                return;
-            }
-
-            if (Constants.isTestmode == true)
-            {
-                MessageBox.Show("테스트모드로 실행합니다. 모델 구동을 생략하고 수정, 저장단계로 넘어갑니다.");
-                //대체할 코드
-                for (int index = 0; index < imgList.Count(); index++)
-                {
-                    gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-
-
-                    rgb_imglist.Add(Image.FromFile(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
-
-
-                    //아예 rgb변환도 생략.
-                    //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
-
-                    /*테스트용 RGB 이미지 생성할때만 풀면됨
-                    rgb_imglist[0].Save(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
-                    MessageBox.Show("rgb테스트용 이미지 저장 완료");
-                    */
-                }
-
-                pictureBox2.Image = rgb_imglist[0];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                original_opac = (Bitmap)pictureBox2.Image.Clone();
-                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha를 바꾸고 pictureBox2.refresh()넣기
-                return;
-            }
-
-            MessageBox.Show("그레이 스케일 변환 중 입니다.");
-            Pythonnet_(input_file_path.SelectedPath, gray_file_path.SelectedPath, imgList);
-            MessageBox.Show("그레이 스케일 변환 완료 !");
-
-
-
-            //GrayScale 이미지 변수에 저장
-            //Gray2RGB 이미지 변수에 저장
-            for (int index = 0; index < imgList.Count(); index++)
-            {
-                gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
-            }
-
-            pictureBox2.Image = rgb_imglist[0];
-            //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            original_opac = (Bitmap)pictureBox2.Image.Clone();
-            pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-        }
-
-        private void Main_form_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F) Network_route_settings();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Main_form_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("t");
-        }
 
         #region <이미지 스크롤 by 마우스 드래그>
 
@@ -615,7 +515,6 @@ namespace Semantic
 
             targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
 
-            pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
             pictureBox2.Refresh();
         }
         #endregion
@@ -645,20 +544,229 @@ namespace Semantic
             Color brush_Color = Color.Black;
             Pen myPen = new Pen(brush_Color, brush_Size);                // myPen
 
-            using (Graphics g = Graphics.FromImage(original_opac)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
+            using (Graphics g = Graphics.FromImage(sourceImgRgb)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
             {
-
                 DrawFreeLine(myPen, g);
-                pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
                 pictureBox2.Refresh();
             }
         }
         #endregion
 
+
+
+        #region Event Control
+
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Network_route_settings();
+        }
+
+        //좌측 이미지 목록 클릭시 동작
+        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
+        public void PBoxThumbnail_Click(object sender, EventArgs e)
+        {
+            //전체 썸넬의 테두리(사실은 패널의 패딩)를 검은색으로
+            //TODO:패널없이 썸넬에 Margin넣으면 안되는지 테스트해보기.
+            for (int i = 0; i < this.LayoutPanelOfThumbnails.Controls.Count; i++)
+            {
+                if (this.LayoutPanelOfThumbnails.Controls[i] is Panel)
+                {
+                    Panel pnl = this.LayoutPanelOfThumbnails.Controls[i] as Panel;
+                    pnl.BackColor = Color.Black;
+                }
+            }
+            // 선택한 썸넬의 테두리(사실은 패널의 패딩)를 빨간색으로
+            PictureBox pb = sender as PictureBox;
+            pb.Parent.BackColor = Color.Red;
+
+            //picturebox1에 띄울 비트맵을 선택된 원본 이미지로 변경
+            int idx = Convert.ToInt32(pb.Tag.ToString());
+            //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
+            sourceImgOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
+
+            //picturebox2 에 띄울 비트맵을 선택된 원본 이미지로 변경
+            //TODO:시맨틱구동+rgb변환되기 전,후가 체크되지 않은채 띄우는 경우가 나오긴하는데 그냥 예외로 넘김?
+            if (null == rgb_imglist || 0 == rgb_imglist.Count())
+            {
+                MessageBox.Show("Err: rgb_imglist가 비었습니다.");
+                return;
+            }
+            else
+            {
+                //pictureBox2.Image = rgb_imglist[idx];
+                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                sourceImgRgb = new Bitmap(rgb_imglist[idx]);
+                Console.WriteLine("rgb리스트에서 소스로 가져옵니다. idx: " 
+                    + Convert.ToString(idx)
+                    + "// "+ Convert.ToString(rgb_imglist.Count())
+                    );
+                pictureBox2.Refresh();
+
+                Console.WriteLine("");
+                Console.WriteLine("tagRect(XYWH)/src.WH: "
+                    +Convert.ToString(targetImgRect.X)
+                    +"/"
+                    +Convert.ToString(targetImgRect.Y)
+                    +"/"
+                    +Convert.ToString(targetImgRect.Width)
+                    +"/"
+                    +Convert.ToString(targetImgRect.Height)
+                    +"/"
+                    +Convert.ToString(sourceImgRgb.Width)
+                    +"/"
+                    +Convert.ToString(sourceImgRgb.Height));
+            }       
+            //UiTxt_File.Text = this.imgList[idx];
+        }
+
+        private void Network_operation_Click(object sender, EventArgs e)
+        {
+            //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+            //Console.WriteLine(Environment.CurrentDirectory);
+            if (imgList == null || imgList.Count() == 0)
+            {
+                MessageBox.Show("불러올 이미지가 없습니다.");
+                return;
+            }
+
+            if (gray_file_path.SelectedPath == string.Empty)
+            {
+                MessageBox.Show("그레이 스케일 저장 경로가 없습니다.");
+                Network_route_settings();
+                return;
+            }
+
+            if (Constants.isTestmode == true)
+            {
+                MessageBox.Show("테스트모드로 실행합니다. 모델 구동을 생략하고 수정, 저장단계로 넘어갑니다.");
+                //대체할 코드
+                for (int index = 0; index < imgList.Count(); index++)
+                {
+
+                    //new Bitmap(경로)로 바꿀예정
+                    gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
+                    rgb_imglist.Add(new Bitmap(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
+                    Console.WriteLine("그레이경로: " + gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png");
+                    Console.WriteLine("RGB 경로: " + rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
+
+                    //아예 rgb변환도 생략.
+                    //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
+
+                    /*테스트용 RGB 이미지 생성할때만 풀면됨
+                    rgb_imglist[0].Save(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
+                    MessageBox.Show("rgb테스트용 이미지 저장 완료");
+                    */
+                }
+                
+                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+                sourceImgRgb = new Bitmap(rgb_imglist[0]);
+                Console.WriteLine();
+
+                pictureBox2.Refresh();
+                return;
+            }
+
+            MessageBox.Show("그레이 스케일 변환 중 입니다.");
+            Pythonnet_(input_file_path.SelectedPath, gray_file_path.SelectedPath, imgList);
+            MessageBox.Show("그레이 스케일 변환 완료 !");
+
+
+
+            //GrayScale 이미지 변수에 저장
+            //Gray2RGB 이미지 변수에 저장
+            for (int index = 0; index < imgList.Count(); index++)
+            {
+                //new Bitmap(경로)로 바꿀예정
+                gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
+                //참조 형식 주의. 일단 메서드 내부에서는 new Bitmap()으로 복사해서 작업
+                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
+            }
+
+            //pictureBox2.Image = rgb_imglist[0];
+            //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
+            // original_opac = (Bitmap)pictureBox2.Image.Clone();
+            sourceImgRgb = new Bitmap(rgb_imglist[0]);
+            pictureBox2.Refresh();
+            return;
+        }
+
+        private void Main_form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F) Network_route_settings();
+        }
+
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            //rgb이미지가 없을때.
+            if(null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceImgRgb)
+            {
+                return;
+            }
+
+            // 보간 방식 지정. 
+            if (zoomScale < 1)
+            {
+                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            }
+            else
+            {
+                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+            //타겟영역 갱신.
+            //e.Graphics.DrawImage(this.sourceBitmap, targetImgRect);
+            e.Graphics.DrawImage(sourceImgRgb, targetImgRect, targetImgRect.X, targetImgRect.Y, sourceImgRgb.Width, sourceImgRgb.Height, GraphicsUnit.Pixel, imageAtt); //잠깐 빼놨음
+
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            //ORIGIN 이미지가 없을때.
+            if (null == imgList || 0 == imgList.Count || null == sourceImgOrigin)
+            {
+                return;
+            }
+
+            // 보간 방식 지정. 
+            if (zoomScale < 1)
+            {
+                //중간값 -> 확대시에 픽셀이 흐릿.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            }
+            else
+            {
+                //픽셀 그대로 확대 -> 이미지 축소시 1pixel굵기의 곡선등이 끊어져보이거나 사라짐.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+            //타겟영역 갱신.
+            //e.Graphics.DrawImage(this.sourceBitmap, targetImgRect);
+            e.Graphics.DrawImage(sourceImgOrigin, targetImgRect, targetImgRect.X, targetImgRect.Y, sourceImgOrigin.Width, sourceImgOrigin.Height, GraphicsUnit.Pixel);
+
+        }
+
+        //이미지 저장버튼
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("t");
+        }
+
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (original_opac == null)
+            if (sourceImgRgb == null)
+            {      
                 return;
+            }
             switch (cursor_mode)
             {
                 case 1: //scroll mode
@@ -689,7 +797,7 @@ namespace Semantic
                     ///= 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안된단 뜻.
                     /// </해설>
 
-                    using (Graphics g = Graphics.FromImage(original_opac))//sourceBitmap sourceBitmap sourceBitmap
+                    using (Graphics g = Graphics.FromImage(sourceImgRgb))//sourceBitmap sourceBitmap sourceBitmap
                     {
                         Pen blackPen = new Pen(Color.Black, brush_Size);
                         // Create rectangle.
@@ -698,7 +806,6 @@ namespace Semantic
                         Brush aBrush = (Brush)Brushes.Black;
                         g.FillRectangle(aBrush, rect);
 
-                        pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
                         pictureBox2.Refresh();
                     }
                     break;
@@ -709,7 +816,7 @@ namespace Semantic
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (original_opac == null)
+            if (sourceImgRgb == null)
                 return;
             switch (cursor_mode)
             {
@@ -731,7 +838,7 @@ namespace Semantic
 
 
                     pen_endpt = new Point((int)((mousePos.X - targetImgRect.X) / zoomScale), (int)((mousePos.Y - targetImgRect.Y) / zoomScale));
-                    Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
+                    //Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
                     pen_startpt = pen_endpt;
 
@@ -743,7 +850,7 @@ namespace Semantic
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (original_opac == null)
+            if (sourceImgRgb == null)
                 return;
             switch (cursor_mode)
             {
