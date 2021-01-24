@@ -59,10 +59,11 @@ namespace Semantic
         private int zoomLevel = 0;
         private double zoomScale = 1.0f;
 
+        bool ctrlKeyDown;
+
 
 
         private ImageAttributes imageAtt = new ImageAttributes(); //TODO:전역변수로 전환.
-
 
         public static class ColorTable
         {
@@ -606,9 +607,37 @@ namespace Semantic
 
         #region Event Control
 
+        
+
+        public void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (true == ctrlKeyDown)
+            {
+                if (e.Delta > 0)
+                {
+                    // The user scrolled up.
+
+                    zoomLevel++;
+                    SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); //필요에따라
+                }
+                else
+                {
+                    // The user scrolled down.
+
+                    zoomLevel--;
+                    SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); 
+                }
+            }
+            else
+            {                
+            }
+
+
+        }
+
         private void Main_form_Load(object sender, EventArgs e)
         {
-
+            this.ctrlKeyDown = false;
         }
         private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -642,7 +671,7 @@ namespace Semantic
             //TODO:시맨틱구동+rgb변환되기 전,후가 체크되지 않은채 띄우는 경우가 나오긴하는데 그냥 예외로 넘김?
             if (null == rgb_imglist || 0 == rgb_imglist.Count())
             {
-                MessageBox.Show("Err: rgb_imglist가 비었습니다.");
+                Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
                 return;
             }
             else
@@ -704,7 +733,7 @@ namespace Semantic
                     rgb_imglist.Add(new Bitmap(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
                     Console.WriteLine("그레이경로: " + gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png");
                     Console.WriteLine("RGB 경로: " + rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
-
+                    
                     //아예 rgb변환도 생략.
                     //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
 
@@ -748,6 +777,12 @@ namespace Semantic
         private void Main_form_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F) Network_route_settings();
+            this.ctrlKeyDown = e.Control;
+        }
+
+        private void Main_form_KeyUp(object sender, KeyEventArgs e)
+        {
+            this.ctrlKeyDown = e.Control;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -826,13 +861,13 @@ namespace Semantic
         private void Button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetScale(Math.Pow(1.5, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+            SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
         }
 
         private void Button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
-            SetScale(Math.Pow(1.5, zoomLevel));
+            SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel));
         }
         private void button_ZoomReset_Click(object sender, EventArgs e)
         {
@@ -1060,9 +1095,13 @@ namespace Semantic
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
 
+        public const double _ScaleDegree = 1.5;
+
         public const int Max_brush_Size = 10;
 
         public const bool isTestmode = false;
+        //public const bool isTestmode = true;
+
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 
         ///모델구동, rgb변환해야되거나 공식적으로 올릴땐 false
     }

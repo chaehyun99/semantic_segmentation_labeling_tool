@@ -75,6 +75,7 @@ namespace Semantic
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel); //직접추가함
             // 
             // button2
             // 
@@ -266,6 +267,7 @@ namespace Semantic
             this.Text = "Main_form";
             this.Load += new System.EventHandler(this.Main_form_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyUp);           
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
