@@ -32,11 +32,15 @@ namespace Semantic
             this.Network_operation = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.LayoutPanelOfThumbnails = new System.Windows.Forms.FlowLayoutPanel();
+            this.listPanelThumb = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.경로설정FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.lable_ImgScale = new System.Windows.Forms.Label();
+            this.lable_Opacity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -75,15 +79,15 @@ namespace Semantic
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // LayoutPanelOfThumbnails
+            // listPanelThumb
             // 
-            this.LayoutPanelOfThumbnails.AutoScroll = true;
-            this.LayoutPanelOfThumbnails.Location = new System.Drawing.Point(36, 87);
-            this.LayoutPanelOfThumbnails.Margin = new System.Windows.Forms.Padding(4);
-            this.LayoutPanelOfThumbnails.Name = "LayoutPanelOfThumbnails";
-            this.LayoutPanelOfThumbnails.Size = new System.Drawing.Size(381, 938);
-            this.LayoutPanelOfThumbnails.TabIndex = 19;
-            this.LayoutPanelOfThumbnails.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
+            this.listPanelThumb.AutoScroll = true;
+            this.listPanelThumb.Location = new System.Drawing.Point(36, 87);
+            this.listPanelThumb.Margin = new System.Windows.Forms.Padding(4);
+            this.listPanelThumb.Name = "listPanelThumb";
+            this.listPanelThumb.Size = new System.Drawing.Size(381, 938);
+            this.listPanelThumb.TabIndex = 19;
+            this.listPanelThumb.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
             // 
             // menuStrip1
             // 
@@ -120,21 +124,66 @@ namespace Semantic
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(1099, 126);
+            this.trackBar1.Location = new System.Drawing.Point(1502, 127);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(4);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(149, 69);
             this.trackBar1.TabIndex = 24;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(827, 171);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(163, 50);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "zoom +";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button_ZoomIn_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(827, 87);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(163, 50);
+            this.button3.TabIndex = 25;
+            this.button3.Text = "zoom -";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button_ZoomOut_Click);
+            // 
+            // lable_ImgScale
+            // 
+            this.lable_ImgScale.AutoSize = true;
+            this.lable_ImgScale.Location = new System.Drawing.Point(861, 145);
+            this.lable_ImgScale.Name = "lable_ImgScale";
+            this.lable_ImgScale.Size = new System.Drawing.Size(87, 18);
+            this.lable_ImgScale.TabIndex = 26;
+            this.lable_ImgScale.Text = "배율: ? %";
+            this.lable_ImgScale.Paint += new System.Windows.Forms.PaintEventHandler(this.lable_ImgScale_Paint);
+            // 
+            // lable_Opacity
+            // 
+            this.lable_Opacity.AutoSize = true;
+            this.lable_Opacity.Location = new System.Drawing.Point(1530, 171);
+            this.lable_Opacity.Name = "lable_Opacity";
+            this.lable_Opacity.Size = new System.Drawing.Size(105, 18);
+            this.lable_Opacity.TabIndex = 27;
+            this.lable_Opacity.Tag = new int();
+            this.lable_Opacity.Text = "투명도: ? %";
+            this.lable_Opacity.Paint += new System.Windows.Forms.PaintEventHandler(this.lable_Opacity_Paint);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1050);
+            this.Controls.Add(this.lable_Opacity);
+            this.Controls.Add(this.lable_ImgScale);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.LayoutPanelOfThumbnails);
+            this.Controls.Add(this.listPanelThumb);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Network_operation);
@@ -160,11 +209,15 @@ namespace Semantic
         private System.Windows.Forms.Button Network_operation;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.FlowLayoutPanel LayoutPanelOfThumbnails;
+        private System.Windows.Forms.FlowLayoutPanel listPanelThumb;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 경로설정FToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lable_ImgScale;
+        private System.Windows.Forms.Label lable_Opacity;
     }
 }
 
