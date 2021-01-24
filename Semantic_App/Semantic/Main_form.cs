@@ -49,7 +49,7 @@ namespace Semantic
         public static FolderBrowserDialog gray_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog rgb_file_path = new FolderBrowserDialog();
 
-        private int cursor_mode = 1, brush_Size = 1;
+        private int cursor_mode = 2, brush_Size = 1;
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
 
@@ -811,20 +811,20 @@ namespace Semantic
         private void Button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetScale(Math.Pow(1.5, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+            SetScale(Math.Pow(2, zoomLevel));
         }
 
         private void Button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
-            SetScale(Math.Pow(1.5, zoomLevel));
+            SetScale(Math.Pow(2, zoomLevel));
         }
 
         private void lable_ImgScale_Paint(object sender, PaintEventArgs e)
         {
             lable_ImgScale.Text =
                 "배율: "
-                + Convert.ToString(Math.Round(zoomScale * 100))
+                + Convert.ToString(zoomScale * 100)
                 +"%"
                 ;
         }
@@ -838,15 +838,6 @@ namespace Semantic
                 ;
         }
 
-        private void Button_ScrollMode_Click(object sender, EventArgs e)
-        {
-            cursor_mode = 2;
-        }
-
-        private void Button_PaintMode_Click(object sender, EventArgs e)
-        {
-            cursor_mode = 1;
-        }
 
         //이미지 저장버튼
         private void button2_Click(object sender, EventArgs e)
@@ -992,7 +983,7 @@ namespace Semantic
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
 
-        public const bool isTestmode = false;
+        public const bool isTestmode = true;
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 
         ///모델구동, rgb변환해야되거나 공식적으로 올릴땐 false
     }
