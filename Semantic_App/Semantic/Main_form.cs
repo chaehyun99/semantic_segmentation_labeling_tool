@@ -39,25 +39,27 @@ namespace Semantic
         List<Bitmap> rgb_imglist = new List<Bitmap>();
 
         ///original_opac -> sourceBitmapRgb로 변경됨
-        private Bitmap sourceImgRgb = null;
+        private Bitmap sourceBitmapRgb = null;
 
         //픽쳐박스1에 띄워줄 원본 저장.
-        private Bitmap sourceImgOrigin = null;
+        private Bitmap sourceBitmapOrigin = null;
 
         public static bool whether_to_save_ = false;
         public static FolderBrowserDialog input_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog gray_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog rgb_file_path = new FolderBrowserDialog();
 
-        private int cursor_mode = 2, brush_Size = 1;
+        private int cursor_mode = 1, brush_Size = 1;
+        private Color brush_Color = Color.Black;
+
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
 
         private Rectangle targetImgRect = new Rectangle(0, 0, 100, 100);
-        private int zoomLevel = 0;     
-        private double zoomScale = 1.0f;     
+        private int zoomLevel = 0;
+        private double zoomScale = 1.0f;
 
-        
+
 
         private ImageAttributes imageAtt = new ImageAttributes(); //TODO:전역변수로 전환.
 
@@ -386,7 +388,7 @@ namespace Semantic
         }
 
         private Bitmap Gray2RGB_Click(Bitmap bmp_)
-        {            
+        {
             Bitmap img2Convert = new Bitmap(bmp_);
 
             int x, y;
@@ -477,10 +479,10 @@ namespace Semantic
             ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
 
             //ImageAttributes imageAtt = new ImageAttributes(); //TODO:전역변수화
-            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap); 
+            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
             //using (Graphics g = Graphics.FromImage(bmpOut))
-               // g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
+            // g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
 
             return;
         }
@@ -488,7 +490,7 @@ namespace Semantic
         //트레이스바(투명도 비율 정보) 조정 - 투명도 조절용
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (null == sourceImgRgb)
+            if (null == sourceBitmapRgb)
             {
                 return;
             }
@@ -546,15 +548,28 @@ namespace Semantic
             }
 
             Color brush_Color = Color.Black;
-            Pen myPen = new Pen(brush_Color, brush_Size);                // myPen
+            Pen myPen = new Pen(brush_Color, brush_Size);                //TODO: myPen의 수명이 언제 끝나는지 확인해서 Dispose처리 해주기.
 
-            using (Graphics g = Graphics.FromImage(sourceImgRgb)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
+            myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+
+            using (Graphics g = Graphics.FromImage(sourceBitmapRgb)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
             {
                 DrawFreeLine(myPen, g);
                 pictureBox1.Refresh();
                 pictureBox2.Refresh();
             }
         }
+
+        //브러시 크기조절
+        private void SetBrushSize(int newbrushSize)
+        {
+            brush_Size = newbrushSize;
+
+            //만약 브러시모양을 표시해줄거면 여기서 갱신
+        }
+
         #endregion
 
         #region <이미지 배율- 확대/축소/직접지정>
@@ -570,7 +585,7 @@ namespace Semantic
         private void SetScale(double scale) // 
         {
             //TODO:(구현에 따라 조건문 추가)
-            if(0 == scale)
+            if (0 == scale)
             {
                 return;
             }
@@ -621,7 +636,7 @@ namespace Semantic
             //picturebox1에 띄울 비트맵을 선택된 원본 이미지로 변경
             int idx = Convert.ToInt32(pb.Tag.ToString());
             //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
-            sourceImgOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
+            sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
 
             //picturebox2 에 띄울 비트맵을 선택된 원본 이미지로 변경
             //TODO:시맨틱구동+rgb변환되기 전,후가 체크되지 않은채 띄우는 경우가 나오긴하는데 그냥 예외로 넘김?
@@ -634,10 +649,10 @@ namespace Semantic
             {
                 //pictureBox2.Image = rgb_imglist[idx];
                 //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                sourceImgRgb = new Bitmap(rgb_imglist[idx]);
-                Console.WriteLine("rgb리스트에서 소스로 가져옵니다. idx: " 
+                sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
+                Console.WriteLine("rgb리스트에서 소스로 가져옵니다. idx: "
                     + Convert.ToString(idx)
-                    + "// "+ Convert.ToString(rgb_imglist.Count())
+                    + "// " + Convert.ToString(rgb_imglist.Count())
                     );
 
                 pictureBox1.Refresh();
@@ -645,18 +660,18 @@ namespace Semantic
 
                 Console.WriteLine("");
                 Console.WriteLine("tagRect(XYWH)/src.WH: "
-                    +Convert.ToString(targetImgRect.X)
-                    +"/"
-                    +Convert.ToString(targetImgRect.Y)
-                    +"/"
-                    +Convert.ToString(targetImgRect.Width)
-                    +"/"
-                    +Convert.ToString(targetImgRect.Height)
-                    +"/"
-                    +Convert.ToString(sourceImgRgb.Width)
-                    +"/"
-                    +Convert.ToString(sourceImgRgb.Height));
-            }       
+                    + Convert.ToString(targetImgRect.X)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Y)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Width)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Height)
+                    + "/"
+                    + Convert.ToString(sourceBitmapRgb.Width)
+                    + "/"
+                    + Convert.ToString(sourceBitmapRgb.Height));
+            }
             //UiTxt_File.Text = this.imgList[idx];
         }
 
@@ -698,9 +713,9 @@ namespace Semantic
                     MessageBox.Show("rgb테스트용 이미지 저장 완료");
                     */
                 }
-                
+
                 //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                sourceImgRgb = new Bitmap(rgb_imglist[0]);
+                sourceBitmapRgb = new Bitmap(rgb_imglist[0]);
                 Console.WriteLine();
 
                 pictureBox1.Refresh();
@@ -722,7 +737,7 @@ namespace Semantic
                 rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
             }
 
-            sourceImgRgb = new Bitmap(rgb_imglist[0]);
+            sourceBitmapRgb = new Bitmap(rgb_imglist[0]);
 
             pictureBox1.Refresh();
             pictureBox2.Refresh();
@@ -738,7 +753,7 @@ namespace Semantic
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             //ORIGIN 이미지가 없을때.
-            if (null == imgList || 0 == imgList.Count || null == sourceImgOrigin)
+            if (null == imgList || 0 == imgList.Count || null == sourceBitmapOrigin)
             {
                 return;
             }
@@ -757,16 +772,16 @@ namespace Semantic
 
             //타겟영역 갱신.
 
-            targetImgRect.Width = (int)(sourceImgOrigin.Width * zoomScale);
-            targetImgRect.Height = (int)(sourceImgOrigin.Height * zoomScale);
+            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
 
             e.Graphics.DrawImage(
-                sourceImgOrigin,
+                sourceBitmapOrigin,
                 targetImgRect,
-                targetImgRect.X,
-                targetImgRect.Y,
-                sourceImgOrigin.Width,
-                sourceImgOrigin.Height,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
                 GraphicsUnit.Pixel
                 );
         }
@@ -774,7 +789,7 @@ namespace Semantic
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             //rgb이미지가 없을때.
-            if(null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceImgRgb)
+            if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb)
             {
                 return;
             }
@@ -793,16 +808,16 @@ namespace Semantic
 
             //타겟영역 갱신.
 
-            targetImgRect.Width = (int)(sourceImgOrigin.Width * zoomScale);
-            targetImgRect.Height = (int)(sourceImgOrigin.Height * zoomScale);
+            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
 
             e.Graphics.DrawImage(
-                sourceImgRgb,
+                sourceBitmapRgb,
                 targetImgRect,
-                targetImgRect.X,
-                targetImgRect.Y,
-                sourceImgOrigin.Width,
-                sourceImgOrigin.Height,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
                 GraphicsUnit.Pixel,
                 imageAtt
                 );
@@ -811,21 +826,21 @@ namespace Semantic
         private void Button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetScale(Math.Pow(2, zoomLevel));
+            SetScale(Math.Pow(1.5, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
         }
 
         private void Button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
-            SetScale(Math.Pow(2, zoomLevel));
+            SetScale(Math.Pow(1.5, zoomLevel));
         }
 
         private void lable_ImgScale_Paint(object sender, PaintEventArgs e)
         {
             lable_ImgScale.Text =
                 "배율: "
-                + Convert.ToString(zoomScale * 100)
-                +"%"
+                + Convert.ToString(Math.Round(zoomScale * 100))
+                + "%"
                 ;
         }
 
@@ -838,6 +853,33 @@ namespace Semantic
                 ;
         }
 
+        private void button_setscrollmode_Click(object sender, EventArgs e)
+        {
+            cursor_mode = 1;
+        }
+
+        private void button_setPaintmode_Click(object sender, EventArgs e)
+        {
+            cursor_mode = 2;
+        }
+
+        private void button_BrushsizeUp_Click(object sender, EventArgs e)
+        {
+            if(Constants.Max_brush_Size == brush_Size)
+            {
+                return;
+            }
+            SetBrushSize(brush_Size + 1);
+        }
+
+        private void button_BrushsizeDown_Click(object sender, EventArgs e)
+        {
+            if (1 == brush_Size)
+            {
+                return;
+            }
+            SetBrushSize(brush_Size - 1);
+        }
 
         //이미지 저장버튼
         private void button2_Click(object sender, EventArgs e)
@@ -852,8 +894,8 @@ namespace Semantic
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (sourceImgRgb == null)
-            {      
+            if (sourceBitmapRgb == null)
+            {
                 return;
             }
             switch (cursor_mode)
@@ -886,18 +928,34 @@ namespace Semantic
                     ///= 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안된단 뜻.
                     /// </해설>
 
-                    using (Graphics g = Graphics.FromImage(sourceImgRgb))//sourceBitmap sourceBitmap sourceBitmap
+                    #region 클릭만 했을때도 점(원) 그려짐.
+                    using (Pen myPen = new Pen(brush_Color, 1))
+                    using (Graphics g = Graphics.FromImage(sourceBitmapRgb))
                     {
-                        Pen blackPen = new Pen(Color.Black, brush_Size);
-                        // Create rectangle.
-                        Rectangle rect = new Rectangle(pen_startpt.X, pen_startpt.Y, 1, 1);
-                        Console.WriteLine("pen_start" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
-                        Brush aBrush = (Brush)Brushes.Black;
-                        g.FillRectangle(aBrush, rect);
+                        Brush aBrush = new SolidBrush(brush_Color);
+
+                        /* //Create Proper Circle */
+                        Rectangle rectDot = new Rectangle(pen_startpt.X - (brush_Size + 2) / 2, pen_startpt.Y - (brush_Size + 2) / 2, brush_Size + 1, brush_Size + 1);
+
+                        if (brush_Size == 1)
+                        {
+                            rectDot = new Rectangle(pen_startpt.X - (brush_Size) / 2, pen_startpt.Y - (brush_Size) / 2, brush_Size, brush_Size);
+                            g.FillRectangle(aBrush, rectDot);
+                        }
+                        else if (brush_Size == 2)
+                        {
+                            rectDot = new Rectangle(pen_startpt.X - (brush_Size) / 2, pen_startpt.Y - (brush_Size) / 2, brush_Size - 1, brush_Size - 1);
+                            g.DrawRectangle(myPen, rectDot);
+                        }
+                        else
+                        {
+                            g.FillEllipse(aBrush, rectDot);
+                        }
 
                         pictureBox1.Refresh();
                         pictureBox2.Refresh();
                     }
+                    #endregion
                     break;
                 default:
                     break;
@@ -906,7 +964,7 @@ namespace Semantic
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (sourceImgRgb == null)
+            if (sourceBitmapRgb == null)
                 return;
             switch (cursor_mode)
             {
@@ -940,7 +998,7 @@ namespace Semantic
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (sourceImgRgb == null)
+            if (sourceBitmapRgb == null)
                 return;
             switch (cursor_mode)
             {
@@ -983,7 +1041,9 @@ namespace Semantic
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
 
-        public const bool isTestmode = true;
+        public const int Max_brush_Size = 10;
+
+        public const bool isTestmode = false;
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 
         ///모델구동, rgb변환해야되거나 공식적으로 올릴땐 false
     }
