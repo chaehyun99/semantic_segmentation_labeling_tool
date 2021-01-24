@@ -41,6 +41,8 @@ namespace Semantic
             this.button3 = new System.Windows.Forms.Button();
             this.lable_ImgScale = new System.Windows.Forms.Label();
             this.lable_Opacity = new System.Windows.Forms.Label();
+            this.Button_ScrollMode = new System.Windows.Forms.Button();
+            this.Button_PaintMode = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -168,15 +170,37 @@ namespace Semantic
             this.lable_Opacity.Name = "lable_Opacity";
             this.lable_Opacity.Size = new System.Drawing.Size(105, 18);
             this.lable_Opacity.TabIndex = 27;
-            this.lable_Opacity.Tag = new int();
+            this.lable_Opacity.Tag = 0;
             this.lable_Opacity.Text = "투명도: ? %";
             this.lable_Opacity.Paint += new System.Windows.Forms.PaintEventHandler(this.lable_Opacity_Paint);
+            // 
+            // Button_ScrollMode
+            // 
+            this.Button_ScrollMode.Location = new System.Drawing.Point(1026, 91);
+            this.Button_ScrollMode.Name = "Button_ScrollMode";
+            this.Button_ScrollMode.Size = new System.Drawing.Size(100, 43);
+            this.Button_ScrollMode.TabIndex = 28;
+            this.Button_ScrollMode.Text = "이동 모드";
+            this.Button_ScrollMode.UseVisualStyleBackColor = true;
+            this.Button_ScrollMode.Click += new System.EventHandler(this.Button_ScrollMode_Click);
+            // 
+            // Button_PaintMode
+            // 
+            this.Button_PaintMode.Location = new System.Drawing.Point(1026, 171);
+            this.Button_PaintMode.Name = "Button_PaintMode";
+            this.Button_PaintMode.Size = new System.Drawing.Size(100, 43);
+            this.Button_PaintMode.TabIndex = 28;
+            this.Button_PaintMode.Text = "수정 모드";
+            this.Button_PaintMode.UseVisualStyleBackColor = true;
+            this.Button_PaintMode.Click += new System.EventHandler(this.Button_PaintMode_Click);
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1871, 1050);
+            this.Controls.Add(this.Button_PaintMode);
+            this.Controls.Add(this.Button_ScrollMode);
             this.Controls.Add(this.lable_Opacity);
             this.Controls.Add(this.lable_ImgScale);
             this.Controls.Add(this.button3);
@@ -218,6 +242,8 @@ namespace Semantic
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label lable_ImgScale;
         private System.Windows.Forms.Label lable_Opacity;
+        private System.Windows.Forms.Button Button_ScrollMode;
+        private System.Windows.Forms.Button Button_PaintMode;
     }
 }
 
