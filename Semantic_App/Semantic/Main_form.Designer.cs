@@ -38,6 +38,11 @@ namespace Semantic
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.percenttextBox = new System.Windows.Forms.TextBox();
+            this.btn_zoomIn = new System.Windows.Forms.Button();
+            this.btn_zoomOut = new System.Windows.Forms.Button();
+            this.btn_zoomReset = new System.Windows.Forms.Button();
+            this.btn_brushSizeUp = new System.Windows.Forms.Button();
+            this.btn_brushSizeDown = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -124,7 +129,7 @@ namespace Semantic
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(769, 84);
+            this.trackBar1.Location = new System.Drawing.Point(664, 102);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(104, 45);
             this.trackBar1.TabIndex = 24;
@@ -132,17 +137,72 @@ namespace Semantic
             // 
             // percenttextBox
             // 
-            this.percenttextBox.Location = new System.Drawing.Point(591, 126);
+            this.percenttextBox.Location = new System.Drawing.Point(558, 126);
             this.percenttextBox.Name = "percenttextBox";
             this.percenttextBox.Size = new System.Drawing.Size(100, 21);
             this.percenttextBox.TabIndex = 25;
             this.percenttextBox.TextChanged += new System.EventHandler(this.percenttextBox_TextChanged);
+            // 
+            // btn_zoomIn
+            // 
+            this.btn_zoomIn.Location = new System.Drawing.Point(558, 58);
+            this.btn_zoomIn.Name = "btn_zoomIn";
+            this.btn_zoomIn.Size = new System.Drawing.Size(43, 23);
+            this.btn_zoomIn.TabIndex = 26;
+            this.btn_zoomIn.Text = "+";
+            this.btn_zoomIn.UseVisualStyleBackColor = true;
+            this.btn_zoomIn.Click += new System.EventHandler(this.btn_zoomIn_Click);
+            // 
+            // btn_zoomOut
+            // 
+            this.btn_zoomOut.Location = new System.Drawing.Point(656, 58);
+            this.btn_zoomOut.Name = "btn_zoomOut";
+            this.btn_zoomOut.Size = new System.Drawing.Size(43, 23);
+            this.btn_zoomOut.TabIndex = 27;
+            this.btn_zoomOut.Text = "-";
+            this.btn_zoomOut.UseVisualStyleBackColor = true;
+            this.btn_zoomOut.Click += new System.EventHandler(this.btn_zoomOut_Click);
+            // 
+            // btn_zoomReset
+            // 
+            this.btn_zoomReset.Location = new System.Drawing.Point(607, 58);
+            this.btn_zoomReset.Name = "btn_zoomReset";
+            this.btn_zoomReset.Size = new System.Drawing.Size(43, 23);
+            this.btn_zoomReset.TabIndex = 28;
+            this.btn_zoomReset.Text = "100%";
+            this.btn_zoomReset.UseVisualStyleBackColor = true;
+            this.btn_zoomReset.Click += new System.EventHandler(this.btn_zoomReset_Click);
+            // 
+            // btn_brushSizeUp
+            // 
+            this.btn_brushSizeUp.Location = new System.Drawing.Point(790, 58);
+            this.btn_brushSizeUp.Name = "btn_brushSizeUp";
+            this.btn_brushSizeUp.Size = new System.Drawing.Size(75, 23);
+            this.btn_brushSizeUp.TabIndex = 29;
+            this.btn_brushSizeUp.Text = "Brush +";
+            this.btn_brushSizeUp.UseVisualStyleBackColor = true;
+            this.btn_brushSizeUp.Click += new System.EventHandler(this.btn_brushSizeUp_Click);
+            // 
+            // btn_brushSizeDown
+            // 
+            this.btn_brushSizeDown.Location = new System.Drawing.Point(790, 87);
+            this.btn_brushSizeDown.Name = "btn_brushSizeDown";
+            this.btn_brushSizeDown.Size = new System.Drawing.Size(75, 23);
+            this.btn_brushSizeDown.TabIndex = 30;
+            this.btn_brushSizeDown.Text = "Brush -";
+            this.btn_brushSizeDown.UseVisualStyleBackColor = true;
+            this.btn_brushSizeDown.Click += new System.EventHandler(this.btn_brushSizeDown_Click);
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 700);
+            this.Controls.Add(this.btn_brushSizeDown);
+            this.Controls.Add(this.btn_brushSizeUp);
+            this.Controls.Add(this.btn_zoomReset);
+            this.Controls.Add(this.btn_zoomOut);
+            this.Controls.Add(this.btn_zoomIn);
             this.Controls.Add(this.percenttextBox);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.pictureBox2);
@@ -177,6 +237,11 @@ namespace Semantic
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.TextBox percenttextBox;
+        private System.Windows.Forms.Button btn_zoomIn;
+        private System.Windows.Forms.Button btn_zoomOut;
+        private System.Windows.Forms.Button btn_zoomReset;
+        private System.Windows.Forms.Button btn_brushSizeUp;
+        private System.Windows.Forms.Button btn_brushSizeDown;
     }
 }
 

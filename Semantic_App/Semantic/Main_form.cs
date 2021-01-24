@@ -48,7 +48,9 @@ namespace Semantic
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
         private double zoomScale = 1;
+        private int zoomLevel = 0;
 
+        bool ctrlKeyDown;
 
         public static class ColorTable
         {
@@ -527,13 +529,82 @@ namespace Semantic
         }
         #endregion
 
+        #region <이미지 스크롤 by 마우스 드래그>
+
+        /// <summary>
+        /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
+        /// 이동할때마다 이미지를 갱신합니다.
+        /// </summary>
+        private void Move_srcImg_location()
+        {
+            if (false == isScroll)
+            {
+                return;
+            }
+
+            //targetImgRect.X += move_endpt.X - move_startpt.X; 
+            //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
+            Console.WriteLine("Move_srcImg_location");
+            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
+
+            //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
+            pictureBox2.Refresh();
+        }
+
+        #endregion
+        #region <그리기: 선>
+
+        /// <summary>
+        /// pt2pt의 선
+        /// </summary>
+        /// <param name="myPen"></param>
+        /// <param name="g"></param>
+        private void DrawFreeLine(Pen myPen, Graphics g)
+        {
+            g.DrawLine(myPen, pen_startpt, pen_endpt);
+        }
+
+        /// <summary>
+        /// isPaint를 확인하고 값이 True면,
+        /// 펜 생성->그리기->새로고침 실행합니다.
+        /// </summary>
+        private void DrawShape() //Q: 나중에 인자로 brush& shape 받기?
+        {
+            if (false == isPaint)
+            {
+                return;
+            }
+
+            Color brush_Color = Color.Black;
+            Pen myPen = new Pen(brush_Color, brush_Size);                // myPen
+
+            myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+            using (Graphics g = Graphics.FromImage(original_opac)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
+            {
+
+                DrawFreeLine(myPen, g);
+                //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
+                pictureBox2.Refresh();
+            }
+        }
+
+        private void SetBrushSize(int newbrushSize)
+        {
+            brush_Size = newbrushSize;
+
+            //만약 브러시모양을 표시해줄거면 여기서 갱신
+        }
+        #endregion
+
         #region Event Control
         private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Network_route_settings();
         }
 
-        //좌측 이미지 목록 클릭시 동작
+        #region 좌측 썸네일 동작
         private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
         public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
@@ -571,6 +642,7 @@ namespace Semantic
             }
             //UiTxt_File.Text = this.imgList[idx];
         }
+        #endregion
 
         private void Network_operation_Click(object sender, EventArgs e)
         {
@@ -680,65 +752,7 @@ namespace Semantic
             MessageBox.Show("t");
         }
 
-        #region <이미지 스크롤 by 마우스 드래그>
-
-        /// <summary>
-        /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
-        /// 이동할때마다 이미지를 갱신합니다.
-        /// </summary>
-        private void Move_srcImg_location()
-        {
-            if (false == isScroll)
-            {
-                return;
-            }
-
-            //targetImgRect.X += move_endpt.X - move_startpt.X; 
-            //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
-            Console.WriteLine("Move_srcImg_location");
-            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
-
-            //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-            pictureBox2.Refresh();
-        }
-
-        #endregion
-        #region <그리기: 선>
-
-        /// <summary>
-        /// pt2pt의 선
-        /// </summary>
-        /// <param name="myPen"></param>
-        /// <param name="g"></param>
-        private void DrawFreeLine(Pen myPen, Graphics g)
-        {
-            g.DrawLine(myPen, pen_startpt, pen_endpt);
-        }
-
-        /// <summary>
-        /// isPaint를 확인하고 값이 True면,
-        /// 펜 생성->그리기->새로고침 실행합니다.
-        /// </summary>
-        private void DrawShape() //Q: 나중에 인자로 brush& shape 받기?
-        {
-            if (false == isPaint)
-            {
-                return;
-            }
-
-            Color brush_Color = Color.Black;
-            Pen myPen = new Pen(brush_Color, brush_Size);                // myPen
-
-            using (Graphics g = Graphics.FromImage(original_opac)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
-            {
-
-                DrawFreeLine(myPen, g);
-                //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-                pictureBox2.Refresh();
-            }
-        }
-        #endregion
-
+        #region picturebox paint option. call by picturebox.refresh()
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (original_img == null)
@@ -762,7 +776,6 @@ namespace Semantic
             Console.WriteLine("pb1_paint");
             e.Graphics.DrawImage((Bitmap)original_img, targetImgRect);
         }
-
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
             
@@ -787,7 +800,9 @@ namespace Semantic
             Console.WriteLine("pb2_paint");
             e.Graphics.DrawImage(SetAlpha((Bitmap)original_opac, trackBar1.Value), targetImgRect);
         }
+        #endregion
 
+        #region picturebox Mouse Event(For Draw)
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
             switch (cursor_mode)
@@ -908,8 +923,9 @@ namespace Semantic
                     break;
             }
         }
+        #endregion
 
-
+        #region zoom control
         private void percenttextBox_TextChanged(object sender, EventArgs e)
         {
             //if (this.ignoreChanges)
@@ -924,6 +940,48 @@ namespace Semantic
                 SetImageScale(percent / 100, true, true, false);
             }
         }
+        private void btn_zoomIn_Click(object sender, EventArgs e)
+        {
+            zoomLevel++;
+            SetImageScale(Math.Pow(Constants._ScaleDegree, zoomLevel), true, true, true); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+        }
+        private void btn_zoomOut_Click(object sender, EventArgs e)
+        {
+            zoomLevel--;
+            SetImageScale(Math.Pow(Constants._ScaleDegree, zoomLevel), true, true, true);
+        }
+        private void btn_zoomReset_Click(object sender, EventArgs e)
+        {
+            //최초 위치로 되돌림.
+            targetImgRect.X = 0;
+            targetImgRect.Y = 0;
+
+            zoomLevel = 0;
+            SetImageScale(Math.Pow(1.5, zoomLevel), true, true, true);
+        }
+
+        #endregion
+
+        #region brush control
+        private void btn_brushSizeUp_Click(object sender, EventArgs e)
+        {
+            if (brush_Size == Constants.Max_brush_Size)
+            {
+                return;
+            }
+            SetBrushSize(brush_Size + 1);
+        }
+
+        private void btn_brushSizeDown_Click(object sender, EventArgs e)
+        {
+            if (brush_Size == 1)
+            {
+                return;
+            }
+            SetBrushSize(brush_Size - 1);
+        }
+        #endregion
+
         #endregion
 
     }
@@ -932,6 +990,9 @@ namespace Semantic
     {
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
+
+        public const double _ScaleDegree = 1.5;
+        public const int Max_brush_Size = 10;
 
         public const bool isTestmode = true;
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 
