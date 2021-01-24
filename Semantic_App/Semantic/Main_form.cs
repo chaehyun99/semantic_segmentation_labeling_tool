@@ -834,6 +834,18 @@ namespace Semantic
             zoomLevel--;
             SetScale(Math.Pow(1.5, zoomLevel));
         }
+        private void button_ZoomReset_Click(object sender, EventArgs e)
+        {
+            //최초 위치로 되돌림.
+            targetImgRect.X = 0;
+            targetImgRect.Y = 0;
+
+            zoomLevel = 0;
+            SetScale(Math.Pow(1.5, zoomLevel));
+
+        }
+
+
 
         private void lable_ImgScale_Paint(object sender, PaintEventArgs e)
         {
@@ -894,10 +906,6 @@ namespace Semantic
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
         {
-            if (sourceBitmapRgb == null)
-            {
-                return;
-            }
             switch (cursor_mode)
             {
                 case 1: //scroll mode
@@ -906,6 +914,11 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
+
+                    if (sourceBitmapRgb == null)
+                    {
+                        return;
+                    }
 
                     #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
@@ -964,8 +977,7 @@ namespace Semantic
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            if (sourceBitmapRgb == null)
-                return;
+            
             switch (cursor_mode)
             {
                 case 1: //scroll mode
@@ -975,6 +987,10 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
+                    if (sourceBitmapRgb == null)
+                    {
+                        return;
+                    }
                     #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
 
@@ -998,8 +1014,6 @@ namespace Semantic
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (sourceBitmapRgb == null)
-                return;
             switch (cursor_mode)
             {
                 case 1: //scroll mode
@@ -1008,6 +1022,11 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
+
+                    if (sourceBitmapRgb == null)
+                    {
+                        return;
+                    }
 
                     #region <sender 캐스팅 & 좌표지정>
 
