@@ -55,6 +55,8 @@ namespace Semantic
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
 
+        private Point dragOffset = new Point(0,0);
+
         private Rectangle targetImgRect = new Rectangle(0, 0, 100, 100);
         private int zoomLevel = 0;
         private double zoomScale = 1.0f;
@@ -519,7 +521,13 @@ namespace Semantic
             //targetImgRect.X += move_endpt.X - move_startpt.X; 
             //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
 
-            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
+            dragOffset.X += move_endpt.X - move_startpt.X;
+            dragOffset.Y += move_endpt.Y - move_startpt.Y;
+            targetImgRect.X += move_endpt.X - move_startpt.X;
+            targetImgRect.Y += move_endpt.Y - move_startpt.Y; 
+
+            Console.WriteLine("좌표이동량의 총합" + Convert.ToString(dragOffset));
+            Console.WriteLine("이동후 targetRect: " + Convert.ToString(targetImgRect.Location));
 
             pictureBox1.Refresh();
             pictureBox2.Refresh();
@@ -607,7 +615,65 @@ namespace Semantic
 
         #region Event Control
 
+
+
+
+        #region Zoom by mouseWheel - 픽쳐박스 중앙기준 좌표계산
+
+        /* 마우스 휠로 확대축소시 픽쳐박스 중앙기준 좌표계산
+
+        .TargetRect_______________________________________
+        |                                                 |
+        |          .pictureBox____________                |
+        |          |                      |               |
+        |          |          。          |               |
+        |          |       (pBox Center)  |               |
+        |          |______________________|               |
+        |_________________________________________________|
         
+        (pCent (- pBox.Loc=0) )* zoomScale  = pCent - newRect.Loc
+
+        Offset => 기존의 targetRect에서 계산식으로 뽑아내거나   (뇌정지+ 잘 안됨)
+        아예 이동할 때 마다 총 이동량을 저장                   (Point dragOffset)
+
+        =>핵심은 마우스 스크롤(드래그)으로 인한 오프셋은 OldRect나 NewRect나 같다는 점.
+
+        Point OffsetByScroll = Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2        
+        (zoomlevel*constants._scaleincreaseratio - 1)*pictureBox1.Size/2
+
+        ==>최종적으로 TargetRect.Location = (1-Scale)*pBox.Size/2 + OffsetByScroll
+
+        New_targetImgRect.Location  
+        = (1-New_Scale)*pictureBox1.Size/2 +  Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2 
+        = pictureBox.Size/2 * (Old_ZoomScale - New_Scale) + Old_TargetREct.Location
+       
+
+        newRect.Loc = pCent - (pCent)*zoomScale + OffsetByScroll = (1-zoomScale)*pBox.Size/2 + OffsetByScroll
+        
+
+        #####확대/축소의 기준점은 커서와 무관하게 두고 먼저 해보기. 일단 상대좌표 계산과 불변/변하는 조건이 명확해지면 확대 기준점은 바꿀수 있다.
+        => 픽쳐박스 중앙 기준. Need Zoom from current viewPoint.
+
+        필요한 값:TargetRect_New.Location ( RectNew.Loc) 
+
+        pBox_Center는 불변. 해당 지점의 targetRect상에서 상대좌표만 변경됨.(TargetRect.Loc만 변한다)
+        .
+
+        Center_from_OldTargetRect = pBoxCenter-TargetRect.Location
+        Center_from NewTargetRect = pBoxCenter-TargetRectNew.Location
+
+        pCent = pBox.Loc + pBox.Size/2
+        Point pBoxCent = (pictureBox1.Location + (pictureBox.Size/2));
+
+       
+        ∴TargetRect_New.Location =  RectNew.Loc = pCent - (pCent - RectOld.Loc) * _ScaleIncreaseRatio
+
+        ////////////////////////////////////////
+        /// 타입캐스팅과 반올림처리 적절히.
+        //////////////////////////////////////
+
+        */
+        #endregion
 
         public void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -618,21 +684,33 @@ namespace Semantic
                     // The user scrolled up.
 
                     zoomLevel++;
-                    SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); //필요에따라
+                    zoomScale = Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel);
+                    SetTargetRectByZoomAtCenter(e);
                 }
                 else
                 {
                     // The user scrolled down.
 
                     zoomLevel--;
-                    SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); 
+                    zoomScale = Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel);
+                    SetTargetRectByZoomAtCenter(e);
                 }
+
+                pictureBox1.Refresh();
+                pictureBox2.Refresh();
+                lable_ImgScale.Refresh();
             }
             else
             {                
             }
 
-
+        }
+        private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
+        {
+            //스케일값으로 인해 변경된 보정량 + dragOffset이 최종 좌표
+            targetImgRect.X = (int)Math.Round((1 - zoomScale) * pictureBox1.Width / 2 +dragOffset.X); //
+            targetImgRect.Y = (int)Math.Round((1 - zoomScale) * pictureBox1.Height / 2 +dragOffset.Y); //
+            Console.WriteLine("마우스 휠-> targetImgRect: " + Convert.ToString(targetImgRect));
         }
 
         private void Main_form_Load(object sender, EventArgs e)
@@ -809,6 +887,20 @@ namespace Semantic
 
             targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
             targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
+            Console.WriteLine("pBox1_paint-TargetRect.Size 조정. 위치: " + Convert.ToString(targetImgRect.Location));
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지
+            /////////////////////////////////////////////////////////////////////////Based on this article 
+            ///https://ella-devblog.tistory.com/6
+            ///이 소스는 4줄빼고 나머지 제대로 안돌아가니까 안들고오는게 좋음
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///////////////////////
+            
 
             e.Graphics.DrawImage(
                 sourceBitmapOrigin,
@@ -846,6 +938,17 @@ namespace Semantic
             targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
             targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
 
+            /**/
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///////////////////////////////////////////////
+            
             e.Graphics.DrawImage(
                 sourceBitmapRgb,
                 targetImgRect,
@@ -861,22 +964,25 @@ namespace Semantic
         private void Button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+            SetScale(Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
         }
 
         private void Button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
-            SetScale(Math.Pow(Constants._ScaleDegree, zoomLevel));
+            SetScale(Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel));
         }
         private void button_ZoomReset_Click(object sender, EventArgs e)
         {
             //최초 위치로 되돌림.
             targetImgRect.X = 0;
             targetImgRect.Y = 0;
+            dragOffset.X = 0;
+            dragOffset.Y = 0;
 
             zoomLevel = 0;
             SetScale(Math.Pow(1.5, zoomLevel));
+            Console.WriteLine("zoomReset_Click. zoomScale: " + Convert.ToString(zoomScale));
 
         }
 
@@ -1095,7 +1201,7 @@ namespace Semantic
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
 
-        public const double _ScaleDegree = 1.5;
+        public const double _ScaleIncreaseRatio = 1.1;
 
         public const int Max_brush_Size = 10;
 
