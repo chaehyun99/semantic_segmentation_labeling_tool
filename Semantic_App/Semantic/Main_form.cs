@@ -654,74 +654,18 @@ namespace Semantic
 
 
 
-        #region Zoom by mouseWheel - 픽쳐박스 중앙기준 좌표계산
-
-        /* 마우스 휠로 확대축소시 픽쳐박스 중앙기준 좌표계산
-
-        .TargetRect_______________________________________
-        |                                                 |
-        |          .pictureBox____________                |
-        |          |                      |               |
-        |          |          。          |               |
-        |          |       (pBox Center)  |               |
-        |          |______________________|               |
-        |_________________________________________________|
-        
-        (pCent (- pBox.Loc=0) )* zoomScale  = pCent - newRect.Loc
-
-        Offset => 기존의 targetRect에서 계산식으로 뽑아내거나   (뇌정지+ 잘 안됨)
-        아예 이동할 때 마다 총 이동량을 저장                   (Point dragOffset)
-
-        =>핵심은 마우스 스크롤(드래그)으로 인한 오프셋은 OldRect나 NewRect나 같다는 점.
-
-        Point OffsetByScroll = Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2        
-        (zoomlevel*constants._scaleincreaseratio - 1)*pictureBox1.Size/2
-
-        ==>최종적으로 TargetRect.Location = (1-Scale)*pBox.Size/2 + OffsetByScroll
-
-        New_targetImgRect.Location  
-        = (1-New_Scale)*pictureBox1.Size/2 +  Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2 
-        = pictureBox.Size/2 * (Old_ZoomScale - New_Scale) + Old_TargetREct.Location
-       
-
-        newRect.Loc = pCent - (pCent)*zoomScale + OffsetByScroll = (1-zoomScale)*pBox.Size/2 + OffsetByScroll
-        
-
-        #####확대/축소의 기준점은 커서와 무관하게 두고 먼저 해보기. 일단 상대좌표 계산과 불변/변하는 조건이 명확해지면 확대 기준점은 바꿀수 있다.
-        => 픽쳐박스 중앙 기준. Need Zoom from current viewPoint.
-
-        필요한 값:TargetRect_New.Location ( RectNew.Loc) 
-
-        pBox_Center는 불변. 해당 지점의 targetRect상에서 상대좌표만 변경됨.(TargetRect.Loc만 변한다)
-        .
-
-        Center_from_OldTargetRect = pBoxCenter-TargetRect.Location
-        Center_from NewTargetRect = pBoxCenter-TargetRectNew.Location
-
-        pCent = pBox.Loc + pBox.Size/2
-        Point pBoxCent = (pictureBox1.Location + (pictureBox.Size/2));
-
-       
-        ∴TargetRect_New.Location =  RectNew.Loc = pCent - (pCent - RectOld.Loc) * _ScaleIncreaseRatio
-
-        ////////////////////////////////////////
-        /// 타입캐스팅과 반올림처리 적절히.
-        //////////////////////////////////////
-
-        */
-        #endregion
-
         public void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
             if (true == ctrlKeyDown)
             {
-                if (e.Delta > 0)
+                if (e.Delta > 0)   
                 {
                     // The user scrolled up.
 
                     zoomLevel++;
                     zoomScale = Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel);
-                    SetTargetRectByZoomAtCenter(e);
+                    //SetTargetRectByZoomAtCenter(e);
+                    SetTargetRectByZoomAtCursor(e);
                 }
                 else
                 {
@@ -729,7 +673,8 @@ namespace Semantic
 
                     zoomLevel--;
                     zoomScale = Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel);
-                    SetTargetRectByZoomAtCenter(e);
+                    //SetTargetRectByZoomAtCenter(e);
+                    SetTargetRectByZoomAtCursor(e);
                 }
 
                 pictureBox1.Refresh();
@@ -746,10 +691,172 @@ namespace Semantic
         }
         private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
         {
-            //스케일값으로 인해 변경된 보정량 + dragOffset이 최종 좌표
-            targetImgRect.X = (int)Math.Round((1 - zoomScale) * pictureBox1.Width / 2 + dragOffset.X); //
-            targetImgRect.Y = (int)Math.Round((1 - zoomScale) * pictureBox1.Height / 2 + dragOffset.Y); //
-            Console.WriteLine("마우스 휠-> targetImgRect: " + Convert.ToString(targetImgRect));
+            //zoom으로 바뀐 값+ dragOffset = 최종 좌표
+            targetImgRect.X = (int)Math.Round((1 - zoomScale) * pictureBox1.Width / 2) + dragOffset.X; //
+            targetImgRect.Y = (int)Math.Round((1 - zoomScale) * pictureBox1.Height / 2) + dragOffset.Y; //
+            Console.WriteLine("휠.줌.중앙_targetImgRect: " + Convert.ToString(targetImgRect));
+
+            #region Zoom by mouseWheel - 픽쳐박스 중앙기준 좌표계산
+
+            /* 마우스 휠로 확대축소시 픽쳐박스 중앙기준 좌표계산
+
+            .TargetRect_______________________________________
+            |                                                 |
+            |          .pictureBox____________                |
+            |          |                      |               |
+            |          |          。          |               |
+            |          |       (pBox Center)  |               |
+            |          |______________________|               |
+            |_________________________________________________|
+
+            (pCent (- pBox.Loc=0) )* zoomScale  = pCent - newRect.Loc
+
+            Offset => 기존의 targetRect에서 계산식으로 뽑아내거나   
+            아예 이동할 때 마다 총 이동량을 저장                   (Point dragOffset)
+
+            =>핵심은 마우스 스크롤(드래그)으로 인한 오프셋은 OldRect나 NewRect나 같다는 점.
+
+            Point OffsetByScroll = Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2        
+            (zoomlevel*constants._scaleincreaseratio - 1)*pictureBox1.Size/2
+
+            ==>최종적으로 TargetRect.Location = (1-Scale)*pBox.Size/2 + OffsetByScroll
+
+            New_targetImgRect.Location  
+            = (1-New_Scale)*pictureBox1.Size/2 +  Old_TargetRect.Location +  (Old_ZoomScale-1)*pictureBox1.Size/2 
+            = pictureBox.Size/2 * (Old_ZoomScale - New_Scale) + Old_TargetREct.Location       
+
+            newRect.Loc = pCent - (pCent)*zoomScale + OffsetByScroll = (1-zoomScale)*pBox.Size/2 + OffsetByScroll      
+
+            필요한 값:TargetRect_New.Location ( RectNew.Loc) 
+
+            pBox_Center는 불변. 해당 지점의 targetRect상에서 상대좌표만 변경됨.(TargetRect.Loc만 변한다)        .
+
+            Center_from_OldTargetRect = pBoxCenter-TargetRect.Location
+            Center_from NewTargetRect = pBoxCenter-TargetRectNew.Location
+
+            pCent = pBox.Loc + pBox.Size/2
+            Point pBoxCent = (pictureBox1.Location + (pictureBox.Size/2));
+
+            ∴TargetRect_New.Location =  RectNew.Loc = pCent - (pCent - RectOld.Loc) * _ScaleIncreaseRatio
+
+            ////////////////////////////////////////
+            /// 타입캐스팅과 반올림처리 적절히.
+            //////////////////////////////////////
+
+            */
+            #endregion
+
+        }
+
+        private void SetTargetRectByZoomAtCursor(MouseEventArgs e)
+        {
+            if (e.Delta>0)
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) * Constants._ScaleIncreaseRatio) + e.X + dragOffset.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) * Constants._ScaleIncreaseRatio) + e.Y + dragOffset.Y;
+            }
+            else
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) / Constants._ScaleIncreaseRatio) + e.X + dragOffset.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) / Constants._ScaleIncreaseRatio) + e.Y + dragOffset.Y;
+            }
+
+            Console.WriteLine("휠.줌.커서_targetImgRect: " + Convert.ToString(targetImgRect));
+
+            #region 커서위치 기준 확대시 좌표
+            /*            
+
+            #최종적으로 구해야되는 변수: TargetRect.Location
+
+            1. 확대하는 동안 픽쳐박스기준에서 커서의 위치는 불변.
+            2. = e.Point - (0,0)  //MouseEventArgs e는 파라미터로.
+
+                확대 전: TargetRectOld
+                확대 후: TargetRectNew
+
+                A:  TargetRectNew의 좌상단 좌표. 즉 최종적으로 구할 변수.
+                B:  pictureBox의         ''
+                C:  마우스 커서의 좌표.
+
+            A.TargetRect_______________________________________
+            |                                                 |
+            |          B.pictureBox___________                |
+            |          |                      |               |
+            |          |         C。          |               |
+            |          |       (e.Location)   |               |
+            |          |______________________|               |
+            |_________________________________________________|
+
+            picBox와 같은 크기에서 1단계만 줌하는 상황 가정
+            즉, picBox 위치,크기 = TargetRectOld
+
+            커서를 중심으로 확대했으니
+            3개의 지점은 일직선으로 이어짐
+
+            AC : BC = _ScaleIncreaseRatio : 1
+
+            Vector_AC = Vector_BC - Vector_BA
+                        = e.Location - targeImgRectNew.Location(정의)
+
+            e.Location - targetImgRectNew.Location
+                = e.Location * _ScaleIncreaseRatio
+
+            A = e.Location * (1-_ScaleIncreaseRatio)
+            ______________________________________________________
+            # 여기까지 구한 식이 일반적으로 적용되는지 확인.
+
+            Case i. if (zoomLevel > 1) ?
+
+                A = e.Location * (1-zoomScale_New)
+                zoomScale_New = _ScaleIncreaseRatio * zoomLevel_New.?
+
+            Case ii.  마우스 스크롤로 좌표이동이 된 상태라면?
+
+                Point DragOffset에 총 커서 이동량 저장했다가 조정.
+            ______________________________________________
+            # 여기까지 구현하고 테스트.
+            ->확대 상태에서 커서위치 이동 -> 이미지 튐.
+            =>최초상태 기준 대신 zoom상태에서 커서위치를 계산.
+
+            A.TargetRect_New___________________________________
+            |                                                 |
+            |          B.TargetRect_Old_______                |
+            |          |                      |               |
+            |          |         C。          |               |
+            |          |       (e.Location)   |               |
+            |          |______________________|               |
+            |_________________________________________________|
+
+            조건 변경) zoomLevel = n에서  +-1단계 되는 상황
+                -> 증가/감소따라 곱할지 바뀔지 달라짐.
+
+            여전히 커서를 중심으로 확대한거니까
+            3개의 지점은 일직선으로 이어진다.
+
+            AC : BC = _ScaleIncreaseRatio : 1
+
+            Vector_AC   = e.Location - targeImgRectNew.Location(정의)
+
+            Vector_BC   = e.Location - targeImgRectOld.Location
+
+            e.Location - A = ( e.location - B) * _ScaleIncreaseRatio
+
+            A = e.Location * (1 - _ScaleIncreaseRatio) + B * _ScaleIncreaseRatio;
+                = (B - e.location) * _ScaleIncreaseRatio + e.Location
+
+            ∴ targetRect.Loc 
+            = e.Loc * (1 - _scaleRatio) + targetRect_.Loc * _scaleRatio
+            =(targetRect_.Loc - e.Loc) * _scaleRatio + e.Loc;
+
+            (_scaleRatio Pow zoomLevel = zoomScale)
+
+            _________________________________________________
+            +화면 scroll로 인한 오프셋
+            _____________________________________
+
+            */
+            #endregion
+
         }
 
         private void Main_form_Load(object sender, EventArgs e)
@@ -795,21 +902,18 @@ namespace Semantic
             pb.Parent.BackColor = Color.Red;
 
 
-            ///////썸네일 픽쳐박스 클릭시 캔버스 픽쳐박스에 불러올 인덱스 Idx의 관리 흐름
+            ///////픽쳐박스 이미지 띄울 때 인덱스는 어디서?
             /// 
-            /// pb.Tag = i.Tostring();            /// 
-            /// > pBoxThumbnail_click(pb, e);            /// 
+            /// pb.Tag = i.Tostring();            
+            /// > pBoxThumbnail_click(pb, e);            
             /// >> pBox = sender as picturebox;
             /// >>> int idx = Convert.ToInt32(pb.Tag.ToString());
             /// >>>> sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
             /// 
             /// /// /// /// 
-            /// TODO:
+            /// TODO?
             /// => i값 저장시 string으로 변환 안해도 됨.
             /// 
-            /// Qustn
-            /// => Tag를 분리하는 코드와 얻어낸 인덱스로 이미지를 불러오는 걸 별개의 메소드로 나눠도 되는가?
-            ///     Q: 기능상 변하지 않는가? Yes. Q;굳이 해야하는가? 한번밖에 안쓰이긴함.
             /////////////////
 
 
@@ -830,17 +934,11 @@ namespace Semantic
                 //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
                 sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
                
-                /*
-                Console.WriteLine("rgb리스트에서 소스로 가져옵니다. idx: "
-                    + Convert.ToString(idx)
-                    + "// " + Convert.ToString(rgb_imglist.Count())
-                 );
-                */
-
                 //커서가 그려질 보드의 비트맵 갱신(크기)
                 cursorBoardBitmap = new Bitmap(sourceBitmapRgb.Width, sourceBitmapRgb.Height);
                 cursorBoardBitmap.MakeTransparent();
 
+                SetAlpha(trackBar1.Value);
 
                 pictureBox1.Refresh();
                 pictureBox2.Refresh();
@@ -888,7 +986,7 @@ namespace Semantic
 
             if (Constants.isTestmode == true)
             {
-                MessageBox.Show("테스트모드로 실행합니다. 모델 구동을 생략하고 수정, 저장단계로 넘어갑니다.");
+                MessageBox.Show("테스트모드로 실행합니다. 모델 구동, GrayToRGB변환을 생략하고 수정, 저장단계로 넘어갑니다.");
                 //대체할 코드
                 for (int index = 0; index < imgList.Count(); index++)
                 {
@@ -920,6 +1018,8 @@ namespace Semantic
                 pBox3_CursorBoard.Refresh();
                 return;
             }
+            
+            //테스트 아닐때
 
             MessageBox.Show("그레이 스케일 변환 중 입니다.");
             Pythonnet_(input_file_path.SelectedPath, gray_file_path.SelectedPath, imgList);
@@ -929,10 +1029,8 @@ namespace Semantic
             //Gray2RGB 이미지 변수에 저장
             for (int index = 0; index < imgList.Count(); index++)
             {
-                //new Bitmap(경로)로 바꿀예정
                 gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-                //참조 형식 주의. 일단 메서드 내부에서는 new Bitmap()으로 복사해서 작업
-                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
+                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index])); 
             }
 
 
@@ -964,33 +1062,34 @@ namespace Semantic
                 return;
             }
 
-            // 보간 방식 지정. 
+            // 보간 방식 지정. 축소시엔 부드럽게, 확대했을땐 픽셀 뚜렷하게
             if (zoomScale < 1)
             {
-                //중간값 -> 확대시에 픽셀이 흐릿.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             }
             else
             {
-                //픽셀 그대로 확대 -> 이미지 축소시 1pixel굵기의 곡선등이 끊어져보이거나 사라짐.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             }
 
             //타겟영역 갱신.
 
-            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
-            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
             ///이미지가 픽쳐박스 탈출하는 것 방지
             /////////////////////////////////////////////////////////////////////////Based on this article 
             ///https://ella-devblog.tistory.com/6
-            ///이 소스는 4줄빼고 나머지 제대로 안돌아가니까 안들고오는게 좋음
+            ///이 소스는 4줄빼면 우리가 원하는 구현이랑 안맞음.
             ////////////////////////////////////////////////////////////////////////////////////////////////
-            //if (targetImgRect.X > 0) targetImgRect.X = 0;
-            //if (targetImgRect.Y > 0) targetImgRect.Y = 0;
-            //if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
-            //if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///적용하는 순서에 따라 zoomOut시에 어느 모서리로 붙을지 결정됨.
+            ///중앙에 띄우고싶으면..?
+            ///
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
             ///////////////////////
 
 
@@ -1007,7 +1106,7 @@ namespace Semantic
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            //rgb이미지가 없을때.
+
             if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb)
             {
                 return;
@@ -1016,21 +1115,19 @@ namespace Semantic
             // 보간 방식 지정. 
             if (zoomScale < 1)
             {
-                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             }
             else
             {
-                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             }
 
             //타겟영역 갱신.
 
-            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
-            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
 
-            /* 이미지 영역은 한쪽만 맞춰놓으면 알아서 될듯?
+            /* draw 영역 조절은 한번만
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
             ///이미지가 픽쳐박스 탈출하는 것 방지
@@ -1057,7 +1154,7 @@ namespace Semantic
         private void Button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetScale(Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+            SetScale(Math.Pow(Constants._ScaleIncreaseRatio, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈( 25%/ 50%/ 100%/ 200%/ 400%)
         }
 
         private void Button_ZoomOut_Click(object sender, EventArgs e)
@@ -1154,8 +1251,8 @@ namespace Semantic
 
             //타겟영역 갱신.
 
-            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
-            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
 
             /*
             /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1184,7 +1281,7 @@ namespace Semantic
         {
             Console.WriteLine("커서표시 panel영역 진입");
 
-            //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무.
+            //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무(isOnpicBox3).
             //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
 
             isOnPicBox3 = true;
@@ -1209,14 +1306,12 @@ namespace Semantic
             }
             picBox.Refresh();
 
-            //혹시 필요하면 패널 clear하기.
         }
 
         private void pBox3_CursorBoard_MouseMove(object sender, MouseEventArgs e)
         {
-            //현재 고민
-            //여기에 picturebox2_mousemove를 어떻게 굴려서 적절히 불러지게 할지
-            //대리자는 또 어떻게 해야 제대로 들어가는지?
+            //picBox3.MouseMove 의 delegate로 picBox2_MouseMove를 줘도 되고,
+            //아예 여기서 picBox2_MouseMove를 발생시켜도 됨.
 
             //Console.WriteLine("panel내 이동, 커서를 그립니다.");
             Console.WriteLine("커서모드&커서비트맵존재:" + Convert.ToString(cursor_mode)+"/" + Convert.ToString(null == cursorBoardBitmap));
@@ -1308,8 +1403,8 @@ namespace Semantic
                     isPaint = true;
 
                     //펜 시작점 갱신.
-                    pen_startpt.X = (int)((mousePos.X - targetImgRect.X) / zoomScale);
-                    pen_startpt.Y = (int)((mousePos.Y - targetImgRect.Y) / zoomScale);
+                    pen_startpt.X = (int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale);
+                    pen_startpt.Y = (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale);
 
                     ///<해설>
                     ///pen좌표*zoom배율+src의 좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
@@ -1378,7 +1473,7 @@ namespace Semantic
                     #endregion
 
                     //이미지의 확대,이동을 역산: 소스비트맵의 해당 좌표
-                    pen_endpt = new Point((int)((mousePos.X - targetImgRect.X) / zoomScale), (int)((mousePos.Y - targetImgRect.Y) / zoomScale));
+                    pen_endpt = new Point((int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale), (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale));
                    
                     //Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
