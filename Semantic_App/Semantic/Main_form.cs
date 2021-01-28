@@ -490,8 +490,8 @@ namespace Semantic
         private void SetImageScale(double scale, bool showWidth, bool showHeight, bool showPercent)
         {
             //1.
-            int width = (int)(this.original_img.Width * scale);
-            int height = (int)(this.original_img.Height * scale);
+            int width = (int)Math.Round(this.original_img.Width * scale);
+            int height = (int)Math.Round(this.original_img.Height * scale);
 
             if ((width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
             {
@@ -520,7 +520,7 @@ namespace Semantic
 
             if (showPercent)
             {
-                int percent = (int)(scale * 100);
+                int percent = (int)Math.Round(scale * 100);
 
                 this.percenttextBox.Text = percent.ToString("0");
             }
@@ -828,8 +828,8 @@ namespace Semantic
                     isPaint = true;
 
                     //펜 시작점 갱신.
-                    pen_startpt.X = (int)((mousePos.X - targetImgRect.X) / zoomScale);
-                    pen_startpt.Y = (int)((mousePos.Y - targetImgRect.Y) / zoomScale);
+                    pen_startpt.X = (int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale);
+                    pen_startpt.Y = (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale);
 
                     ///<해설>
                     ///pen좌표*zoom배율+src의 좌표 = mosPos이니까 우변으로 넘기고 나누면 같아짐.
@@ -877,7 +877,7 @@ namespace Semantic
                     #endregion
 
 
-                    pen_endpt = new Point((int)((mousePos.X - targetImgRect.X) / zoomScale), (int)((mousePos.Y - targetImgRect.Y) / zoomScale));
+                    pen_endpt = new Point((int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale), (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale));
                     Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
                     pen_startpt = pen_endpt;
