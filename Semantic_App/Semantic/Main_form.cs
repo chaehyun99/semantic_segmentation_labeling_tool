@@ -52,10 +52,14 @@ namespace Semantic
         private int cursor_mode = 1, brush_Size = 1;
         private Color brush_Color = Color.Black;
 
+        //브러시 그리기 관련
+        bool isOnPicBox3 = false;
+        private Bitmap cursorBoardBitmap = null;
+
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
 
-        private Point dragOffset = new Point(0,0);
+        private Point dragOffset = new Point(0, 0);
 
         private Rectangle targetImgRect = new Rectangle(0, 0, 100, 100);
         private int zoomLevel = 0;
@@ -256,9 +260,24 @@ namespace Semantic
             imgList = null;
 
             //pictureBox2 겹치기
+            //pictureBox1.Controls.Add(pictureBox2);
             pictureBox2.Parent = pictureBox1;
             pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Location = new Point(0, 0);//thePointRelativeToTheBackImage;
+            //pictureBox2.Location = new Point(pictureBox1.Width/8 , pictureBox1.Height/8 );//thePointRelativeToTheBackImage;
+            pictureBox2.Location = new Point(0,0);//thePointRelativeToTheBackImage;
+            Console.WriteLine("pbox2위치;" + Convert.ToString(pictureBox2.Location));
+
+
+
+            //cursorBoardBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //cursorBoardBitmap.MakeTransparent();
+            //커서그려줄 패널 겹치기
+            
+            pBox3_CursorBoard.Parent = pictureBox2;
+            pBox3_CursorBoard.BackColor = Color.Transparent;
+            //pBox3_CursorBoard.Size
+            pBox3_CursorBoard.Location = new Point(0,0);//thePointRelativeToTheBackImage;
+            Console.WriteLine("pbox3위치;"+Convert.ToString(pBox3_CursorBoard.Location));
 
             gray_imglist.Clear();
             rgb_imglist.Clear();
@@ -302,6 +321,8 @@ namespace Semantic
                 PictureBox pb = pnl.Controls[0] as PictureBox;
                 PBoxThumbnail_Click(pb, null);
             }
+
+            //if (null == rgb_imglist || 0 == rgb_imglist.Count()){}
         }
         #endregion
 
@@ -501,6 +522,9 @@ namespace Semantic
             Console.WriteLine("투명도 변경: " + Convert.ToString(trackBar1.Value));
             pictureBox1.Refresh();
             pictureBox2.Refresh();
+
+            //pbox3_cursorboard.bringtofront();
+            pBox3_CursorBoard.Refresh();
         }
         #endregion
 
@@ -511,7 +535,7 @@ namespace Semantic
         /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
         /// 이동할때마다 이미지를 갱신합니다.
         /// </summary>
-        private void Move_srcImg_location()
+        private void Move_targetRect_location()
         {
             if (false == isScroll)
             {
@@ -524,13 +548,17 @@ namespace Semantic
             dragOffset.X += move_endpt.X - move_startpt.X;
             dragOffset.Y += move_endpt.Y - move_startpt.Y;
             targetImgRect.X += move_endpt.X - move_startpt.X;
-            targetImgRect.Y += move_endpt.Y - move_startpt.Y; 
+            targetImgRect.Y += move_endpt.Y - move_startpt.Y;
 
             Console.WriteLine("좌표이동량의 총합" + Convert.ToString(dragOffset));
-            Console.WriteLine("이동후 targetRect: " + Convert.ToString(targetImgRect.Location));
+            //Console.WriteLine("이동후 targetRect: " + Convert.ToString(targetImgRect.Location));
 
             pictureBox1.Refresh();
             pictureBox2.Refresh();
+
+
+            //pbox3_cursorboard.bringtofront();
+            pBox3_CursorBoard.Refresh();
         }
         #endregion
         #region <그리기: 선>
@@ -566,9 +594,14 @@ namespace Semantic
             using (Graphics g = Graphics.FromImage(sourceBitmapRgb)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
             {
                 DrawFreeLine(myPen, g);
-                pictureBox1.Refresh();
-                pictureBox2.Refresh();
             }
+
+
+            pictureBox1.Refresh();
+            pictureBox2.Refresh();
+
+            //pbox3_cursorboard.bringtofront();
+            pBox3_CursorBoard.Refresh();
         }
 
         //브러시 크기조절
@@ -601,6 +634,9 @@ namespace Semantic
             zoomScale = scale;
             pictureBox1.Refresh();
             pictureBox2.Refresh();
+
+            //pbox3_cursorboard.bringtofront();
+            pBox3_CursorBoard.Refresh();
             lable_ImgScale.Refresh();
 
             /*
@@ -698,24 +734,42 @@ namespace Semantic
 
                 pictureBox1.Refresh();
                 pictureBox2.Refresh();
+
+                //pbox3_cursorboard.bringtofront();
+                pBox3_CursorBoard.Refresh();
                 lable_ImgScale.Refresh();
             }
             else
-            {                
+            {
             }
 
         }
         private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
         {
             //스케일값으로 인해 변경된 보정량 + dragOffset이 최종 좌표
-            targetImgRect.X = (int)Math.Round((1 - zoomScale) * pictureBox1.Width / 2 +dragOffset.X); //
-            targetImgRect.Y = (int)Math.Round((1 - zoomScale) * pictureBox1.Height / 2 +dragOffset.Y); //
+            targetImgRect.X = (int)Math.Round((1 - zoomScale) * pictureBox1.Width / 2 + dragOffset.X); //
+            targetImgRect.Y = (int)Math.Round((1 - zoomScale) * pictureBox1.Height / 2 + dragOffset.Y); //
             Console.WriteLine("마우스 휠-> targetImgRect: " + Convert.ToString(targetImgRect));
         }
 
         private void Main_form_Load(object sender, EventArgs e)
         {
             this.ctrlKeyDown = false;
+            //cursorBoardBitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            //rgb픽쳐박스와 커서픽쳐박스의 이벤트 전달유무 관리(없으면 pBox3에 막혀서 나머지 이벤트 사용못함.
+            this.pBox3_CursorBoard.MouseDown += pictureBox2_MouseDown;
+            this.pBox3_CursorBoard.MouseUp += pictureBox2_MouseUp;
+            
+            //호출순서 변경(정석은 아닌듯)
+            this.pBox3_CursorBoard.MouseMove -= pBox3_CursorBoard_MouseMove;
+            this.pBox3_CursorBoard.MouseMove += pictureBox2_MouseMove;
+            this.pBox3_CursorBoard.MouseMove += pBox3_CursorBoard_MouseMove;
+
+            this.pBox3_CursorBoard.MouseWheel += pictureBox1_MouseWheel;
+            //pBox3_CursorBoard.Click += pictureBox1_Click;
+
+
         }
         private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -723,11 +777,11 @@ namespace Semantic
         }
 
         //좌측 이미지 목록 클릭시 동작
-        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
+        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e){ }
+
         public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
-            //전체 썸넬의 테두리(사실은 패널의 패딩)를 검은색으로
-            //TODO:패널없이 썸넬에 Margin넣으면 안되는지 테스트해보기.
+            
             for (int i = 0; i < this.listPanelThumb.Controls.Count; i++)
             {
                 if (this.listPanelThumb.Controls[i] is Panel)
@@ -736,17 +790,35 @@ namespace Semantic
                     pnl.BackColor = Color.Black;
                 }
             }
-            // 선택한 썸넬의 테두리(사실은 패널의 패딩)를 빨간색으로
+
             PictureBox pb = sender as PictureBox;
             pb.Parent.BackColor = Color.Red;
 
-            //picturebox1에 띄울 비트맵을 선택된 원본 이미지로 변경
+
+            ///////썸네일 픽쳐박스 클릭시 캔버스 픽쳐박스에 불러올 인덱스 Idx의 관리 흐름
+            /// 
+            /// pb.Tag = i.Tostring();            /// 
+            /// > pBoxThumbnail_click(pb, e);            /// 
+            /// >> pBox = sender as picturebox;
+            /// >>> int idx = Convert.ToInt32(pb.Tag.ToString());
+            /// >>>> sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
+            /// 
+            /// /// /// /// 
+            /// TODO:
+            /// => i값 저장시 string으로 변환 안해도 됨.
+            /// 
+            /// Qustn
+            /// => Tag를 분리하는 코드와 얻어낸 인덱스로 이미지를 불러오는 걸 별개의 메소드로 나눠도 되는가?
+            ///     Q: 기능상 변하지 않는가? Yes. Q;굳이 해야하는가? 한번밖에 안쓰이긴함.
+            /////////////////
+
+
+
             int idx = Convert.ToInt32(pb.Tag.ToString());
             //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
             sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
 
-            //picturebox2 에 띄울 비트맵을 선택된 원본 이미지로 변경
-            //TODO:시맨틱구동+rgb변환되기 전,후가 체크되지 않은채 띄우는 경우가 나오긴하는데 그냥 예외로 넘김?
+            //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)
             if (null == rgb_imglist || 0 == rgb_imglist.Count())
             {
                 Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
@@ -757,13 +829,24 @@ namespace Semantic
                 //pictureBox2.Image = rgb_imglist[idx];
                 //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
                 sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
+               
+                /*
                 Console.WriteLine("rgb리스트에서 소스로 가져옵니다. idx: "
                     + Convert.ToString(idx)
                     + "// " + Convert.ToString(rgb_imglist.Count())
-                    );
+                 );
+                */
+
+                //커서가 그려질 보드의 비트맵 갱신(크기)
+                cursorBoardBitmap = new Bitmap(sourceBitmapRgb.Width, sourceBitmapRgb.Height);
+                cursorBoardBitmap.MakeTransparent();
+
 
                 pictureBox1.Refresh();
                 pictureBox2.Refresh();
+
+                //pbox3_cursorboard.bringtofront();
+                pBox3_CursorBoard.Refresh();
 
                 Console.WriteLine("");
                 Console.WriteLine("tagRect(XYWH)/src.WH: "
@@ -779,8 +862,12 @@ namespace Semantic
                     + "/"
                     + Convert.ToString(sourceBitmapRgb.Height));
             }
+
+
             //UiTxt_File.Text = this.imgList[idx];
         }
+
+
 
         private void Network_operation_Click(object sender, EventArgs e)
         {
@@ -811,7 +898,7 @@ namespace Semantic
                     rgb_imglist.Add(new Bitmap(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
                     Console.WriteLine("그레이경로: " + gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png");
                     Console.WriteLine("RGB 경로: " + rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
-                    
+
                     //아예 rgb변환도 생략.
                     //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
 
@@ -822,11 +909,15 @@ namespace Semantic
                 }
 
                 //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                sourceBitmapRgb = new Bitmap(rgb_imglist[0]);
                 Console.WriteLine();
+
+
 
                 pictureBox1.Refresh();
                 pictureBox2.Refresh();
+
+                //pbox3_cursorboard.bringtofront();
+                pBox3_CursorBoard.Refresh();
                 return;
             }
 
@@ -844,10 +935,12 @@ namespace Semantic
                 rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
             }
 
-            sourceBitmapRgb = new Bitmap(rgb_imglist[0]);
 
             pictureBox1.Refresh();
             pictureBox2.Refresh();
+
+            //pbox3_cursorboard.bringtofront();
+            pBox3_CursorBoard.Refresh();
 
             return;
         }
@@ -887,7 +980,6 @@ namespace Semantic
 
             targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
             targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
-            Console.WriteLine("pBox1_paint-TargetRect.Size 조정. 위치: " + Convert.ToString(targetImgRect.Location));
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
             ///이미지가 픽쳐박스 탈출하는 것 방지
@@ -895,12 +987,12 @@ namespace Semantic
             ///https://ella-devblog.tistory.com/6
             ///이 소스는 4줄빼고 나머지 제대로 안돌아가니까 안들고오는게 좋음
             ////////////////////////////////////////////////////////////////////////////////////////////////
-            if (targetImgRect.X > 0) targetImgRect.X = 0;
-            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
-            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
-            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            //if (targetImgRect.X > 0) targetImgRect.X = 0;
+            //if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            //if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            //if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
             ///////////////////////
-            
+
 
             e.Graphics.DrawImage(
                 sourceBitmapOrigin,
@@ -938,7 +1030,7 @@ namespace Semantic
             targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
             targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
 
-            /**/
+            /* 이미지 영역은 한쪽만 맞춰놓으면 알아서 될듯?
 
             /////////////////////////////////////////////////////////////////////////////////////////////////
             ///이미지가 픽쳐박스 탈출하는 것 방지
@@ -948,7 +1040,7 @@ namespace Semantic
             if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
             if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
             ///////////////////////////////////////////////
-            
+            */
             e.Graphics.DrawImage(
                 sourceBitmapRgb,
                 targetImgRect,
@@ -959,6 +1051,7 @@ namespace Semantic
                 GraphicsUnit.Pixel,
                 imageAtt
                 );
+
         }
 
         private void Button_ZoomIn_Click(object sender, EventArgs e)
@@ -1018,7 +1111,7 @@ namespace Semantic
 
         private void button_BrushsizeUp_Click(object sender, EventArgs e)
         {
-            if(Constants.Max_brush_Size == brush_Size)
+            if (Constants.Max_brush_Size == brush_Size)
             {
                 return;
             }
@@ -1033,6 +1126,147 @@ namespace Semantic
             }
             SetBrushSize(brush_Size - 1);
         }
+
+        private void pBox3_CursorBoard_Paint(object sender, PaintEventArgs e)
+        {
+            //1.보간처리 pictureBox2와 동일하게
+            //2.현재 픽쳐박스와 동일한 크기의 패널로 구현 및갱신. //추후 부분만 갱신하는 방법으로 구현해보기
+
+            //rgb이미지가 없을때.
+            if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb || null == cursorBoardBitmap)
+            {
+                return;
+            }
+
+            Console.WriteLine("조건 만족. CursorBoardBitmap을 화면에 그립니다.");
+
+            // 보간 방식 지정. 
+            if (zoomScale < 1)
+            {
+                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            }
+            else
+            {
+                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+
+            //타겟영역 갱신.
+
+            targetImgRect.Width = (int)(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)(sourceBitmapOrigin.Height * zoomScale);
+
+            /*
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///////////////////////////////////////////////
+            */
+
+            e.Graphics.DrawImage(
+                cursorBoardBitmap,
+                targetImgRect,
+                0,
+                0,
+                sourceBitmapOrigin.Width,   
+                sourceBitmapOrigin.Height,   
+                GraphicsUnit.Pixel
+                );
+        }
+
+
+        private void pBox3_CursorBoard_MouseEnter(object sender, EventArgs e)
+        {
+            Console.WriteLine("커서표시 panel영역 진입");
+
+            //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무.
+            //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
+
+            isOnPicBox3 = true;
+        }
+
+        private void pBox3_CursorBoard_MouseLeave(object sender, EventArgs e)
+        {
+            Console.WriteLine("커서표시 panel영역 탈출");
+
+            isOnPicBox3 = false;
+
+
+            PictureBox picBox = (PictureBox)sender;
+            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            {
+                return;
+            }
+
+            using (Graphics g = Graphics.FromImage(cursorBoardBitmap))
+            {
+                g.Clear(Color.Transparent);
+            }
+            picBox.Refresh();
+
+            //혹시 필요하면 패널 clear하기.
+        }
+
+        private void pBox3_CursorBoard_MouseMove(object sender, MouseEventArgs e)
+        {
+            //현재 고민
+            //여기에 picturebox2_mousemove를 어떻게 굴려서 적절히 불러지게 할지
+            //대리자는 또 어떻게 해야 제대로 들어가는지?
+
+            //Console.WriteLine("panel내 이동, 커서를 그립니다.");
+            Console.WriteLine("커서모드&커서비트맵존재:" + Convert.ToString(cursor_mode)+"/" + Convert.ToString(null == cursorBoardBitmap));
+            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            {
+                return;
+            }
+            //커서그리는 함수 호출
+            DrawCursor(pBox3_CursorBoard, e);
+        }
+
+        private void DrawCursor(Control control_, MouseEventArgs e)
+        {
+            
+            using (Pen myPen = new Pen(brush_Color, 1))
+            using (Graphics g = Graphics.FromImage(cursorBoardBitmap))
+            {
+
+                Brush aBrush = new SolidBrush(brush_Color);
+
+                //이전에 그려진 브러시커서 처리
+                //g.Clear(Color.Transparent);
+
+                /* //Create Proper Circle */
+                Point ptOnSrcBitmap = new Point((int)Math.Round((e.X - targetImgRect.X) / zoomScale), (int)Math.Round((e.Y - targetImgRect.Y) / zoomScale));
+
+                Rectangle rectDot = new Rectangle(ptOnSrcBitmap.X - ((brush_Size + 2) / 2), ptOnSrcBitmap.Y - ((brush_Size + 2) / 2), brush_Size + 1, brush_Size + 1);
+                
+                Console.WriteLine("브러시 pen_startpt 좌표: " + Convert.ToString(e.Location));
+
+                g.Clear(Color.Transparent);
+                if (brush_Size == 1)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size, brush_Size);
+                    g.FillRectangle(aBrush, rectDot);
+                }
+                else if (brush_Size == 2)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size - 1, brush_Size - 1);
+                    g.DrawRectangle(myPen, rectDot);
+                }
+                else
+                {
+                    g.FillEllipse(aBrush, rectDot);
+                }
+
+                control_.Refresh();
+            }
+        }
+
 
         //이미지 저장버튼
         private void button2_Click(object sender, EventArgs e)
@@ -1108,6 +1342,8 @@ namespace Semantic
 
                         pictureBox1.Refresh();
                         pictureBox2.Refresh();
+                        //pbox3_cursorboard.bringtofront();
+                        pBox3_CursorBoard.Refresh();
                     }
                     #endregion
                     break;
@@ -1118,12 +1354,12 @@ namespace Semantic
 
         private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
         {
-            
+
             switch (cursor_mode)
             {
                 case 1: //scroll mode
                     move_endpt = e.Location;
-                    Move_srcImg_location();
+                    Move_targetRect_location();
                     move_startpt = move_endpt;
                     break;
 
@@ -1141,8 +1377,9 @@ namespace Semantic
 
                     #endregion
 
-
+                    //이미지의 확대,이동을 역산: 소스비트맵의 해당 좌표
                     pen_endpt = new Point((int)((mousePos.X - targetImgRect.X) / zoomScale), (int)((mousePos.Y - targetImgRect.Y) / zoomScale));
+                   
                     //Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
                     pen_startpt = pen_endpt;

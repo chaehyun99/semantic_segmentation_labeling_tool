@@ -46,10 +46,12 @@ namespace Semantic
             this.button_BrushsizeUp = new System.Windows.Forms.Button();
             this.button_BrushsizeDown = new System.Windows.Forms.Button();
             this.button_ZoomReset = new System.Windows.Forms.Button();
+            this.pBox3_CursorBoard = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).BeginInit();
             this.SuspendLayout();
             // 
             // Network_operation
@@ -65,17 +67,20 @@ namespace Semantic
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(308, 170);
+            this.pictureBox1.Location = new System.Drawing.Point(347, 170);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(703, 340);
+            this.pictureBox1.Size = new System.Drawing.Size(635, 344);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel); //직접추가함
+            this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel);
             // 
             // button2
             // 
@@ -105,7 +110,7 @@ namespace Semantic
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(1025, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1040, 24);
             this.menuStrip1.TabIndex = 20;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -118,12 +123,15 @@ namespace Semantic
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.BackColor = System.Drawing.SystemColors.GrayText;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(308, 170);
+            this.pictureBox2.Location = new System.Drawing.Point(396, 154);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(703, 340);
+            this.pictureBox2.Size = new System.Drawing.Size(635, 344);
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
@@ -241,11 +249,29 @@ namespace Semantic
             this.button_ZoomReset.UseVisualStyleBackColor = true;
             this.button_ZoomReset.Click += new System.EventHandler(this.button_ZoomReset_Click);
             // 
+            // pBox3_CursorBoard
+            // 
+            this.pBox3_CursorBoard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pBox3_CursorBoard.BackColor = System.Drawing.Color.LightSalmon;
+            this.pBox3_CursorBoard.Location = new System.Drawing.Point(429, 141);
+            this.pBox3_CursorBoard.Margin = new System.Windows.Forms.Padding(2);
+            this.pBox3_CursorBoard.Name = "pBox3_CursorBoard";
+            this.pBox3_CursorBoard.Size = new System.Drawing.Size(635, 344);
+            this.pBox3_CursorBoard.TabIndex = 32;
+            this.pBox3_CursorBoard.TabStop = false;
+            this.pBox3_CursorBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.pBox3_CursorBoard_Paint);
+            this.pBox3_CursorBoard.MouseEnter += new System.EventHandler(this.pBox3_CursorBoard_MouseEnter);
+            this.pBox3_CursorBoard.MouseLeave += new System.EventHandler(this.pBox3_CursorBoard_MouseLeave);
+            this.pBox3_CursorBoard.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pBox3_CursorBoard_MouseMove);
+            // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 520);
+            this.ClientSize = new System.Drawing.Size(1040, 538);
+            this.Controls.Add(this.pBox3_CursorBoard);
             this.Controls.Add(this.button_ZoomReset);
             this.Controls.Add(this.button_BrushsizeDown);
             this.Controls.Add(this.button_setPaintmode);
@@ -267,12 +293,13 @@ namespace Semantic
             this.Text = "Main_form";
             this.Load += new System.EventHandler(this.Main_form_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyDown);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyUp);           
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,6 +324,7 @@ namespace Semantic
         private System.Windows.Forms.Button button_BrushsizeUp;
         private System.Windows.Forms.Button button_BrushsizeDown;
         private System.Windows.Forms.Button button_ZoomReset;
+        private System.Windows.Forms.PictureBox pBox3_CursorBoard;
     }
 }
 
