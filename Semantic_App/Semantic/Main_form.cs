@@ -727,7 +727,7 @@ namespace Semantic
             if (zoomScale < 1)
             {
                 //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
-                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
             }
             else
             {
@@ -1122,7 +1122,7 @@ namespace Semantic
             // 보간 방식 지정. 축소시엔 부드럽게, 확대했을땐 픽셀 뚜렷하게.
             if (zoomScale < 1)
             {
-                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
             }
             else
             {
@@ -1169,7 +1169,7 @@ namespace Semantic
             // 보간 방식 지정. 
             if (zoomScale < 1)
             {
-                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Bilinear;
             }
             else
             {
@@ -1217,8 +1217,11 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
-                    if (sourceBitmapOrigin == null)
+                    if (sourceBitmapRgb == null)
+                    {
                         return;
+                    }
+
                     #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
 
