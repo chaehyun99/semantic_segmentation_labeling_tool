@@ -115,7 +115,7 @@ namespace Semantic
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(440, 255);
+            this.pictureBox2.Location = new System.Drawing.Point(547, 208);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(1245, 641);
             this.pictureBox2.TabIndex = 23;
@@ -202,7 +202,7 @@ namespace Semantic
             // 
             this.pictureBox3.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(440, 255);
+            this.pictureBox3.Location = new System.Drawing.Point(691, 153);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(1245, 563);
             this.pictureBox3.TabIndex = 31;
@@ -210,7 +210,6 @@ namespace Semantic
             this.pictureBox3.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox3_Paint);
             this.pictureBox3.MouseEnter += new System.EventHandler(this.pictureBox3_MouseEnter);
             this.pictureBox3.MouseLeave += new System.EventHandler(this.pictureBox3_MouseLeave);
-            this.pictureBox3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox3_MouseMove);
             // 
             // Main_form
             // 
