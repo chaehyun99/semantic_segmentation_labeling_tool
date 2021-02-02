@@ -33,10 +33,10 @@ namespace Semantic
         #region Field        
 
         List<string> imgList = null;
-        List<Image> gray_imglist = new List<Image>();
-        List<Image> rgb_imglist = new List<Image>();
-        Image original_img = null;
-        Image original_opac = null;
+        List<Bitmap> gray_imglist = new List<Bitmap>();
+        List<Bitmap> rgb_imglist = new List<Bitmap>();
+        private Bitmap sourceBitmapRgb = null;
+        private Bitmap sourceBitmapOrigin = null;
 
         public static bool whether_to_save_ = false;
         public static FolderBrowserDialog input_file_path = new FolderBrowserDialog();
@@ -47,10 +47,24 @@ namespace Semantic
         private int cursor_mode = 2, brush_Size = 1;
         private bool isScroll = false, isPaint = false;
         private Point move_startpt, move_endpt, pen_startpt, pen_endpt;
-        private double zoomScale = 1;
+        private double zoomScale = 1.0f;
         private int zoomLevel = 0;
 
+
+        enum zoomMode
+        {
+            Center,
+            Cursor,
+            TopLeft
+        }
+
         bool ctrlKeyDown;
+
+        bool isOnPicBox3 = false;
+        private Bitmap cursorBoardBitmap = null;
+        private Color brush_Color = Color.Black;
+
+        private ImageAttributes imageAtt = new ImageAttributes();
 
         public static class ColorTable
         {
@@ -108,6 +122,8 @@ namespace Semantic
              };
 
         }
+
+
         #endregion
 
         #region 생성자 - MainForm()
@@ -136,7 +152,7 @@ namespace Semantic
             string[] words;
             ProcessStartInfo cmd = new ProcessStartInfo();
             Process process = new Process();
-            Console.WriteLine("loading");
+            ////Console.WriteLine("loading");
             cmd.FileName = @"cmd";
             cmd.WindowStyle = ProcessWindowStyle.Hidden;
             cmd.CreateNoWindow = true;
@@ -157,7 +173,7 @@ namespace Semantic
 
             process.StandardInput.Close();
             result = process.StandardOutput.ReadToEnd();
-            Console.WriteLine(result);
+            ////Console.WriteLine(result);
 
             words = Regex.Split(result, "\r\n");
             if (!words[4].Contains("conda") || !words[5].Contains("conda"))
@@ -233,56 +249,6 @@ namespace Semantic
             }
         }
 
-        public void Load_()
-        {
-            // 이미지 리스트 및 경로 초기화
-            this.uiPanelThumbnail.Controls.Clear();
-            //pictureBox1.Image = null;
-            imgList = null;
-
-            //pictureBox2 겹치기
-            pictureBox2.Parent = pictureBox1;
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Location = new Point(0, 0);//thePointRelativeToTheBackImage;
-
-            gray_imglist.Clear();
-            rgb_imglist.Clear();
-
-            string[] files = Directory.GetFiles(input_file_path.SelectedPath);
-
-            imgList = files.Where(x => x.IndexOf(".bmp", StringComparison.OrdinalIgnoreCase) >= 0 || x.IndexOf(".jpg", StringComparison.OrdinalIgnoreCase) >= 0 || x.IndexOf(".png", StringComparison.OrdinalIgnoreCase) >= 0).Select(x => x).ToList();
-
-            for (int index = 0; index < imgList.Count(); index++)
-                imgList[index] = imgList[index].Remove(0, input_file_path.SelectedPath.Count());
-
-            for (int i = 0; i < imgList.Count; i++)
-            {
-                Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
-
-                Panel panelThumbnail = new Panel();
-                panelThumbnail.BackColor = Color.Black;
-                panelThumbnail.Size = new Size(Constants.Thumbnail_Width, Constants.Thumbnail_Height);
-                panelThumbnail.Padding = new System.Windows.Forms.Padding(4);
-
-                PictureBox pBoxThumbnail = new PictureBox();
-                pBoxThumbnail.BackColor = Color.DimGray;
-                pBoxThumbnail.Dock = DockStyle.Fill;
-                pBoxThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
-                pBoxThumbnail.Image = img.GetThumbnailImage(Constants.Thumbnail_Width, Constants.Thumbnail_Height, null, IntPtr.Zero);
-                pBoxThumbnail.Click += PBoxThumbnail_Click;
-                pBoxThumbnail.Tag = i.ToString();
-                panelThumbnail.Controls.Add(pBoxThumbnail);
-
-                this.uiPanelThumbnail.Controls.Add(panelThumbnail);
-            }
-
-            if (imgList.Count > 0)
-            {
-                Panel pnl = this.uiPanelThumbnail.Controls[0] as Panel;
-                PictureBox pb = pnl.Controls[0] as PictureBox;
-                PBoxThumbnail_Click(pb, null);
-            }
-        }
         #endregion
 
         #region Save Img
@@ -331,7 +297,7 @@ namespace Semantic
         public Color Swap_G2RGB(Color co_Gray)
         {
             byte value2Swap = co_Gray.R; //R이든 G든 B든 상관x.
-            //Console.WriteLine("index확인: " + Convert.ToString(value2Swap));
+            ////Console.WriteLine("index확인: " + Convert.ToString(value2Swap));
             Color Ret_Color = ColorTable.Entry[value2Swap];
             return Ret_Color;
         }
@@ -370,10 +336,10 @@ namespace Semantic
             return Ret_Color;
         }
 
-        private Image Gray2RGB_Click(Image image_)
+        private Bitmap Gray2RGB_Click(Bitmap image_)
         {
 
-            Bitmap img2Convert = image_ as Bitmap;
+            Bitmap img2Convert = new Bitmap(image_);
 
             int x, y;
 
@@ -393,9 +359,9 @@ namespace Semantic
 
         }
 
-        private Image RGB2Gray_Click(Image image_)
+        private Bitmap RGB2Gray_Click(Bitmap image_)
         {
-            Bitmap img2Convert = image_ as Bitmap;
+            Bitmap img2Convert = new Bitmap(image_);
 
             int x, y;
 
@@ -438,11 +404,9 @@ namespace Semantic
 
         #region Opacity Function
         //pictureBox2 알파값 조정 - 투명도 조절용
-        private Bitmap SetAlpha(Bitmap bmpIn, int alpha)
+        private void SetAlpha(int alpha)
         {
-            Bitmap bmpOut = new Bitmap(bmpIn.Width, bmpIn.Height);
             float a = alpha / (float)trackBar1.Maximum;
-            Rectangle r = new Rectangle(0, 0, bmpIn.Width, bmpIn.Height);
 
             float[][] matrixItems = {
                 new float[] {1, 0, 0, 0, 0},
@@ -453,22 +417,20 @@ namespace Semantic
 
             ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
 
-            ImageAttributes imageAtt = new ImageAttributes();
             imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
 
-            using (Graphics g = Graphics.FromImage(bmpOut))
-                g.DrawImage(bmpIn, r, r.X, r.Y, r.Width, r.Height, GraphicsUnit.Pixel, imageAtt);
-
-            return bmpOut;
+            return;
         }
 
         //트레이스바(투명도 비율 정보) 조정 - 투명도 조절용
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (original_opac != null)
+            if (sourceBitmapOrigin != null)
             {
                 //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha개선하고 picturebox2.refresh()넣어주기.
-                pictureBox2.Refresh();
+                SetAlpha(trackBar1.Value);
+                RefreshPictureBoxes();
+
             }
         }
         #endregion
@@ -487,24 +449,38 @@ namespace Semantic
             return ret_ratio;
         }
 
-        private void SetImageScale(double scale, bool showWidth, bool showHeight, bool showPercent)
+        private void SetScale(double scale) // 
+        {
+            //TODO:(구현에 따라 조건문 추가)
+            if (0 == scale)
+            {
+                return;
+            }
+            zoomScale = scale;
+            RefreshPictureBoxes();
+            //lable_ImgScale.Refresh();
+
+            /*
+             * 배율 조정하는 인터페이스(트랙바, 텍스트박스 등)의 변동이 아래에 들어가면 됨.
+            this.ignoreChanges = true;
+            this.ignoreChanges = false;
+            */
+        }
+        
+        private void SetScale2(double scale, bool showWidth, bool showHeight, bool showPercent)
         {
             //1.
-            int width = (int)Math.Round(this.original_img.Width * scale);
-            int height = (int)Math.Round(this.original_img.Height * scale);
+            int width = (int)Math.Round(this.sourceBitmapOrigin.Width * scale);
+            int height = (int)Math.Round(this.sourceBitmapOrigin.Height * scale);
 
-            if ((width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
+            if ((0 == scale)|(width < 1) || (height < 1)) // 값이 너무 작아서 1x1보다 작아진 경우
             {
                 return;
             }
             //2.
             zoomScale = scale;
             //3.
-            targetImgRect.Width = width;
-            targetImgRect.Height = height;
-            //4.
-            pictureBox1.Refresh();
-            pictureBox2.Refresh();
+            RefreshPictureBoxes();
             //
             //this.ignoreChanges = true;
 
@@ -527,6 +503,7 @@ namespace Semantic
 
             //this.ignoreChanges = false;
         }
+        
         #endregion
 
         #region <이미지 스크롤 by 마우스 드래그>
@@ -544,10 +521,12 @@ namespace Semantic
 
             //targetImgRect.X += move_endpt.X - move_startpt.X; 
             //targetImgRect.Y += move_endpt.Y - move_startpt.Y;
-            Console.WriteLine("Move_srcImg_location");
-            targetImgRect.Offset(move_endpt.X - move_startpt.X, move_endpt.Y - move_startpt.Y);
+
+            targetImgRect.X += move_endpt.X - move_startpt.X;
+            targetImgRect.Y += move_endpt.Y - move_startpt.Y;
 
             //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
+            pictureBox1.Refresh();
             pictureBox2.Refresh();
         }
 
@@ -575,18 +554,20 @@ namespace Semantic
                 return;
             }
 
-            Color brush_Color = Color.Black;
+            Color brush_Color = this.brush_Color;
             Pen myPen = new Pen(brush_Color, brush_Size);                // myPen
 
             myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 
-            using (Graphics g = Graphics.FromImage(original_opac)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
+            using (Graphics g = Graphics.FromImage(sourceBitmapRgb)) //sourceBitmap sourceBitmap sourceBitmap 픽처박스에 뜨는부분만 가져와서 그리는게 아니고 전체 맵에서 뜨는걸 가져와야되나?
             {
 
                 DrawFreeLine(myPen, g);
                 //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
+                
                 pictureBox2.Refresh();
+                pictureBox3.Refresh();
             }
         }
 
@@ -598,16 +579,244 @@ namespace Semantic
         }
         #endregion
 
-        #region Event Control
-        private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
+        #region 2021-02-02 커서따라다니는 브러시 & 마우스휠 Zoom 작업
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////메서드
+        ///
+        private void DrawCursor(Control control_, MouseEventArgs e)
         {
-            Network_route_settings();
+
+            using (Pen myPen = new Pen(brush_Color, 1))
+            using (Graphics g = Graphics.FromImage(cursorBoardBitmap))
+            {
+
+                Brush aBrush = new SolidBrush(brush_Color);
+
+                //이전에 그려진 브러시커서 처리
+                //g.Clear(Color.Transparent);
+
+                /* //Create Proper Circle */
+                Point ptOnSrcBitmap = new Point((int)Math.Round((e.X - targetImgRect.X) / zoomScale), (int)Math.Round((e.Y - targetImgRect.Y) / zoomScale));
+
+                Rectangle rectDot = new Rectangle(ptOnSrcBitmap.X - ((brush_Size + 2) / 2), ptOnSrcBitmap.Y - ((brush_Size + 2) / 2), brush_Size + 1, brush_Size + 1);
+
+                //Console.WriteLine("브러시 pen_startpt 좌표: " + Convert.ToString(e.Location));
+
+                g.Clear(Color.Transparent);
+                if (brush_Size == 1)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size, brush_Size);
+                    g.FillRectangle(aBrush, rectDot);
+                }
+                else if (brush_Size == 2)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size - 1, brush_Size - 1);
+                    g.DrawRectangle(myPen, rectDot);
+                }
+                else
+                {
+                    g.FillEllipse(aBrush, rectDot);
+                }
+
+                control_.Refresh();
+            }
         }
 
-        #region 좌측 썸네일 동작
-        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+            this.ctrlKeyDown = false;
+
+            //rgb픽쳐박스와 커서픽쳐박스의 이벤트 전달여부 (picBox에 가려진 이벤트 발동)
+            this.pictureBox3.MouseDown += pictureBox2_MouseDown;
+            this.pictureBox3.MouseUp += pictureBox2_MouseUp;
+
+            //호출순서 변경(정석은 아닌듯)
+            this.pictureBox3.MouseMove -= pictureBox3_MouseMove;
+            this.pictureBox3.MouseMove += pictureBox2_MouseMove;
+            this.pictureBox3.MouseMove += pictureBox3_MouseMove;
+
+            this.pictureBox3.MouseWheel += pictureBox1_MouseWheel;
+        }
+
+        public void Load_()
+        {
+            // 이미지 리스트 및 경로 초기화
+            this.uiPanelThumbnail.Controls.Clear();
+            pictureBox1.Image = null;
+            imgList = null;
+
+            pictureBox2.Parent = pictureBox1;
+            pictureBox2.BackColor = Color.Transparent;
+            //thePointRelativeToTheBackImage;
+            pictureBox2.Location = new Point(0, 0);
+
+            //Console.WriteLine("pbox2위치;" + Convert.ToString(pictureBox2.Location));
+
+            //커서그려줄 패널 겹치기
+
+            pictureBox3.Parent = pictureBox2;
+            pictureBox3.BackColor = Color.Transparent;
+            //thePointRelativeToTheBackImage;
+            pictureBox3.Location = new Point(0, 0);
+            //Console.WriteLine("pbox3위치;" + Convert.ToString(pictureBox3.Location));
+
+            gray_imglist.Clear();
+            rgb_imglist.Clear();
+
+            string[] files = Directory.GetFiles(input_file_path.SelectedPath);
+
+            imgList = files.Where(x => x.IndexOf(".bmp", StringComparison.OrdinalIgnoreCase) >= 0 || x.IndexOf(".jpg", StringComparison.OrdinalIgnoreCase) >= 0 || x.IndexOf(".png", StringComparison.OrdinalIgnoreCase) >= 0).Select(x => x).ToList();
+
+            for (int index = 0; index < imgList.Count(); index++)
+                imgList[index] = imgList[index].Remove(0, input_file_path.SelectedPath.Count());
+
+            //썸넬 목록 갱신
+            for (int i = 0; i < imgList.Count; i++)
+            {
+                Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
+
+                Panel panelThumb = new Panel();
+                panelThumb.BackColor = Color.Black;
+                panelThumb.Size = new Size(Constants.Thumbnail_Width, Constants.Thumbnail_Height);
+                panelThumb.Padding = new System.Windows.Forms.Padding(4);
+
+                PictureBox pBoxThumb = new PictureBox();
+                pBoxThumb.BackColor = Color.DimGray;
+                pBoxThumb.Dock = DockStyle.Fill;
+                pBoxThumb.SizeMode = PictureBoxSizeMode.Zoom;
+                pBoxThumb.Image = img.GetThumbnailImage(Constants.Thumbnail_Width, Constants.Thumbnail_Height, null, IntPtr.Zero);
+                pBoxThumb.Click += PBoxThumbnail_Click;
+                pBoxThumb.Tag = i.ToString();
+                panelThumb.Controls.Add(pBoxThumb);
+
+                this.uiPanelThumbnail.Controls.Add(panelThumb);
+            }
+
+
+
+            if (imgList.Count <= 0)
+            {
+                return;
+            }
+            else
+            {
+                Panel pnl = this.uiPanelThumbnail.Controls[0] as Panel;
+                PictureBox pb = pnl.Controls[0] as PictureBox;
+                PBoxThumbnail_Click(pb, null);
+            }
+
+            //if (null == rgb_imglist || 0 == rgb_imglist.Count()){}
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////이벤트
+        ///
+
+
+        private void pictureBox3_Paint(object sender, PaintEventArgs e)
+        {
+            //1.보간처리 pictureBox2와 동일하게
+            //2.현재 픽쳐박스와 동일한 크기의 패널로 구현 및갱신. //추후 부분만 갱신하는 방법으로 구현해보기
+
+            //rgb이미지가 없을때.
+            if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb || null == cursorBoardBitmap)
+            {
+                return;
+            }
+
+            // 보간 방식 지정. 
+            if (zoomScale < 1)
+            {
+                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
+            }
+            else
+            {
+                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+
+            //타겟영역 갱신.
+
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
+
+            /*
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///////////////////////////////////////////////
+            */
+
+            e.Graphics.DrawImage(
+                cursorBoardBitmap,
+                targetImgRect,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
+                GraphicsUnit.Pixel,
+                imageAtt
+                );
+
+            //브러시에 투명도 미적용 하려면 imageAtt만 제외.
+        }
+
+        private void pictureBox3_MouseEnter(object sender, EventArgs e)
+        {
+            //Console.WriteLine("커서표시영역 진입");
+
+            //Console.WriteLine("커서모드" + Convert.ToString(cursor_mode));
+            Console.WriteLine(
+                "커서비트맵:"
+                + ((null == cursorBoardBitmap) ? "No" : "Yes")
+                );
+
+            //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무(isOnpicBox3).
+            //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
+
+            isOnPicBox3 = true;
+        }
+
+        private void pictureBox3_MouseLeave(object sender, EventArgs e)
+        {
+            //Console.WriteLine("커서표시영역 탈출");
+
+            isOnPicBox3 = false;
+
+            PictureBox picBox = (PictureBox)sender;
+            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            {
+                return;
+            }
+
+            using (Graphics g = Graphics.FromImage(cursorBoardBitmap))
+            {
+                g.Clear(Color.Transparent);
+            }
+            picBox.Refresh();
+
+        }
+
+        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            //picBox3.MouseMove 의 delegate로 picBox2_MouseMove를 줘도 되고,
+            //아예 여기서 picBox2_MouseMove를 발생시켜도 됨.
+
+            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            {
+                return;
+            }
+            DrawCursor(pictureBox3, e);
+        }
+
+
         public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
+
             for (int i = 0; i < this.uiPanelThumbnail.Controls.Count; i++)
             {
                 if (this.uiPanelThumbnail.Controls[i] is Panel)
@@ -620,34 +829,86 @@ namespace Semantic
             PictureBox pb = sender as PictureBox;
             pb.Parent.BackColor = Color.Red;
 
+
+            ///////픽쳐박스 이미지 띄울 때 인덱스는 어디서?
+            /// 
+            /// pb.Tag = i.Tostring();            
+            /// > pBoxThumbnail_click(pb, e);            
+            /// >> pBox = sender as picturebox;
+            /// >>> int idx = Convert.ToInt32(pb.Tag.ToString());
+            /// >>>> sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
+            /// 
+            /// /// /// /// 
+            /// TODO?
+            /// => i값 저장시 string으로 변환 안해도 됨.
+            /// 
+            /////////////////
+
             int idx = Convert.ToInt32(pb.Tag.ToString());
+            //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
+            sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
 
-            original_img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
-
-            //선택된 원본 이미지로 변경
-            //pictureBox1.Image = img;
-            SetImageScale(GetScale_fitImg2PicBox(pictureBox1, (Bitmap)original_img), true, true, true);
-            //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            //선택된 레이블링 이미지로 변경
-            if (rgb_imglist != null && rgb_imglist.Count() != 0)
+            //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)
+            if (null == rgb_imglist || 0 == rgb_imglist.Count())
             {
-                //pictureBox2.Image = rgb_imglist[idx];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                //original_opac = (Bitmap)pictureBox2.Image.Clone();
-                //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-
-                original_opac = (Bitmap)rgb_imglist[idx].Clone();
-                pictureBox2.Refresh();
+                //Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
+                return;
             }
+            else
+            {
+                sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
+
+                //커서가 그려질 보드의 비트맵 갱신(크기)
+                cursorBoardBitmap = new Bitmap(sourceBitmapRgb.Width, sourceBitmapRgb.Height);
+                cursorBoardBitmap.MakeTransparent();
+
+                SetAlpha(trackBar1.Value);
+
+                RefreshPictureBoxes();
+
+                /*
+                Console.WriteLine("tagRect(XYWH)/src.WH: "
+                    + Convert.ToString(targetImgRect.X)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Y)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Width)
+                    + "/"
+                    + Convert.ToString(targetImgRect.Height)
+                    + "/"
+                    + Convert.ToString(sourceBitmapRgb.Width)
+                    + "/"
+                    + Convert.ToString(sourceBitmapRgb.Height));
+                */
+            }
+
+            RefreshPictureBoxes();
             //UiTxt_File.Text = this.imgList[idx];
         }
+
+        #endregion
+
+        private void RefreshPictureBoxes()
+        {
+            pictureBox1.Refresh();
+            pictureBox2.Refresh();
+            pictureBox3.Refresh();
+        }
+
+        #region Event Control
+        private void 경로설정FToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Network_route_settings();
+        }
+
+        #region 좌측 썸네일 동작
+      
         #endregion
 
         private void Network_operation_Click(object sender, EventArgs e)
         {
-            //Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            //Console.WriteLine(Environment.CurrentDirectory);
+            ////Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
+            ////Console.WriteLine(Environment.CurrentDirectory);
             if (imgList == null || imgList.Count() == 0)
             {
                 MessageBox.Show("불러올 이미지가 없습니다.");
@@ -667,31 +928,18 @@ namespace Semantic
                 //대체할 코드
                 for (int index = 0; index < imgList.Count(); index++)
                 {
-                    gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
+                    gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
 
 
-                    rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));
+                    rgb_imglist.Add(new Bitmap(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png"));
 
-                    //pictureBox2.Image = rgb_imglist[0];
-                    original_opac = (Bitmap)rgb_imglist[0].Clone();
-                    //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-                    pictureBox2.Refresh();
-
-                    //아예 rgb변환도 생략.
-                    //rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
-
-                    /*테스트용 RGB 이미지 생성할때만 풀면됨
-                    rgb_imglist[0].Save(rgb_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_rgb_img.png");
-                    MessageBox.Show("rgb테스트용 이미지 저장 완료");
-                    */
                 }
 
-                //pictureBox2.Image = rgb_imglist[0];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                original_opac = (Bitmap)rgb_imglist[0].Clone();
+                //sourceBitmapOrigin = (Bitmap)rgb_imglist[0].Clone();
                 //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value); //TODO: SetAlpha를 바꾸고 pictureBox2.refresh()넣기
-                SetImageScale(GetScale_fitImg2PicBox(pictureBox2, (Bitmap)original_opac), true, true, true);
-                pictureBox2.Refresh();
+                //SetScale2(GetScale_fitImg2PicBox(pictureBox2, (Bitmap)sourceBitmapOrigin), true, true, true);
+                RefreshPictureBoxes();
+
                 return;
             }
 
@@ -705,16 +953,18 @@ namespace Semantic
             //Gray2RGB 이미지 변수에 저장
             for (int index = 0; index < imgList.Count(); index++)
             {
-                gray_imglist.Add(Image.FromFile(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));  /// gray -> rgb image
+                gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
+                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));
             }
+
 
             //pictureBox2.Image = rgb_imglist[0];
             //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            original_opac = (Bitmap)rgb_imglist[0].Clone();
+            sourceBitmapOrigin = (Bitmap)rgb_imglist[0].Clone();
             //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-            SetImageScale(GetScale_fitImg2PicBox(pictureBox2, (Bitmap)original_opac), true, true, true);
-            pictureBox2.Refresh();
+            SetScale2(GetScale_fitImg2PicBox(pictureBox2, (Bitmap)sourceBitmapOrigin), true, true, true);
+            RefreshPictureBoxes();
+
         }
 
         private void Main_form_KeyDown(object sender, KeyEventArgs e)
@@ -726,12 +976,12 @@ namespace Semantic
                 if (cursor_mode == 1)
                 {
                     cursor_mode = 2;
-                    Console.WriteLine("cursor mode set draw");
+                    //Console.WriteLine("cursor mode set draw");
                 }
                 else
                 {
                     cursor_mode = 1;
-                    Console.WriteLine("cursor mode set move");
+                    //Console.WriteLine("cursor mode set move");
                 }
             }
         }
@@ -742,8 +992,115 @@ namespace Semantic
 
         }
 
-        private void Main_form_Load(object sender, EventArgs e)
+
+        public void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (e.Delta > 0)
+            {
+                // WheelUp
+                zoomLevel++;
+            }
+            else
+            {
+                // WheelDown
+                zoomLevel--;
+            }
+
+
+            zoomScale = Math.Pow(Constants.ratioPerLevel, zoomLevel);
+
+            if (true == ctrlKeyDown)
+            {
+                SetTargetRectByZoomAt(zoomMode.Cursor, e);
+            }
+            else
+            {
+                SetTargetRectByZoomAt(zoomMode.Center, e);
+            }
+
+            RefreshPictureBoxes();
+           // lable_ImgScale.Refresh();
+        }
+
+
+        private void SetTargetRectByZoomAt(zoomMode zoomOrigin, MouseEventArgs e)
+        {
+            Point zoomOrigin_pt = new Point();
+
+            switch (zoomOrigin)
+            {
+                case zoomMode.Center:
+                    zoomOrigin_pt.X = pictureBox1.Width / 2;
+                    zoomOrigin_pt.Y = pictureBox1.Height / 2;
+                    break;
+                case zoomMode.Cursor:
+                    zoomOrigin_pt = e.Location;
+                    break;
+                case zoomMode.TopLeft:
+                    zoomOrigin_pt = new Point(0, 0);
+                    break;
+                default:
+                    break;
+            }
+
+            if (e.Delta > 0)
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - zoomOrigin_pt.X) * Constants.ratioPerLevel) + zoomOrigin_pt.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - zoomOrigin_pt.Y) * Constants.ratioPerLevel) + zoomOrigin_pt.Y;
+            }
+            else
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - zoomOrigin_pt.X) / Constants.ratioPerLevel) + zoomOrigin_pt.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - zoomOrigin_pt.Y) / Constants.ratioPerLevel) + zoomOrigin_pt.Y;
+            }
+
+            //"zoom [??] ByWheelFrom [??]"
+            Console.WriteLine(
+                "zoom "
+                + (e.Delta > 0 ? "[IN]" : "[OUT]")
+                + " ByWheelFrom ["
+                + zoomOrigin.ToString()
+                + "]"
+                );
+
+            #region 픽쳐박스의 특정 지점으로부터 zoom : 좌표계산
+            /*
+
+                A.TargetRect_New___________________________________
+                |                                                 |
+                |          B.TargetRect_Old_______                |
+                |          |                      |               |
+                |          |         C。          |               |
+                |          |       (zoomOrigin)   |               |
+                |          |______________________|               |
+                |_________________________________________________|
+
+            AC / BC = zoomRatio
+            //상대좌표로 계산시 원점이 동일해야함. 이 경우엔 Control인 pictureBox1 기준.
+            AC = zoomOrigin - TargetRect_New.Location
+            BC = zoomOrigin - TargetRect_Old.Location
+
+            A = C - (C - B) * zoomRatio
+              = C * (1 - zoomRatio) + B * zoomRatio
+
+            ___________________코드_____________________
+
+            Point ZoomOrigin;
+                       
+            Double zoomRatio = TargetRectNew.Size / TargetRectOld.Size;
+            //Width or Height.
+            //계산량을 줄이고 싶으면 e.Delta의 부호를 조건으로 나누고, ZoomRatio를 상수로 지정해서 계산식을 나누면 됨.
+           
+            TargetRect.Location.X = ZoomOrigin.X * (1 - zoomRatio) + TargetRect.Location.X * zoomRatio;
+            TargetRect.Location.Y = ZoomOrigin.Y * (1 - zoomRatio) + TargetRect.Location.Y * zoomRatio;
+
+            //이하 AC > BC일때 ( Zoom in)
+            targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) * Constants._ScaleIncreaseRatio) + e.X;
+            targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) * Constants._ScaleIncreaseRatio) + e.Y;
+
+            */
+
+            #endregion
 
         }
 
@@ -753,52 +1110,99 @@ namespace Semantic
         }
 
         #region picturebox paint option. call by picturebox.refresh()
+
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            if (original_img == null)
+            //ORIGIN 이미지가 없을때.
+            if (null == imgList || 0 == imgList.Count || null == sourceBitmapOrigin)
+            {
                 return;
+            }
 
-            //보간 방식 지정. 
-            //scale 1을 기준으로 변경
+            // 보간 방식 지정. 축소시엔 부드럽게, 확대했을땐 픽셀 뚜렷하게.
             if (zoomScale < 1)
             {
-                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             }
             else
             {
-                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             }
 
-
             //타겟영역 갱신.
-            Console.WriteLine("pb1_paint");
-            e.Graphics.DrawImage((Bitmap)original_img, targetImgRect);
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지.
+            ////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //적용하는 순서에 따라 zoomOut시에 어느 모서리로 붙을지 결정.
+            //중앙에 띄우고싶으면..?
+
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            e.Graphics.DrawImage(
+                sourceBitmapOrigin,
+                targetImgRect,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
+                GraphicsUnit.Pixel
+                );
         }
+
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            
-            if (original_opac == null)
-                return;
 
-            //보간 방식 지정. 
-            //scale 1을 기준으로 변경
+            if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb)
+            {
+                return;
+            }
+
+            // 보간 방식 지정. 
             if (zoomScale < 1)
             {
-                //어느정도 중간값 사용. -> 확대시에 픽셀이 흐릿.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBilinear;
             }
             else
             {
-                //픽셀을 그대로 확대 -> 이미지 축소시에 1pixel짜리 곡선같은건 끊어져보이거나 사라짐.
                 e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
             }
 
-
             //타겟영역 갱신.
-            Console.WriteLine("pb2_paint");
-            e.Graphics.DrawImage(SetAlpha((Bitmap)original_opac, trackBar1.Value), targetImgRect);
+
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
+
+            /* draw 영역 조절은 한번만
+
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+            ///이미지가 픽쳐박스 탈출하는 것 방지
+            ////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (targetImgRect.X > 0) targetImgRect.X = 0;
+            if (targetImgRect.Y > 0) targetImgRect.Y = 0;
+            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            ///////////////////////////////////////////////
+            */
+            e.Graphics.DrawImage(
+                sourceBitmapRgb,
+                targetImgRect,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
+                GraphicsUnit.Pixel,
+                imageAtt
+                );
+
         }
         #endregion
 
@@ -813,7 +1217,7 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
-                    if (original_opac == null)
+                    if (sourceBitmapOrigin == null)
                         return;
                     #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
@@ -836,17 +1240,18 @@ namespace Semantic
                     ///= 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안된단 뜻.
                     /// </해설>
 
-                    using (Graphics g = Graphics.FromImage(original_opac))//sourceBitmap sourceBitmap sourceBitmap
+                    using (Graphics g = Graphics.FromImage(sourceBitmapOrigin))//sourceBitmap sourceBitmap sourceBitmap
                     {
                         Pen blackPen = new Pen(Color.Black, brush_Size);
                         // Create rectangle.
                         Rectangle rect = new Rectangle(pen_startpt.X, pen_startpt.Y, 1, 1);
-                        Console.WriteLine("pen_start" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
+                        //Console.WriteLine("pen_start" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                         Brush aBrush = (Brush)Brushes.Black;
                         g.FillRectangle(aBrush, rect);
 
                         //pictureBox2.Image = SetAlpha((Bitmap)original_opac, trackBar1.Value);
-                        pictureBox2.Refresh();
+                        RefreshPictureBoxes();
+
                     }
                     break;
                 default:
@@ -865,7 +1270,7 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
-                    if (original_opac == null)
+                    if (sourceBitmapOrigin == null)
                         return;
                     #region <sender 캐스팅 & 좌표지정>
                     PictureBox picBox = (PictureBox)sender;
@@ -878,7 +1283,7 @@ namespace Semantic
 
 
                     pen_endpt = new Point((int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale), (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale));
-                    Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
+                    ////Console.WriteLine("Move" + pen_startpt.X.ToString() + " " + pen_startpt.Y.ToString());
                     DrawShape();
                     pen_startpt = pen_endpt;
 
@@ -898,7 +1303,7 @@ namespace Semantic
                     break;
 
                 case 2: //paint mode
-                    if (original_opac == null)
+                    if (sourceBitmapOrigin == null)
                         return;
                     #region <sender 캐스팅 & 좌표지정>
 
@@ -937,18 +1342,18 @@ namespace Semantic
 
             if (double.TryParse(this.percenttextBox.Text, out percent))
             {
-                SetImageScale(percent / 100, true, true, false);
+                SetScale2(percent / 100, true, true, false);
             }
         }
         private void btn_zoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
-            SetImageScale(Math.Pow(Constants._ScaleDegree, zoomLevel), true, true, true); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
+            SetScale2(Math.Pow(Constants.ratioPerLevel, zoomLevel), true, true, true); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈임( 25%/ 50%/ 100%/ 200%/ 400%)
         }
         private void btn_zoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
-            SetImageScale(Math.Pow(Constants._ScaleDegree, zoomLevel), true, true, true);
+            SetScale2(Math.Pow(Constants.ratioPerLevel, zoomLevel), true, true, true);
         }
         private void btn_zoomReset_Click(object sender, EventArgs e)
         {
@@ -957,7 +1362,7 @@ namespace Semantic
             targetImgRect.Y = 0;
 
             zoomLevel = 0;
-            SetImageScale(Math.Pow(1.5, zoomLevel), true, true, true);
+            SetScale2(Math.Pow(Constants.ratioPerLevel, zoomLevel), true, true, true);
         }
 
         #endregion
@@ -991,7 +1396,7 @@ namespace Semantic
         public const int Thumbnail_Width = 300;
         public const int Thumbnail_Height = 150;
 
-        public const double _ScaleDegree = 1.5;
+        public const double ratioPerLevel = 1.5;
         public const int Max_brush_Size = 10;
 
         public const bool isTestmode = true;
