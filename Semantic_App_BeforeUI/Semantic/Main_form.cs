@@ -917,11 +917,6 @@ namespace Semantic
         }
         #endregion
 
-    }
-
-
-    public partial class Main_form : Form
-    {
         //-----------------------------------------------------------------------------------------------속성
 
         //브러시 그리기 관련
@@ -1224,11 +1219,6 @@ namespace Semantic
             //UiTxt_File.Text = this.imgList[idx];
         }
 
-    }
-
-
-    public partial class Main_form : Form
-    {
         //---------------------------------------------------------------속성
 
         enum zoomMode
