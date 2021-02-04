@@ -14,6 +14,9 @@ Semantic/Semantic/obj/
 Semantic_App/Semantic/obj/
 Semantic_App/Semantic/obj/
 
+Semantic_App_BeforeUI/Semantic/obj
+Semantic_App_BeforeUI(02.04)/Semantic/obj
+
 *.pyc
 __pycache__
 
