@@ -25,5 +25,18 @@ namespace Semantic
 
 
         //----------------------------------------------------이벤트(UI)
+
+        //가급적 이미 있는 함수 호출만 해주세요.
+
+        private void Main_form_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F) Network_route_settings();
+            
+            
+
+            //이 변수은 MouseWheel관련된거라서 무시하고 작업하시면 됩니다.
+            this.ctrlKeyDown = e.Control;
+        }
+
     }
 }

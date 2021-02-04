@@ -713,12 +713,6 @@ namespace Semantic
             return;
         }
 
-        private void Main_form_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F) Network_route_settings();
-            this.ctrlKeyDown = e.Control;
-        }
-
         private void Main_form_KeyUp(object sender, KeyEventArgs e)
         {
             this.ctrlKeyDown = e.Control;
