@@ -413,7 +413,7 @@ namespace Semantic
             Color Ret_Color = co_RGB;
             for (int i = 0; i < ColorTable.Entry_Length; i++)
             {
-                if (ColorTable.Entry_byKnownName[i].ToArgb().Equals(co_RGB.ToArgb()))
+                if (ColorTable.Entry[i].ToArgb().Equals(co_RGB.ToArgb()))
                 {
                     Ret_Color = Color.FromArgb(255, i, i, i); //n번째 인덱스의 색상과 일치하면 그 인덱스값이 곧 회색 값
                     break;
