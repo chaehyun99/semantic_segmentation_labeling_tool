@@ -12,3 +12,17 @@ C:\Users\재설치용 임시\Documents\GitHub\semantic_segmentation_labeling_too
 C:\Users\재설치용 임시\Documents\GitHub\semantic_segmentation_labeling_tool\Semantic_App\Semantic\obj\x64\Debug\Semantic.csproj.CopyComplete
 C:\Users\재설치용 임시\Documents\GitHub\semantic_segmentation_labeling_tool\Semantic_App\Semantic\obj\x64\Debug\Semantic.exe
 C:\Users\재설치용 임시\Documents\GitHub\semantic_segmentation_labeling_tool\Semantic_App\Semantic\obj\x64\Debug\Semantic.pdb
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\bin\x64\Debug\Semantic.exe.config
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\bin\x64\Debug\Semantic.exe
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\bin\x64\Debug\Semantic.pdb
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\bin\x64\Debug\Python.Runtime.dll
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\bin\x64\Debug\Python.Runtime.xml
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.csprojAssemblyReference.cache
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.Main_form.resources
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.Network_route_settings.resources
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.Properties.Resources.resources
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.csproj.GenerateResource.cache
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.csproj.CoreCompileInputs.cache
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.csproj.CopyComplete
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.exe
+C:\Users\PC\Desktop\work\semantic_segmentation_labeling_tool\Semantic_App_BeforeUI\Semantic\obj\x64\Debug\Semantic.pdb
