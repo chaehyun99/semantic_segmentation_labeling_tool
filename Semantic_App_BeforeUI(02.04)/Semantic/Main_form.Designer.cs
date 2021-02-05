@@ -59,7 +59,7 @@ namespace Semantic
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
+            this.button_setColor0 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.lable_Opacity = new System.Windows.Forms.Label();
             this.colorSlider2BrushSize = new ColorSlider.ColorSlider();
@@ -68,26 +68,26 @@ namespace Semantic
             this.pBox3_CursorBoard = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
+            this.button_setColor5 = new System.Windows.Forms.Button();
+            this.button_setColor7 = new System.Windows.Forms.Button();
+            this.button_setColor10 = new System.Windows.Forms.Button();
+            this.button_setColor9 = new System.Windows.Forms.Button();
+            this.button_setColor8 = new System.Windows.Forms.Button();
+            this.button_setColor1 = new System.Windows.Forms.Button();
+            this.button_setColor2 = new System.Windows.Forms.Button();
+            this.button_setColor3 = new System.Windows.Forms.Button();
+            this.button_setColor4 = new System.Windows.Forms.Button();
+            this.button_setColor6 = new System.Windows.Forms.Button();
+            this.button_setColor11 = new System.Windows.Forms.Button();
+            this.button_setColor12 = new System.Windows.Forms.Button();
+            this.button_setColor14 = new System.Windows.Forms.Button();
+            this.button_setColor16 = new System.Windows.Forms.Button();
+            this.button_setColor20 = new System.Windows.Forms.Button();
+            this.button_setColor15 = new System.Windows.Forms.Button();
+            this.button_setColor13 = new System.Windows.Forms.Button();
+            this.button_setColor17 = new System.Windows.Forms.Button();
+            this.button_setColor18 = new System.Windows.Forms.Button();
+            this.button_setColor19 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -499,45 +499,45 @@ namespace Semantic
             // 
             this.panel4.BackgroundImage = global::Semantic.Properties.Resources.아래;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel4.Controls.Add(this.button26);
-            this.panel4.Controls.Add(this.button25);
-            this.panel4.Controls.Add(this.button24);
-            this.panel4.Controls.Add(this.button23);
-            this.panel4.Controls.Add(this.button22);
-            this.panel4.Controls.Add(this.button21);
-            this.panel4.Controls.Add(this.button20);
-            this.panel4.Controls.Add(this.button19);
-            this.panel4.Controls.Add(this.button18);
-            this.panel4.Controls.Add(this.button17);
-            this.panel4.Controls.Add(this.button16);
-            this.panel4.Controls.Add(this.button15);
-            this.panel4.Controls.Add(this.button14);
-            this.panel4.Controls.Add(this.button13);
-            this.panel4.Controls.Add(this.button12);
-            this.panel4.Controls.Add(this.button11);
-            this.panel4.Controls.Add(this.button10);
-            this.panel4.Controls.Add(this.button9);
-            this.panel4.Controls.Add(this.button8);
-            this.panel4.Controls.Add(this.button6);
-            this.panel4.Controls.Add(this.button7);
+            this.panel4.Controls.Add(this.button_setColor19);
+            this.panel4.Controls.Add(this.button_setColor18);
+            this.panel4.Controls.Add(this.button_setColor17);
+            this.panel4.Controls.Add(this.button_setColor13);
+            this.panel4.Controls.Add(this.button_setColor15);
+            this.panel4.Controls.Add(this.button_setColor20);
+            this.panel4.Controls.Add(this.button_setColor16);
+            this.panel4.Controls.Add(this.button_setColor14);
+            this.panel4.Controls.Add(this.button_setColor12);
+            this.panel4.Controls.Add(this.button_setColor11);
+            this.panel4.Controls.Add(this.button_setColor6);
+            this.panel4.Controls.Add(this.button_setColor4);
+            this.panel4.Controls.Add(this.button_setColor3);
+            this.panel4.Controls.Add(this.button_setColor2);
+            this.panel4.Controls.Add(this.button_setColor1);
+            this.panel4.Controls.Add(this.button_setColor8);
+            this.panel4.Controls.Add(this.button_setColor9);
+            this.panel4.Controls.Add(this.button_setColor10);
+            this.panel4.Controls.Add(this.button_setColor7);
+            this.panel4.Controls.Add(this.button_setColor5);
+            this.panel4.Controls.Add(this.button_setColor0);
             this.panel4.Location = new System.Drawing.Point(21, 288);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(337, 580);
             this.panel4.TabIndex = 1;
             // 
-            // button7
+            // button_setColor0
             // 
-            this.button7.BackColor = System.Drawing.Color.Black;
-            this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(13, 15);
-            this.button7.Margin = new System.Windows.Forms.Padding(0);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 40);
-            this.button7.TabIndex = 35;
-            this.button7.Text = "브러시 +";
-            this.button7.UseVisualStyleBackColor = false;
+            this.button_setColor0.BackColor = System.Drawing.Color.Black;
+            this.button_setColor0.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor0.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor0.Location = new System.Drawing.Point(13, 15);
+            this.button_setColor0.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor0.Name = "button_setColor0";
+            this.button_setColor0.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor0.TabIndex = 35;
+            this.button_setColor0.Text = "브러시 +";
+            this.button_setColor0.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
@@ -760,265 +760,265 @@ namespace Semantic
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel);
             // 
-            // button6
+            // button_setColor5
             // 
-            this.button6.BackColor = System.Drawing.Color.Black;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(173, 114);
-            this.button6.Margin = new System.Windows.Forms.Padding(0);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 40);
-            this.button6.TabIndex = 36;
-            this.button6.Text = "브러시 +";
-            this.button6.UseVisualStyleBackColor = false;
+            this.button_setColor5.BackColor = System.Drawing.Color.Black;
+            this.button_setColor5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor5.Location = new System.Drawing.Point(173, 114);
+            this.button_setColor5.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor5.Name = "button_setColor5";
+            this.button_setColor5.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor5.TabIndex = 36;
+            this.button_setColor5.Text = "브러시 +";
+            this.button_setColor5.UseVisualStyleBackColor = false;
             // 
-            // button8
+            // button_setColor7
             // 
-            this.button8.BackColor = System.Drawing.Color.Black;
-            this.button8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Location = new System.Drawing.Point(173, 164);
-            this.button8.Margin = new System.Windows.Forms.Padding(0);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 40);
-            this.button8.TabIndex = 37;
-            this.button8.Text = "브러시 +";
-            this.button8.UseVisualStyleBackColor = false;
+            this.button_setColor7.BackColor = System.Drawing.Color.Black;
+            this.button_setColor7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor7.Location = new System.Drawing.Point(173, 164);
+            this.button_setColor7.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor7.Name = "button_setColor7";
+            this.button_setColor7.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor7.TabIndex = 37;
+            this.button_setColor7.Text = "브러시 +";
+            this.button_setColor7.UseVisualStyleBackColor = false;
             // 
-            // button9
+            // button_setColor10
             // 
-            this.button9.BackColor = System.Drawing.Color.Black;
-            this.button9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Location = new System.Drawing.Point(13, 263);
-            this.button9.Margin = new System.Windows.Forms.Padding(0);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 40);
-            this.button9.TabIndex = 38;
-            this.button9.Text = "브러시 +";
-            this.button9.UseVisualStyleBackColor = false;
+            this.button_setColor10.BackColor = System.Drawing.Color.Black;
+            this.button_setColor10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor10.Location = new System.Drawing.Point(13, 263);
+            this.button_setColor10.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor10.Name = "button_setColor10";
+            this.button_setColor10.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor10.TabIndex = 38;
+            this.button_setColor10.Text = "브러시 +";
+            this.button_setColor10.UseVisualStyleBackColor = false;
             // 
-            // button10
+            // button_setColor9
             // 
-            this.button10.BackColor = System.Drawing.Color.Black;
-            this.button10.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(173, 214);
-            this.button10.Margin = new System.Windows.Forms.Padding(0);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(100, 40);
-            this.button10.TabIndex = 39;
-            this.button10.Text = "브러시 +";
-            this.button10.UseVisualStyleBackColor = false;
+            this.button_setColor9.BackColor = System.Drawing.Color.Black;
+            this.button_setColor9.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor9.Location = new System.Drawing.Point(173, 214);
+            this.button_setColor9.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor9.Name = "button_setColor9";
+            this.button_setColor9.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor9.TabIndex = 39;
+            this.button_setColor9.Text = "브러시 +";
+            this.button_setColor9.UseVisualStyleBackColor = false;
             // 
-            // button11
+            // button_setColor8
             // 
-            this.button11.BackColor = System.Drawing.Color.Black;
-            this.button11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(13, 214);
-            this.button11.Margin = new System.Windows.Forms.Padding(0);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(100, 40);
-            this.button11.TabIndex = 40;
-            this.button11.Text = "브러시 +";
-            this.button11.UseVisualStyleBackColor = false;
+            this.button_setColor8.BackColor = System.Drawing.Color.Black;
+            this.button_setColor8.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor8.Location = new System.Drawing.Point(13, 214);
+            this.button_setColor8.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor8.Name = "button_setColor8";
+            this.button_setColor8.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor8.TabIndex = 40;
+            this.button_setColor8.Text = "브러시 +";
+            this.button_setColor8.UseVisualStyleBackColor = false;
             // 
-            // button12
+            // button_setColor1
             // 
-            this.button12.BackColor = System.Drawing.Color.Black;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Location = new System.Drawing.Point(173, 15);
-            this.button12.Margin = new System.Windows.Forms.Padding(0);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(100, 40);
-            this.button12.TabIndex = 41;
-            this.button12.Text = "브러시 +";
-            this.button12.UseVisualStyleBackColor = false;
+            this.button_setColor1.BackColor = System.Drawing.Color.Black;
+            this.button_setColor1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor1.Location = new System.Drawing.Point(173, 15);
+            this.button_setColor1.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor1.Name = "button_setColor1";
+            this.button_setColor1.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor1.TabIndex = 41;
+            this.button_setColor1.Text = "브러시 +";
+            this.button_setColor1.UseVisualStyleBackColor = false;
             // 
-            // button13
+            // button_setColor2
             // 
-            this.button13.BackColor = System.Drawing.Color.Black;
-            this.button13.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button13.Location = new System.Drawing.Point(13, 64);
-            this.button13.Margin = new System.Windows.Forms.Padding(0);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(100, 40);
-            this.button13.TabIndex = 42;
-            this.button13.Text = "브러시 +";
-            this.button13.UseVisualStyleBackColor = false;
+            this.button_setColor2.BackColor = System.Drawing.Color.Black;
+            this.button_setColor2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor2.Location = new System.Drawing.Point(13, 64);
+            this.button_setColor2.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor2.Name = "button_setColor2";
+            this.button_setColor2.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor2.TabIndex = 42;
+            this.button_setColor2.Text = "브러시 +";
+            this.button_setColor2.UseVisualStyleBackColor = false;
             // 
-            // button14
+            // button_setColor3
             // 
-            this.button14.BackColor = System.Drawing.Color.Black;
-            this.button14.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button14.Location = new System.Drawing.Point(173, 64);
-            this.button14.Margin = new System.Windows.Forms.Padding(0);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(100, 40);
-            this.button14.TabIndex = 43;
-            this.button14.Text = "브러시 +";
-            this.button14.UseVisualStyleBackColor = false;
+            this.button_setColor3.BackColor = System.Drawing.Color.Black;
+            this.button_setColor3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor3.Location = new System.Drawing.Point(173, 64);
+            this.button_setColor3.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor3.Name = "button_setColor3";
+            this.button_setColor3.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor3.TabIndex = 43;
+            this.button_setColor3.Text = "브러시 +";
+            this.button_setColor3.UseVisualStyleBackColor = false;
             // 
-            // button15
+            // button_setColor4
             // 
-            this.button15.BackColor = System.Drawing.Color.Black;
-            this.button15.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button15.Location = new System.Drawing.Point(13, 114);
-            this.button15.Margin = new System.Windows.Forms.Padding(0);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(100, 40);
-            this.button15.TabIndex = 44;
-            this.button15.Text = "브러시 +";
-            this.button15.UseVisualStyleBackColor = false;
+            this.button_setColor4.BackColor = System.Drawing.Color.Black;
+            this.button_setColor4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor4.Location = new System.Drawing.Point(13, 114);
+            this.button_setColor4.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor4.Name = "button_setColor4";
+            this.button_setColor4.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor4.TabIndex = 44;
+            this.button_setColor4.Text = "브러시 +";
+            this.button_setColor4.UseVisualStyleBackColor = false;
             // 
-            // button16
+            // button_setColor6
             // 
-            this.button16.BackColor = System.Drawing.Color.Black;
-            this.button16.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Location = new System.Drawing.Point(13, 164);
-            this.button16.Margin = new System.Windows.Forms.Padding(0);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(100, 40);
-            this.button16.TabIndex = 45;
-            this.button16.Text = "브러시 +";
-            this.button16.UseVisualStyleBackColor = false;
+            this.button_setColor6.BackColor = System.Drawing.Color.Black;
+            this.button_setColor6.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor6.Location = new System.Drawing.Point(13, 164);
+            this.button_setColor6.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor6.Name = "button_setColor6";
+            this.button_setColor6.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor6.TabIndex = 45;
+            this.button_setColor6.Text = "브러시 +";
+            this.button_setColor6.UseVisualStyleBackColor = false;
             // 
-            // button17
+            // button_setColor11
             // 
-            this.button17.BackColor = System.Drawing.Color.Black;
-            this.button17.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button17.Location = new System.Drawing.Point(173, 263);
-            this.button17.Margin = new System.Windows.Forms.Padding(0);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(100, 40);
-            this.button17.TabIndex = 46;
-            this.button17.Text = "브러시 +";
-            this.button17.UseVisualStyleBackColor = false;
+            this.button_setColor11.BackColor = System.Drawing.Color.Black;
+            this.button_setColor11.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor11.Location = new System.Drawing.Point(173, 263);
+            this.button_setColor11.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor11.Name = "button_setColor11";
+            this.button_setColor11.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor11.TabIndex = 46;
+            this.button_setColor11.Text = "브러시 +";
+            this.button_setColor11.UseVisualStyleBackColor = false;
             // 
-            // button18
+            // button_setColor12
             // 
-            this.button18.BackColor = System.Drawing.Color.Black;
-            this.button18.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button18.Location = new System.Drawing.Point(13, 312);
-            this.button18.Margin = new System.Windows.Forms.Padding(0);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(100, 40);
-            this.button18.TabIndex = 47;
-            this.button18.Text = "브러시 +";
-            this.button18.UseVisualStyleBackColor = false;
+            this.button_setColor12.BackColor = System.Drawing.Color.Black;
+            this.button_setColor12.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor12.Location = new System.Drawing.Point(13, 312);
+            this.button_setColor12.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor12.Name = "button_setColor12";
+            this.button_setColor12.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor12.TabIndex = 47;
+            this.button_setColor12.Text = "브러시 +";
+            this.button_setColor12.UseVisualStyleBackColor = false;
             // 
-            // button19
+            // button_setColor14
             // 
-            this.button19.BackColor = System.Drawing.Color.Black;
-            this.button19.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button19.Location = new System.Drawing.Point(13, 367);
-            this.button19.Margin = new System.Windows.Forms.Padding(0);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(100, 40);
-            this.button19.TabIndex = 48;
-            this.button19.Text = "브러시 +";
-            this.button19.UseVisualStyleBackColor = false;
+            this.button_setColor14.BackColor = System.Drawing.Color.Black;
+            this.button_setColor14.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor14.Location = new System.Drawing.Point(13, 367);
+            this.button_setColor14.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor14.Name = "button_setColor14";
+            this.button_setColor14.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor14.TabIndex = 48;
+            this.button_setColor14.Text = "브러시 +";
+            this.button_setColor14.UseVisualStyleBackColor = false;
             // 
-            // button20
+            // button_setColor16
             // 
-            this.button20.BackColor = System.Drawing.Color.Black;
-            this.button20.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Location = new System.Drawing.Point(13, 424);
-            this.button20.Margin = new System.Windows.Forms.Padding(0);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(100, 40);
-            this.button20.TabIndex = 49;
-            this.button20.Text = "브러시 +";
-            this.button20.UseVisualStyleBackColor = false;
+            this.button_setColor16.BackColor = System.Drawing.Color.Black;
+            this.button_setColor16.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor16.Location = new System.Drawing.Point(13, 424);
+            this.button_setColor16.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor16.Name = "button_setColor16";
+            this.button_setColor16.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor16.TabIndex = 49;
+            this.button_setColor16.Text = "브러시 +";
+            this.button_setColor16.UseVisualStyleBackColor = false;
             // 
-            // button21
+            // button_setColor20
             // 
-            this.button21.BackColor = System.Drawing.Color.Black;
-            this.button21.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button21.Location = new System.Drawing.Point(13, 527);
-            this.button21.Margin = new System.Windows.Forms.Padding(0);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(100, 40);
-            this.button21.TabIndex = 50;
-            this.button21.Text = "브러시 +";
-            this.button21.UseVisualStyleBackColor = false;
+            this.button_setColor20.BackColor = System.Drawing.Color.Black;
+            this.button_setColor20.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor20.Location = new System.Drawing.Point(13, 527);
+            this.button_setColor20.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor20.Name = "button_setColor20";
+            this.button_setColor20.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor20.TabIndex = 50;
+            this.button_setColor20.Text = "브러시 +";
+            this.button_setColor20.UseVisualStyleBackColor = false;
             // 
-            // button22
+            // button_setColor15
             // 
-            this.button22.BackColor = System.Drawing.Color.Black;
-            this.button22.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button22.Location = new System.Drawing.Point(173, 367);
-            this.button22.Margin = new System.Windows.Forms.Padding(0);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(100, 40);
-            this.button22.TabIndex = 51;
-            this.button22.Text = "브러시 +";
-            this.button22.UseVisualStyleBackColor = false;
+            this.button_setColor15.BackColor = System.Drawing.Color.Black;
+            this.button_setColor15.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor15.Location = new System.Drawing.Point(173, 367);
+            this.button_setColor15.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor15.Name = "button_setColor15";
+            this.button_setColor15.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor15.TabIndex = 51;
+            this.button_setColor15.Text = "브러시 +";
+            this.button_setColor15.UseVisualStyleBackColor = false;
             // 
-            // button23
+            // button_setColor13
             // 
-            this.button23.BackColor = System.Drawing.Color.Black;
-            this.button23.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button23.Location = new System.Drawing.Point(173, 312);
-            this.button23.Margin = new System.Windows.Forms.Padding(0);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(100, 40);
-            this.button23.TabIndex = 52;
-            this.button23.Text = "브러시 +";
-            this.button23.UseVisualStyleBackColor = false;
+            this.button_setColor13.BackColor = System.Drawing.Color.Black;
+            this.button_setColor13.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor13.Location = new System.Drawing.Point(173, 312);
+            this.button_setColor13.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor13.Name = "button_setColor13";
+            this.button_setColor13.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor13.TabIndex = 52;
+            this.button_setColor13.Text = "브러시 +";
+            this.button_setColor13.UseVisualStyleBackColor = false;
             // 
-            // button24
+            // button_setColor17
             // 
-            this.button24.BackColor = System.Drawing.Color.Black;
-            this.button24.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button24.Location = new System.Drawing.Point(173, 424);
-            this.button24.Margin = new System.Windows.Forms.Padding(0);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(100, 40);
-            this.button24.TabIndex = 53;
-            this.button24.Text = "브러시 +";
-            this.button24.UseVisualStyleBackColor = false;
+            this.button_setColor17.BackColor = System.Drawing.Color.Black;
+            this.button_setColor17.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor17.Location = new System.Drawing.Point(173, 424);
+            this.button_setColor17.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor17.Name = "button_setColor17";
+            this.button_setColor17.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor17.TabIndex = 53;
+            this.button_setColor17.Text = "브러시 +";
+            this.button_setColor17.UseVisualStyleBackColor = false;
             // 
-            // button25
+            // button_setColor18
             // 
-            this.button25.BackColor = System.Drawing.Color.Black;
-            this.button25.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button25.Location = new System.Drawing.Point(13, 475);
-            this.button25.Margin = new System.Windows.Forms.Padding(0);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(100, 40);
-            this.button25.TabIndex = 54;
-            this.button25.Text = "브러시 +";
-            this.button25.UseVisualStyleBackColor = false;
+            this.button_setColor18.BackColor = System.Drawing.Color.Black;
+            this.button_setColor18.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor18.Location = new System.Drawing.Point(13, 475);
+            this.button_setColor18.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor18.Name = "button_setColor18";
+            this.button_setColor18.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor18.TabIndex = 54;
+            this.button_setColor18.Text = "브러시 +";
+            this.button_setColor18.UseVisualStyleBackColor = false;
             // 
-            // button26
+            // button_setColor19
             // 
-            this.button26.BackColor = System.Drawing.Color.Black;
-            this.button26.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button26.Location = new System.Drawing.Point(173, 475);
-            this.button26.Margin = new System.Windows.Forms.Padding(0);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(100, 40);
-            this.button26.TabIndex = 55;
-            this.button26.Text = "브러시 +";
-            this.button26.UseVisualStyleBackColor = false;
+            this.button_setColor19.BackColor = System.Drawing.Color.Black;
+            this.button_setColor19.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button_setColor19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setColor19.Location = new System.Drawing.Point(173, 475);
+            this.button_setColor19.Margin = new System.Windows.Forms.Padding(0);
+            this.button_setColor19.Name = "button_setColor19";
+            this.button_setColor19.Size = new System.Drawing.Size(100, 40);
+            this.button_setColor19.TabIndex = 55;
+            this.button_setColor19.Text = "브러시 +";
+            this.button_setColor19.UseVisualStyleBackColor = false;
             // 
             // Main_form
             // 
@@ -1068,7 +1068,7 @@ namespace Semantic
         private System.Windows.Forms.Label lable_Opacity;
         private System.Windows.Forms.Label lable_ImgScale;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button_setColor0;
         private System.Windows.Forms.FlowLayoutPanel listPanelThumb;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -1091,26 +1091,26 @@ namespace Semantic
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button_setColor19;
+        private System.Windows.Forms.Button button_setColor18;
+        private System.Windows.Forms.Button button_setColor17;
+        private System.Windows.Forms.Button button_setColor13;
+        private System.Windows.Forms.Button button_setColor15;
+        private System.Windows.Forms.Button button_setColor20;
+        private System.Windows.Forms.Button button_setColor16;
+        private System.Windows.Forms.Button button_setColor14;
+        private System.Windows.Forms.Button button_setColor12;
+        private System.Windows.Forms.Button button_setColor11;
+        private System.Windows.Forms.Button button_setColor6;
+        private System.Windows.Forms.Button button_setColor4;
+        private System.Windows.Forms.Button button_setColor3;
+        private System.Windows.Forms.Button button_setColor2;
+        private System.Windows.Forms.Button button_setColor1;
+        private System.Windows.Forms.Button button_setColor8;
+        private System.Windows.Forms.Button button_setColor9;
+        private System.Windows.Forms.Button button_setColor10;
+        private System.Windows.Forms.Button button_setColor7;
+        private System.Windows.Forms.Button button_setColor5;
     }
 }
 
