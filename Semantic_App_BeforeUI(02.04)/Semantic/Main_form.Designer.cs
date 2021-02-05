@@ -42,8 +42,6 @@ namespace Semantic
             this.Network_operation = new System.Windows.Forms.Button();
             this.button_ZoomReset = new System.Windows.Forms.Button();
             this.button_setPaintmode = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.colorSlider2BrushSize = new ColorSlider.ColorSlider();
             this.colorSlider1 = new ColorSlider.ColorSlider();
@@ -56,19 +54,18 @@ namespace Semantic
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pBox3_CursorBoard = new System.Windows.Forms.PictureBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // button_setscrollmode
@@ -84,9 +81,8 @@ namespace Semantic
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.tableLayoutPanel1.SetColumnSpan(this.panel1, 3);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button5);
             this.panel1.Controls.Add(this.button4);
@@ -99,10 +95,11 @@ namespace Semantic
             this.panel1.Controls.Add(this.button_ZoomReset);
             this.panel1.Controls.Add(this.button_setscrollmode);
             this.panel1.Controls.Add(this.button_setPaintmode);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1030, 87);
+            this.panel1.Size = new System.Drawing.Size(1284, 90);
             this.panel1.TabIndex = 33;
             // 
             // button6
@@ -251,32 +248,6 @@ namespace Semantic
             this.button_setPaintmode.UseVisualStyleBackColor = true;
             this.button_setPaintmode.Click += new System.EventHandler(this.button_setPaintmode_Click);
             // 
-            // panel5
-            // 
-            this.panel5.Controls.Add(this.panel2);
-            this.panel5.Controls.Add(this.listPanelThumb);
-            this.panel5.Controls.Add(this.pictureBox2);
-            this.panel5.Controls.Add(this.pictureBox1);
-            this.panel5.Controls.Add(this.pBox3_CursorBoard);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(0, 0);
-            this.panel5.Margin = new System.Windows.Forms.Padding(0);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1030, 610);
-            this.panel5.TabIndex = 34;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(767, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0, 74, 0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(263, 610);
-            this.panel2.TabIndex = 34;
-            // 
             // panel3
             // 
             this.panel3.BackgroundImage = global::Semantic.Properties.Resources.위;
@@ -285,7 +256,7 @@ namespace Semantic
             this.panel3.Controls.Add(this.colorSlider1);
             this.panel3.Controls.Add(this.lable_Opacity);
             this.panel3.Controls.Add(this.lable_ImgScale);
-            this.panel3.Location = new System.Drawing.Point(15, 37);
+            this.panel3.Location = new System.Drawing.Point(12, 10);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(236, 248);
@@ -295,13 +266,13 @@ namespace Semantic
             // 
             this.colorSlider2BrushSize.BackColor = System.Drawing.Color.White;
             this.colorSlider2BrushSize.BarInnerColor = System.Drawing.Color.White;
-            this.colorSlider2BrushSize.BarPenColorBottom = System.Drawing.Color.Gray;
+            this.colorSlider2BrushSize.BarPenColorBottom = System.Drawing.Color.WhiteSmoke;
             this.colorSlider2BrushSize.BarPenColorTop = System.Drawing.Color.White;
             this.colorSlider2BrushSize.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSlider2BrushSize.ElapsedInnerColor = System.Drawing.Color.DimGray;
+            this.colorSlider2BrushSize.ElapsedInnerColor = System.Drawing.Color.Silver;
             this.colorSlider2BrushSize.ElapsedPenColorBottom = System.Drawing.Color.DarkGray;
-            this.colorSlider2BrushSize.ElapsedPenColorTop = System.Drawing.Color.DarkGray;
-            this.colorSlider2BrushSize.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorSlider2BrushSize.ElapsedPenColorTop = System.Drawing.Color.Silver;
+            this.colorSlider2BrushSize.Font = new System.Drawing.Font("HY강M", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.colorSlider2BrushSize.ForeColor = System.Drawing.Color.Black;
             this.colorSlider2BrushSize.LargeChange = new decimal(new int[] {
             5,
@@ -321,7 +292,7 @@ namespace Semantic
             0});
             this.colorSlider2BrushSize.Name = "colorSlider2BrushSize";
             this.colorSlider2BrushSize.ScaleDivisions = new decimal(new int[] {
-            9,
+            1,
             0,
             0,
             0});
@@ -330,7 +301,7 @@ namespace Semantic
             0,
             0,
             0});
-            this.colorSlider2BrushSize.ShowDivisionsText = false;
+            this.colorSlider2BrushSize.ShowDivisionsText = true;
             this.colorSlider2BrushSize.ShowSmallScale = false;
             this.colorSlider2BrushSize.Size = new System.Drawing.Size(200, 59);
             this.colorSlider2BrushSize.SmallChange = new decimal(new int[] {
@@ -339,16 +310,16 @@ namespace Semantic
             0,
             0});
             this.colorSlider2BrushSize.TabIndex = 28;
-            this.colorSlider2BrushSize.ThumbInnerColor = System.Drawing.Color.DarkGray;
-            this.colorSlider2BrushSize.ThumbOuterColor = System.Drawing.Color.DarkGray;
-            this.colorSlider2BrushSize.ThumbPenColor = System.Drawing.Color.Gainsboro;
+            this.colorSlider2BrushSize.ThumbInnerColor = System.Drawing.Color.Silver;
+            this.colorSlider2BrushSize.ThumbOuterColor = System.Drawing.Color.Gainsboro;
+            this.colorSlider2BrushSize.ThumbPenColor = System.Drawing.Color.DarkGray;
             this.colorSlider2BrushSize.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
             this.colorSlider2BrushSize.ThumbSize = new System.Drawing.Size(16, 16);
             this.colorSlider2BrushSize.TickAdd = 0F;
             this.colorSlider2BrushSize.TickColor = System.Drawing.Color.Black;
             this.colorSlider2BrushSize.TickDivide = 1F;
             this.colorSlider2BrushSize.Value = new decimal(new int[] {
-            3,
+            4,
             0,
             0,
             0});
@@ -357,13 +328,14 @@ namespace Semantic
             // colorSlider1
             // 
             this.colorSlider1.BackColor = System.Drawing.Color.White;
-            this.colorSlider1.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
-            this.colorSlider1.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
+            this.colorSlider1.BarInnerColor = System.Drawing.Color.White;
+            this.colorSlider1.BarPenColorBottom = System.Drawing.Color.WhiteSmoke;
+            this.colorSlider1.BarPenColorTop = System.Drawing.Color.White;
             this.colorSlider1.BorderRoundRectSize = new System.Drawing.Size(8, 8);
-            this.colorSlider1.ElapsedInnerColor = System.Drawing.Color.White;
-            this.colorSlider1.ElapsedPenColorBottom = System.Drawing.Color.Black;
-            this.colorSlider1.ElapsedPenColorTop = System.Drawing.Color.Black;
-            this.colorSlider1.Font = new System.Drawing.Font("MD아트체", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.colorSlider1.ElapsedInnerColor = System.Drawing.Color.Silver;
+            this.colorSlider1.ElapsedPenColorBottom = System.Drawing.Color.DarkGray;
+            this.colorSlider1.ElapsedPenColorTop = System.Drawing.Color.Silver;
+            this.colorSlider1.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colorSlider1.ForeColor = System.Drawing.Color.Black;
             this.colorSlider1.LargeChange = new decimal(new int[] {
             5,
@@ -388,12 +360,12 @@ namespace Semantic
             0,
             0});
             this.colorSlider1.ScaleSubDivisions = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
             this.colorSlider1.ShowDivisionsText = true;
-            this.colorSlider1.ShowSmallScale = true;
+            this.colorSlider1.ShowSmallScale = false;
             this.colorSlider1.Size = new System.Drawing.Size(200, 61);
             this.colorSlider1.SmallChange = new decimal(new int[] {
             1,
@@ -402,8 +374,9 @@ namespace Semantic
             0});
             this.colorSlider1.TabIndex = 3;
             this.colorSlider1.Text = "colorSlider1";
-            this.colorSlider1.ThumbInnerColor = System.Drawing.Color.White;
-            this.colorSlider1.ThumbPenColor = System.Drawing.Color.Black;
+            this.colorSlider1.ThumbInnerColor = System.Drawing.Color.Silver;
+            this.colorSlider1.ThumbOuterColor = System.Drawing.Color.Gainsboro;
+            this.colorSlider1.ThumbPenColor = System.Drawing.Color.DarkGray;
             this.colorSlider1.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
             this.colorSlider1.ThumbSize = new System.Drawing.Size(16, 16);
             this.colorSlider1.TickAdd = 0F;
@@ -446,7 +419,7 @@ namespace Semantic
             this.panel4.BackgroundImage = global::Semantic.Properties.Resources.아래;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel4.Controls.Add(this.button7);
-            this.panel4.Location = new System.Drawing.Point(15, 300);
+            this.panel4.Location = new System.Drawing.Point(12, 258);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(236, 396);
@@ -469,11 +442,11 @@ namespace Semantic
             // 
             this.listPanelThumb.AutoScroll = true;
             this.listPanelThumb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.listPanelThumb.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listPanelThumb.Location = new System.Drawing.Point(0, 0);
+            this.listPanelThumb.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listPanelThumb.Location = new System.Drawing.Point(0, 90);
             this.listPanelThumb.Margin = new System.Windows.Forms.Padding(0);
             this.listPanelThumb.Name = "listPanelThumb";
-            this.listPanelThumb.Size = new System.Drawing.Size(264, 610);
+            this.listPanelThumb.Size = new System.Drawing.Size(263, 609);
             this.listPanelThumb.TabIndex = 19;
             this.listPanelThumb.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
             // 
@@ -482,13 +455,13 @@ namespace Semantic
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.GrayText;
+            this.pictureBox2.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(271, 7);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(7);
+            this.pictureBox2.Location = new System.Drawing.Point(15, 15);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(15);
             this.pictureBox2.MinimumSize = new System.Drawing.Size(100, 100);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(489, 596);
+            this.pictureBox2.Size = new System.Drawing.Size(722, 573);
             this.pictureBox2.TabIndex = 23;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox2_Paint);
@@ -503,10 +476,10 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Info;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(271, 7);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(7);
+            this.pictureBox1.Location = new System.Drawing.Point(15, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(15);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(489, 596);
+            this.pictureBox1.Size = new System.Drawing.Size(722, 573);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -518,11 +491,11 @@ namespace Semantic
             this.pBox3_CursorBoard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pBox3_CursorBoard.BackColor = System.Drawing.Color.Gainsboro;
-            this.pBox3_CursorBoard.Location = new System.Drawing.Point(271, 7);
-            this.pBox3_CursorBoard.Margin = new System.Windows.Forms.Padding(7);
+            this.pBox3_CursorBoard.BackColor = System.Drawing.Color.DimGray;
+            this.pBox3_CursorBoard.Location = new System.Drawing.Point(15, 15);
+            this.pBox3_CursorBoard.Margin = new System.Windows.Forms.Padding(15);
             this.pBox3_CursorBoard.Name = "pBox3_CursorBoard";
-            this.pBox3_CursorBoard.Size = new System.Drawing.Size(489, 596);
+            this.pBox3_CursorBoard.Size = new System.Drawing.Size(722, 573);
             this.pBox3_CursorBoard.TabIndex = 32;
             this.pBox3_CursorBoard.TabStop = false;
             this.pBox3_CursorBoard.Paint += new System.Windows.Forms.PaintEventHandler(this.pBox3_CursorBoard_Paint);
@@ -530,49 +503,69 @@ namespace Semantic
             this.pBox3_CursorBoard.MouseLeave += new System.EventHandler(this.pBox3_CursorBoard_MouseLeave);
             this.pBox3_CursorBoard.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pBox3_CursorBoard_MouseMove);
             // 
-            // splitContainer1
+            // tableLayoutPanel1
             // 
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listPanelThumb, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1284, 699);
+            this.tableLayoutPanel1.TabIndex = 35;
             // 
-            // splitContainer1.Panel1
+            // panel2
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.panel1);
-            this.splitContainer1.Panel1MinSize = 84;
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(1024, 93);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(257, 603);
+            this.panel2.TabIndex = 36;
             // 
-            // splitContainer1.Panel2
+            // panel5
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.panel5);
-            this.splitContainer1.Size = new System.Drawing.Size(1030, 701);
-            this.splitContainer1.SplitterDistance = 87;
-            this.splitContainer1.TabIndex = 35;
+            this.panel5.Controls.Add(this.pBox3_CursorBoard);
+            this.panel5.Controls.Add(this.pictureBox2);
+            this.panel5.Controls.Add(this.pictureBox1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(266, 93);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(752, 603);
+            this.panel5.TabIndex = 36;
             // 
             // Main_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
-            this.ClientSize = new System.Drawing.Size(1030, 701);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(1284, 699);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "Main_form";
             this.Load += new System.EventHandler(this.Main_form_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyUp);
             this.panel1.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -592,8 +585,6 @@ namespace Semantic
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button_ZoomReset;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lable_Opacity;
         private System.Windows.Forms.Label lable_ImgScale;
@@ -604,9 +595,11 @@ namespace Semantic
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pBox3_CursorBoard;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private ColorSlider.ColorSlider colorSlider1;
         private ColorSlider.ColorSlider colorSlider2BrushSize;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel5;
     }
 }
 
