@@ -19,80 +19,6 @@ namespace Semantic
     public partial class Main_form : Form
     {
 
-
-
-        public void PBoxThumbnail_Click(object sender, EventArgs e)
-        {
-
-            for (int i = 0; i < this.listPanelThumb.Controls.Count; i++)
-            {
-                if (this.listPanelThumb.Controls[i] is Panel)
-                {
-                    Panel pnl = this.listPanelThumb.Controls[i] as Panel;
-                    pnl.BackColor = Color.Black;
-                }
-            }
-
-            PictureBox pb = sender as PictureBox;
-            pb.Parent.BackColor = Color.Red;
-
-
-            ///////픽쳐박스 이미지 띄울 때 인덱스는 어디서?
-            /// 
-            /// pb.Tag = i.Tostring();            
-            /// > pBoxThumbnail_click(pb, e);            
-            /// >> pBox = sender as picturebox;
-            /// >>> int idx = Convert.ToInt32(pb.Tag.ToString());
-            /// >>>> sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
-            /// 
-            /// /// /// /// 
-            /// TODO?
-            /// => i값 저장시 string으로 변환 안해도 됨.
-            /// 
-            /////////////////
-
-            int idx = Convert.ToInt32(pb.Tag.ToString());
-            //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[idx]);
-            sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
-
-            //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)
-            if (null == rgb_imglist || 0 == rgb_imglist.Count())
-            {
-                Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
-                return;
-            }
-            else
-            {
-                //pictureBox2.Image = rgb_imglist[idx];
-                //pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-                sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
-
-                //커서가 그려질 보드의 비트맵 갱신(크기)
-                cursorBoardBitmap = new Bitmap(sourceBitmapRgb.Width, sourceBitmapRgb.Height);
-                cursorBoardBitmap.MakeTransparent();
-
-                SetAlpha(trackBar1.Value);
-
-                RefreshAllPictureBox();
-
-                Console.WriteLine("");
-                Console.WriteLine("tagRect(XYWH)/src.WH: "
-                    + Convert.ToString(targetImgRect.X)
-                    + "/"
-                    + Convert.ToString(targetImgRect.Y)
-                    + "/"
-                    + Convert.ToString(targetImgRect.Width)
-                    + "/"
-                    + Convert.ToString(targetImgRect.Height)
-                    + "/"
-                    + Convert.ToString(sourceBitmapRgb.Width)
-                    + "/"
-                    + Convert.ToString(sourceBitmapRgb.Height));
-            }
-
-
-            //UiTxt_File.Text = this.imgList[idx];
-        }
         #region Field        
 
         List<string> imgList = null;
@@ -942,46 +868,6 @@ namespace Semantic
                     break;
             }
         }
-
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
-        {
-            switch (cursor_mode)
-            {
-                case 1: //scroll mode
-
-                    isScroll = false;
-                    break;
-
-                case 2: //paint mode
-
-                    if (sourceBitmapRgb == null)
-                    {
-                        return;
-                    }
-
-                    #region <sender 캐스팅 & 좌표지정>
-
-                    PictureBox picBox = (PictureBox)sender;
-
-                    //커서 좌표 갱신 
-                    Point mousePos = e.Location;
-
-                    #endregion
-
-                    //그리기 비활성화.
-                    isPaint = false;
-
-                    ////
-                    ///TODO: mouse_Down-> Move -> Up까지 한 번 그린 분량의 이미지를 값복사하여 stackUndo에 저장.
-                    ///그리고 그리기 액션이 있을대마다 redoStack.Clear()해주기.
-                    ////
-
-
-                    break;
-                default:
-                    break;
-            }
-        }
         #endregion
 
         //-----------------------------------------------------------------------------------------------속성
@@ -1029,22 +915,6 @@ namespace Semantic
 
                 control_.Refresh();
             }
-        }
-
-        private void Main_form_Load(object sender, EventArgs e)
-        {
-            this.ctrlKeyDown = false;
-
-            //rgb픽쳐박스와 커서픽쳐박스의 이벤트 전달여부 (picBox에 가려진 이벤트 발동)
-            this.pBox3_CursorBoard.MouseDown += pictureBox2_MouseDown;
-            this.pBox3_CursorBoard.MouseUp += pictureBox2_MouseUp;
-
-            //호출순서 변경(정석은 아닌듯)
-            this.pBox3_CursorBoard.MouseMove -= pBox3_CursorBoard_MouseMove;
-            this.pBox3_CursorBoard.MouseMove += pictureBox2_MouseMove;
-            this.pBox3_CursorBoard.MouseMove += pBox3_CursorBoard_MouseMove;
-
-            this.pBox3_CursorBoard.MouseWheel += pictureBox1_MouseWheel;
         }
 
         public void Load_()
@@ -1338,11 +1208,6 @@ namespace Semantic
         private void button1_Click(object sender, EventArgs e)
         {
             Network_route_settings();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
