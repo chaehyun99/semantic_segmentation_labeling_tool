@@ -1197,26 +1197,6 @@ namespace Semantic
             MessageBox.Show("이미지 불러오기: F \n딥러닝 레이블링 적용: Q  \n브러쉬: B \n지우개: E \n이미지 확대: Scroll up \n이미지 축소: Scroll down \n되돌리기 : Ctrl + Z  \n앞돌리기: Ctrl + Y \n프로젝트 저장: Ctrl + S");
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>
         /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.

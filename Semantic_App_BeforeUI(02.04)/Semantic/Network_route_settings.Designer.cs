@@ -47,16 +47,16 @@ namespace Semantic
             // 
             // Input_image_path
             // 
-            this.Input_image_path.Location = new System.Drawing.Point(178, 160);
-            this.Input_image_path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Input_image_path.Location = new System.Drawing.Point(178, 99);
+            this.Input_image_path.Margin = new System.Windows.Forms.Padding(1);
             this.Input_image_path.Name = "Input_image_path";
             this.Input_image_path.Size = new System.Drawing.Size(285, 21);
             this.Input_image_path.TabIndex = 10;
             // 
             // Gray_scale_path
             // 
-            this.Gray_scale_path.Location = new System.Drawing.Point(178, 97);
-            this.Gray_scale_path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Gray_scale_path.Location = new System.Drawing.Point(178, 161);
+            this.Gray_scale_path.Margin = new System.Windows.Forms.Padding(1);
             this.Gray_scale_path.Name = "Gray_scale_path";
             this.Gray_scale_path.Size = new System.Drawing.Size(285, 21);
             this.Gray_scale_path.TabIndex = 11;
@@ -64,7 +64,7 @@ namespace Semantic
             // Rgb_path
             // 
             this.Rgb_path.Location = new System.Drawing.Point(178, 223);
-            this.Rgb_path.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.Rgb_path.Margin = new System.Windows.Forms.Padding(1);
             this.Rgb_path.Name = "Rgb_path";
             this.Rgb_path.Size = new System.Drawing.Size(285, 21);
             this.Rgb_path.TabIndex = 12;
@@ -76,7 +76,7 @@ namespace Semantic
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.button1.Location = new System.Drawing.Point(475, 97);
-            this.button1.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
+            this.button1.Margin = new System.Windows.Forms.Padding(1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 13;
@@ -91,7 +91,7 @@ namespace Semantic
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.button2.Location = new System.Drawing.Point(475, 159);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 14;
@@ -106,7 +106,7 @@ namespace Semantic
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.button3.Location = new System.Drawing.Point(475, 222);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 15;
@@ -153,7 +153,7 @@ namespace Semantic
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Location = new System.Drawing.Point(214, 300);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(104, 40);
             this.button4.TabIndex = 19;

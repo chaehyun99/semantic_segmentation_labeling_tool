@@ -44,9 +44,9 @@ namespace Semantic
             */
             if (e.KeyCode == Keys.F) button1_Click(sender, e);
             if (e.KeyCode == Keys.Q) Network_operation_Click(sender, e);
-            if (e.Control && e.KeyCode == Keys.Z) button4_Click(sender, e);
-            if (e.Control && e.KeyCode == Keys.Y) button5_Click(sender, e);
-            if (e.Control && e.KeyCode == Keys.S) button2_Click_1(sender, e);
+            if (this.ctrlKeyDown && (e.KeyCode == Keys.Z)) UNDO(sender, e);
+            if (this.ctrlKeyDown && (e.KeyCode == Keys.Y)) REDO(sender, e);
+            if (this.ctrlKeyDown && (e.KeyCode == Keys.S)) button2_Click_1(sender, e);
             if (e.KeyCode == Keys.B) button_setPaintmode_Click(sender, e);
             if (e.KeyCode == Keys.E)// button6_Click(sender, e);->brush색깔 0으로 해주면됨.
             if (e.KeyCode == Keys.I) button3_Click(sender, e);
