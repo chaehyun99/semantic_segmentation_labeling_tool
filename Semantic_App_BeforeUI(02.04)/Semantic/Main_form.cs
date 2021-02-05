@@ -37,7 +37,6 @@ namespace Semantic
         public static FolderBrowserDialog rgb_file_path = new FolderBrowserDialog();
 
         private int cursor_mode = 1, brush_Size = 1;
-        private Color brush_Color = Color.Black;
 
 
         private bool isScroll = false, isPaint = false;
@@ -278,50 +277,9 @@ namespace Semantic
                 Load_();
                 whether_to_save_ = false;
             }
-        }
-
-       
+        }       
 
         #region Save Img
-        public static FolderBrowserDialog GetSaveFolderDialog()
-        {
-            FolderBrowserDialog saveFolderDig = new FolderBrowserDialog();
-            saveFolderDig.RootFolder = Environment.SpecialFolder.Desktop;
-
-            return saveFolderDig;
-        }
-        /*
-        private void Image_Save_Click(Object sender, EventArgs e)
-        {
-            using (FolderBrowserDialog folderDiag = GetSaveFolderDialog())
-            {
-                if (folderDiag.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    string dir = folderDiag.SelectedPath;
-
-                    Image image = pictureBox1.Image;
-
-                    string fileName = "test.jpg".ToString();
-
-                    if (image != null)
-                    {
-                        string imageSavePath = string.Format(@"{0}\{1}", dir, fileName);
-                        image.Save(imageSavePath);
-                        MessageBox.Show("저장 완료");
-                    }
-
-
-
-                    this.Cursor = Cursors.Default;
-
-                }
-
-            }
-
-        }
-        */
         #endregion
 
         #region GrayScale <-> RGB Function
