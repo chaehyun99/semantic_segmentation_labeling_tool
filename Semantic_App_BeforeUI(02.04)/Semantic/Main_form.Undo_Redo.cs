@@ -151,6 +151,7 @@ namespace Semantic
 
             this.pBox3_CursorBoard.MouseWheel += pictureBox1_MouseWheel;
 
+            InitBtnBrushColor();
         }
 
         private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
