@@ -19,10 +19,18 @@ namespace Semantic
     public partial class Main_form : Form
     {
         //----------------------------------------------------필드(변수)
-       
+
+        //필요시 초깃값 바꿔도됨
+        private Color brush_Color = Color.Black;
+        public Color Brush_Color { get => brush_Color; set => brush_Color = value; }
+
+
         //----------------------------------------------------메서드(기능)
-       
-        
+
+
         //----------------------------------------------------이벤트(UI)
+
+        //영빈이형이 만들어논 검은색 버튼 이름 =  button 7.
+
     }
 }

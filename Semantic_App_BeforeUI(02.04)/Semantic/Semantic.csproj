@@ -75,14 +75,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main_form.BrushColorSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Main_form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main_form.Designer.cs">
       <DependentUpon>Main_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main_form.FixImageLoadingLogic.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Main_form.SaveButton.cs">
       <SubType>Form</SubType>
