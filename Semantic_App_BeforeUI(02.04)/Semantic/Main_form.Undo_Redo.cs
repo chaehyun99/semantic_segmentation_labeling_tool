@@ -157,12 +157,12 @@ namespace Semantic
         {
             switch (cursor_mode)
             {
-                case 1: //scroll mode
+                case CursorMode.Scroll: //scroll mode
 
                     isScroll = false;
                     break;
 
-                case 2: //paint mode
+                case CursorMode.Paint: //paint mode
 
                     if (sourceBitmapRgb == null)
                     {
@@ -218,7 +218,7 @@ namespace Semantic
                 cursorBoardBitmap = new Bitmap(sourceBitmapRgb.Width, sourceBitmapRgb.Height);
                 cursorBoardBitmap.MakeTransparent();
 
-                SetAlpha(trackBar1.Value);
+                SetAlpha(decimal.ToInt32(colorSlider1.Value));
 
                 // 픽쳐박스에 올라온 이미지가 바뀔때마다 
                     // 1. 기존 스택을 비우고,

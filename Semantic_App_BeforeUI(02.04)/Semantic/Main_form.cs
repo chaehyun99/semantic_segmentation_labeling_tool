@@ -36,7 +36,13 @@ namespace Semantic
         public static FolderBrowserDialog gray_file_path = new FolderBrowserDialog();
         public static FolderBrowserDialog rgb_file_path = new FolderBrowserDialog();
 
-        private int cursor_mode = 1, brush_Size = 1;
+        private enum CursorMode
+        {
+            Scroll,
+            Paint
+        }
+        private int brush_Size = 1;
+        private CursorMode cursor_mode = CursorMode.Scroll;
         private Color brush_Color = Color.Black;
 
 
@@ -424,7 +430,7 @@ namespace Semantic
         private void SetAlpha(int alpha)
         {
 
-            float a = alpha / (float)trackBar1.Maximum;
+            float a = alpha / (float)colorSlider1.Maximum;
 
             //투명도 표시 인터페이스
             lable_Opacity.Tag = (int)Math.Round(a * 100);
@@ -444,19 +450,6 @@ namespace Semantic
 
 
             return;
-        }
-
-        //트레이스바(투명도 비율 정보) 조정 - 투명도 조절용
-        private void trackBar1_Scroll(object sender, EventArgs e)
-        {
-            if (null == sourceBitmapRgb)
-            {
-                return;
-            }
-            SetAlpha(trackBar1.Value);
-
-            RefreshAllPictureBox();
-
         }
         #endregion
 
@@ -724,12 +717,12 @@ namespace Semantic
 
         private void button_setscrollmode_Click(object sender, EventArgs e)
         {
-            cursor_mode = 1;
+            cursor_mode = CursorMode.Scroll;
         }
 
         private void button_setPaintmode_Click(object sender, EventArgs e)
         {
-            cursor_mode = 2;
+            cursor_mode = CursorMode.Paint;
         }
 
         private void button_BrushsizeUp_Click(object sender, EventArgs e)
@@ -766,12 +759,12 @@ namespace Semantic
         {
             switch (cursor_mode)
             {
-                case 1: //scroll mode
+                case CursorMode.Scroll: //scroll mode
                     isScroll = true;
                     move_startpt = e.Location;
                     break;
 
-                case 2: //paint mode
+                case CursorMode.Paint: //paint mode
 
                     if (sourceBitmapRgb == null)
                     {
@@ -837,13 +830,13 @@ namespace Semantic
 
             switch (cursor_mode)
             {
-                case 1: //scroll mode
+                case CursorMode.Scroll: //scroll mode
                     move_endpt = e.Location;
                     Move_targetRect_location();
                     move_startpt = move_endpt;
                     break;
 
-                case 2: //paint mode
+                case CursorMode.Paint: //paint mode
                     if (sourceBitmapRgb == null)
                     {
                         return;
@@ -895,7 +888,8 @@ namespace Semantic
 
                 Rectangle rectDot = new Rectangle(ptOnSrcBitmap.X - ((brush_Size + 2) / 2), ptOnSrcBitmap.Y - ((brush_Size + 2) / 2), brush_Size + 1, brush_Size + 1);
 
-                Console.WriteLine("브러시 pen_startpt 좌표: " + Convert.ToString(e.Location));
+                //Console.WriteLine("브러시 pen_startpt 좌표: " + Convert.ToString(e.Location));
+                //TODO: 이거 나중에 하단에 좌표 띄워주기.
 
                 g.Clear(Color.Transparent);
                 if (brush_Size == 1)
@@ -1038,10 +1032,6 @@ namespace Semantic
             Console.WriteLine("커서표시영역 진입");
 
             Console.WriteLine("커서모드" + Convert.ToString(cursor_mode));
-            Console.WriteLine(
-                "커서비트맵:"
-                + ((null == cursorBoardBitmap) ? "No" : "Yes")
-                );
 
             //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무(isOnpicBox3).
             //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
@@ -1057,7 +1047,7 @@ namespace Semantic
 
 
             PictureBox picBox = (PictureBox)sender;
-            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            if ((CursorMode.Paint != cursor_mode) || (null == cursorBoardBitmap))
             {
                 return;
             }
@@ -1075,7 +1065,7 @@ namespace Semantic
             //picBox3.MouseMove 의 delegate로 picBox2_MouseMove를 줘도 되고,
             //아예 여기서 picBox2_MouseMove를 발생시켜도 됨.
 
-            if ((2 != cursor_mode) || (null == cursorBoardBitmap))
+            if ((CursorMode.Paint != cursor_mode) || (null == cursorBoardBitmap))
             {
                 return;
             }
@@ -1210,12 +1200,22 @@ namespace Semantic
             Network_route_settings();
         }
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
 
+        private void colorSlider1_Scroll(object sender, ScrollEventArgs e)
+        {
+            if (null == sourceBitmapRgb)
+            {
+                return;
+            }
+            SetAlpha(decimal.ToInt32(colorSlider1.Value));
+
+            RefreshAllPictureBox();
         }
 
-
+        private void colorSlider2BrushSize_Scroll(object sender, ScrollEventArgs e)
+        {
+            SetBrushSize(decimal.ToInt32(colorSlider2BrushSize.Value));
+        }
 
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>

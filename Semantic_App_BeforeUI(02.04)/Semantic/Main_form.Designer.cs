@@ -30,8 +30,6 @@ namespace Semantic
         private void InitializeComponent()
         {
             this.button_setscrollmode = new System.Windows.Forms.Button();
-            this.button_BrushsizeUp = new System.Windows.Forms.Button();
-            this.button_BrushsizeDown = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -47,7 +45,8 @@ namespace Semantic
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.colorSlider2BrushSize = new ColorSlider.ColorSlider();
+            this.colorSlider1 = new ColorSlider.ColorSlider();
             this.lable_Opacity = new System.Windows.Forms.Label();
             this.lable_ImgScale = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -62,7 +61,6 @@ namespace Semantic
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -75,7 +73,7 @@ namespace Semantic
             // 
             // button_setscrollmode
             // 
-            this.button_setscrollmode.Location = new System.Drawing.Point(951, 38);
+            this.button_setscrollmode.Location = new System.Drawing.Point(682, 32);
             this.button_setscrollmode.Margin = new System.Windows.Forms.Padding(0);
             this.button_setscrollmode.Name = "button_setscrollmode";
             this.button_setscrollmode.Size = new System.Drawing.Size(67, 37);
@@ -83,28 +81,6 @@ namespace Semantic
             this.button_setscrollmode.Text = "이동";
             this.button_setscrollmode.UseVisualStyleBackColor = true;
             this.button_setscrollmode.Click += new System.EventHandler(this.button_setscrollmode_Click);
-            // 
-            // button_BrushsizeUp
-            // 
-            this.button_BrushsizeUp.Location = new System.Drawing.Point(741, 34);
-            this.button_BrushsizeUp.Margin = new System.Windows.Forms.Padding(7);
-            this.button_BrushsizeUp.Name = "button_BrushsizeUp";
-            this.button_BrushsizeUp.Size = new System.Drawing.Size(67, 37);
-            this.button_BrushsizeUp.TabIndex = 28;
-            this.button_BrushsizeUp.Text = "브러시 +";
-            this.button_BrushsizeUp.UseVisualStyleBackColor = true;
-            this.button_BrushsizeUp.Click += new System.EventHandler(this.button_BrushsizeUp_Click);
-            // 
-            // button_BrushsizeDown
-            // 
-            this.button_BrushsizeDown.Location = new System.Drawing.Point(824, 35);
-            this.button_BrushsizeDown.Margin = new System.Windows.Forms.Padding(7);
-            this.button_BrushsizeDown.Name = "button_BrushsizeDown";
-            this.button_BrushsizeDown.Size = new System.Drawing.Size(67, 37);
-            this.button_BrushsizeDown.TabIndex = 29;
-            this.button_BrushsizeDown.Text = "브러시 -";
-            this.button_BrushsizeDown.UseVisualStyleBackColor = true;
-            this.button_BrushsizeDown.Click += new System.EventHandler(this.button_BrushsizeDown_Click);
             // 
             // panel1
             // 
@@ -122,9 +98,7 @@ namespace Semantic
             this.panel1.Controls.Add(this.Network_operation);
             this.panel1.Controls.Add(this.button_ZoomReset);
             this.panel1.Controls.Add(this.button_setscrollmode);
-            this.panel1.Controls.Add(this.button_BrushsizeDown);
             this.panel1.Controls.Add(this.button_setPaintmode);
-            this.panel1.Controls.Add(this.button_BrushsizeUp);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
@@ -307,7 +281,8 @@ namespace Semantic
             // 
             this.panel3.BackgroundImage = global::Semantic.Properties.Resources.위;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel3.Controls.Add(this.trackBar1);
+            this.panel3.Controls.Add(this.colorSlider2BrushSize);
+            this.panel3.Controls.Add(this.colorSlider1);
             this.panel3.Controls.Add(this.lable_Opacity);
             this.panel3.Controls.Add(this.lable_ImgScale);
             this.panel3.Location = new System.Drawing.Point(15, 37);
@@ -316,14 +291,130 @@ namespace Semantic
             this.panel3.Size = new System.Drawing.Size(236, 248);
             this.panel3.TabIndex = 2;
             // 
-            // trackBar1
+            // colorSlider2BrushSize
             // 
-            this.trackBar1.Location = new System.Drawing.Point(32, 71);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
-            this.trackBar1.TabIndex = 24;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            this.colorSlider2BrushSize.BackColor = System.Drawing.Color.White;
+            this.colorSlider2BrushSize.BarInnerColor = System.Drawing.Color.White;
+            this.colorSlider2BrushSize.BarPenColorBottom = System.Drawing.Color.Gray;
+            this.colorSlider2BrushSize.BarPenColorTop = System.Drawing.Color.White;
+            this.colorSlider2BrushSize.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.colorSlider2BrushSize.ElapsedInnerColor = System.Drawing.Color.DimGray;
+            this.colorSlider2BrushSize.ElapsedPenColorBottom = System.Drawing.Color.DarkGray;
+            this.colorSlider2BrushSize.ElapsedPenColorTop = System.Drawing.Color.DarkGray;
+            this.colorSlider2BrushSize.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorSlider2BrushSize.ForeColor = System.Drawing.Color.Black;
+            this.colorSlider2BrushSize.LargeChange = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.Location = new System.Drawing.Point(18, 122);
+            this.colorSlider2BrushSize.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.Name = "colorSlider2BrushSize";
+            this.colorSlider2BrushSize.ScaleDivisions = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.ScaleSubDivisions = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.ShowDivisionsText = false;
+            this.colorSlider2BrushSize.ShowSmallScale = false;
+            this.colorSlider2BrushSize.Size = new System.Drawing.Size(200, 59);
+            this.colorSlider2BrushSize.SmallChange = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.TabIndex = 28;
+            this.colorSlider2BrushSize.ThumbInnerColor = System.Drawing.Color.DarkGray;
+            this.colorSlider2BrushSize.ThumbOuterColor = System.Drawing.Color.DarkGray;
+            this.colorSlider2BrushSize.ThumbPenColor = System.Drawing.Color.Gainsboro;
+            this.colorSlider2BrushSize.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.colorSlider2BrushSize.ThumbSize = new System.Drawing.Size(16, 16);
+            this.colorSlider2BrushSize.TickAdd = 0F;
+            this.colorSlider2BrushSize.TickColor = System.Drawing.Color.Black;
+            this.colorSlider2BrushSize.TickDivide = 1F;
+            this.colorSlider2BrushSize.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.colorSlider2BrushSize.Scroll += new System.Windows.Forms.ScrollEventHandler(this.colorSlider2BrushSize_Scroll);
+            // 
+            // colorSlider1
+            // 
+            this.colorSlider1.BackColor = System.Drawing.Color.White;
+            this.colorSlider1.BarPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(87)))), ((int)(((byte)(94)))), ((int)(((byte)(110)))));
+            this.colorSlider1.BarPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(60)))), ((int)(((byte)(74)))));
+            this.colorSlider1.BorderRoundRectSize = new System.Drawing.Size(8, 8);
+            this.colorSlider1.ElapsedInnerColor = System.Drawing.Color.White;
+            this.colorSlider1.ElapsedPenColorBottom = System.Drawing.Color.Black;
+            this.colorSlider1.ElapsedPenColorTop = System.Drawing.Color.Black;
+            this.colorSlider1.Font = new System.Drawing.Font("MD아트체", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.colorSlider1.ForeColor = System.Drawing.Color.Black;
+            this.colorSlider1.LargeChange = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.colorSlider1.Location = new System.Drawing.Point(18, 67);
+            this.colorSlider1.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.colorSlider1.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.colorSlider1.Name = "colorSlider1";
+            this.colorSlider1.ScaleDivisions = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorSlider1.ScaleSubDivisions = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.colorSlider1.ShowDivisionsText = true;
+            this.colorSlider1.ShowSmallScale = true;
+            this.colorSlider1.Size = new System.Drawing.Size(200, 61);
+            this.colorSlider1.SmallChange = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.colorSlider1.TabIndex = 3;
+            this.colorSlider1.Text = "colorSlider1";
+            this.colorSlider1.ThumbInnerColor = System.Drawing.Color.White;
+            this.colorSlider1.ThumbPenColor = System.Drawing.Color.Black;
+            this.colorSlider1.ThumbRoundRectSize = new System.Drawing.Size(16, 16);
+            this.colorSlider1.ThumbSize = new System.Drawing.Size(16, 16);
+            this.colorSlider1.TickAdd = 0F;
+            this.colorSlider1.TickColor = System.Drawing.Color.Black;
+            this.colorSlider1.TickDivide = 0F;
+            this.colorSlider1.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.colorSlider1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.colorSlider1_Scroll);
             // 
             // lable_Opacity
             // 
@@ -474,7 +565,6 @@ namespace Semantic
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -495,8 +585,6 @@ namespace Semantic
         private System.Windows.Forms.Button Button_ZoomOut;
         private System.Windows.Forms.Button button_setscrollmode;
         private System.Windows.Forms.Button button_setPaintmode;
-        private System.Windows.Forms.Button button_BrushsizeUp;
-        private System.Windows.Forms.Button button_BrushsizeDown;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
@@ -507,7 +595,6 @@ namespace Semantic
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label lable_Opacity;
         private System.Windows.Forms.Label lable_ImgScale;
         private System.Windows.Forms.Panel panel4;
@@ -518,6 +605,8 @@ namespace Semantic
         private System.Windows.Forms.PictureBox pBox3_CursorBoard;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private ColorSlider.ColorSlider colorSlider1;
+        private ColorSlider.ColorSlider colorSlider2BrushSize;
     }
 }
 
