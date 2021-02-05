@@ -1235,6 +1235,26 @@ namespace Semantic
 
         }
 
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel6_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
 
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>

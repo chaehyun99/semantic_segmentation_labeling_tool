@@ -179,5 +179,17 @@
   <ItemGroup>
     <None Include="Resources\black_eye.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor2__.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_100_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

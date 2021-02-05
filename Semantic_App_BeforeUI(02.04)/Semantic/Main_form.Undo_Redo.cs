@@ -135,8 +135,8 @@ namespace Semantic
         {
 
             //Undo,Redo 버튼 이벤트 연결
-            this.button4.Click += UNDO;
-            this.button5.Click += REDO;
+            this.button10.Click += UNDO;
+            this.button19.Click += REDO;
 
             this.ctrlKeyDown = false;
 

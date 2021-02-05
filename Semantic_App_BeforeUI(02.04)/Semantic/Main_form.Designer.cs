@@ -31,21 +31,11 @@ namespace Semantic
         {
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.lable_Opacity = new System.Windows.Forms.Label();
-            this.lable_ImgScale = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button_BrushsizeUp = new System.Windows.Forms.Button();
-            this.button_BrushsizeDown = new System.Windows.Forms.Button();
-            this.button_setscrollmode = new System.Windows.Forms.Button();
             this.listPanelThumb = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pBox3_CursorBoard = new System.Windows.Forms.PictureBox();
+            this.button_setPaintmode = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox10 = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
@@ -55,27 +45,43 @@ namespace Semantic
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button_setPaintmode = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Button_ZoomIn = new System.Windows.Forms.Button();
-            this.Button_ZoomOut = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.Network_operation = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.lable_Opacity = new System.Windows.Forms.Label();
+            this.lable_ImgScale = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button_BrushsizeUp = new System.Windows.Forms.Button();
+            this.button_BrushsizeDown = new System.Windows.Forms.Button();
+            this.button_setscrollmode = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pBox3_CursorBoard = new System.Windows.Forms.PictureBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).BeginInit();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel5
@@ -85,6 +91,9 @@ namespace Semantic
             this.panel5.Controls.Add(this.pictureBox2);
             this.panel5.Controls.Add(this.pictureBox1);
             this.panel5.Controls.Add(this.pBox3_CursorBoard);
+            this.panel5.Controls.Add(this.button_setPaintmode);
+            this.panel5.Controls.Add(this.button6);
+            this.panel5.Controls.Add(this.button4);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel5.Location = new System.Drawing.Point(0, 83);
             this.panel5.Margin = new System.Windows.Forms.Padding(0);
@@ -95,6 +104,7 @@ namespace Semantic
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.panel2.Controls.Add(this.textBox11);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
@@ -105,79 +115,457 @@ namespace Semantic
             this.panel2.TabIndex = 34;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // listPanelThumb
+            // 
+            this.listPanelThumb.AutoScroll = true;
+            this.listPanelThumb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.listPanelThumb.Dock = System.Windows.Forms.DockStyle.Left;
+            this.listPanelThumb.Location = new System.Drawing.Point(0, 0);
+            this.listPanelThumb.Margin = new System.Windows.Forms.Padding(0);
+            this.listPanelThumb.Name = "listPanelThumb";
+            this.listPanelThumb.Size = new System.Drawing.Size(264, 616);
+            this.listPanelThumb.TabIndex = 19;
+            this.listPanelThumb.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
+            // 
+            // button_setPaintmode
+            // 
+            this.button_setPaintmode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button_setPaintmode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button_setPaintmode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button_setPaintmode.Location = new System.Drawing.Point(514, 58);
+            this.button_setPaintmode.Margin = new System.Windows.Forms.Padding(7);
+            this.button_setPaintmode.Name = "button_setPaintmode";
+            this.button_setPaintmode.Size = new System.Drawing.Size(34, 37);
+            this.button_setPaintmode.TabIndex = 28;
+            this.button_setPaintmode.UseVisualStyleBackColor = true;
+            this.button_setPaintmode.Click += new System.EventHandler(this.button_setPaintmode_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Location = new System.Drawing.Point(493, 126);
+            this.button6.Margin = new System.Windows.Forms.Padding(7);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(55, 55);
+            this.button6.TabIndex = 35;
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.panel6.Controls.Add(this.button12);
+            this.panel6.Controls.Add(this.textBox7);
+            this.panel6.Controls.Add(this.textBox6);
+            this.panel6.Controls.Add(this.button17);
+            this.panel6.Controls.Add(this.textBox5);
+            this.panel6.Controls.Add(this.button1);
+            this.panel6.Controls.Add(this.button14);
+            this.panel6.Controls.Add(this.button16);
+            this.panel6.Controls.Add(this.button19);
+            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.textBox10);
+            this.panel6.Controls.Add(this.button13);
+            this.panel6.Controls.Add(this.button18);
+            this.panel6.Controls.Add(this.button15);
+            this.panel6.Controls.Add(this.textBox9);
+            this.panel6.Controls.Add(this.textBox8);
+            this.panel6.Controls.Add(this.button10);
+            this.panel6.Controls.Add(this.button9);
+            this.panel6.Controls.Add(this.textBox4);
+            this.panel6.Controls.Add(this.button11);
+            this.panel6.Controls.Add(this.textBox3);
+            this.panel6.Controls.Add(this.textBox2);
+            this.panel6.Location = new System.Drawing.Point(0, 3);
+            this.panel6.Margin = new System.Windows.Forms.Padding(0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1257, 87);
+            this.panel6.TabIndex = 0;
+            this.panel6.Paint += new System.Windows.Forms.PaintEventHandler(this.panel6_Paint);
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(81)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(413, 57);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(46, 14);
+            this.textBox1.TabIndex = 36;
+            this.textBox1.Text = "undo";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // textBox10
+            // 
+            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox10.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox10.Location = new System.Drawing.Point(137, 57);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(102, 14);
+            this.textBox10.TabIndex = 35;
+            this.textBox10.Text = "info";
+            // 
+            // textBox9
+            // 
+            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox9.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox9.Location = new System.Drawing.Point(69, 57);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(55, 14);
+            this.textBox9.TabIndex = 44;
+            this.textBox9.Text = "semantic";
+            // 
+            // textBox8
+            // 
+            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox8.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox8.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox8.Location = new System.Drawing.Point(28, 57);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(64, 14);
+            this.textBox8.TabIndex = 43;
+            this.textBox8.Text = "path";
+            // 
+            // textBox7
+            // 
+            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox7.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox7.Location = new System.Drawing.Point(828, 57);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(73, 14);
+            this.textBox7.TabIndex = 42;
+            this.textBox7.Text = "save";
+            // 
+            // textBox6
+            // 
+            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox6.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox6.Location = new System.Drawing.Point(750, 57);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(98, 14);
+            this.textBox6.TabIndex = 41;
+            this.textBox6.Text = "zoom out";
+            // 
+            // textBox5
+            // 
+            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox5.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox5.Location = new System.Drawing.Point(629, 57);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(68, 14);
+            this.textBox5.TabIndex = 40;
+            this.textBox5.Text = "zoom in";
+            // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox4.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox4.Location = new System.Drawing.Point(570, 57);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(80, 14);
+            this.textBox4.TabIndex = 39;
+            this.textBox4.Text = "move";
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox3.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox3.Location = new System.Drawing.Point(515, 57);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(53, 14);
+            this.textBox3.TabIndex = 38;
+            this.textBox3.Text = "brush";
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox2.ForeColor = System.Drawing.SystemColors.Window;
+            this.textBox2.Location = new System.Drawing.Point(464, 57);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(53, 14);
+            this.textBox2.TabIndex = 37;
+            this.textBox2.Text = "redo";
+            // 
+            // button4
+            // 
+            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(451, 130);
+            this.button4.Margin = new System.Windows.Forms.Padding(7);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(46, 47);
+            this.button4.TabIndex = 33;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(293, 41);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(713, 526);
+            this.button8.TabIndex = 45;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // textBox11
+            // 
+            this.textBox11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.textBox11.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox11.Font = new System.Drawing.Font("Agency FB", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox11.Location = new System.Drawing.Point(73, 589);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(183, 18);
+            this.textBox11.TabIndex = 3;
+            this.textBox11.Text = "Deeplearning-semantic training data editor";
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button12.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_document_file_paper_page_07_2850900;
+            this.button12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button12.FlatAppearance.BorderSize = 0;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button12.Location = new System.Drawing.Point(816, 9);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(44, 49);
+            this.button12.TabIndex = 40;
+            this.button12.UseVisualStyleBackColor = false;
+            // 
+            // button17
+            // 
+            this.button17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button17.BackgroundImage = global::Semantic.Properties.Resources.zoom_out;
+            this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button17.FlatAppearance.BorderSize = 0;
+            this.button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button17.Location = new System.Drawing.Point(753, 2);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(40, 60);
+            this.button17.TabIndex = 44;
+            this.button17.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button1.BackgroundImage = global::Semantic.Properties.Resources.cursor2__;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(567, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 36);
+            this.button1.TabIndex = 45;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button14.BackgroundImage = global::Semantic.Properties.Resources.zoom_100_;
+            this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button14.FlatAppearance.BorderSize = 0;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button14.Location = new System.Drawing.Point(687, 5);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(43, 57);
+            this.button14.TabIndex = 42;
+            this.button14.UseVisualStyleBackColor = false;
+            // 
+            // button16
+            // 
+            this.button16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button16.BackgroundImage = global::Semantic.Properties.Resources.zoom_in;
+            this.button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button16.FlatAppearance.BorderSize = 0;
+            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button16.Location = new System.Drawing.Point(626, 5);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(42, 59);
+            this.button16.TabIndex = 43;
+            this.button16.UseVisualStyleBackColor = false;
+            // 
+            // button19
+            // 
+            this.button19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button19.BackgroundImage = global::Semantic.Properties.Resources.redo;
+            this.button19.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button19.FlatAppearance.BorderSize = 0;
+            this.button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button19.Location = new System.Drawing.Point(447, 11);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(59, 48);
+            this.button19.TabIndex = 46;
+            this.button19.UseVisualStyleBackColor = false;
+            // 
+            // button13
+            // 
+            this.button13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button13.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_17_Brush_290133;
+            this.button13.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button13.FlatAppearance.BorderSize = 0;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button13.Location = new System.Drawing.Point(511, 11);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(36, 42);
+            this.button13.TabIndex = 41;
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button18.BackgroundImage = global::Semantic.Properties.Resources.segmentation;
+            this.button18.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button18.FlatAppearance.BorderSize = 0;
+            this.button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button18.Location = new System.Drawing.Point(72, 15);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(43, 34);
+            this.button18.TabIndex = 45;
+            this.button18.UseVisualStyleBackColor = false;
+            // 
+            // button15
+            // 
+            this.button15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button15.BackgroundImage = global::Semantic.Properties.Resources.redo;
+            this.button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button15.FlatAppearance.BorderSize = 0;
+            this.button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button15.Location = new System.Drawing.Point(473, 73);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(53, 60);
+            this.button15.TabIndex = 0;
+            this.button15.UseVisualStyleBackColor = false;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button10.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_restore_2460287;
+            this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button10.FlatAppearance.BorderSize = 0;
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(400, 12);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(50, 48);
+            this.button10.TabIndex = 38;
+            this.button10.UseVisualStyleBackColor = false;
+            // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button9.BackgroundImage = global::Semantic.Properties.Resources.info;
+            this.button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Location = new System.Drawing.Point(128, 15);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(36, 39);
+            this.button9.TabIndex = 37;
+            this.button9.UseVisualStyleBackColor = false;
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.button11.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_Folder_Place_File_Storage_Paper_Office_1343439;
+            this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button11.FlatAppearance.BorderSize = 0;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Location = new System.Drawing.Point(21, 14);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(36, 37);
+            this.button11.TabIndex = 39;
+            this.button11.UseVisualStyleBackColor = false;
+            // 
             // panel3
             // 
+            this.panel3.BackgroundImage = global::Semantic.Properties.Resources.up;
             this.panel3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel3.Controls.Add(this.trackBar1);
             this.panel3.Controls.Add(this.lable_Opacity);
             this.panel3.Controls.Add(this.lable_ImgScale);
-            this.panel3.Location = new System.Drawing.Point(15, 38);
+            this.panel3.Location = new System.Drawing.Point(15, 27);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(236, 169);
+            this.panel3.Size = new System.Drawing.Size(236, 160);
             this.panel3.TabIndex = 2;
+            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(75, 73);
+            this.trackBar1.Location = new System.Drawing.Point(25, 31);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(0);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(104, 45);
+            this.trackBar1.Size = new System.Drawing.Size(173, 45);
             this.trackBar1.TabIndex = 24;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // lable_Opacity
             // 
             this.lable_Opacity.AutoSize = true;
-            this.lable_Opacity.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.lable_Opacity.Location = new System.Drawing.Point(56, 40);
+            this.lable_Opacity.BackColor = System.Drawing.SystemColors.Window;
+            this.lable_Opacity.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lable_Opacity.Location = new System.Drawing.Point(18, 14);
             this.lable_Opacity.Margin = new System.Windows.Forms.Padding(0);
             this.lable_Opacity.Name = "lable_Opacity";
-            this.lable_Opacity.Size = new System.Drawing.Size(69, 12);
+            this.lable_Opacity.Size = new System.Drawing.Size(142, 15);
             this.lable_Opacity.TabIndex = 27;
             this.lable_Opacity.Tag = 0;
-            this.lable_Opacity.Text = "투명도: ? %";
+            this.lable_Opacity.Text = "transparency 투명도: ? %";
             this.lable_Opacity.Paint += new System.Windows.Forms.PaintEventHandler(this.lable_Opacity_Paint);
             // 
             // lable_ImgScale
             // 
             this.lable_ImgScale.AutoSize = true;
-            this.lable_ImgScale.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.lable_ImgScale.Location = new System.Drawing.Point(129, 40);
+            this.lable_ImgScale.BackColor = System.Drawing.SystemColors.Window;
+            this.lable_ImgScale.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lable_ImgScale.Location = new System.Drawing.Point(18, 81);
             this.lable_ImgScale.Margin = new System.Windows.Forms.Padding(0);
             this.lable_ImgScale.Name = "lable_ImgScale";
-            this.lable_ImgScale.Size = new System.Drawing.Size(57, 12);
+            this.lable_ImgScale.Size = new System.Drawing.Size(88, 15);
             this.lable_ImgScale.TabIndex = 26;
-            this.lable_ImgScale.Text = "배율: ? %";
+            this.lable_ImgScale.Text = "scale 배율: ? %";
             this.lable_ImgScale.Paint += new System.Windows.Forms.PaintEventHandler(this.lable_ImgScale_Paint);
             // 
             // panel4
             // 
+            this.panel4.BackgroundImage = global::Semantic.Properties.Resources.down;
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel4.Controls.Add(this.textBox11);
+            this.panel4.Controls.Add(this.textBox12);
             this.panel4.Controls.Add(this.button7);
             this.panel4.Controls.Add(this.button_BrushsizeUp);
             this.panel4.Controls.Add(this.button_BrushsizeDown);
             this.panel4.Controls.Add(this.button_setscrollmode);
-            this.panel4.Location = new System.Drawing.Point(15, 186);
+            this.panel4.Location = new System.Drawing.Point(15, 192);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(236, 405);
+            this.panel4.Size = new System.Drawing.Size(236, 387);
             this.panel4.TabIndex = 1;
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(0, 0);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 21);
-            this.textBox11.TabIndex = 36;
             // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.Black;
             this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(35, 47);
+            this.button7.Location = new System.Drawing.Point(34, 78);
             this.button7.Margin = new System.Windows.Forms.Padding(0);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(81, 34);
@@ -199,7 +587,7 @@ namespace Semantic
             // 
             // button_BrushsizeDown
             // 
-            this.button_BrushsizeDown.Location = new System.Drawing.Point(131, 120);
+            this.button_BrushsizeDown.Location = new System.Drawing.Point(131, 121);
             this.button_BrushsizeDown.Margin = new System.Windows.Forms.Padding(7);
             this.button_BrushsizeDown.Name = "button_BrushsizeDown";
             this.button_BrushsizeDown.Size = new System.Drawing.Size(67, 37);
@@ -219,18 +607,6 @@ namespace Semantic
             this.button_setscrollmode.UseVisualStyleBackColor = true;
             this.button_setscrollmode.Click += new System.EventHandler(this.button_setscrollmode_Click);
             // 
-            // listPanelThumb
-            // 
-            this.listPanelThumb.AutoScroll = true;
-            this.listPanelThumb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.listPanelThumb.Dock = System.Windows.Forms.DockStyle.Left;
-            this.listPanelThumb.Location = new System.Drawing.Point(0, 0);
-            this.listPanelThumb.Margin = new System.Windows.Forms.Padding(0);
-            this.listPanelThumb.Name = "listPanelThumb";
-            this.listPanelThumb.Size = new System.Drawing.Size(264, 616);
-            this.listPanelThumb.TabIndex = 19;
-            this.listPanelThumb.Paint += new System.Windows.Forms.PaintEventHandler(this.uiPanelThumbnail_Paint);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -238,8 +614,8 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Location = new System.Drawing.Point(258, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(7);
+            this.pictureBox2.Location = new System.Drawing.Point(261, 5);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(741, 616);
             this.pictureBox2.TabIndex = 23;
@@ -281,289 +657,15 @@ namespace Semantic
             this.pBox3_CursorBoard.MouseLeave += new System.EventHandler(this.pBox3_CursorBoard_MouseLeave);
             this.pBox3_CursorBoard.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pBox3_CursorBoard_MouseMove);
             // 
-            // panel6
+            // textBox12
             // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.panel6.Controls.Add(this.textBox10);
-            this.panel6.Controls.Add(this.textBox9);
-            this.panel6.Controls.Add(this.textBox8);
-            this.panel6.Controls.Add(this.textBox7);
-            this.panel6.Controls.Add(this.textBox6);
-            this.panel6.Controls.Add(this.textBox5);
-            this.panel6.Controls.Add(this.textBox4);
-            this.panel6.Controls.Add(this.textBox3);
-            this.panel6.Controls.Add(this.textBox2);
-            this.panel6.Controls.Add(this.textBox1);
-            this.panel6.Controls.Add(this.button_setPaintmode);
-            this.panel6.Controls.Add(this.button1);
-            this.panel6.Controls.Add(this.Button_ZoomIn);
-            this.panel6.Controls.Add(this.Button_ZoomOut);
-            this.panel6.Controls.Add(this.button2);
-            this.panel6.Controls.Add(this.button4);
-            this.panel6.Controls.Add(this.button3);
-            this.panel6.Controls.Add(this.Network_operation);
-            this.panel6.Controls.Add(this.button6);
-            this.panel6.Controls.Add(this.button5);
-            this.panel6.Location = new System.Drawing.Point(0, 2);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1257, 87);
-            this.panel6.TabIndex = 0;
-            // 
-            // textBox10
-            // 
-            this.textBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox10.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox10.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox10.Location = new System.Drawing.Point(130, 50);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(102, 14);
-            this.textBox10.TabIndex = 35;
-            this.textBox10.Text = "info";
-            // 
-            // textBox9
-            // 
-            this.textBox9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox9.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox9.Location = new System.Drawing.Point(64, 50);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(55, 14);
-            this.textBox9.TabIndex = 44;
-            this.textBox9.Text = "semantic";
-            // 
-            // textBox8
-            // 
-            this.textBox8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox8.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox8.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox8.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox8.Location = new System.Drawing.Point(25, 50);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(64, 14);
-            this.textBox8.TabIndex = 43;
-            this.textBox8.Text = "path";
-            // 
-            // textBox7
-            // 
-            this.textBox7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox7.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox7.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox7.Location = new System.Drawing.Point(772, 50);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(73, 14);
-            this.textBox7.TabIndex = 42;
-            this.textBox7.Text = "save";
-            // 
-            // textBox6
-            // 
-            this.textBox6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox6.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox6.Location = new System.Drawing.Point(699, 50);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(98, 14);
-            this.textBox6.TabIndex = 41;
-            this.textBox6.Text = "zoom out";
-            // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox5.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox5.Location = new System.Drawing.Point(638, 50);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(68, 14);
-            this.textBox5.TabIndex = 40;
-            this.textBox5.Text = "zoom in";
-            // 
-            // textBox4
-            // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox4.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox4.Location = new System.Drawing.Point(581, 50);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(80, 14);
-            this.textBox4.TabIndex = 39;
-            this.textBox4.Text = "eraser";
-            // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox3.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox3.Location = new System.Drawing.Point(524, 50);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(53, 14);
-            this.textBox3.TabIndex = 38;
-            this.textBox3.Text = "brush";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox2.ForeColor = System.Drawing.SystemColors.Window;
-            this.textBox2.Location = new System.Drawing.Point(473, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(53, 14);
-            this.textBox2.TabIndex = 37;
-            this.textBox2.Text = "redo";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(81)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.textBox1.ForeColor = System.Drawing.Color.White;
-            this.textBox1.Location = new System.Drawing.Point(420, 50);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(46, 14);
-            this.textBox1.TabIndex = 36;
-            this.textBox1.Text = "undo";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // button_setPaintmode
-            // 
-            this.button_setPaintmode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_setPaintmode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_setPaintmode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_setPaintmode.Location = new System.Drawing.Point(526, 8);
-            this.button_setPaintmode.Margin = new System.Windows.Forms.Padding(7);
-            this.button_setPaintmode.Name = "button_setPaintmode";
-            this.button_setPaintmode.Size = new System.Drawing.Size(34, 37);
-            this.button_setPaintmode.TabIndex = 28;
-            this.button_setPaintmode.UseVisualStyleBackColor = true;
-            this.button_setPaintmode.Click += new System.EventHandler(this.button_setPaintmode_Click);
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(16, 11);
-            this.button1.Margin = new System.Windows.Forms.Padding(7);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(44, 33);
-            this.button1.TabIndex = 31;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // Button_ZoomIn
-            // 
-            this.Button_ZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_ZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.Button_ZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_ZoomIn.Location = new System.Drawing.Point(639, 8);
-            this.Button_ZoomIn.Margin = new System.Windows.Forms.Padding(7);
-            this.Button_ZoomIn.Name = "Button_ZoomIn";
-            this.Button_ZoomIn.Size = new System.Drawing.Size(39, 39);
-            this.Button_ZoomIn.TabIndex = 25;
-            this.Button_ZoomIn.UseVisualStyleBackColor = true;
-            this.Button_ZoomIn.Click += new System.EventHandler(this.Button_ZoomIn_Click);
-            // 
-            // Button_ZoomOut
-            // 
-            this.Button_ZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_ZoomOut.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.Button_ZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_ZoomOut.Location = new System.Drawing.Point(705, 7);
-            this.Button_ZoomOut.Margin = new System.Windows.Forms.Padding(7);
-            this.Button_ZoomOut.Name = "Button_ZoomOut";
-            this.Button_ZoomOut.Size = new System.Drawing.Size(39, 39);
-            this.Button_ZoomOut.TabIndex = 25;
-            this.Button_ZoomOut.UseVisualStyleBackColor = true;
-            this.Button_ZoomOut.Click += new System.EventHandler(this.Button_ZoomOut_Click);
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Location = new System.Drawing.Point(764, 6);
-            this.button2.Margin = new System.Windows.Forms.Padding(7);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(40, 40);
-            this.button2.TabIndex = 18;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Location = new System.Drawing.Point(411, 4);
-            this.button4.Margin = new System.Windows.Forms.Padding(7);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(46, 47);
-            this.button4.TabIndex = 33;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Location = new System.Drawing.Point(121, 11);
-            this.button3.Margin = new System.Windows.Forms.Padding(7);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(40, 36);
-            this.button3.TabIndex = 32;
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // Network_operation
-            // 
-            this.Network_operation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Network_operation.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.Network_operation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Network_operation.Location = new System.Drawing.Point(73, 10);
-            this.Network_operation.Margin = new System.Windows.Forms.Padding(7);
-            this.Network_operation.Name = "Network_operation";
-            this.Network_operation.Size = new System.Drawing.Size(34, 33);
-            this.Network_operation.TabIndex = 16;
-            this.Network_operation.UseVisualStyleBackColor = true;
-            this.Network_operation.Click += new System.EventHandler(this.Network_operation_Click);
-            // 
-            // button6
-            // 
-            this.button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Location = new System.Drawing.Point(574, -1);
-            this.button6.Margin = new System.Windows.Forms.Padding(7);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(55, 55);
-            this.button6.TabIndex = 35;
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button5.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Location = new System.Drawing.Point(463, 4);
-            this.button5.Margin = new System.Windows.Forms.Padding(7);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(47, 47);
-            this.button5.TabIndex = 34;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(293, 41);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(713, 526);
-            this.button8.TabIndex = 45;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = true;
+            this.textBox12.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox12.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.textBox12.Location = new System.Drawing.Point(21, 30);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(139, 16);
+            this.textBox12.TabIndex = 36;
+            this.textBox12.Text = "brush colors 브러쉬 색상";
             // 
             // Main_form
             // 
@@ -580,6 +682,9 @@ namespace Semantic
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_form_KeyUp);
             this.panel5.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
@@ -588,26 +693,16 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBox3_CursorBoard)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button Network_operation;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button Button_ZoomIn;
-        private System.Windows.Forms.Button Button_ZoomOut;
         private System.Windows.Forms.Button button_setscrollmode;
         private System.Windows.Forms.Button button_setPaintmode;
         private System.Windows.Forms.Button button_BrushsizeUp;
         private System.Windows.Forms.Button button_BrushsizeDown;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel2;
@@ -623,7 +718,6 @@ namespace Semantic
         private System.Windows.Forms.PictureBox pBox3_CursorBoard;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox11;
         private System.Windows.Forms.TextBox textBox10;
         private System.Windows.Forms.TextBox textBox9;
         private System.Windows.Forms.TextBox textBox8;
@@ -634,6 +728,20 @@ namespace Semantic
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button19;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Button button16;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox12;
     }
 }
 
