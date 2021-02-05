@@ -90,6 +90,9 @@
     <Compile Include="Main_form.ShortCutKey.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Main_form.Undo_Redo.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Network_route_settings.cs">
       <SubType>Form</SubType>
     </Compile>
