@@ -39,12 +39,13 @@ namespace Semantic
         ///////////////////
         ///
 
+        int current_idx = 0;
 
         //----------------------------------------------------필드(변수)
 
         LinkedList<Bitmap> stackUndo = new LinkedList<Bitmap>();
         LinkedList<Bitmap> stackRedo = new LinkedList<Bitmap>();
-
+        
         /// <summary>
         /// 이 값으로 저장할수 있는 UNDO,REDO횟수의 최댓값 조절.
         /// </summary>
@@ -188,7 +189,9 @@ namespace Semantic
 
         public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
-
+            // 전꺼 저장 current idx 기준
+            if(sourceBitmapRgb != null) rgb_imglist[current_idx] = new Bitmap(sourceBitmapRgb);
+           
             for (int i = 0; i < this.listPanelThumb.Controls.Count; i++)
             {
                 if (this.listPanelThumb.Controls[i] is Panel)
@@ -202,6 +205,7 @@ namespace Semantic
             pb.Parent.BackColor = Color.Red;
 
             int idx = Convert.ToInt32(pb.Tag.ToString());
+            current_idx = idx;
             sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
 
             //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)

@@ -277,7 +277,7 @@ namespace Semantic
                 Load_();
                 whether_to_save_ = false;
             }
-        }       
+        }
 
         #region Save Img
         #endregion
@@ -302,7 +302,7 @@ namespace Semantic
                     Ret_Color = Color.FromArgb(255, i, i, i); //n번째 인덱스의 색상과 일치하면 그 인덱스값이 곧 회색 값
                     break;
                 }
-                
+
             }
 
 
@@ -435,7 +435,7 @@ namespace Semantic
         /// isPaint를 확인하고 값이 True면,
         /// 펜 생성->그리기->새로고침 실행합니다.
         /// </summary>
-        private void DrawShape() 
+        private void DrawShape()
         {
             if (false == isPaint)
             {
@@ -443,17 +443,17 @@ namespace Semantic
             }
 
             Color brush_Color = Color.Black;
-            Pen myPen = new Pen(brush_Color, brush_Size);                
+            Pen myPen = new Pen(brush_Color, brush_Size);
             //TODO: myPen의 수명이 언제 끝나는지 확인해서 Dispose처리 해주기.
             //TODO: 모든 disposable의 수명이 언제 끝나는지 미리 확인해서 라이프사이클 관리. 
 
             //GC에 모든걸 맡기면 느려지거나 크래시날 확률 존재
-            
+
             myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
             myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
 
 
-            using (Graphics g = Graphics.FromImage(sourceBitmapRgb)) 
+            using (Graphics g = Graphics.FromImage(sourceBitmapRgb))
             {
                 DrawFreeLine(myPen, g);
             }
@@ -505,7 +505,7 @@ namespace Semantic
         }
 
         //좌측 이미지 목록 클릭시 동작
-        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e){ }
+        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
 
 
 
@@ -534,7 +534,7 @@ namespace Semantic
 
                     //new Bitmap(경로)로 바꿀예정
                     gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-                    Console.WriteLine("그레이경로: " + gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png");                    
+                    Console.WriteLine("그레이경로: " + gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png");
                     rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));
 
                     //아예 rgb변환도 생략.
@@ -574,7 +574,7 @@ namespace Semantic
                 RefreshAllPictureBox();
                 return;
             }
-            
+
             //테스트 아닐때
 
             MessageBox.Show("그레이 스케일 변환 중 입니다.");
@@ -586,7 +586,7 @@ namespace Semantic
             for (int index = 0; index < imgList.Count(); index++)
             {
                 gray_imglist.Add(new Bitmap(gray_file_path.SelectedPath + imgList[index].Remove(imgList[index].Count() - 4, 4) + "_gray_img.png"));
-                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index])); 
+                rgb_imglist.Add(Gray2RGB_Click(gray_imglist[index]));
             }
 
 
@@ -752,10 +752,10 @@ namespace Semantic
                     pen_startpt.X = (int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale);
                     pen_startpt.Y = (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale);
 
-                    
+
                     /// pen좌표*zoom배율+src의 좌표 = mosPos이니까 우변으로 넘기고 나누면 동일
                     /// = 2배로 보고있을땐 10cm 이동해도 5cm 이동한 셈밖에 안됨
-                    
+
 
                     #region 클릭만 했을때도 점(원) 그려짐.
                     using (Pen myPen = new Pen(brush_Color, 1))
@@ -817,7 +817,7 @@ namespace Semantic
 
                     //이미지의 확대,이동을 역산: 소스비트맵의 해당 좌표
                     pen_endpt = new Point((int)Math.Round((mousePos.X - targetImgRect.X) / zoomScale), (int)Math.Round((mousePos.Y - targetImgRect.Y) / zoomScale));
-                   
+
                     DrawShape();
                     pen_startpt = pen_endpt;
 
@@ -910,23 +910,33 @@ namespace Semantic
             //썸넬 목록 갱신
             for (int i = 0; i < imgList.Count; i++)
             {
-                Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
+                //Image img = Image.FromFile(input_file_path.SelectedPath + imgList[i]);
 
-                Panel panelThumb = new Panel();
-                panelThumb.BackColor = Color.Black;
-                panelThumb.Size = new Size(Constants.Thumbnail_Width, Constants.Thumbnail_Height);
-                panelThumb.Padding = new System.Windows.Forms.Padding(4);
+                using (FileStream fs = new FileStream(input_file_path.SelectedPath + imgList[i], FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    Image img = Image.FromStream(fs);
 
-                PictureBox pBoxThumb = new PictureBox();
-                pBoxThumb.BackColor = Color.DimGray;
-                pBoxThumb.Dock = DockStyle.Fill;
-                pBoxThumb.SizeMode = PictureBoxSizeMode.Zoom;
-                pBoxThumb.Image = img.GetThumbnailImage(Constants.Thumbnail_Width, Constants.Thumbnail_Height, null, IntPtr.Zero);
-                pBoxThumb.Click += PBoxThumbnail_Click;
-                pBoxThumb.Tag = i.ToString();
-                panelThumb.Controls.Add(pBoxThumb);
+                    Panel panelThumb = new Panel();
+                    panelThumb.BackColor = Color.Black;
+                    panelThumb.Size = new Size(Constants.Thumbnail_Width, Constants.Thumbnail_Height);
+                    panelThumb.Padding = new System.Windows.Forms.Padding(4);
 
-                this.listPanelThumb.Controls.Add(panelThumb);
+                    PictureBox pBoxThumb = new PictureBox();
+                    pBoxThumb.BackColor = Color.DimGray;
+                    pBoxThumb.Dock = DockStyle.Fill;
+                    pBoxThumb.SizeMode = PictureBoxSizeMode.Zoom;
+                    pBoxThumb.Image = img.GetThumbnailImage(Constants.Thumbnail_Width, Constants.Thumbnail_Height, null, IntPtr.Zero);
+                    pBoxThumb.Click += PBoxThumbnail_Click;
+                    pBoxThumb.Tag = i.ToString();
+                    panelThumb.Controls.Add(pBoxThumb);
+
+                    this.listPanelThumb.Controls.Add(panelThumb);
+                    fs.Close();
+                }
+
+
+
+               
             }
 
 
@@ -1173,6 +1183,38 @@ namespace Semantic
 
         }
 
+        //save button
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            Image_Save();
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("이미지 불러오기: F \n딥러닝 레이블링 적용: Q  \n브러쉬: B \n지우개: E \n이미지 확대: Scroll up \n이미지 축소: Scroll down \n되돌리기 : Ctrl + Z  \n앞돌리기: Ctrl + Y \n프로젝트 저장: Ctrl + S");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>
         /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
@@ -1305,7 +1347,7 @@ namespace Semantic
         //public const bool isTest_NoLabel_mode = true;               //모델구동 생략. 레이블링해놓은 GrayScale 이미지를 경로에 둔채로 테스트.                          
         //
         public const bool isTest_NoLabel_mode = false;
-        public const bool isTestmode = true;                       //모델구동+rgb 전부 생략. GraysCale&RGB 이미지를 경로에 둔채로 테스트.                   
+        public const bool isTestmode = false;                       //모델구동+rgb 전부 생략. GraysCale&RGB 이미지를 경로에 둔채로 테스트.                   
         //
 
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 

@@ -32,39 +32,38 @@ namespace Semantic
 
             return saveFolderDig;
         }
-        /*
-        private void Image_Save_Click(Object sender, EventArgs e)
+
+        private void Image_Save()
         {
-            using (FolderBrowserDialog folderDiag = GetSaveFolderDialog())
+            if (null == rgb_imglist || 0 == rgb_imglist.Count)
             {
-                if (folderDiag.ShowDialog(this) == DialogResult.OK)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    string dir = folderDiag.SelectedPath;
-
-                    Image image = pictureBox1.Image;
-
-                    string fileName = "test.jpg".ToString();
-
-                    if (image != null)
-                    {
-                        string imageSavePath = string.Format(@"{0}\{1}", dir, fileName);
-                        image.Save(imageSavePath);
-                        MessageBox.Show("저장 완료");
-                    }
-
-
-
-                    this.Cursor = Cursors.Default;
-
-                }
-
+                MessageBox.Show("저장 할 이미지가 없습니다 !! ");
+                return;
             }
 
-        }
-        */
+            if (sourceBitmapRgb == null)
+            {
+                MessageBox.Show("수정 된 이미지가 없습니다 !! ");
+                return;
+            }
 
-        //----------------------------------------------------이벤트(UI)
+            if (gray_file_path.SelectedPath == string.Empty)
+            {
+                MessageBox.Show("그레이 스케일 저장 경로가 없습니다.");
+                Network_route_settings();
+                return;
+            }
+
+            // index 넣어서 저장
+            //rgb_imglist[index] = sourceBitmapRgb.;
+            MessageBox.Show(current_idx.ToString());
+            rgb_imglist[current_idx] = new Bitmap(sourceBitmapRgb);
+
+            for (int index = 0; index < rgb_imglist.Count(); index++)
+            {
+                gray_imglist[index] = RGB2Gray_Click(rgb_imglist[index]);
+                gray_imglist[index].Save(gray_file_path.SelectedPath + imgList[index].Remove(imgList[0].Count() - 4, 4) + "_1gray_img.png");
+            }
+        }
     }
 }
