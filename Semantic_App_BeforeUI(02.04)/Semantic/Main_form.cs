@@ -1250,11 +1250,6 @@ namespace Semantic
 
         }
 
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
 
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>
