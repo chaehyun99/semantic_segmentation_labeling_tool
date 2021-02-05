@@ -121,17 +121,17 @@
   <data name="zoom_in" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ToolName" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ToolName.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="segmentation" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\segmentation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="위" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\위.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="info" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconfinder_restore_2460287" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconfinder_restore_2460287.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="위" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\위.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -142,11 +142,17 @@
   <data name="iconfinder_Folder_Place_File_Storage_Paper_Office_1343439" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\iconfinder_Folder_Place_File_Storage_Paper_Office_1343439.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cursor2__" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cursor2__.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="redo1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\redo1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="아래" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\아래.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="redo3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="redo2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\redo2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,10 +160,16 @@
   <data name="eraser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\eraser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="iconfinder_document_file_paper_page-07_2850900" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconfinder_document_file_paper_page-07_2850900.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="zoom_out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zoom_out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iconfinder_document_file_paper_page-07_2850900" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iconfinder_document_file_paper_page-07_2850900.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iconfinder_restore_2460287" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\iconfinder_restore_2460287.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoom_100_" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zoom_100_.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

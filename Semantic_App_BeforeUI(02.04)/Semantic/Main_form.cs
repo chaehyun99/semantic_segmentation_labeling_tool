@@ -700,8 +700,7 @@ namespace Semantic
         private void lable_ImgScale_Paint(object sender, PaintEventArgs e)
         {
             lable_ImgScale.Text =
-                "배율: "
-                + Convert.ToString(Math.Round(zoomScale * 100))
+                Convert.ToString(Math.Round(zoomScale * 100))
                 + "%"
                 ;
         }
@@ -709,7 +708,7 @@ namespace Semantic
         private void lable_Opacity_Paint(object sender, PaintEventArgs e)
         {
             lable_Opacity.Text =
-                "불투명도: "
+                "opacity: "
                 + Convert.ToString(lable_Opacity.Tag)
                 + "%"
                 ;
@@ -1235,6 +1234,7 @@ namespace Semantic
             RefreshAllPictureBox();
         }
         #endregion
+
 
 
         private void SetTargetRectByZoomAtCenter(MouseEventArgs e)

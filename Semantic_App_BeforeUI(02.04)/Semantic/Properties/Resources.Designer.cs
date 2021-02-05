@@ -63,6 +63,16 @@ namespace Semantic.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap cursor2__ {
+            get {
+                object obj = ResourceManager.GetObject("cursor2__", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap eraser {
             get {
                 object obj = ResourceManager.GetObject("eraser", resourceCulture);
@@ -153,9 +163,39 @@ namespace Semantic.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap redo3 {
+            get {
+                object obj = ResourceManager.GetObject("redo3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap segmentation {
             get {
                 object obj = ResourceManager.GetObject("segmentation", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap ToolName {
+            get {
+                object obj = ResourceManager.GetObject("ToolName", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap zoom_100_ {
+            get {
+                object obj = ResourceManager.GetObject("zoom_100_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

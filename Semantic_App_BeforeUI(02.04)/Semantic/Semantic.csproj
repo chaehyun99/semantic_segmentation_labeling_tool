@@ -182,5 +182,11 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cursor2__.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom_100_.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
