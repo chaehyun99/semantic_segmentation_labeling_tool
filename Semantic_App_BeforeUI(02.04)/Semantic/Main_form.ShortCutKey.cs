@@ -48,7 +48,7 @@ namespace Semantic
             if (e.Control && e.KeyCode == Keys.Y) button5_Click(sender, e);
             if (e.Control && e.KeyCode == Keys.S) button2_Click_1(sender, e);
             if (e.KeyCode == Keys.B) button_setPaintmode_Click(sender, e);
-            if (e.KeyCode == Keys.E) button6_Click(sender, e);
+            if (e.KeyCode == Keys.E)// button6_Click(sender, e);->brush색깔 0으로 해주면됨.
             if (e.KeyCode == Keys.I) button3_Click(sender, e);
 
             

@@ -61,9 +61,6 @@
     <Reference Include="ColorSlider">
       <HintPath>bin\Debug\ColorSlider.dll</HintPath>
     </Reference>
-    <Reference Include="PBL_CustomControl_TrackBar1">
-      <HintPath>bin\Debug\PBL_CustomControl_TrackBar1.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Python.Runtime, Version=2.5.1.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\pythonnet_py38_win.2.5.1\lib\net40\Python.Runtime.dll</HintPath>

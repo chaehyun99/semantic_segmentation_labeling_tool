@@ -1237,7 +1237,6 @@ namespace Semantic
         #endregion
 
 
-
         private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
         {
             if (e.Delta > 0)
@@ -1337,7 +1336,7 @@ namespace Semantic
 
     static class Constants
     {
-        public const int Thumbnail_Width = 300;
+        public const int Thumbnail_Width = 243;
         public const int Thumbnail_Height = 150;
 
         public const double ratioPerLevel = 1.1;
@@ -1345,12 +1344,12 @@ namespace Semantic
         public const int Max_brush_Size = 10;
 
         //
-        //public const bool isTestmode = false;                     //원본이미지만 필요
+        public const bool isTestmode = false;                     //원본이미지만 필요
         //
-        //public const bool isTest_NoLabel_mode = true;               //모델구동 생략. 레이블링해놓은 GrayScale 이미지를 경로에 둔채로 테스트.                          
+        public const bool isTest_NoLabel_mode = true;               //모델구동 생략. 레이블링해놓은 GrayScale 이미지를 경로에 둔채로 테스트.                          
         //
-        public const bool isTest_NoLabel_mode = false;
-        public const bool isTestmode = false;                       //모델구동+rgb 전부 생략. GraysCale&RGB 이미지를 경로에 둔채로 테스트.                   
+        //public const bool isTest_NoLabel_mode = true;
+       // public const bool isTestmode = true;                       //모델구동+rgb 전부 생략. GraysCale&RGB 이미지를 경로에 둔채로 테스트.                   
         //
 
         ///모델구동, rgb변환없이 작업 시작할 때 키고, 
