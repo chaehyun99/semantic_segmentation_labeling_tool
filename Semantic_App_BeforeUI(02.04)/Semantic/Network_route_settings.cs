@@ -88,6 +88,9 @@ namespace Semantic
             Close();
         }
 
+        private void Input_image_path_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }

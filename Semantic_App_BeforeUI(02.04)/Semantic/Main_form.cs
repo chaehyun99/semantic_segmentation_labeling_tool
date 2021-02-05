@@ -1215,6 +1215,36 @@ namespace Semantic
 
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Main_form_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+
         #region <이미지 스크롤 by 마우스 드래그>
         /// <summary>
         /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
