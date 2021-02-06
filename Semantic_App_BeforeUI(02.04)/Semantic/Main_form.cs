@@ -1217,6 +1217,31 @@ namespace Semantic
         #endregion
 
 
+        private void button_setColor20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lable_ImgScale_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
         {
             if (e.Delta > 0)
