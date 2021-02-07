@@ -436,7 +436,6 @@ namespace Semantic
                 return;
             }
 
-            Color brush_Color = Color.Black;
             Pen myPen = new Pen(brush_Color, brush_Size);
             //TODO: myPen의 수명이 언제 끝나는지 확인해서 Dispose처리 해주기.
             //TODO: 모든 disposable의 수명이 언제 끝나는지 미리 확인해서 라이프사이클 관리. 
@@ -1238,6 +1237,11 @@ namespace Semantic
         }
 
         private void label13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
         {
 
         }

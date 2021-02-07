@@ -42,6 +42,20 @@ namespace Semantic
             프로젝트 저장 : Ctrl + S
             정보창: I
             */
+
+            if (e.KeyCode == Keys.D3)
+            {
+                SetBrushColor(ColorName.Car); 
+            }
+            if (e.KeyCode == Keys.D1)
+            {
+                SetBrushColor(ColorName.Bicycle);
+            }
+            if (e.KeyCode == Keys.D2)
+            {
+                SetBrushColor(ColorName.Person);
+            }
+
             if (e.KeyCode == Keys.F) button1_Click(sender, e);
             if (e.KeyCode == Keys.Q) Network_operation_Click(sender, e);
             if (this.ctrlKeyDown && (e.KeyCode == Keys.Z)) UNDO(sender, e);
