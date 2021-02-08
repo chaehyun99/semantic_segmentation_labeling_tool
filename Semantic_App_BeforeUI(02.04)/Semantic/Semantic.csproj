@@ -78,38 +78,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main_form.BrushColorSelect.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main_form.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main_form.Designer.cs">
-      <DependentUpon>Main_form.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Main_form.SaveButton.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main_form.ShortCutKey.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Main_form.Undo_Redo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Network_route_settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Network_route_settings.Designer.cs">
-      <DependentUpon>Network_route_settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Main_form.resx">
-      <DependentUpon>Main_form.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Network_route_settings.resx">
-      <DependentUpon>Network_route_settings.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="UI_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI_Main.Designer.cs">
+      <DependentUpon>UI_Main.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -120,7 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
+    <EmbeddedResource Include="UI_Main.resx">
+      <DependentUpon>UI_Main.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,9 +107,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\iconfinder_Folder_Place_File_Storage_Paper_Office_1343439.png" />
