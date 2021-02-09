@@ -32,8 +32,6 @@ namespace Semantic
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI_Main));
             this.splitContainer_MenuBar_Left = new System.Windows.Forms.SplitContainer();
-            this.button1 = new System.Windows.Forms.Button();
-            this.flowPanel_Menu_LoadSave = new System.Windows.Forms.FlowLayoutPanel();
             this.button_Path = new System.Windows.Forms.Button();
             this.imageList_ButtonIcon = new System.Windows.Forms.ImageList(this.components);
             this.button_RunModel = new System.Windows.Forms.Button();
@@ -50,8 +48,6 @@ namespace Semantic
             this.button_ZoomOut = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
             this.lable_ImgScale = new System.Windows.Forms.Label();
-            this.panel_Logo = new System.Windows.Forms.Panel();
-            this.label_Logo = new System.Windows.Forms.Label();
             this.label_Class5 = new System.Windows.Forms.Label();
             this.label_Class6 = new System.Windows.Forms.Label();
             this.tablePanel_Color_1 = new System.Windows.Forms.TableLayoutPanel();
@@ -128,18 +124,17 @@ namespace Semantic
             this.picBox_Origin = new System.Windows.Forms.PictureBox();
             this.tablePanel_FullLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftDock_flowPanel_Thumbnail = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowPanel_Menu_LoadSave = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).BeginInit();
             this.splitContainer_MenuBar_Left.Panel1.SuspendLayout();
             this.splitContainer_MenuBar_Left.Panel2.SuspendLayout();
             this.splitContainer_MenuBar_Left.SuspendLayout();
-            this.flowPanel_Menu_LoadSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).BeginInit();
             this.splitContainer_Menu_CenterRight.Panel1.SuspendLayout();
             this.splitContainer_Menu_CenterRight.Panel2.SuspendLayout();
             this.splitContainer_Menu_CenterRight.SuspendLayout();
             this.flowPanel_Menu_Edit.SuspendLayout();
             this.flowPanel_Menu_Zoom.SuspendLayout();
-            this.panel_Logo.SuspendLayout();
             this.tablePanel_Color_1.SuspendLayout();
             this.tablePanel_Color_6.SuspendLayout();
             this.flowPanel_ColorSelect.SuspendLayout();
@@ -169,68 +164,35 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).BeginInit();
             this.tablePanel_FullLayout.SuspendLayout();
-            this.LeftDock_flowPanel_Thumbnail.SuspendLayout();
+            this.flowPanel_Menu_LoadSave.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer_MenuBar_Left
             // 
             this.splitContainer_MenuBar_Left.BackColor = System.Drawing.Color.Red;
             this.tablePanel_FullLayout.SetColumnSpan(this.splitContainer_MenuBar_Left, 2);
-            this.splitContainer_MenuBar_Left.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer_MenuBar_Left.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer_MenuBar_Left.IsSplitterFixed = true;
             this.splitContainer_MenuBar_Left.Location = new System.Drawing.Point(263, 0);
             this.splitContainer_MenuBar_Left.Margin = new System.Windows.Forms.Padding(0);
-            this.splitContainer_MenuBar_Left.MinimumSize = new System.Drawing.Size(512, 0);
             this.splitContainer_MenuBar_Left.Name = "splitContainer_MenuBar_Left";
             // 
             // splitContainer_MenuBar_Left.Panel1
             // 
             this.splitContainer_MenuBar_Left.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.button1);
             this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.flowPanel_Menu_LoadSave);
-            this.splitContainer_MenuBar_Left.Panel1MinSize = 256;
+            this.splitContainer_MenuBar_Left.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_MenuBar_Left_Panel1_Paint);
+            this.splitContainer_MenuBar_Left.Panel1MinSize = 192;
             // 
             // splitContainer_MenuBar_Left.Panel2
             // 
             this.splitContainer_MenuBar_Left.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.splitContainer_MenuBar_Left.Panel2.Controls.Add(this.splitContainer_Menu_CenterRight);
-            this.splitContainer_MenuBar_Left.Panel2MinSize = 128;
-            this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(946, 80);
-            this.splitContainer_MenuBar_Left.SplitterDistance = 262;
+            this.splitContainer_MenuBar_Left.Panel2MinSize = 516;
+            this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(777, 80);
+            this.splitContainer_MenuBar_Left.SplitterDistance = 256;
             this.splitContainer_MenuBar_Left.SplitterIncrement = 64;
-            this.splitContainer_MenuBar_Left.SplitterWidth = 1;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
-            // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.button1.ForeColor = System.Drawing.SystemColors.Window;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button1.ImageKey = "edit_Scroll.png";
-            this.button1.Location = new System.Drawing.Point(448, 0);
-            this.button1.Margin = new System.Windows.Forms.Padding(0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(64, 80);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "move";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button_ScrollMode_Click);
-            // 
-            // flowPanel_Menu_LoadSave
-            // 
-            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.Navy;
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
-            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(0, 0);
-            this.flowPanel_Menu_LoadSave.Margin = new System.Windows.Forms.Padding(0);
-            this.flowPanel_Menu_LoadSave.Name = "flowPanel_Menu_LoadSave";
-            this.flowPanel_Menu_LoadSave.Size = new System.Drawing.Size(192, 80);
-            this.flowPanel_Menu_LoadSave.TabIndex = 33;
             // 
             // button_Path
             // 
@@ -311,10 +273,12 @@ namespace Semantic
             // splitContainer_Menu_CenterRight
             // 
             this.splitContainer_Menu_CenterRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.splitContainer_Menu_CenterRight.Dock = System.Windows.Forms.DockStyle.Left;
             this.splitContainer_Menu_CenterRight.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer_Menu_CenterRight.IsSplitterFixed = true;
             this.splitContainer_Menu_CenterRight.Location = new System.Drawing.Point(0, 0);
             this.splitContainer_Menu_CenterRight.Margin = new System.Windows.Forms.Padding(0);
+            this.splitContainer_Menu_CenterRight.MinimumSize = new System.Drawing.Size(517, 0);
             this.splitContainer_Menu_CenterRight.Name = "splitContainer_Menu_CenterRight";
             // 
             // splitContainer_Menu_CenterRight.Panel1
@@ -329,8 +293,8 @@ namespace Semantic
             this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.flowPanel_Menu_Zoom);
             this.splitContainer_Menu_CenterRight.Panel2MinSize = 192;
             this.splitContainer_Menu_CenterRight.Size = new System.Drawing.Size(767, 80);
-            this.splitContainer_Menu_CenterRight.SplitterDistance = 329;
-            this.splitContainer_Menu_CenterRight.SplitterWidth = 1;
+            this.splitContainer_Menu_CenterRight.SplitterDistance = 256;
+            this.splitContainer_Menu_CenterRight.SplitterIncrement = 64;
             this.splitContainer_Menu_CenterRight.TabIndex = 0;
             // 
             // flowPanel_Menu_Edit
@@ -530,29 +494,6 @@ namespace Semantic
             this.lable_ImgScale.Size = new System.Drawing.Size(75, 15);
             this.lable_ImgScale.TabIndex = 26;
             this.lable_ImgScale.Text = "Scale: ? %";
-            // 
-            // panel_Logo
-            // 
-            this.panel_Logo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel_Logo.Controls.Add(this.label_Logo);
-            this.panel_Logo.Location = new System.Drawing.Point(0, 0);
-            this.panel_Logo.Margin = new System.Windows.Forms.Padding(0);
-            this.panel_Logo.Name = "panel_Logo";
-            this.panel_Logo.Size = new System.Drawing.Size(265, 72);
-            this.panel_Logo.TabIndex = 37;
-            // 
-            // label_Logo
-            // 
-            this.label_Logo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.label_Logo.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Logo.ForeColor = System.Drawing.Color.White;
-            this.label_Logo.Location = new System.Drawing.Point(8, 8);
-            this.label_Logo.Margin = new System.Windows.Forms.Padding(8);
-            this.label_Logo.Name = "label_Logo";
-            this.label_Logo.Size = new System.Drawing.Size(248, 56);
-            this.label_Logo.TabIndex = 0;
-            this.label_Logo.Text = "로고이미지로 대체\r\nDeeplearning-Semantic\r\n Training Data Editor";
-            this.label_Logo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_Class5
             // 
@@ -1414,10 +1355,10 @@ namespace Semantic
             this.RightDock_panel_Brush.Controls.Add(this.flowPanel_ColorSelect);
             this.RightDock_panel_Brush.Controls.Add(this.panel_TrackBar);
             this.RightDock_panel_Brush.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDock_panel_Brush.Location = new System.Drawing.Point(1025, 80);
+            this.RightDock_panel_Brush.Location = new System.Drawing.Point(856, 80);
             this.RightDock_panel_Brush.Margin = new System.Windows.Forms.Padding(0);
             this.RightDock_panel_Brush.Name = "RightDock_panel_Brush";
-            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 621);
+            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 451);
             this.RightDock_panel_Brush.TabIndex = 36;
             // 
             // panel_TrackBar
@@ -1603,7 +1544,7 @@ namespace Semantic
             this.panel_Canvas.Location = new System.Drawing.Point(263, 80);
             this.panel_Canvas.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Canvas.Name = "panel_Canvas";
-            this.panel_Canvas.Size = new System.Drawing.Size(762, 621);
+            this.panel_Canvas.Size = new System.Drawing.Size(593, 451);
             this.panel_Canvas.TabIndex = 36;
             // 
             // picBox_Cursor
@@ -1615,7 +1556,7 @@ namespace Semantic
             this.picBox_Cursor.Location = new System.Drawing.Point(5, 5);
             this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Cursor.Name = "picBox_Cursor";
-            this.picBox_Cursor.Size = new System.Drawing.Size(752, 611);
+            this.picBox_Cursor.Size = new System.Drawing.Size(583, 441);
             this.picBox_Cursor.TabIndex = 32;
             this.picBox_Cursor.TabStop = false;
             // 
@@ -1630,7 +1571,7 @@ namespace Semantic
             this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Rgb.MinimumSize = new System.Drawing.Size(100, 100);
             this.picBox_Rgb.Name = "picBox_Rgb";
-            this.picBox_Rgb.Size = new System.Drawing.Size(752, 611);
+            this.picBox_Rgb.Size = new System.Drawing.Size(583, 441);
             this.picBox_Rgb.TabIndex = 23;
             this.picBox_Rgb.TabStop = false;
             // 
@@ -1644,7 +1585,7 @@ namespace Semantic
             this.picBox_Origin.Location = new System.Drawing.Point(5, 5);
             this.picBox_Origin.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Origin.Name = "picBox_Origin";
-            this.picBox_Origin.Size = new System.Drawing.Size(752, 611);
+            this.picBox_Origin.Size = new System.Drawing.Size(583, 441);
             this.picBox_Origin.TabIndex = 17;
             this.picBox_Origin.TabStop = false;
             // 
@@ -1665,44 +1606,53 @@ namespace Semantic
             this.tablePanel_FullLayout.RowCount = 2;
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tablePanel_FullLayout.Size = new System.Drawing.Size(1209, 701);
+            this.tablePanel_FullLayout.Size = new System.Drawing.Size(1040, 531);
             this.tablePanel_FullLayout.TabIndex = 36;
             // 
             // LeftDock_flowPanel_Thumbnail
             // 
             this.LeftDock_flowPanel_Thumbnail.AutoScroll = true;
             this.LeftDock_flowPanel_Thumbnail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.LeftDock_flowPanel_Thumbnail.Controls.Add(this.panel_Logo);
             this.LeftDock_flowPanel_Thumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LeftDock_flowPanel_Thumbnail.Location = new System.Drawing.Point(0, 0);
             this.LeftDock_flowPanel_Thumbnail.Margin = new System.Windows.Forms.Padding(0);
             this.LeftDock_flowPanel_Thumbnail.Name = "LeftDock_flowPanel_Thumbnail";
             this.tablePanel_FullLayout.SetRowSpan(this.LeftDock_flowPanel_Thumbnail, 2);
-            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 701);
+            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 531);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
+            // 
+            // flowPanel_Menu_LoadSave
+            // 
+            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.Navy;
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
+            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(0, 0);
+            this.flowPanel_Menu_LoadSave.Margin = new System.Windows.Forms.Padding(0);
+            this.flowPanel_Menu_LoadSave.Name = "flowPanel_Menu_LoadSave";
+            this.flowPanel_Menu_LoadSave.Size = new System.Drawing.Size(192, 80);
+            this.flowPanel_Menu_LoadSave.TabIndex = 33;
             // 
             // UI_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 701);
+            this.ClientSize = new System.Drawing.Size(1040, 531);
             this.Controls.Add(this.tablePanel_FullLayout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(720, 450);
+            this.MinimumSize = new System.Drawing.Size(991, 570);
             this.Name = "UI_Main";
             this.Text = "DeepLearning-Semantic Training Data Editor";
             this.splitContainer_MenuBar_Left.Panel1.ResumeLayout(false);
             this.splitContainer_MenuBar_Left.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).EndInit();
             this.splitContainer_MenuBar_Left.ResumeLayout(false);
-            this.flowPanel_Menu_LoadSave.ResumeLayout(false);
             this.splitContainer_Menu_CenterRight.Panel1.ResumeLayout(false);
             this.splitContainer_Menu_CenterRight.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).EndInit();
             this.splitContainer_Menu_CenterRight.ResumeLayout(false);
             this.flowPanel_Menu_Edit.ResumeLayout(false);
             this.flowPanel_Menu_Zoom.ResumeLayout(false);
-            this.panel_Logo.ResumeLayout(false);
             this.tablePanel_Color_1.ResumeLayout(false);
             this.tablePanel_Color_6.ResumeLayout(false);
             this.flowPanel_ColorSelect.ResumeLayout(false);
@@ -1733,7 +1683,7 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).EndInit();
             this.tablePanel_FullLayout.ResumeLayout(false);
-            this.LeftDock_flowPanel_Thumbnail.ResumeLayout(false);
+            this.flowPanel_Menu_LoadSave.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1746,8 +1696,6 @@ namespace Semantic
         private System.Windows.Forms.PictureBox picBox_Cursor;
         private System.Windows.Forms.PictureBox picBox_Rgb;
         private System.Windows.Forms.PictureBox picBox_Origin;
-        private System.Windows.Forms.Panel panel_Logo;
-        private System.Windows.Forms.Label label_Logo;
         private System.Windows.Forms.Panel RightDock_panel_Brush;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_ColorSelect;
         private System.Windows.Forms.TableLayoutPanel tablePanel_Color_1;
@@ -1811,8 +1759,6 @@ namespace Semantic
         private System.Windows.Forms.TableLayoutPanel tablePanel_Color_0;
         private System.Windows.Forms.Label label_Class0;
         private System.Windows.Forms.ImageList imageList_ButtonIcon;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_LoadSave;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_Edit;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_Zoom;
         private System.Windows.Forms.Panel panel3;
@@ -1836,5 +1782,6 @@ namespace Semantic
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_LoadSave;
     }
 }
