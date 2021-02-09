@@ -15,6 +15,7 @@ namespace Semantic
         public UI_Main()
         {
             InitializeComponent();
+            this.AdjustFormScrollbars(false);
             
         }
 
@@ -64,6 +65,21 @@ namespace Semantic
         }
 
         private void button_ZoomOut_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void flowPanel_ColorSelect_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label_Class0_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tablePanel_Color_20_Paint(object sender, PaintEventArgs e)
         {
 
         }
