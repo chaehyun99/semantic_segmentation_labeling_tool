@@ -29,34 +29,22 @@ namespace Semantic
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI_Main));
             this.splitContainer_MenuBar_Left = new System.Windows.Forms.SplitContainer();
-            this.tablePanel_Menu_Zoom = new System.Windows.Forms.TableLayoutPanel();
-            this.label_Info = new System.Windows.Forms.Label();
-            this.label_Path = new System.Windows.Forms.Label();
-            this.label_RunModel = new System.Windows.Forms.Label();
             this.button_RunModel = new System.Windows.Forms.Button();
             this.button_Info = new System.Windows.Forms.Button();
             this.button_Path = new System.Windows.Forms.Button();
             this.splitContainer_Menu_CenterRight = new System.Windows.Forms.SplitContainer();
-            this.tablePanel_Menu_Edit = new System.Windows.Forms.TableLayoutPanel();
-            this.label_Move = new System.Windows.Forms.Label();
             this.button_PaintMode = new System.Windows.Forms.Button();
-            this.label_Brush = new System.Windows.Forms.Label();
             this.button_Undo = new System.Windows.Forms.Button();
-            this.label_Redo = new System.Windows.Forms.Label();
-            this.label_Undo = new System.Windows.Forms.Label();
             this.button_ScrollMode = new System.Windows.Forms.Button();
             this.button_Redo = new System.Windows.Forms.Button();
             this.lable_ImgScale = new System.Windows.Forms.Label();
-            this.tablePanel_Menu_LoadSave = new System.Windows.Forms.TableLayoutPanel();
-            this.label_ZoomOut = new System.Windows.Forms.Label();
-            this.label_ZoomIn = new System.Windows.Forms.Label();
-            this.label_ZoomReset = new System.Windows.Forms.Label();
             this.button_ZoomOut = new System.Windows.Forms.Button();
             this.button_ZoomIn = new System.Windows.Forms.Button();
             this.button_ZoomReset = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
-            this.label_Save = new System.Windows.Forms.Label();
             this.panel_Logo = new System.Windows.Forms.Panel();
             this.label_Logo = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -135,17 +123,16 @@ namespace Semantic
             this.picBox_Origin = new System.Windows.Forms.PictureBox();
             this.tablePanel_FullLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftDock_flowPanel_Thumbnail = new System.Windows.Forms.FlowLayoutPanel();
+            this.imageList_ButtonIcon = new System.Windows.Forms.ImageList(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).BeginInit();
             this.splitContainer_MenuBar_Left.Panel1.SuspendLayout();
             this.splitContainer_MenuBar_Left.Panel2.SuspendLayout();
             this.splitContainer_MenuBar_Left.SuspendLayout();
-            this.tablePanel_Menu_Zoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).BeginInit();
             this.splitContainer_Menu_CenterRight.Panel1.SuspendLayout();
             this.splitContainer_Menu_CenterRight.Panel2.SuspendLayout();
             this.splitContainer_Menu_CenterRight.SuspendLayout();
-            this.tablePanel_Menu_Edit.SuspendLayout();
-            this.tablePanel_Menu_LoadSave.SuspendLayout();
             this.panel_Logo.SuspendLayout();
             this.tablePanel_Color_1.SuspendLayout();
             this.tablePanel_Color_6.SuspendLayout();
@@ -176,6 +163,7 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).BeginInit();
             this.tablePanel_FullLayout.SuspendLayout();
+            this.LeftDock_flowPanel_Thumbnail.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer_MenuBar_Left
@@ -190,114 +178,79 @@ namespace Semantic
             // splitContainer_MenuBar_Left.Panel1
             // 
             this.splitContainer_MenuBar_Left.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.tablePanel_Menu_Zoom);
+            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.button_Path);
+            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.button_Info);
+            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.button_RunModel);
+            this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.button1);
             // 
             // splitContainer_MenuBar_Left.Panel2
             // 
             this.splitContainer_MenuBar_Left.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.splitContainer_MenuBar_Left.Panel2.Controls.Add(this.splitContainer_Menu_CenterRight);
             this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(946, 80);
-            this.splitContainer_MenuBar_Left.SplitterDistance = 176;
+            this.splitContainer_MenuBar_Left.SplitterDistance = 255;
             this.splitContainer_MenuBar_Left.SplitterWidth = 1;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
             // 
-            // tablePanel_Menu_Zoom
-            // 
-            this.tablePanel_Menu_Zoom.BackColor = System.Drawing.Color.Teal;
-            this.tablePanel_Menu_Zoom.ColumnCount = 3;
-            this.tablePanel_Menu_Zoom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tablePanel_Menu_Zoom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tablePanel_Menu_Zoom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tablePanel_Menu_Zoom.Controls.Add(this.label_Info, 2, 1);
-            this.tablePanel_Menu_Zoom.Controls.Add(this.label_Path, 0, 1);
-            this.tablePanel_Menu_Zoom.Controls.Add(this.label_RunModel, 1, 1);
-            this.tablePanel_Menu_Zoom.Controls.Add(this.button_RunModel, 1, 0);
-            this.tablePanel_Menu_Zoom.Controls.Add(this.button_Info, 2, 0);
-            this.tablePanel_Menu_Zoom.Controls.Add(this.button_Path, 0, 0);
-            this.tablePanel_Menu_Zoom.Location = new System.Drawing.Point(8, 8);
-            this.tablePanel_Menu_Zoom.Name = "tablePanel_Menu_Zoom";
-            this.tablePanel_Menu_Zoom.RowCount = 2;
-            this.tablePanel_Menu_Zoom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tablePanel_Menu_Zoom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tablePanel_Menu_Zoom.Size = new System.Drawing.Size(136, 72);
-            this.tablePanel_Menu_Zoom.TabIndex = 2;
-            // 
-            // label_Info
-            // 
-            this.label_Info.AutoSize = true;
-            this.label_Info.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Info.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Info.Location = new System.Drawing.Point(94, 47);
-            this.label_Info.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Info.Name = "label_Info";
-            this.label_Info.Size = new System.Drawing.Size(24, 13);
-            this.label_Info.TabIndex = 37;
-            this.label_Info.Text = "info";
-            this.label_Info.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_Path
-            // 
-            this.label_Path.AutoSize = true;
-            this.label_Path.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Path.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Path.Location = new System.Drawing.Point(4, 47);
-            this.label_Path.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Path.Name = "label_Path";
-            this.label_Path.Size = new System.Drawing.Size(28, 13);
-            this.label_Path.TabIndex = 35;
-            this.label_Path.Text = "path";
-            this.label_Path.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_RunModel
-            // 
-            this.label_RunModel.AutoSize = true;
-            this.label_RunModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_RunModel.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_RunModel.Location = new System.Drawing.Point(49, 47);
-            this.label_RunModel.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_RunModel.Name = "label_RunModel";
-            this.label_RunModel.Size = new System.Drawing.Size(29, 13);
-            this.label_RunModel.TabIndex = 36;
-            this.label_RunModel.Text = "label";
-            this.label_RunModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // button_RunModel
             // 
-            this.button_RunModel.BackgroundImage = global::Semantic.Properties.Resources.segmentation;
-            this.button_RunModel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_RunModel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_RunModel.FlatAppearance.BorderSize = 0;
+            this.button_RunModel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_RunModel.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_RunModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_RunModel.Location = new System.Drawing.Point(48, 3);
+            this.button_RunModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_RunModel.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_RunModel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_RunModel.ImageKey = "segmentation.png";
+            this.button_RunModel.ImageList = this.imageList_ButtonIcon;
+            this.button_RunModel.Location = new System.Drawing.Point(66, 2);
+            this.button_RunModel.Margin = new System.Windows.Forms.Padding(2);
             this.button_RunModel.Name = "button_RunModel";
-            this.button_RunModel.Size = new System.Drawing.Size(34, 34);
+            this.button_RunModel.Size = new System.Drawing.Size(60, 76);
             this.button_RunModel.TabIndex = 16;
+            this.button_RunModel.Text = "segment";
+            this.button_RunModel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_RunModel.UseVisualStyleBackColor = true;
+            this.button_RunModel.Click += new System.EventHandler(this.button_RunModel_Click);
             // 
             // button_Info
             // 
-            this.button_Info.BackgroundImage = global::Semantic.Properties.Resources.info;
-            this.button_Info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Info.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_Info.FlatAppearance.BorderSize = 0;
+            this.button_Info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Info.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_Info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Info.Location = new System.Drawing.Point(93, 3);
+            this.button_Info.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_Info.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_Info.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_Info.ImageKey = "Info.png";
+            this.button_Info.ImageList = this.imageList_ButtonIcon;
+            this.button_Info.Location = new System.Drawing.Point(130, 2);
+            this.button_Info.Margin = new System.Windows.Forms.Padding(2);
             this.button_Info.Name = "button_Info";
-            this.button_Info.Size = new System.Drawing.Size(34, 34);
+            this.button_Info.Size = new System.Drawing.Size(60, 76);
             this.button_Info.TabIndex = 32;
+            this.button_Info.Text = "info";
+            this.button_Info.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Info.UseVisualStyleBackColor = true;
+            this.button_Info.Click += new System.EventHandler(this.button_Info_Click);
             // 
             // button_Path
             // 
-            this.button_Path.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_Folder_Place_File_Storage_Paper_Office_1343439;
-            this.button_Path.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Path.FlatAppearance.BorderSize = 0;
+            this.button_Path.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Path.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_Path.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Path.Location = new System.Drawing.Point(3, 3);
+            this.button_Path.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_Path.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_Path.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_Path.ImageKey = "file_Path";
+            this.button_Path.ImageList = this.imageList_ButtonIcon;
+            this.button_Path.Location = new System.Drawing.Point(2, 2);
+            this.button_Path.Margin = new System.Windows.Forms.Padding(2);
             this.button_Path.Name = "button_Path";
-            this.button_Path.Size = new System.Drawing.Size(34, 34);
+            this.button_Path.Size = new System.Drawing.Size(60, 76);
             this.button_Path.TabIndex = 31;
+            this.button_Path.Text = "path";
+            this.button_Path.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Path.UseVisualStyleBackColor = true;
+            this.button_Path.Click += new System.EventHandler(this.button_Path_Click);
             // 
             // splitContainer_Menu_CenterRight
             // 
@@ -308,145 +261,102 @@ namespace Semantic
             // splitContainer_Menu_CenterRight.Panel1
             // 
             this.splitContainer_Menu_CenterRight.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.splitContainer_Menu_CenterRight.Panel1.Controls.Add(this.tablePanel_Menu_Edit);
+            this.splitContainer_Menu_CenterRight.Panel1.Controls.Add(this.button_PaintMode);
+            this.splitContainer_Menu_CenterRight.Panel1.Controls.Add(this.button_Undo);
+            this.splitContainer_Menu_CenterRight.Panel1.Controls.Add(this.button_Redo);
+            this.splitContainer_Menu_CenterRight.Panel1.Controls.Add(this.button_ScrollMode);
             // 
             // splitContainer_Menu_CenterRight.Panel2
             // 
             this.splitContainer_Menu_CenterRight.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.lable_ImgScale);
-            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.tablePanel_Menu_LoadSave);
-            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.panel_Logo);
+            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.button_ZoomIn);
+            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.button_ZoomReset);
+            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.button_Save);
+            this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.button_ZoomOut);
             this.splitContainer_Menu_CenterRight.Size = new System.Drawing.Size(767, 80);
-            this.splitContainer_Menu_CenterRight.SplitterDistance = 192;
+            this.splitContainer_Menu_CenterRight.SplitterDistance = 320;
             this.splitContainer_Menu_CenterRight.SplitterWidth = 1;
             this.splitContainer_Menu_CenterRight.TabIndex = 0;
             // 
-            // tablePanel_Menu_Edit
-            // 
-            this.tablePanel_Menu_Edit.BackColor = System.Drawing.Color.Green;
-            this.tablePanel_Menu_Edit.ColumnCount = 4;
-            this.tablePanel_Menu_Edit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_Edit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_Edit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_Edit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_Edit.Controls.Add(this.label_Move, 3, 1);
-            this.tablePanel_Menu_Edit.Controls.Add(this.button_PaintMode, 2, 0);
-            this.tablePanel_Menu_Edit.Controls.Add(this.label_Brush, 2, 1);
-            this.tablePanel_Menu_Edit.Controls.Add(this.button_Undo, 0, 0);
-            this.tablePanel_Menu_Edit.Controls.Add(this.label_Redo, 1, 1);
-            this.tablePanel_Menu_Edit.Controls.Add(this.label_Undo, 0, 1);
-            this.tablePanel_Menu_Edit.Controls.Add(this.button_ScrollMode, 3, 0);
-            this.tablePanel_Menu_Edit.Controls.Add(this.button_Redo, 1, 0);
-            this.tablePanel_Menu_Edit.Location = new System.Drawing.Point(8, 8);
-            this.tablePanel_Menu_Edit.Name = "tablePanel_Menu_Edit";
-            this.tablePanel_Menu_Edit.RowCount = 2;
-            this.tablePanel_Menu_Edit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tablePanel_Menu_Edit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tablePanel_Menu_Edit.Size = new System.Drawing.Size(176, 72);
-            this.tablePanel_Menu_Edit.TabIndex = 1;
-            // 
-            // label_Move
-            // 
-            this.label_Move.AutoSize = true;
-            this.label_Move.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Move.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Move.Location = new System.Drawing.Point(136, 47);
-            this.label_Move.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Move.Name = "label_Move";
-            this.label_Move.Size = new System.Drawing.Size(33, 13);
-            this.label_Move.TabIndex = 40;
-            this.label_Move.Text = "move";
-            this.label_Move.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // button_PaintMode
             // 
-            this.button_PaintMode.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_17_Brush_290133;
-            this.button_PaintMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_PaintMode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_PaintMode.FlatAppearance.BorderSize = 0;
+            this.button_PaintMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_PaintMode.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_PaintMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_PaintMode.Location = new System.Drawing.Point(91, 3);
+            this.button_PaintMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_PaintMode.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_PaintMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_PaintMode.ImageKey = "edit_Brush";
+            this.button_PaintMode.ImageList = this.imageList_ButtonIcon;
+            this.button_PaintMode.Location = new System.Drawing.Point(130, 2);
+            this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_PaintMode.Name = "button_PaintMode";
-            this.button_PaintMode.Size = new System.Drawing.Size(34, 34);
+            this.button_PaintMode.Size = new System.Drawing.Size(60, 76);
             this.button_PaintMode.TabIndex = 28;
+            this.button_PaintMode.Text = "brush";
+            this.button_PaintMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_PaintMode.UseVisualStyleBackColor = true;
-            // 
-            // label_Brush
-            // 
-            this.label_Brush.AutoSize = true;
-            this.label_Brush.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Brush.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Brush.Location = new System.Drawing.Point(92, 47);
-            this.label_Brush.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Brush.Name = "label_Brush";
-            this.label_Brush.Size = new System.Drawing.Size(33, 13);
-            this.label_Brush.TabIndex = 45;
-            this.label_Brush.Text = "brush";
-            this.label_Brush.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_PaintMode.Click += new System.EventHandler(this.button_PaintMode_Click);
             // 
             // button_Undo
             // 
-            this.button_Undo.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_restore_2460287;
-            this.button_Undo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Undo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_Undo.FlatAppearance.BorderSize = 0;
+            this.button_Undo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Undo.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_Undo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Undo.Location = new System.Drawing.Point(3, 3);
+            this.button_Undo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_Undo.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_Undo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_Undo.ImageKey = "edit_Undo";
+            this.button_Undo.ImageList = this.imageList_ButtonIcon;
+            this.button_Undo.Location = new System.Drawing.Point(2, 2);
+            this.button_Undo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Undo.Name = "button_Undo";
-            this.button_Undo.Size = new System.Drawing.Size(34, 34);
+            this.button_Undo.Size = new System.Drawing.Size(60, 76);
             this.button_Undo.TabIndex = 33;
+            this.button_Undo.Text = "undo";
+            this.button_Undo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Undo.UseVisualStyleBackColor = true;
-            // 
-            // label_Redo
-            // 
-            this.label_Redo.AutoSize = true;
-            this.label_Redo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Redo.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Redo.Location = new System.Drawing.Point(48, 47);
-            this.label_Redo.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Redo.Name = "label_Redo";
-            this.label_Redo.Size = new System.Drawing.Size(28, 13);
-            this.label_Redo.TabIndex = 39;
-            this.label_Redo.Text = "redo";
-            this.label_Redo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_Undo
-            // 
-            this.label_Undo.AutoSize = true;
-            this.label_Undo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Undo.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Undo.Location = new System.Drawing.Point(4, 47);
-            this.label_Undo.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Undo.Name = "label_Undo";
-            this.label_Undo.Size = new System.Drawing.Size(31, 13);
-            this.label_Undo.TabIndex = 38;
-            this.label_Undo.Text = "undo";
-            this.label_Undo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Undo.Click += new System.EventHandler(this.button_Undo_Click);
             // 
             // button_ScrollMode
             // 
-            this.button_ScrollMode.BackgroundImage = global::Semantic.Properties.Resources.cursor2__;
-            this.button_ScrollMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_ScrollMode.FlatAppearance.BorderSize = 0;
+            this.button_ScrollMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_ScrollMode.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_ScrollMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ScrollMode.Location = new System.Drawing.Point(135, 3);
+            this.button_ScrollMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_ScrollMode.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_ScrollMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_ScrollMode.ImageKey = "edit_Scroll.png";
+            this.button_ScrollMode.ImageList = this.imageList_ButtonIcon;
+            this.button_ScrollMode.Location = new System.Drawing.Point(194, 2);
+            this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_ScrollMode.Name = "button_ScrollMode";
-            this.button_ScrollMode.Size = new System.Drawing.Size(34, 34);
+            this.button_ScrollMode.Size = new System.Drawing.Size(60, 76);
             this.button_ScrollMode.TabIndex = 28;
+            this.button_ScrollMode.Text = "move";
+            this.button_ScrollMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_ScrollMode.UseVisualStyleBackColor = true;
+            this.button_ScrollMode.Click += new System.EventHandler(this.button_ScrollMode_Click);
             // 
             // button_Redo
             // 
-            this.button_Redo.BackgroundImage = global::Semantic.Properties.Resources.redo2;
-            this.button_Redo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Redo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_Redo.FlatAppearance.BorderSize = 0;
+            this.button_Redo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Redo.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_Redo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Redo.Location = new System.Drawing.Point(47, 3);
+            this.button_Redo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_Redo.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_Redo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_Redo.ImageKey = "edit_Redo.png";
+            this.button_Redo.ImageList = this.imageList_ButtonIcon;
+            this.button_Redo.Location = new System.Drawing.Point(66, 2);
+            this.button_Redo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Redo.Name = "button_Redo";
-            this.button_Redo.Size = new System.Drawing.Size(34, 34);
+            this.button_Redo.Size = new System.Drawing.Size(60, 76);
             this.button_Redo.TabIndex = 34;
+            this.button_Redo.Text = "redo";
+            this.button_Redo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Redo.UseVisualStyleBackColor = true;
+            this.button_Redo.Click += new System.EventHandler(this.button_Redo_Click);
             // 
             // lable_ImgScale
             // 
@@ -454,146 +364,97 @@ namespace Semantic
             this.lable_ImgScale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.lable_ImgScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lable_ImgScale.ForeColor = System.Drawing.Color.Black;
-            this.lable_ImgScale.Location = new System.Drawing.Point(192, 24);
+            this.lable_ImgScale.Location = new System.Drawing.Point(72, 0);
             this.lable_ImgScale.Margin = new System.Windows.Forms.Padding(3);
             this.lable_ImgScale.Name = "lable_ImgScale";
             this.lable_ImgScale.Size = new System.Drawing.Size(75, 15);
             this.lable_ImgScale.TabIndex = 26;
             this.lable_ImgScale.Text = "Scale: ? %";
             // 
-            // tablePanel_Menu_LoadSave
-            // 
-            this.tablePanel_Menu_LoadSave.BackColor = System.Drawing.Color.Olive;
-            this.tablePanel_Menu_LoadSave.ColumnCount = 4;
-            this.tablePanel_Menu_LoadSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_LoadSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_LoadSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_LoadSave.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.label_ZoomOut, 2, 1);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.label_ZoomIn, 0, 1);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.label_ZoomReset, 1, 1);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.button_ZoomOut, 2, 0);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.button_ZoomIn, 0, 0);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.button_ZoomReset, 1, 0);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.button_Save, 3, 0);
-            this.tablePanel_Menu_LoadSave.Controls.Add(this.label_Save, 3, 1);
-            this.tablePanel_Menu_LoadSave.Location = new System.Drawing.Point(8, 8);
-            this.tablePanel_Menu_LoadSave.Name = "tablePanel_Menu_LoadSave";
-            this.tablePanel_Menu_LoadSave.RowCount = 2;
-            this.tablePanel_Menu_LoadSave.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tablePanel_Menu_LoadSave.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tablePanel_Menu_LoadSave.Size = new System.Drawing.Size(160, 72);
-            this.tablePanel_Menu_LoadSave.TabIndex = 0;
-            // 
-            // label_ZoomOut
-            // 
-            this.label_ZoomOut.AutoSize = true;
-            this.label_ZoomOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ZoomOut.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_ZoomOut.Location = new System.Drawing.Point(84, 47);
-            this.label_ZoomOut.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_ZoomOut.Name = "label_ZoomOut";
-            this.label_ZoomOut.Size = new System.Drawing.Size(32, 25);
-            this.label_ZoomOut.TabIndex = 46;
-            this.label_ZoomOut.Text = "zoom\r\nout";
-            this.label_ZoomOut.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_ZoomIn
-            // 
-            this.label_ZoomIn.AutoSize = true;
-            this.label_ZoomIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ZoomIn.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_ZoomIn.Location = new System.Drawing.Point(4, 47);
-            this.label_ZoomIn.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_ZoomIn.Name = "label_ZoomIn";
-            this.label_ZoomIn.Size = new System.Drawing.Size(32, 25);
-            this.label_ZoomIn.TabIndex = 44;
-            this.label_ZoomIn.Text = "zoom\r\nin";
-            this.label_ZoomIn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label_ZoomReset
-            // 
-            this.label_ZoomReset.AutoSize = true;
-            this.label_ZoomReset.BackColor = System.Drawing.Color.Transparent;
-            this.label_ZoomReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ZoomReset.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_ZoomReset.Location = new System.Drawing.Point(44, 47);
-            this.label_ZoomReset.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_ZoomReset.Name = "label_ZoomReset";
-            this.label_ZoomReset.Size = new System.Drawing.Size(30, 13);
-            this.label_ZoomReset.TabIndex = 45;
-            this.label_ZoomReset.Text = "reset";
-            this.label_ZoomReset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // button_ZoomOut
             // 
-            this.button_ZoomOut.BackgroundImage = global::Semantic.Properties.Resources.zoom_out;
-            this.button_ZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_ZoomOut.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_ZoomOut.FlatAppearance.BorderSize = 0;
+            this.button_ZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_ZoomOut.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_ZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ZoomOut.Location = new System.Drawing.Point(83, 3);
+            this.button_ZoomOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_ZoomOut.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_ZoomOut.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_ZoomOut.ImageKey = "zoom_out.png";
+            this.button_ZoomOut.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomOut.Location = new System.Drawing.Point(130, 2);
+            this.button_ZoomOut.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomOut.Name = "button_ZoomOut";
-            this.button_ZoomOut.Size = new System.Drawing.Size(34, 34);
+            this.button_ZoomOut.Size = new System.Drawing.Size(60, 76);
             this.button_ZoomOut.TabIndex = 33;
+            this.button_ZoomOut.Text = "zoom out";
+            this.button_ZoomOut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_ZoomOut.UseVisualStyleBackColor = true;
+            this.button_ZoomOut.Click += new System.EventHandler(this.button_ZoomOut_Click);
             // 
             // button_ZoomIn
             // 
-            this.button_ZoomIn.BackgroundImage = global::Semantic.Properties.Resources.zoom_in;
-            this.button_ZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_ZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_ZoomIn.FlatAppearance.BorderSize = 0;
+            this.button_ZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_ZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_ZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ZoomIn.Location = new System.Drawing.Point(3, 3);
+            this.button_ZoomIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_ZoomIn.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_ZoomIn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_ZoomIn.ImageKey = "zoom_in.png";
+            this.button_ZoomIn.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomIn.Location = new System.Drawing.Point(2, 2);
+            this.button_ZoomIn.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomIn.Name = "button_ZoomIn";
-            this.button_ZoomIn.Size = new System.Drawing.Size(33, 34);
+            this.button_ZoomIn.Size = new System.Drawing.Size(60, 76);
             this.button_ZoomIn.TabIndex = 25;
+            this.button_ZoomIn.Text = "zoom in";
+            this.button_ZoomIn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_ZoomIn.UseVisualStyleBackColor = true;
+            this.button_ZoomIn.Click += new System.EventHandler(this.button_ZoomIn_Click);
             // 
             // button_ZoomReset
             // 
-            this.button_ZoomReset.BackgroundImage = global::Semantic.Properties.Resources.zoom_100_;
-            this.button_ZoomReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_ZoomReset.FlatAppearance.BorderSize = 0;
+            this.button_ZoomReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_ZoomReset.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_ZoomReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_ZoomReset.Location = new System.Drawing.Point(43, 3);
+            this.button_ZoomReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_ZoomReset.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_ZoomReset.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_ZoomReset.ImageKey = "zoom_100_.png";
+            this.button_ZoomReset.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomReset.Location = new System.Drawing.Point(66, 2);
+            this.button_ZoomReset.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomReset.Name = "button_ZoomReset";
-            this.button_ZoomReset.Size = new System.Drawing.Size(33, 34);
+            this.button_ZoomReset.Size = new System.Drawing.Size(60, 76);
             this.button_ZoomReset.TabIndex = 30;
+            this.button_ZoomReset.Text = "reset";
+            this.button_ZoomReset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_ZoomReset.UseVisualStyleBackColor = true;
+            this.button_ZoomReset.Click += new System.EventHandler(this.button_ZoomReset_Click);
             // 
             // button_Save
             // 
-            this.button_Save.BackgroundImage = global::Semantic.Properties.Resources.iconfinder_document_file_paper_page_07_2850900;
-            this.button_Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button_Save.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.button_Save.FlatAppearance.BorderSize = 0;
+            this.button_Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Save.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button_Save.Location = new System.Drawing.Point(123, 3);
+            this.button_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button_Save.ForeColor = System.Drawing.SystemColors.Window;
+            this.button_Save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button_Save.ImageKey = "file_Save";
+            this.button_Save.ImageList = this.imageList_ButtonIcon;
+            this.button_Save.Location = new System.Drawing.Point(194, 2);
+            this.button_Save.Margin = new System.Windows.Forms.Padding(2);
             this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(34, 34);
+            this.button_Save.Size = new System.Drawing.Size(60, 76);
             this.button_Save.TabIndex = 18;
-            this.button_Save.UseVisualStyleBackColor = true;
-            // 
-            // label_Save
-            // 
-            this.label_Save.AutoSize = true;
-            this.label_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Save.ForeColor = System.Drawing.SystemColors.Window;
-            this.label_Save.Location = new System.Drawing.Point(124, 47);
-            this.label_Save.Margin = new System.Windows.Forms.Padding(4, 4, 0, 0);
-            this.label_Save.Name = "label_Save";
-            this.label_Save.Size = new System.Drawing.Size(30, 13);
-            this.label_Save.TabIndex = 44;
-            this.label_Save.Text = "save";
-            this.label_Save.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button_Save.Text = "save";
+            this.button_Save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button_Save.UseVisualStyleBackColor = false;
             // 
             // panel_Logo
             // 
             this.panel_Logo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel_Logo.Controls.Add(this.label_Logo);
-            this.panel_Logo.Location = new System.Drawing.Point(302, 8);
+            this.panel_Logo.Location = new System.Drawing.Point(0, 0);
             this.panel_Logo.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Logo.Name = "panel_Logo";
             this.panel_Logo.Size = new System.Drawing.Size(265, 72);
@@ -615,6 +476,7 @@ namespace Semantic
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Maroon;
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
@@ -624,6 +486,7 @@ namespace Semantic
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Green;
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(4, 4);
             this.panel7.Margin = new System.Windows.Forms.Padding(4);
             this.panel7.Name = "panel7";
@@ -633,6 +496,7 @@ namespace Semantic
             // panel11
             // 
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(4, 4);
             this.panel11.Margin = new System.Windows.Forms.Padding(4);
             this.panel11.Name = "panel11";
@@ -642,6 +506,7 @@ namespace Semantic
             // panel13
             // 
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(4, 4);
             this.panel13.Margin = new System.Windows.Forms.Padding(4);
             this.panel13.Name = "panel13";
@@ -651,6 +516,7 @@ namespace Semantic
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.Color.Teal;
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(4, 4);
             this.panel9.Margin = new System.Windows.Forms.Padding(4);
             this.panel9.Name = "panel9";
@@ -673,6 +539,7 @@ namespace Semantic
             // panel17
             // 
             this.panel17.BackColor = System.Drawing.Color.Gray;
+            this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(4, 4);
             this.panel17.Margin = new System.Windows.Forms.Padding(4);
             this.panel17.Name = "panel17";
@@ -695,6 +562,7 @@ namespace Semantic
             // panel19
             // 
             this.panel19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel19.Location = new System.Drawing.Point(4, 4);
             this.panel19.Margin = new System.Windows.Forms.Padding(4);
             this.panel19.Name = "panel19";
@@ -799,6 +667,7 @@ namespace Semantic
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Black;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(4, 4);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
@@ -975,6 +844,7 @@ namespace Semantic
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Red;
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(4, 4);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
@@ -1014,6 +884,7 @@ namespace Semantic
             // panel22
             // 
             this.panel22.BackColor = System.Drawing.Color.Blue;
+            this.panel22.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel22.Location = new System.Drawing.Point(4, 4);
             this.panel22.Margin = new System.Windows.Forms.Padding(4);
             this.panel22.Name = "panel22";
@@ -1053,6 +924,7 @@ namespace Semantic
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(4, 4);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
@@ -1092,6 +964,7 @@ namespace Semantic
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Maroon;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(4, 4);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
@@ -1131,6 +1004,7 @@ namespace Semantic
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Green;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(4, 4);
             this.panel6.Margin = new System.Windows.Forms.Padding(4);
             this.panel6.Name = "panel6";
@@ -1170,6 +1044,7 @@ namespace Semantic
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(4, 4);
             this.panel8.Margin = new System.Windows.Forms.Padding(4);
             this.panel8.Name = "panel8";
@@ -1209,6 +1084,7 @@ namespace Semantic
             // panel10
             // 
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(4, 4);
             this.panel10.Margin = new System.Windows.Forms.Padding(4);
             this.panel10.Name = "panel10";
@@ -1248,6 +1124,7 @@ namespace Semantic
             // panel12
             // 
             this.panel12.BackColor = System.Drawing.Color.Teal;
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(4, 4);
             this.panel12.Margin = new System.Windows.Forms.Padding(4);
             this.panel12.Name = "panel12";
@@ -1287,6 +1164,7 @@ namespace Semantic
             // panel14
             // 
             this.panel14.BackColor = System.Drawing.Color.Gray;
+            this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(4, 4);
             this.panel14.Margin = new System.Windows.Forms.Padding(4);
             this.panel14.Name = "panel14";
@@ -1326,6 +1204,7 @@ namespace Semantic
             // panel16
             // 
             this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(4, 4);
             this.panel16.Margin = new System.Windows.Forms.Padding(4);
             this.panel16.Name = "panel16";
@@ -1365,6 +1244,7 @@ namespace Semantic
             // panel18
             // 
             this.panel18.BackColor = System.Drawing.Color.Red;
+            this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel18.Location = new System.Drawing.Point(4, 4);
             this.panel18.Margin = new System.Windows.Forms.Padding(4);
             this.panel18.Name = "panel18";
@@ -1404,6 +1284,7 @@ namespace Semantic
             // panel20
             // 
             this.panel20.BackColor = System.Drawing.Color.Blue;
+            this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel20.Location = new System.Drawing.Point(4, 4);
             this.panel20.Margin = new System.Windows.Forms.Padding(4);
             this.panel20.Name = "panel20";
@@ -1443,6 +1324,7 @@ namespace Semantic
             // panel21
             // 
             this.panel21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(4, 4);
             this.panel21.Margin = new System.Windows.Forms.Padding(4);
             this.panel21.Name = "panel21";
@@ -1483,6 +1365,7 @@ namespace Semantic
             this.panel_TrackBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel_TrackBar.Controls.Add(this.label_BrushSize);
             this.panel_TrackBar.Controls.Add(this.lable_Opacity);
+            this.panel_TrackBar.Controls.Add(this.lable_ImgScale);
             this.panel_TrackBar.Controls.Add(this.colorSlider_BrushSize);
             this.panel_TrackBar.Controls.Add(this.colorSlider_Opacity);
             this.panel_TrackBar.Location = new System.Drawing.Point(8, 8);
@@ -1668,7 +1551,7 @@ namespace Semantic
             this.picBox_Cursor.Location = new System.Drawing.Point(5, 5);
             this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Cursor.Name = "picBox_Cursor";
-            this.picBox_Cursor.Size = new System.Drawing.Size(749, 614);
+            this.picBox_Cursor.Size = new System.Drawing.Size(752, 611);
             this.picBox_Cursor.TabIndex = 32;
             this.picBox_Cursor.TabStop = false;
             // 
@@ -1683,7 +1566,7 @@ namespace Semantic
             this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Rgb.MinimumSize = new System.Drawing.Size(100, 100);
             this.picBox_Rgb.Name = "picBox_Rgb";
-            this.picBox_Rgb.Size = new System.Drawing.Size(749, 614);
+            this.picBox_Rgb.Size = new System.Drawing.Size(752, 611);
             this.picBox_Rgb.TabIndex = 23;
             this.picBox_Rgb.TabStop = false;
             // 
@@ -1697,7 +1580,7 @@ namespace Semantic
             this.picBox_Origin.Location = new System.Drawing.Point(5, 5);
             this.picBox_Origin.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Origin.Name = "picBox_Origin";
-            this.picBox_Origin.Size = new System.Drawing.Size(749, 614);
+            this.picBox_Origin.Size = new System.Drawing.Size(752, 611);
             this.picBox_Origin.TabIndex = 17;
             this.picBox_Origin.TabStop = false;
             // 
@@ -1725,6 +1608,7 @@ namespace Semantic
             // 
             this.LeftDock_flowPanel_Thumbnail.AutoScroll = true;
             this.LeftDock_flowPanel_Thumbnail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.LeftDock_flowPanel_Thumbnail.Controls.Add(this.panel_Logo);
             this.LeftDock_flowPanel_Thumbnail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LeftDock_flowPanel_Thumbnail.Location = new System.Drawing.Point(0, 0);
             this.LeftDock_flowPanel_Thumbnail.Margin = new System.Windows.Forms.Padding(0);
@@ -1732,6 +1616,41 @@ namespace Semantic
             this.tablePanel_FullLayout.SetRowSpan(this.LeftDock_flowPanel_Thumbnail, 2);
             this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 701);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
+            // 
+            // imageList_ButtonIcon
+            // 
+            this.imageList_ButtonIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_ButtonIcon.ImageStream")));
+            this.imageList_ButtonIcon.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_ButtonIcon.Images.SetKeyName(0, "edit_Scroll.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(1, "edit_Brush");
+            this.imageList_ButtonIcon.Images.SetKeyName(2, "file_Save");
+            this.imageList_ButtonIcon.Images.SetKeyName(3, "file_Path");
+            this.imageList_ButtonIcon.Images.SetKeyName(4, "Info.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(5, "segmentation.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(6, "zoom_100_.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(7, "zoom_in.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(8, "zoom_out.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(9, "edit_Undo");
+            this.imageList_ButtonIcon.Images.SetKeyName(10, "edit_Redo.png");
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.button1.ForeColor = System.Drawing.SystemColors.Window;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button1.ImageKey = "edit_Scroll.png";
+            this.button1.Location = new System.Drawing.Point(448, 0);
+            this.button1.Margin = new System.Windows.Forms.Padding(0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(64, 80);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "move";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button_ScrollMode_Click);
             // 
             // UI_Main
             // 
@@ -1747,17 +1666,10 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).EndInit();
             this.splitContainer_MenuBar_Left.ResumeLayout(false);
-            this.tablePanel_Menu_Zoom.ResumeLayout(false);
-            this.tablePanel_Menu_Zoom.PerformLayout();
             this.splitContainer_Menu_CenterRight.Panel1.ResumeLayout(false);
             this.splitContainer_Menu_CenterRight.Panel2.ResumeLayout(false);
-            this.splitContainer_Menu_CenterRight.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).EndInit();
             this.splitContainer_Menu_CenterRight.ResumeLayout(false);
-            this.tablePanel_Menu_Edit.ResumeLayout(false);
-            this.tablePanel_Menu_Edit.PerformLayout();
-            this.tablePanel_Menu_LoadSave.ResumeLayout(false);
-            this.tablePanel_Menu_LoadSave.PerformLayout();
             this.panel_Logo.ResumeLayout(false);
             this.tablePanel_Color_1.ResumeLayout(false);
             this.tablePanel_Color_6.ResumeLayout(false);
@@ -1790,6 +1702,7 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).EndInit();
             this.tablePanel_FullLayout.ResumeLayout(false);
+            this.LeftDock_flowPanel_Thumbnail.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1827,13 +1740,9 @@ namespace Semantic
         private ColorSlider.ColorSlider colorSlider_BrushSize;
         private ColorSlider.ColorSlider colorSlider_Opacity;
         private System.Windows.Forms.Button button_Path;
-        private System.Windows.Forms.Label label_Path;
-        private System.Windows.Forms.Label label_RunModel;
         private System.Windows.Forms.Button button_RunModel;
-        private System.Windows.Forms.Label label_Info;
         private System.Windows.Forms.Button button_Info;
         private System.Windows.Forms.Button button_Save;
-        private System.Windows.Forms.Label label_Save;
         private System.Windows.Forms.Label lable_ImgScale;
         private System.Windows.Forms.Button button_ZoomReset;
         private System.Windows.Forms.Button button_PaintMode;
@@ -1841,17 +1750,7 @@ namespace Semantic
         private System.Windows.Forms.Button button_Undo;
         private System.Windows.Forms.Button button_ScrollMode;
         private System.Windows.Forms.Button button_Redo;
-        private System.Windows.Forms.Label label_Redo;
-        private System.Windows.Forms.Label label_Undo;
-        private System.Windows.Forms.Label label_Brush;
-        private System.Windows.Forms.Label label_Move;
-        private System.Windows.Forms.Label label_ZoomReset;
-        private System.Windows.Forms.Label label_ZoomIn;
-        private System.Windows.Forms.Label label_ZoomOut;
         private System.Windows.Forms.SplitContainer splitContainer_Menu_CenterRight;
-        private System.Windows.Forms.TableLayoutPanel tablePanel_Menu_LoadSave;
-        private System.Windows.Forms.TableLayoutPanel tablePanel_Menu_Edit;
-        private System.Windows.Forms.TableLayoutPanel tablePanel_Menu_Zoom;
         private System.Windows.Forms.Button button_ZoomOut;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel5;
@@ -1901,5 +1800,7 @@ namespace Semantic
         private System.Windows.Forms.TableLayoutPanel tablePanel_Color_0;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label_Class0;
+        private System.Windows.Forms.ImageList imageList_ButtonIcon;
+        private System.Windows.Forms.Button button1;
     }
 }

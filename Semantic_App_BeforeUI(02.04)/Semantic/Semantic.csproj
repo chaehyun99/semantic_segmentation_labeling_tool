@@ -149,16 +149,16 @@
     <None Include="Resources\아래.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\iconfinder_document_file_paper_page-07_2850900.png" />
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\cursor2__.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\zoom_100_.png" />
+    <None Include="Resources\icon_Save_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_Zoom100_32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
