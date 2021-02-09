@@ -169,7 +169,7 @@ namespace Semantic
             // 
             // splitContainer_MenuBar_Left
             // 
-            this.splitContainer_MenuBar_Left.BackColor = System.Drawing.Color.Red;
+            this.splitContainer_MenuBar_Left.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.tablePanel_FullLayout.SetColumnSpan(this.splitContainer_MenuBar_Left, 2);
             this.splitContainer_MenuBar_Left.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer_MenuBar_Left.IsSplitterFixed = true;
@@ -190,14 +190,14 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.Panel2.Controls.Add(this.splitContainer_Menu_CenterRight);
             this.splitContainer_MenuBar_Left.Panel2MinSize = 516;
             this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(777, 80);
-            this.splitContainer_MenuBar_Left.SplitterDistance = 256;
+            this.splitContainer_MenuBar_Left.SplitterDistance = 253;
             this.splitContainer_MenuBar_Left.SplitterIncrement = 64;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
             // 
             // button_Path
             // 
             this.button_Path.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_Path.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_Path.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Path.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Path.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Path.ForeColor = System.Drawing.SystemColors.Window;
@@ -233,7 +233,7 @@ namespace Semantic
             // button_RunModel
             // 
             this.button_RunModel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_RunModel.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_RunModel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_RunModel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_RunModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_RunModel.ForeColor = System.Drawing.SystemColors.Window;
@@ -253,7 +253,7 @@ namespace Semantic
             // button_Info
             // 
             this.button_Info.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_Info.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_Info.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Info.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Info.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Info.ForeColor = System.Drawing.SystemColors.Window;
@@ -272,7 +272,7 @@ namespace Semantic
             // 
             // splitContainer_Menu_CenterRight
             // 
-            this.splitContainer_Menu_CenterRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.splitContainer_Menu_CenterRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.splitContainer_Menu_CenterRight.Dock = System.Windows.Forms.DockStyle.Left;
             this.splitContainer_Menu_CenterRight.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer_Menu_CenterRight.IsSplitterFixed = true;
@@ -299,7 +299,7 @@ namespace Semantic
             // 
             // flowPanel_Menu_Edit
             // 
-            this.flowPanel_Menu_Edit.BackColor = System.Drawing.Color.Navy;
+            this.flowPanel_Menu_Edit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.flowPanel_Menu_Edit.Controls.Add(this.button_Undo);
             this.flowPanel_Menu_Edit.Controls.Add(this.button_Redo);
             this.flowPanel_Menu_Edit.Controls.Add(this.button_PaintMode);
@@ -313,7 +313,7 @@ namespace Semantic
             // button_Undo
             // 
             this.button_Undo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_Undo.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_Undo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Undo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Undo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Undo.ForeColor = System.Drawing.SystemColors.Window;
@@ -333,7 +333,7 @@ namespace Semantic
             // button_Redo
             // 
             this.button_Redo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_Redo.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_Redo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Redo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Redo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Redo.ForeColor = System.Drawing.SystemColors.Window;
@@ -353,7 +353,7 @@ namespace Semantic
             // button_PaintMode
             // 
             this.button_PaintMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_PaintMode.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_PaintMode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_PaintMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_PaintMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_PaintMode.ForeColor = System.Drawing.SystemColors.Window;
@@ -373,7 +373,7 @@ namespace Semantic
             // button_ScrollMode
             // 
             this.button_ScrollMode.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_ScrollMode.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_ScrollMode.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_ScrollMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ScrollMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ScrollMode.ForeColor = System.Drawing.SystemColors.Window;
@@ -392,7 +392,7 @@ namespace Semantic
             // 
             // flowPanel_Menu_Zoom
             // 
-            this.flowPanel_Menu_Zoom.BackColor = System.Drawing.Color.Navy;
+            this.flowPanel_Menu_Zoom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.flowPanel_Menu_Zoom.Controls.Add(this.button_ZoomIn);
             this.flowPanel_Menu_Zoom.Controls.Add(this.button_ZoomReset);
             this.flowPanel_Menu_Zoom.Controls.Add(this.button_ZoomOut);
@@ -406,7 +406,7 @@ namespace Semantic
             // button_ZoomIn
             // 
             this.button_ZoomIn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_ZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_ZoomIn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_ZoomIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ZoomIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ZoomIn.ForeColor = System.Drawing.SystemColors.Window;
@@ -426,7 +426,7 @@ namespace Semantic
             // button_ZoomReset
             // 
             this.button_ZoomReset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_ZoomReset.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_ZoomReset.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_ZoomReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ZoomReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ZoomReset.ForeColor = System.Drawing.SystemColors.Window;
@@ -446,7 +446,7 @@ namespace Semantic
             // button_ZoomOut
             // 
             this.button_ZoomOut.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_ZoomOut.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_ZoomOut.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_ZoomOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_ZoomOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ZoomOut.ForeColor = System.Drawing.SystemColors.Window;
@@ -466,7 +466,7 @@ namespace Semantic
             // button_Save
             // 
             this.button_Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button_Save.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.button_Save.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Save.ForeColor = System.Drawing.SystemColors.Window;
@@ -488,7 +488,7 @@ namespace Semantic
             this.lable_ImgScale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.lable_ImgScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lable_ImgScale.ForeColor = System.Drawing.Color.Black;
-            this.lable_ImgScale.Location = new System.Drawing.Point(80, 8);
+            this.lable_ImgScale.Location = new System.Drawing.Point(81, 1);
             this.lable_ImgScale.Margin = new System.Windows.Forms.Padding(3);
             this.lable_ImgScale.Name = "lable_ImgScale";
             this.lable_ImgScale.Size = new System.Drawing.Size(75, 15);
@@ -497,7 +497,7 @@ namespace Semantic
             // 
             // label_Class5
             // 
-            this.label_Class5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class5.BackColor = System.Drawing.Color.White;
             this.label_Class5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class5.Location = new System.Drawing.Point(24, 0);
@@ -510,7 +510,7 @@ namespace Semantic
             // 
             // label_Class6
             // 
-            this.label_Class6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class6.BackColor = System.Drawing.Color.White;
             this.label_Class6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class6.Location = new System.Drawing.Point(24, 0);
@@ -539,7 +539,7 @@ namespace Semantic
             // 
             // label_Class1
             // 
-            this.label_Class1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class1.BackColor = System.Drawing.Color.White;
             this.label_Class1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class1.Location = new System.Drawing.Point(24, 0);
@@ -588,7 +588,6 @@ namespace Semantic
             // flowPanel_ColorSelect
             // 
             this.flowPanel_ColorSelect.AutoScroll = true;
-            this.flowPanel_ColorSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_0);
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_1);
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_2);
@@ -647,7 +646,7 @@ namespace Semantic
             // 
             // label_Class0
             // 
-            this.label_Class0.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class0.BackColor = System.Drawing.Color.White;
             this.label_Class0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class0.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class0.Location = new System.Drawing.Point(24, 0);
@@ -687,7 +686,7 @@ namespace Semantic
             // 
             // label_Class2
             // 
-            this.label_Class2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class2.BackColor = System.Drawing.Color.White;
             this.label_Class2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class2.Location = new System.Drawing.Point(24, 0);
@@ -716,7 +715,7 @@ namespace Semantic
             // 
             // label_Class3
             // 
-            this.label_Class3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class3.BackColor = System.Drawing.Color.White;
             this.label_Class3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class3.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class3.Location = new System.Drawing.Point(24, 0);
@@ -755,7 +754,7 @@ namespace Semantic
             // 
             // label_Class4
             // 
-            this.label_Class4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class4.BackColor = System.Drawing.Color.White;
             this.label_Class4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class4.Location = new System.Drawing.Point(24, 0);
@@ -820,7 +819,7 @@ namespace Semantic
             // 
             // label_Class7
             // 
-            this.label_Class7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class7.BackColor = System.Drawing.Color.White;
             this.label_Class7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class7.Location = new System.Drawing.Point(24, 0);
@@ -859,7 +858,7 @@ namespace Semantic
             // 
             // label_Class8
             // 
-            this.label_Class8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class8.BackColor = System.Drawing.Color.White;
             this.label_Class8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class8.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class8.Location = new System.Drawing.Point(24, 0);
@@ -898,7 +897,7 @@ namespace Semantic
             // 
             // label_Class9
             // 
-            this.label_Class9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class9.BackColor = System.Drawing.Color.White;
             this.label_Class9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class9.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class9.Location = new System.Drawing.Point(24, 0);
@@ -937,7 +936,7 @@ namespace Semantic
             // 
             // label_Class10
             // 
-            this.label_Class10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class10.BackColor = System.Drawing.Color.White;
             this.label_Class10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class10.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class10.Location = new System.Drawing.Point(24, 0);
@@ -976,7 +975,7 @@ namespace Semantic
             // 
             // label_Class11
             // 
-            this.label_Class11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class11.BackColor = System.Drawing.Color.White;
             this.label_Class11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class11.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class11.Location = new System.Drawing.Point(24, 0);
@@ -1015,7 +1014,7 @@ namespace Semantic
             // 
             // label_Class12
             // 
-            this.label_Class12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class12.BackColor = System.Drawing.Color.White;
             this.label_Class12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class12.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class12.Location = new System.Drawing.Point(24, 0);
@@ -1054,7 +1053,7 @@ namespace Semantic
             // 
             // label_Class13
             // 
-            this.label_Class13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class13.BackColor = System.Drawing.Color.White;
             this.label_Class13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class13.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class13.Location = new System.Drawing.Point(24, 0);
@@ -1093,7 +1092,7 @@ namespace Semantic
             // 
             // label_Class14
             // 
-            this.label_Class14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class14.BackColor = System.Drawing.Color.White;
             this.label_Class14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class14.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class14.Location = new System.Drawing.Point(24, 0);
@@ -1132,7 +1131,7 @@ namespace Semantic
             // 
             // label_Class15
             // 
-            this.label_Class15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class15.BackColor = System.Drawing.Color.White;
             this.label_Class15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class15.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class15.Location = new System.Drawing.Point(24, 0);
@@ -1171,7 +1170,7 @@ namespace Semantic
             // 
             // label_Class16
             // 
-            this.label_Class16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class16.BackColor = System.Drawing.Color.White;
             this.label_Class16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class16.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class16.Location = new System.Drawing.Point(24, 0);
@@ -1210,7 +1209,7 @@ namespace Semantic
             // 
             // label_Class17
             // 
-            this.label_Class17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class17.BackColor = System.Drawing.Color.White;
             this.label_Class17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class17.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class17.Location = new System.Drawing.Point(24, 0);
@@ -1249,7 +1248,7 @@ namespace Semantic
             // 
             // label_Class18
             // 
-            this.label_Class18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class18.BackColor = System.Drawing.Color.White;
             this.label_Class18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class18.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class18.Location = new System.Drawing.Point(24, 0);
@@ -1288,7 +1287,7 @@ namespace Semantic
             // 
             // label_Class19
             // 
-            this.label_Class19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class19.BackColor = System.Drawing.Color.White;
             this.label_Class19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class19.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class19.Location = new System.Drawing.Point(24, 0);
@@ -1328,7 +1327,7 @@ namespace Semantic
             // 
             // label_Class20
             // 
-            this.label_Class20.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.label_Class20.BackColor = System.Drawing.Color.White;
             this.label_Class20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label_Class20.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Class20.Location = new System.Drawing.Point(24, 0);
@@ -1365,7 +1364,7 @@ namespace Semantic
             // 
             this.panel_TrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel_TrackBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel_TrackBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.panel_TrackBar.BackgroundImage = global::Semantic.Properties.Resources.위;
             this.panel_TrackBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel_TrackBar.Controls.Add(this.label_BrushSize);
@@ -1536,7 +1535,7 @@ namespace Semantic
             // 
             // panel_Canvas
             // 
-            this.panel_Canvas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.panel_Canvas.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panel_Canvas.Controls.Add(this.picBox_Cursor);
             this.panel_Canvas.Controls.Add(this.picBox_Rgb);
             this.panel_Canvas.Controls.Add(this.picBox_Origin);
@@ -1552,7 +1551,7 @@ namespace Semantic
             this.picBox_Cursor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBox_Cursor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(206)))), ((int)(((byte)(206)))));
+            this.picBox_Cursor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.picBox_Cursor.Location = new System.Drawing.Point(5, 5);
             this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(5);
             this.picBox_Cursor.Name = "picBox_Cursor";
@@ -1623,7 +1622,7 @@ namespace Semantic
             // 
             // flowPanel_Menu_LoadSave
             // 
-            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.Navy;
+            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
