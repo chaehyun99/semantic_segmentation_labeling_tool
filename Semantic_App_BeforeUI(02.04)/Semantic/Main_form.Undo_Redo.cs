@@ -1,18 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Python.Runtime;
-using System.Diagnostics;
-using System.Drawing.Imaging;
-using System.Windows.Media.Imaging;//솔루션에서 PresentationCore.dll 참조추가 -JSW
-using System.Text.RegularExpressions;
 
 namespace Semantic
 {
@@ -105,7 +95,7 @@ namespace Semantic
             //이미지 꺼내서 화면 갱신
             this.sourceBitmapRgb = new Bitmap(stackUndo.Last.Value);
 
-            pictureBox2.Refresh();
+            picBox_Rgb.Refresh();
 
         }
 
@@ -128,7 +118,7 @@ namespace Semantic
 
             //이미지 꺼내서 화면 갱신
             this.sourceBitmapRgb = new Bitmap(stackUndo.Last.Value);
-            pictureBox2.Refresh();
+            picBox_Rgb.Refresh();
 
         }
 
@@ -136,25 +126,25 @@ namespace Semantic
         {
 
             //Undo,Redo 버튼 이벤트 연결
-            this.button4.Click += button_Undo_Click;
-            this.button5.Click += button_Redo_Click;
+            this.button_Undo.Click += button_Undo_Click;
+            this.button_Redo.Click += button_Redo_Click;
 
             this.ctrlKeyDown = false;
 
             //제일 앞 컨트롤에 뒤에 덮인 컨트롤의 이벤트 연결.
-            this.pBox3_CursorBoard.MouseDown += pictureBox2_MouseDown;
-            this.pBox3_CursorBoard.MouseUp += pictureBox2_MouseUp;
+            this.picBox_Cursor.MouseDown += picBox_Rgb_MouseDown;
+            this.picBox_Cursor.MouseUp += picBox_Rgb_MouseUp;
 
             //호출순서 변경(정석은 아닌듯)
-            this.pBox3_CursorBoard.MouseMove -= pBox3_CursorBoard_MouseMove;
-            this.pBox3_CursorBoard.MouseMove += pictureBox2_MouseMove;
-            this.pBox3_CursorBoard.MouseMove += pBox3_CursorBoard_MouseMove;
+            this.picBox_Cursor.MouseMove -= picBox_Cursor_MouseMove;
+            this.picBox_Cursor.MouseMove += picBox_Rgb_MouseMove;
+            this.picBox_Cursor.MouseMove += picBox_Cursor_MouseMove;
 
-            this.pBox3_CursorBoard.MouseWheel += pictureBox1_MouseWheel;
+            this.picBox_Cursor.MouseWheel += picBox_Origin_MouseWheel;
 
         }
 
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        private void picBox_Rgb_MouseUp(object sender, MouseEventArgs e)
         {
             switch (cursor_mode)
             {
@@ -192,11 +182,11 @@ namespace Semantic
             // 전꺼 저장 current idx 기준
             if(sourceBitmapRgb != null) rgb_imglist[current_idx] = new Bitmap(sourceBitmapRgb);
            
-            for (int i = 0; i < this.listPanelThumb.Controls.Count; i++)
+            for (int i = 0; i < this.LeftDock_flowPanel_Thumbnail.Controls.Count; i++)
             {
-                if (this.listPanelThumb.Controls[i] is Panel)
+                if (this.LeftDock_flowPanel_Thumbnail.Controls[i] is Panel)
                 {
-                    Panel pnl = this.listPanelThumb.Controls[i] as Panel;
+                    Panel pnl = this.LeftDock_flowPanel_Thumbnail.Controls[i] as Panel;
                     pnl.BackColor = Color.Black;
                 }
             }

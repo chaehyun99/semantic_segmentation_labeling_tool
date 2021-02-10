@@ -476,7 +476,7 @@ namespace Semantic
             }
             zoomScale = scale;
             RefreshAllPictureBox();
-            lable_ImgScale.Refresh();
+            Scale_toolStripStatusLabel.Refresh();
 
             /*
              * 배율 조정하는 인터페이스(트랙바, 텍스트박스 등)의 변동이 아래에 들어가면 됨.
@@ -499,11 +499,11 @@ namespace Semantic
         }
 
         //좌측 이미지 목록 클릭시 동작
-        private void uiPanelThumbnail_Paint(object sender, PaintEventArgs e) { }
+        private void LeftDock_flowPanel_Thumbnail_Paint(object sender, PaintEventArgs e) { }
 
 
 
-        private void Network_operation_Click(object sender, EventArgs e)
+        private void button_RunModel_Click(object sender, EventArgs e)
         {
             if (imgList == null || imgList.Count() == 0)
             {
@@ -596,7 +596,7 @@ namespace Semantic
 
         //pictureBox1_Paint() -> 수정을 위해 Main_Form_partial_zoomAtCursor.cs로 이동.
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void picBox_Rgb_Paint(object sender, PaintEventArgs e)
         {
 
             if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb)
@@ -632,13 +632,13 @@ namespace Semantic
 
         }
 
-        private void Button_ZoomIn_Click(object sender, EventArgs e)
+        private void button_ZoomIn_Click(object sender, EventArgs e)
         {
             zoomLevel++;
             SetScale(Math.Pow(Constants.ratioPerLevel, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈( 25%/ 50%/ 100%/ 200%/ 400%)
         }
 
-        private void Button_ZoomOut_Click(object sender, EventArgs e)
+        private void button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
             SetScale(Math.Pow(Constants.ratioPerLevel, zoomLevel));
@@ -656,9 +656,9 @@ namespace Semantic
 
 
 
-        private void lable_ImgScale_Paint(object sender, PaintEventArgs e)
+        private void Scale_toolStripStatusLabel_Paint(object sender, PaintEventArgs e)
         {
-            lable_ImgScale.Text =
+            Scale_toolStripStatusLabel.Text =
                 Convert.ToString(Math.Round(zoomScale * 100))
                 + "%"
                 ;
@@ -673,12 +673,12 @@ namespace Semantic
                 ;
         }
 
-        private void button_setscrollmode_Click(object sender, EventArgs e)
+        private void button_ScrollMode_Click(object sender, EventArgs e)
         {
             cursor_mode = CursorMode.Scroll;
         }
 
-        private void button_setPaintmode_Click(object sender, EventArgs e)
+        private void button_PaintMode_Click(object sender, EventArgs e)
         {
             cursor_mode = CursorMode.Paint;
         }
@@ -708,12 +708,12 @@ namespace Semantic
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void picBox_Origin_Click(object sender, EventArgs e)
         {
             MessageBox.Show("t");
         }
 
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        private void picBox_Rgb_MouseDown(object sender, MouseEventArgs e)
         {
             switch (cursor_mode)
             {
@@ -783,7 +783,7 @@ namespace Semantic
             }
         }
 
-        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        private void picBox_Rgb_MouseMove(object sender, MouseEventArgs e)
         {
 
             switch (cursor_mode)
@@ -872,24 +872,24 @@ namespace Semantic
         public void Load_()
         {
             // 이미지 리스트 및 경로 초기화
-            this.listPanelThumb.Controls.Clear();
-            pictureBox1.Image = null;
+            this.LeftDock_flowPanel_Thumbnail.Controls.Clear();
+            picBox_Origin.Image = null;
             imgList = null;
 
-            pictureBox2.Parent = pictureBox1;
-            pictureBox2.BackColor = Color.Transparent;
+            picBox_Rgb.Parent = picBox_Origin;
+            picBox_Rgb.BackColor = Color.Transparent;
             //thePointRelativeToTheBackImage;
-            pictureBox2.Location = new Point(0, 0);
+            picBox_Rgb.Location = new Point(0, 0);
 
-            Console.WriteLine("pbox2위치;" + Convert.ToString(pictureBox2.Location));
+            Console.WriteLine("pbox2위치;" + Convert.ToString(picBox_Rgb.Location));
 
             //커서그려줄 패널 겹치기
 
-            pBox3_CursorBoard.Parent = pictureBox2;
-            pBox3_CursorBoard.BackColor = Color.Transparent;
+            picBox_Cursor.Parent = picBox_Rgb;
+            picBox_Cursor.BackColor = Color.Transparent;
             //thePointRelativeToTheBackImage;
-            pBox3_CursorBoard.Location = new Point(0, 0);
-            Console.WriteLine("pbox3위치;" + Convert.ToString(pBox3_CursorBoard.Location));
+            picBox_Cursor.Location = new Point(0, 0);
+            Console.WriteLine("pbox3위치;" + Convert.ToString(picBox_Cursor.Location));
 
             gray_imglist.Clear();
             rgb_imglist.Clear();
@@ -924,7 +924,7 @@ namespace Semantic
                     pBoxThumb.Tag = i.ToString();
                     panelThumb.Controls.Add(pBoxThumb);
 
-                    this.listPanelThumb.Controls.Add(panelThumb);
+                    this.LeftDock_flowPanel_Thumbnail.Controls.Add(panelThumb);
                     fs.Close();
                 }
 
@@ -941,7 +941,7 @@ namespace Semantic
             }
             else
             {
-                Panel pnl = this.listPanelThumb.Controls[0] as Panel;
+                Panel pnl = this.LeftDock_flowPanel_Thumbnail.Controls[0] as Panel;
                 PictureBox pb = pnl.Controls[0] as PictureBox;
                 PBoxThumbnail_Click(pb, null);
             }
@@ -953,7 +953,7 @@ namespace Semantic
         ///
 
 
-        private void pBox3_CursorBoard_Paint(object sender, PaintEventArgs e)
+        private void picBox_Cursor_Paint(object sender, PaintEventArgs e)
         {
             //1.보간처리 pictureBox2와 동일하게
             //2.현재 픽쳐박스와 동일한 크기의 패널로 구현 및갱신. //추후 부분만 갱신하는 방법으로 구현해보기
@@ -995,7 +995,7 @@ namespace Semantic
             //브러시에 투명도 미적용 하려면 imageAtt만 제외.
         }
 
-        private void pBox3_CursorBoard_MouseEnter(object sender, EventArgs e)
+        private void picBox_Cursor_MouseEnter(object sender, EventArgs e)
         {
             Console.WriteLine("커서표시영역 진입");
 
@@ -1007,7 +1007,7 @@ namespace Semantic
             isOnPicBox3 = true;
         }
 
-        private void pBox3_CursorBoard_MouseLeave(object sender, EventArgs e)
+        private void picBox_Cursor_MouseLeave(object sender, EventArgs e)
         {
             Console.WriteLine("커서표시영역 탈출");
 
@@ -1028,7 +1028,7 @@ namespace Semantic
 
         }
 
-        private void pBox3_CursorBoard_MouseMove(object sender, MouseEventArgs e)
+        private void picBox_Cursor_MouseMove(object sender, MouseEventArgs e)
         {
             //picBox3.MouseMove 의 delegate로 picBox2_MouseMove를 줘도 되고,
             //아예 여기서 picBox2_MouseMove를 발생시켜도 됨.
@@ -1037,7 +1037,7 @@ namespace Semantic
             {
                 return;
             }
-            DrawCursor(pBox3_CursorBoard, e);
+            DrawCursor(picBox_Cursor, e);
         }
 
 
@@ -1054,7 +1054,7 @@ namespace Semantic
 
         // ------------------------------------------------------------- 메소드
 
-        public void pictureBox1_MouseWheel(object sender, MouseEventArgs e)
+        public void picBox_Origin_MouseWheel(object sender, MouseEventArgs e)
         {
             if (e.Delta > 0)
             {
@@ -1079,7 +1079,7 @@ namespace Semantic
             }
 
             RefreshAllPictureBox();
-            lable_ImgScale.Refresh();
+            Scale_toolStripStatusLabel.Refresh();
         }
 
         private void SetTargetRectByZoomAt(zoomMode zoomOrigin, MouseEventArgs e)
@@ -1089,8 +1089,8 @@ namespace Semantic
             switch (zoomOrigin)
             {
                 case zoomMode.Center:
-                    zoomOrigin_pt.X = pictureBox1.Width / 2;
-                    zoomOrigin_pt.Y = pictureBox1.Height / 2;
+                    zoomOrigin_pt.X = picBox_Origin.Width / 2;
+                    zoomOrigin_pt.Y = picBox_Origin.Height / 2;
                     break;
                 case zoomMode.Cursor:
                     zoomOrigin_pt = e.Location;
@@ -1163,7 +1163,7 @@ namespace Semantic
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button_Path_Click(object sender, EventArgs e)
         {
             Network_route_settings();
         }
@@ -1222,7 +1222,7 @@ namespace Semantic
 
         }
 
-        private void lable_ImgScale_Click(object sender, EventArgs e)
+        private void Scale_toolStripStatusLabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -1246,13 +1246,13 @@ namespace Semantic
         {
             if (e.Delta > 0)
             {
-                targetImgRect.X = (int)Math.Round((targetImgRect.X - pictureBox1.Width / 2) * Constants.ratioPerLevel) + pictureBox1.Width / 2;
-                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - pictureBox1.Height / 2) * Constants.ratioPerLevel) + pictureBox1.Height / 2;
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - picBox_Origin.Width / 2) * Constants.ratioPerLevel) + picBox_Origin.Width / 2;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - picBox_Origin.Height / 2) * Constants.ratioPerLevel) + picBox_Origin.Height / 2;
             }
             else
             {
-                targetImgRect.X = (int)Math.Round((targetImgRect.X - pictureBox1.Width / 2) / Constants.ratioPerLevel) + pictureBox1.Width / 2;
-                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - pictureBox1.Height / 2) / Constants.ratioPerLevel) + pictureBox1.Height / 2;
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - picBox_Origin.Width / 2) / Constants.ratioPerLevel) + picBox_Origin.Width / 2;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - picBox_Origin.Height / 2) / Constants.ratioPerLevel) + picBox_Origin.Height / 2;
             }
 
             Console.WriteLine("휠.줌.중앙_targetImgRect: " + Convert.ToString(targetImgRect));
@@ -1279,7 +1279,7 @@ namespace Semantic
         //-----------------------------------------------------------------------------이벤트
 
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void picBox_Origin_Paint(object sender, PaintEventArgs e)
         {
             //ORIGIN 이미지가 없을때.
             if (null == imgList || 0 == imgList.Count || null == sourceBitmapOrigin)
@@ -1310,8 +1310,8 @@ namespace Semantic
 
             if (targetImgRect.X > 0) targetImgRect.X = 0;
             if (targetImgRect.Y > 0) targetImgRect.Y = 0;
-            if (targetImgRect.X + targetImgRect.Width < pictureBox1.Width) targetImgRect.X = pictureBox1.Width - targetImgRect.Width;
-            if (targetImgRect.Y + targetImgRect.Height < pictureBox1.Height) targetImgRect.Y = pictureBox1.Height - targetImgRect.Height;
+            if (targetImgRect.X + targetImgRect.Width < picBox_Origin.Width) targetImgRect.X = picBox_Origin.Width - targetImgRect.Width;
+            if (targetImgRect.Y + targetImgRect.Height < picBox_Origin.Height) targetImgRect.Y = picBox_Origin.Height - targetImgRect.Height;
 
             //---------------------------------------------------------------------------------
 
@@ -1333,9 +1333,9 @@ namespace Semantic
         //확대는 아무리해도 그냥 래스터 그대로 보여주니까 안느려짐. 어짜피 축소했을떈 수정안하니까 타협필요. 
         private void RefreshAllPictureBox()
         {
-            pictureBox1.Refresh();
-            pictureBox2.Refresh();
-            pBox3_CursorBoard.Refresh();
+            picBox_Origin.Refresh();
+            picBox_Rgb.Refresh();
+            picBox_Cursor.Refresh();
         }
     }
 
