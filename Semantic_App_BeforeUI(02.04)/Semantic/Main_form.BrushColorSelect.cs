@@ -71,6 +71,7 @@ namespace Semantic
         //브러쉬 색생 버튼 초기화. Main_form_Load에서 1회 호출.
         private void InitBtnBrushColor()
         {
+            /*
             button_setColor[0] = button_setColor0;
             button_setColor[1] = button_setColor1;
             button_setColor[2] = button_setColor2;
@@ -93,7 +94,7 @@ namespace Semantic
             button_setColor[19] = button_setColor19;
             button_setColor[20] = button_setColor20;
             
-
+            */
             int i = 0;
             foreach (var btn in button_setColor)
             {

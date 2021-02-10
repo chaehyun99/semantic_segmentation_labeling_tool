@@ -85,7 +85,7 @@ namespace Semantic
 
         //----------------------------------------------------이벤트(UI)
 
-        private void UNDO(object sender, EventArgs e)
+        private void button_Undo_Click(object sender, EventArgs e)
         {
             //되돌리기가 수행가능한 상태인지 확인.
             if (stackUndo.Count <= 1) //UNDO의 Last를 항상 화면에 띄우는 이미지와 같게할 것이므로 최소 1스택.
@@ -109,7 +109,7 @@ namespace Semantic
 
         }
 
-        private void REDO(object sender, EventArgs e)
+        private void button_Redo_Click(object sender, EventArgs e)
         {
             //되돌리기가 수행가능한 상태인지 확인.
             if (stackRedo.Count <= 0)
@@ -136,8 +136,8 @@ namespace Semantic
         {
 
             //Undo,Redo 버튼 이벤트 연결
-            this.button4.Click += UNDO;
-            this.button5.Click += REDO;
+            this.button4.Click += button_Undo_Click;
+            this.button5.Click += button_Redo_Click;
 
             this.ctrlKeyDown = false;
 
