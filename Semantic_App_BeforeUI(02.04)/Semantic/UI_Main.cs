@@ -15,10 +15,22 @@ namespace Semantic
     {
         public UI_Main()
         {
-
             InitializeComponent();
-            this.AdjustFormScrollbars(false);
-            
+
+            //창 최대화시 작업표시줄 가리지 않게 조정..
+            Rectangle bounds = Screen.FromHandle(this.Handle).WorkingArea;
+            int x_offset = SystemInformation.HorizontalResizeBorderThickness + SystemInformation.FixedFrameBorderSize.Width;
+            int y_offset = SystemInformation.VerticalResizeBorderThickness + SystemInformation.FixedFrameBorderSize.Height;
+
+            bounds.X -= x_offset;
+            bounds.Width += (x_offset * 2);
+            bounds.Height += y_offset;
+
+            //this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.MaximizedBounds = bounds;
+
+            // 창 크기 최대화 처리
+            this.WindowState = FormWindowState.Maximized;            
         }
 
         private void button_Path_Click(object sender, EventArgs e)
@@ -99,7 +111,6 @@ namespace Semantic
         {
 
         }
-
     }
 }
 

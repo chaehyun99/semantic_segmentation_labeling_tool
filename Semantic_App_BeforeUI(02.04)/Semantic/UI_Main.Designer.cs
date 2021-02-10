@@ -32,6 +32,7 @@ namespace Semantic
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI_Main));
             this.splitContainer_MenuBar_Left = new System.Windows.Forms.SplitContainer();
+            this.flowPanel_Menu_LoadSave = new System.Windows.Forms.FlowLayoutPanel();
             this.button_Path = new System.Windows.Forms.Button();
             this.imageList_ButtonIcon = new System.Windows.Forms.ImageList(this.components);
             this.button_RunModel = new System.Windows.Forms.Button();
@@ -47,7 +48,6 @@ namespace Semantic
             this.button_ZoomReset = new System.Windows.Forms.Button();
             this.button_ZoomOut = new System.Windows.Forms.Button();
             this.button_Save = new System.Windows.Forms.Button();
-            this.lable_ImgScale = new System.Windows.Forms.Label();
             this.label_Class5 = new System.Windows.Forms.Label();
             this.label_Class6 = new System.Windows.Forms.Label();
             this.tablePanel_Color_1 = new System.Windows.Forms.TableLayoutPanel();
@@ -124,11 +124,15 @@ namespace Semantic
             this.picBox_Origin = new System.Windows.Forms.PictureBox();
             this.tablePanel_FullLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftDock_flowPanel_Thumbnail = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowPanel_Menu_LoadSave = new System.Windows.Forms.FlowLayoutPanel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.Scale_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.BitmapSize_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.CursorPosition_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).BeginInit();
             this.splitContainer_MenuBar_Left.Panel1.SuspendLayout();
             this.splitContainer_MenuBar_Left.Panel2.SuspendLayout();
             this.splitContainer_MenuBar_Left.SuspendLayout();
+            this.flowPanel_Menu_LoadSave.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).BeginInit();
             this.splitContainer_Menu_CenterRight.Panel1.SuspendLayout();
             this.splitContainer_Menu_CenterRight.Panel2.SuspendLayout();
@@ -164,7 +168,7 @@ namespace Semantic
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).BeginInit();
             this.tablePanel_FullLayout.SuspendLayout();
-            this.flowPanel_Menu_LoadSave.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer_MenuBar_Left
@@ -193,6 +197,18 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.SplitterDistance = 253;
             this.splitContainer_MenuBar_Left.SplitterIncrement = 64;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
+            // 
+            // flowPanel_Menu_LoadSave
+            // 
+            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
+            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
+            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(0, 0);
+            this.flowPanel_Menu_LoadSave.Margin = new System.Windows.Forms.Padding(0);
+            this.flowPanel_Menu_LoadSave.Name = "flowPanel_Menu_LoadSave";
+            this.flowPanel_Menu_LoadSave.Size = new System.Drawing.Size(192, 80);
+            this.flowPanel_Menu_LoadSave.TabIndex = 33;
             // 
             // button_Path
             // 
@@ -481,19 +497,6 @@ namespace Semantic
             this.button_Save.Text = "save";
             this.button_Save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Save.UseVisualStyleBackColor = false;
-            // 
-            // lable_ImgScale
-            // 
-            this.lable_ImgScale.AutoSize = true;
-            this.lable_ImgScale.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lable_ImgScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lable_ImgScale.ForeColor = System.Drawing.Color.Black;
-            this.lable_ImgScale.Location = new System.Drawing.Point(81, 1);
-            this.lable_ImgScale.Margin = new System.Windows.Forms.Padding(3);
-            this.lable_ImgScale.Name = "lable_ImgScale";
-            this.lable_ImgScale.Size = new System.Drawing.Size(75, 15);
-            this.lable_ImgScale.TabIndex = 26;
-            this.lable_ImgScale.Text = "Scale: ? %";
             // 
             // label_Class5
             // 
@@ -1357,7 +1360,7 @@ namespace Semantic
             this.RightDock_panel_Brush.Location = new System.Drawing.Point(856, 80);
             this.RightDock_panel_Brush.Margin = new System.Windows.Forms.Padding(0);
             this.RightDock_panel_Brush.Name = "RightDock_panel_Brush";
-            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 451);
+            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 473);
             this.RightDock_panel_Brush.TabIndex = 36;
             // 
             // panel_TrackBar
@@ -1369,7 +1372,6 @@ namespace Semantic
             this.panel_TrackBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel_TrackBar.Controls.Add(this.label_BrushSize);
             this.panel_TrackBar.Controls.Add(this.lable_Opacity);
-            this.panel_TrackBar.Controls.Add(this.lable_ImgScale);
             this.panel_TrackBar.Controls.Add(this.colorSlider_BrushSize);
             this.panel_TrackBar.Controls.Add(this.colorSlider_Opacity);
             this.panel_TrackBar.Location = new System.Drawing.Point(8, 8);
@@ -1536,6 +1538,7 @@ namespace Semantic
             // panel_Canvas
             // 
             this.panel_Canvas.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.panel_Canvas.Controls.Add(this.statusStrip1);
             this.panel_Canvas.Controls.Add(this.picBox_Cursor);
             this.panel_Canvas.Controls.Add(this.picBox_Rgb);
             this.panel_Canvas.Controls.Add(this.picBox_Origin);
@@ -1543,7 +1546,7 @@ namespace Semantic
             this.panel_Canvas.Location = new System.Drawing.Point(263, 80);
             this.panel_Canvas.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Canvas.Name = "panel_Canvas";
-            this.panel_Canvas.Size = new System.Drawing.Size(593, 451);
+            this.panel_Canvas.Size = new System.Drawing.Size(593, 473);
             this.panel_Canvas.TabIndex = 36;
             // 
             // picBox_Cursor
@@ -1552,10 +1555,10 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Cursor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.picBox_Cursor.Location = new System.Drawing.Point(5, 5);
-            this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(5);
+            this.picBox_Cursor.Location = new System.Drawing.Point(4, 4);
+            this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_Cursor.Name = "picBox_Cursor";
-            this.picBox_Cursor.Size = new System.Drawing.Size(583, 441);
+            this.picBox_Cursor.Size = new System.Drawing.Size(585, 443);
             this.picBox_Cursor.TabIndex = 32;
             this.picBox_Cursor.TabStop = false;
             // 
@@ -1566,11 +1569,11 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Rgb.BackColor = System.Drawing.Color.Gainsboro;
             this.picBox_Rgb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBox_Rgb.Location = new System.Drawing.Point(5, 5);
-            this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(5);
+            this.picBox_Rgb.Location = new System.Drawing.Point(4, 4);
+            this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_Rgb.MinimumSize = new System.Drawing.Size(100, 100);
             this.picBox_Rgb.Name = "picBox_Rgb";
-            this.picBox_Rgb.Size = new System.Drawing.Size(583, 441);
+            this.picBox_Rgb.Size = new System.Drawing.Size(585, 443);
             this.picBox_Rgb.TabIndex = 23;
             this.picBox_Rgb.TabStop = false;
             // 
@@ -1581,10 +1584,10 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Origin.BackColor = System.Drawing.SystemColors.Info;
             this.picBox_Origin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBox_Origin.Location = new System.Drawing.Point(5, 5);
-            this.picBox_Origin.Margin = new System.Windows.Forms.Padding(5);
+            this.picBox_Origin.Location = new System.Drawing.Point(4, 4);
+            this.picBox_Origin.Margin = new System.Windows.Forms.Padding(4);
             this.picBox_Origin.Name = "picBox_Origin";
-            this.picBox_Origin.Size = new System.Drawing.Size(583, 441);
+            this.picBox_Origin.Size = new System.Drawing.Size(585, 443);
             this.picBox_Origin.TabIndex = 17;
             this.picBox_Origin.TabStop = false;
             // 
@@ -1605,7 +1608,7 @@ namespace Semantic
             this.tablePanel_FullLayout.RowCount = 2;
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tablePanel_FullLayout.Size = new System.Drawing.Size(1040, 531);
+            this.tablePanel_FullLayout.Size = new System.Drawing.Size(1040, 553);
             this.tablePanel_FullLayout.TabIndex = 36;
             // 
             // LeftDock_flowPanel_Thumbnail
@@ -1617,26 +1620,59 @@ namespace Semantic
             this.LeftDock_flowPanel_Thumbnail.Margin = new System.Windows.Forms.Padding(0);
             this.LeftDock_flowPanel_Thumbnail.Name = "LeftDock_flowPanel_Thumbnail";
             this.tablePanel_FullLayout.SetRowSpan(this.LeftDock_flowPanel_Thumbnail, 2);
-            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 531);
+            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 553);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
             // 
-            // flowPanel_Menu_LoadSave
+            // statusStrip1
             // 
-            this.flowPanel_Menu_LoadSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
-            this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
-            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(0, 0);
-            this.flowPanel_Menu_LoadSave.Margin = new System.Windows.Forms.Padding(0);
-            this.flowPanel_Menu_LoadSave.Name = "flowPanel_Menu_LoadSave";
-            this.flowPanel_Menu_LoadSave.Size = new System.Drawing.Size(192, 80);
-            this.flowPanel_Menu_LoadSave.TabIndex = 33;
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.statusStrip1.GripMargin = new System.Windows.Forms.Padding(0);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CursorPosition_toolStripStatusLabel,
+            this.BitmapSize_toolStripStatusLabel,
+            this.Scale_toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(593, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 33;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // Scale_toolStripStatusLabel
+            // 
+            this.Scale_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
+            this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.Scale_toolStripStatusLabel.Spring = true;
+            this.Scale_toolStripStatusLabel.Text = "Scale: ? %";
+            this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // BitmapSize_toolStripStatusLabel
+            // 
+            this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
+            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.BitmapSize_toolStripStatusLabel.Spring = true;
+            this.BitmapSize_toolStripStatusLabel.Text = "원본_x: ?, y: ?";
+            this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // CursorPosition_toolStripStatusLabel
+            // 
+            this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
+            this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
+            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(184, 17);
+            this.CursorPosition_toolStripStatusLabel.Spring = true;
+            this.CursorPosition_toolStripStatusLabel.Text = "커서_x: ?, y: ?";
+            this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // UI_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 531);
+            this.ClientSize = new System.Drawing.Size(1040, 553);
             this.Controls.Add(this.tablePanel_FullLayout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimumSize = new System.Drawing.Size(991, 570);
@@ -1646,6 +1682,7 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).EndInit();
             this.splitContainer_MenuBar_Left.ResumeLayout(false);
+            this.flowPanel_Menu_LoadSave.ResumeLayout(false);
             this.splitContainer_Menu_CenterRight.Panel1.ResumeLayout(false);
             this.splitContainer_Menu_CenterRight.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_Menu_CenterRight)).EndInit();
@@ -1678,11 +1715,13 @@ namespace Semantic
             this.panel_TrackBar.ResumeLayout(false);
             this.panel_TrackBar.PerformLayout();
             this.panel_Canvas.ResumeLayout(false);
+            this.panel_Canvas.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Cursor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).EndInit();
             this.tablePanel_FullLayout.ResumeLayout(false);
-            this.flowPanel_Menu_LoadSave.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1714,7 +1753,6 @@ namespace Semantic
         private System.Windows.Forms.Button button_RunModel;
         private System.Windows.Forms.Button button_Info;
         private System.Windows.Forms.Button button_Save;
-        private System.Windows.Forms.Label lable_ImgScale;
         private System.Windows.Forms.Button button_ZoomReset;
         private System.Windows.Forms.Button button_PaintMode;
         private System.Windows.Forms.Button button_ZoomIn;
@@ -1782,5 +1820,9 @@ namespace Semantic
         private System.Windows.Forms.Panel panel22;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_LoadSave;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel Scale_toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel BitmapSize_toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel CursorPosition_toolStripStatusLabel;
     }
 }
