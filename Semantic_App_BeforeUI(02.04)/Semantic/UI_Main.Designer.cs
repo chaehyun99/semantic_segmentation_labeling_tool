@@ -119,15 +119,15 @@ namespace Semantic
             this.colorSlider_BrushSize = new ColorSlider.ColorSlider();
             this.colorSlider_Opacity = new ColorSlider.ColorSlider();
             this.panel_Canvas = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.CursorPosition_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.BitmapSize_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Scale_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.picBox_Cursor = new System.Windows.Forms.PictureBox();
             this.picBox_Rgb = new System.Windows.Forms.PictureBox();
             this.picBox_Origin = new System.Windows.Forms.PictureBox();
             this.tablePanel_FullLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftDock_flowPanel_Thumbnail = new System.Windows.Forms.FlowLayoutPanel();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.Scale_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.BitmapSize_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.CursorPosition_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).BeginInit();
             this.splitContainer_MenuBar_Left.Panel1.SuspendLayout();
             this.splitContainer_MenuBar_Left.Panel2.SuspendLayout();
@@ -164,11 +164,11 @@ namespace Semantic
             this.RightDock_panel_Brush.SuspendLayout();
             this.panel_TrackBar.SuspendLayout();
             this.panel_Canvas.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Cursor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).BeginInit();
             this.tablePanel_FullLayout.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer_MenuBar_Left
@@ -591,6 +591,7 @@ namespace Semantic
             // flowPanel_ColorSelect
             // 
             this.flowPanel_ColorSelect.AutoScroll = true;
+            this.flowPanel_ColorSelect.BackColor = System.Drawing.Color.Silver;
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_0);
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_1);
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_2);
@@ -1549,6 +1550,51 @@ namespace Semantic
             this.panel_Canvas.Size = new System.Drawing.Size(593, 473);
             this.panel_Canvas.TabIndex = 36;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.statusStrip1.GripMargin = new System.Windows.Forms.Padding(0);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CursorPosition_toolStripStatusLabel,
+            this.BitmapSize_toolStripStatusLabel,
+            this.Scale_toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(593, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 33;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // CursorPosition_toolStripStatusLabel
+            // 
+            this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
+            this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
+            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(184, 17);
+            this.CursorPosition_toolStripStatusLabel.Spring = true;
+            this.CursorPosition_toolStripStatusLabel.Text = "커서_x: ?, y: ?";
+            this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // BitmapSize_toolStripStatusLabel
+            // 
+            this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
+            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.BitmapSize_toolStripStatusLabel.Spring = true;
+            this.BitmapSize_toolStripStatusLabel.Text = "원본_x: ?, y: ?";
+            this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Scale_toolStripStatusLabel
+            // 
+            this.Scale_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
+            this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.Scale_toolStripStatusLabel.Spring = true;
+            this.Scale_toolStripStatusLabel.Text = "Scale: ? %";
+            this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // picBox_Cursor
             // 
             this.picBox_Cursor.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -1623,51 +1669,6 @@ namespace Semantic
             this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 553);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.statusStrip1.GripMargin = new System.Windows.Forms.Padding(0);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.CursorPosition_toolStripStatusLabel,
-            this.BitmapSize_toolStripStatusLabel,
-            this.Scale_toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(593, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 33;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // Scale_toolStripStatusLabel
-            // 
-            this.Scale_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
-            this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
-            this.Scale_toolStripStatusLabel.Spring = true;
-            this.Scale_toolStripStatusLabel.Text = "Scale: ? %";
-            this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // BitmapSize_toolStripStatusLabel
-            // 
-            this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
-            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
-            this.BitmapSize_toolStripStatusLabel.Spring = true;
-            this.BitmapSize_toolStripStatusLabel.Text = "원본_x: ?, y: ?";
-            this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // CursorPosition_toolStripStatusLabel
-            // 
-            this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
-            this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
-            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(184, 17);
-            this.CursorPosition_toolStripStatusLabel.Spring = true;
-            this.CursorPosition_toolStripStatusLabel.Text = "커서_x: ?, y: ?";
-            this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // UI_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -1716,12 +1717,12 @@ namespace Semantic
             this.panel_TrackBar.PerformLayout();
             this.panel_Canvas.ResumeLayout(false);
             this.panel_Canvas.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Cursor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Rgb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBox_Origin)).EndInit();
             this.tablePanel_FullLayout.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
