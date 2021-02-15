@@ -243,11 +243,12 @@ namespace Semantic
             //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)
             if (null == rgb_imglist || 0 == rgb_imglist.Count())
             {
-                Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
+                Console.WriteLine("ERR: rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
                 return;
             }
             else
             {
+                Console.WriteLine("rgb_imglist.Count: " + Convert.ToString(rgb_imglist.Count));
                 sourceBitmapRgb = new Bitmap(rgb_imglist[idx]);
 
                 //커서가 그려질 보드의 비트맵 갱신(크기)
@@ -618,7 +619,6 @@ namespace Semantic
                 return;
             }
 
-            Color brush_Color = Color.Black;
             Pen myPen = new Pen(brush_Color, brush_Size);
             //TODO: myPen의 수명이 언제 끝나는지 확인해서 Dispose처리 해주기.
             //TODO: 모든 disposable의 수명이 언제 끝나는지 미리 확인해서 라이프사이클 관리. 

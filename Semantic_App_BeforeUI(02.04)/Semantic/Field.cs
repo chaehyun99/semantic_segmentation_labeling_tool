@@ -53,10 +53,7 @@ namespace Semantic
 
         private ImageAttributes imageAtt = new ImageAttributes();
 
-
-        bool isOnPicBox3 = false;
         private Bitmap cursorBoardBitmap = null;
-
 
         enum zoomMode
         {

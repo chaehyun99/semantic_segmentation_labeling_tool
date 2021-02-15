@@ -227,10 +227,8 @@ namespace Semantic
 
         private void UI_Main_Load(object sender, EventArgs e)
         {
+            //우측 브러시 색상선택 버튼 초기화.
             InitBtnBrushColor();
-            // TODO: picBox 3종류간의 이벤트 호출을 최상단의 하나에 통합.
-            // 방법1. 최상단에서 같은종류의 이벤트 호출시 나머지를 호출.
-            // 방법2. 현재 상태처럼 대리자 리스트 관리를 통해서 호출.
 
             // 제일 앞 컨트롤에 뒤에 덮인 컨트롤의 이벤트 연결.
             this.picBox_Cursor.MouseDown += picBox_Rgb_MouseDown;
@@ -242,6 +240,10 @@ namespace Semantic
             this.picBox_Cursor.MouseMove += picBox_Cursor_MouseMove;
 
             this.picBox_Cursor.MouseWheel += picBox_Origin_MouseWheel;
+
+            // TODO: picBox 3종류간의 이벤트 호출을 최상단의 하나에 통합.
+            // 방법1. 최상단에서 같은종류의 이벤트 호출시 나머지를 호출.
+            // 방법2. 현재 상태처럼 대리자 리스트 관리를 통해서 호출.
         }
 
         private void button_Save_Click(object sender, EventArgs e)
@@ -476,12 +478,11 @@ namespace Semantic
             //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무(isOnpicBox3).
             //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
 
-            isOnPicBox3 = true;
+            //TODO:어찌하다보니 쓸모가 없어짐. 적절히 써먹든지 삭제.
         }
 
         private void picBox_Cursor_MouseLeave(object sender, EventArgs e)
         {
-            isOnPicBox3 = false;
 
 
             PictureBox picBox = (PictureBox)sender;
@@ -630,6 +631,42 @@ namespace Semantic
 
         private void UI_Main_KeyUp(object sender, KeyEventArgs e)
         {
+            this.ctrlKeyDown = e.Control;
+        }
+
+        private void picBox_Rgb_Paint(object sender, PaintEventArgs e)
+        {
+
+            if (null == rgb_imglist || 0 == rgb_imglist.Count || null == sourceBitmapRgb)
+            {
+                return;
+            }
+
+            // 보간 방식 지정. 
+            if (zoomScale < 1)
+            {
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.Low;
+            }
+            else
+            {
+                e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+            }
+
+            //타겟영역 갱신.
+
+            targetImgRect.Width = (int)Math.Round(sourceBitmapOrigin.Width * zoomScale);
+            targetImgRect.Height = (int)Math.Round(sourceBitmapOrigin.Height * zoomScale);
+
+            e.Graphics.DrawImage(
+                sourceBitmapRgb,
+                targetImgRect,
+                0,
+                0,
+                sourceBitmapOrigin.Width,
+                sourceBitmapOrigin.Height,
+                GraphicsUnit.Pixel,
+                imageAtt
+                );
 
         }
     }

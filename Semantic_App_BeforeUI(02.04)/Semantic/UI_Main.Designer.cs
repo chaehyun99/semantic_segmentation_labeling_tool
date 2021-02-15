@@ -1612,7 +1612,7 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Cursor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
-            this.picBox_Cursor.Location = new System.Drawing.Point(4, 4);
+            this.picBox_Cursor.Location = new System.Drawing.Point(152, 112);
             this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picBox_Cursor.Name = "picBox_Cursor";
             this.picBox_Cursor.Size = new System.Drawing.Size(444, 357);
@@ -1630,13 +1630,14 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Rgb.BackColor = System.Drawing.Color.Gainsboro;
             this.picBox_Rgb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picBox_Rgb.Location = new System.Drawing.Point(4, 4);
+            this.picBox_Rgb.Location = new System.Drawing.Point(56, 48);
             this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picBox_Rgb.MinimumSize = new System.Drawing.Size(100, 100);
             this.picBox_Rgb.Name = "picBox_Rgb";
             this.picBox_Rgb.Size = new System.Drawing.Size(444, 357);
             this.picBox_Rgb.TabIndex = 23;
             this.picBox_Rgb.TabStop = false;
+            this.picBox_Rgb.Paint += new System.Windows.Forms.PaintEventHandler(this.picBox_Rgb_Paint);
             this.picBox_Rgb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseDown);
             this.picBox_Rgb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseMove);
             this.picBox_Rgb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseUp);
