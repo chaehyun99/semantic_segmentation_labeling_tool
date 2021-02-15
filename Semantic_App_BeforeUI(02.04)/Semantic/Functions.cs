@@ -84,7 +84,7 @@ namespace Semantic
             //if (null == rgb_imglist || 0 == rgb_imglist.Count()){}
         }
 
-        public void Network_route_settings()
+        private void Network_route_settings()
         {
             Network_route_settings setting_Form = new Network_route_settings();
 
@@ -223,6 +223,7 @@ namespace Semantic
 
         public void PBoxThumbnail_Click(object sender, EventArgs e)
         {
+            //TODO: 여기 if 한줄 더 들어가야되는지 아닌지 확인. (Branch_ SeongWoon에서 Undo_redo.cs 확인)
 
             for (int i = 0; i < this.LeftDock_flowPanel_Thumbnail.Controls.Count; i++)
             {
@@ -254,7 +255,7 @@ namespace Semantic
                 cursorBoardBitmap.MakeTransparent();
 
                 //TODO: ㅁㄴㅇㄹ 컬러슬라이더 라이브러리로 바뀐것에 대응하기.
-                SetAlpha(trackBar1.Value);
+                SetAlpha((int)colorSlider_Opacity.Value);
 
                 // 픽쳐박스에 올라온 이미지가 바뀔때마다 
                 // 1. 기존 스택을 비우고,
@@ -267,144 +268,6 @@ namespace Semantic
 
             }
 
-        }
-
-        public static class ColorTable
-        {
-
-            //c#에 맞게 사용. 색상표는 r언어나 matlab에서 쓰는것 중에 적당히
-            public static int Entry_Length = 40;
-
-            public static Color[] Entry =
-            {
-                Color.FromArgb(0, 0, 0),            // 0=background    
-                Color.FromArgb(128, 0, 0),          // 1=aeroplane     
-                Color.FromArgb(0, 128, 0),          // 2=bicycle       
-                Color.FromArgb(128, 128, 0),        // 3=bird          
-                Color.FromArgb(0, 0, 128),          // 4=boat          
-                Color.FromArgb(128, 0, 128),        // 5=bottle        
-                Color.FromArgb(0, 128, 128),        // 6=bus           
-                Color.FromArgb(128, 128, 128),      // 7=car           
-                Color.FromArgb(255, 255, 255),      // 8=cat           
-                Color.FromArgb(192, 0, 0),          // 9=chair         
-                Color.FromArgb(64, 128, 0),         // 10=cow          
-                Color.FromArgb(192, 128, 0),        // 11=dining table 
-                Color.FromArgb(64, 0, 128),         // 12=dog          
-                Color.FromArgb(192, 0, 128),        // 13=horse        
-                Color.FromArgb(64, 128, 128),       // 14=motorbike    
-                Color.FromArgb(192, 128, 128),      // 15=person       
-                Color.FromArgb(0, 64, 0),           // 16=potted plant 
-                Color.FromArgb(128, 64, 0),         // 17=sheep        
-                Color.FromArgb(0, 192, 0),          // 18=sofa         
-                Color.FromArgb(128, 192, 0),        // 19=train        
-                Color.FromArgb(0, 64, 128),          // 20=tv/monitor
-                
-                //규격외 파일 테스트용 더미 컬러
-                Color.FromArgb(0,0, 64),            // 0=background    
-                Color.FromArgb(128, 0, 64),          // 1=aeroplane     
-                Color.FromArgb(0, 128, 64),          // 2=bicycle       
-                Color.FromArgb(128, 128, 64),        // 3=bird          
-                Color.FromArgb(0, 192, 128),          // 4=boat          
-                Color.FromArgb(128, 64, 128),        // 5=bottle        
-                Color.FromArgb(0, 128, 128),        // 6=bus           
-                Color.FromArgb(128, 0, 128),      // 7=car           
-                Color.FromArgb(255, 255, 255),      // 8=cat           
-                Color.FromArgb(192, 0, 0),          // 9=chair         
-                Color.FromArgb(64, 128, 0),         // 10=cow          
-                Color.FromArgb(192, 128, 0),        // 11=dining table 
-                Color.FromArgb(64, 0, 128),         // 12=dog          
-                Color.FromArgb(192, 0, 128),        // 13=horse        
-                Color.FromArgb(64, 128, 128),       // 14=motorbike    
-                Color.FromArgb(192, 128, 128),      // 15=person       
-                Color.FromArgb(0, 64, 0),           // 16=potted plant 
-                Color.FromArgb(128, 64, 0),         // 17=sheep        
-                Color.FromArgb(0, 192, 0),          // 18=sofa         
-                Color.FromArgb(128, 192, 0),        // 19=train        
-                Color.FromArgb(0, 64, 128),
-
-            };
-            /*
-            public static Color[] Entry_byKnownName =
-             {
-                //20번까지는 python 모델에서 사용하는 클래스 순서 그대로 사용.
-                Color.Black,       // 0=background
-                Color.LightPink,        // 1=aeroplane
-                Color.DarkGreen,       //2=bicycle
-                Color.LightBlue,        // 3=bird
-                Color.LawnGreen,        // 4=boat
-                Color.Lavender,         // 5=bottle
-                Color.Khaki,            // 6=bus
-                Color.Ivory,            // 7=car
-                Color.IndianRed,        // 8=cat
-                Color.HotPink,          // 9=chair
-                Color.Lime,             // 10=cow
-                Color.LightCoral,        // 11=dining table
-                Color.LightSalmon,      // 12=dog
-                Color.SlateBlue,        // 13=horse
-                Color.OrangeRed,        // 14=motorbike
-                Color.Yellow,           // 15=person
-                Color.Navy,             // 16=potted plant
-                Color.Wheat,            // 17=sheep
-                Color.MediumTurquoise,  // 18=sofa
-                Color.Magenta,          // 19=train
-                Color.Gray,             // 20=tv/monitor
-                ///이하 규격외 이미지 대상 테스트 전용.
-                ///ColorTable의 인덱스 관련된 오류가 있을때 주석 풀고 테스트.
-                Color.Tan,
-                Color.Aqua,
-                Color.DarkCyan,
-                Color.DarkKhaki,
-                Color.LemonChiffon,
-                Color.DeepPink,
-                Color.Pink,
-                Color.LightCoral,
-                Color.AntiqueWhite,
-                Color.AliceBlue, //30        
-                Color.DarkCyan,
-                Color.BlueViolet,
-                Color.Chartreuse,
-                Color.DarkOliveGreen,
-                Color.Cornsilk,
-                Color.DarkOrange,
-                Color.Gainsboro,
-                Color.Blue,
-                Color.Bisque,
-                Color.DarkGoldenrod//40
-             };
-             */
-        }
-
-        public void Image_Save()
-        {
-            if (null == rgb_imglist || 0 == rgb_imglist.Count)
-            {
-                MessageBox.Show("저장 할 이미지가 없습니다 !! ");
-                return;
-            }
-
-            if (sourceBitmapRgb == null)
-            {
-                MessageBox.Show("수정 된 이미지가 없습니다 !! ");
-                return;
-            }
-
-            if (gray_file_path.SelectedPath == string.Empty)
-            {
-                MessageBox.Show("그레이 스케일 저장 경로가 없습니다.");
-                Network_route_settings();
-                return;
-            }
-
-            // index 넣어서 저장
-            //rgb_imglist[index] = sourceBitmapRgb.;
-            MessageBox.Show(current_idx.ToString());
-            rgb_imglist[current_idx] = new Bitmap(sourceBitmapRgb);
-
-            for (int index = 0; index < rgb_imglist.Count(); index++)
-            {
-                gray_imglist[index] = RGB2Gray_Click(rgb_imglist[index]);
-                gray_imglist[index].Save(gray_file_path.SelectedPath + imgList[index].Remove(imgList[0].Count() - 4, 4) + "_gray_img.png");
-            }
         }
 
         public Color Swap_G2RGB(Color co_Gray)
@@ -500,14 +363,280 @@ namespace Semantic
             }*/
             return img2Convert;
         }
-
+                
         private void RefreshAllPictureBox()
         {
             picBox_Origin.Refresh();
             picBox_Rgb.Refresh();
             picBox_Cursor.Refresh();
+
+            //TODO: 모든 상황에 각 픽쳐박스가 다 refreash되게 해둔것 최적화하기.
+            // == 전체적인 프로그램 흐름을 파악한 뒤에 지울거 지워서 불필요한 연산 줄이기.
         }
 
+        private void SetScale(double scale) // 
+        {
+            if (0 == scale)
+            {
+                return;
+            }
+            zoomScale = scale;
+            RefreshAllPictureBox();
+
+            //TODO: Scale_toolStripStatusLabel 작동원리 파악해서 값 변하게 해주기.
+
+            /*
+             * 배율 조정하는 인터페이스(트랙바, 텍스트박스 등)의 변동이 아래에 들어가면 됨.
+            this.ignoreChanges = true;
+            this.ignoreChanges = false;
+            */
+        }
+
+        /// <summary>
+        /// 타겟이미지의 위치 변화 벡터 = 커서의 위치 변화벡터.
+        /// 이동할때마다 이미지를 갱신합니다.
+        /// </summary>
+        private void Move_targetRect_location()
+        {
+            if (false == isScroll)
+            {
+                return;
+            }
+
+            targetImgRect.X += move_endpt.X - move_startpt.X;
+            targetImgRect.Y += move_endpt.Y - move_startpt.Y;
+
+            RefreshAllPictureBox();
+        }
+
+        private void DrawCursor(Control control_, MouseEventArgs e)
+        {
+
+            using (Pen myPen = new Pen(brush_Color, 1))
+            using (Graphics g = Graphics.FromImage(cursorBoardBitmap))
+            {
+
+                Brush aBrush = new SolidBrush(brush_Color);
+
+                //이전에 그려진 브러시커서 처리
+                //g.Clear(Color.Transparent);
+
+                /* //Create Proper Circle */
+                Point ptOnSrcBitmap = new Point((int)Math.Round((e.X - targetImgRect.X) / zoomScale), (int)Math.Round((e.Y - targetImgRect.Y) / zoomScale));
+
+                Rectangle rectDot = new Rectangle(ptOnSrcBitmap.X - ((brush_Size + 2) / 2), ptOnSrcBitmap.Y - ((brush_Size + 2) / 2), brush_Size + 1, brush_Size + 1);
+
+                //Console.WriteLine("브러시 pen_startpt 좌표: " + Convert.ToString(e.Location));
+                //TODO: 이거 나중에 하단에 좌표 띄워주기 -> CursorPosition_toolStripStatusLabel
+
+                g.Clear(Color.Transparent);
+                if (brush_Size == 1)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size, brush_Size);
+                    g.FillRectangle(aBrush, rectDot);
+                }
+                else if (brush_Size == 2)
+                {
+                    rectDot = new Rectangle(ptOnSrcBitmap.X - (brush_Size) / 2, ptOnSrcBitmap.Y - (brush_Size) / 2, brush_Size - 1, brush_Size - 1);
+                    g.DrawRectangle(myPen, rectDot);
+                }
+                else
+                {
+                    g.FillEllipse(aBrush, rectDot);
+                }
+
+                control_.Refresh();
+            }
+        }
+
+        private void SetTargetRectByZoomAt(zoomMode zoomOrigin, MouseEventArgs e)
+        {
+            Point zoomOrigin_pt = new Point();
+
+            switch (zoomOrigin)
+            {
+                case zoomMode.Center:
+                    zoomOrigin_pt.X = picBox_Origin.Width / 2;
+                    zoomOrigin_pt.Y = picBox_Origin.Height / 2;
+                    break;
+                case zoomMode.Cursor:
+                    zoomOrigin_pt = e.Location;
+                    break;
+                case zoomMode.TopLeft:
+                    zoomOrigin_pt = new Point(0, 0);
+                    break;
+                default:
+                    break;
+            }
+
+            if (e.Delta > 0)
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - zoomOrigin_pt.X) * Constants.ratioPerLevel) + zoomOrigin_pt.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - zoomOrigin_pt.Y) * Constants.ratioPerLevel) + zoomOrigin_pt.Y;
+            }
+            else
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - zoomOrigin_pt.X) / Constants.ratioPerLevel) + zoomOrigin_pt.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - zoomOrigin_pt.Y) / Constants.ratioPerLevel) + zoomOrigin_pt.Y;
+            }
+
+            //"zoom [??] ByWheelFrom [??]"
+            Console.WriteLine(
+                "zoom "
+                + (e.Delta > 0 ? "[IN]" : "[OUT]")
+                + " ByWheelFrom ["
+                + zoomOrigin.ToString()
+                + "]"
+                );
+
+            #region 픽쳐박스의 특정 지점으로부터 zoom : 좌표계산
+            /*
+
+                A.TargetRect_New___________________________________
+                |                                                 |
+                |          B.TargetRect_Old_______                |
+                |          |                      |               |
+                |          |         C。          |               |
+                |          |       (zoomOrigin)   |               |
+                |          |______________________|               |
+                |_________________________________________________|
+
+            AC / BC = zoomRatio
+            //상대좌표로 계산시 원점이 동일해야함. 이 경우엔 Control인 pictureBox1 기준.
+            AC = zoomOrigin - TargetRect_New.Location
+            BC = zoomOrigin - TargetRect_Old.Location
+
+            A = C - (C - B) * zoomRatio
+              = C * (1 - zoomRatio) + B * zoomRatio
+
+            ___________________코드_____________________
+
+            Point ZoomOrigin;
+                       
+            Double zoomRatio = TargetRectNew.Size / TargetRectOld.Size;
+            //Width or Height.
+            //계산량을 줄이고 싶으면 e.Delta의 부호를 조건으로 나누고, ZoomRatio를 상수로 지정해서 계산식을 나누면 됨.
+           
+            TargetRect.Location.X = ZoomOrigin.X * (1 - zoomRatio) + TargetRect.Location.X * zoomRatio;
+            TargetRect.Location.Y = ZoomOrigin.Y * (1 - zoomRatio) + TargetRect.Location.Y * zoomRatio;
+
+            //이하 AC > BC일때 ( Zoom in)
+            targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) * Constants._ScaleIncreaseRatio) + e.X;
+            targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) * Constants._ScaleIncreaseRatio) + e.Y;
+
+            */
+
+            #endregion
+
+        }
+
+        private void SetTargetRectByZoomAtCenter(MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - picBox_Origin.Width / 2) * Constants.ratioPerLevel) + picBox_Origin.Width / 2;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - picBox_Origin.Height / 2) * Constants.ratioPerLevel) + picBox_Origin.Height / 2;
+            }
+            else
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - picBox_Origin.Width / 2) / Constants.ratioPerLevel) + picBox_Origin.Width / 2;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - picBox_Origin.Height / 2) / Constants.ratioPerLevel) + picBox_Origin.Height / 2;
+            }
+
+            Console.WriteLine("휠.줌.중앙_targetImgRect: " + Convert.ToString(targetImgRect));
+        }
+
+        private void SetTargetRectByZoomAtCursor(MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) * Constants.ratioPerLevel) + e.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) * Constants.ratioPerLevel) + e.Y;
+            }
+            else
+            {
+                targetImgRect.X = (int)Math.Round((targetImgRect.X - e.X) / Constants.ratioPerLevel) + e.X;
+                targetImgRect.Y = (int)Math.Round((targetImgRect.Y - e.Y) / Constants.ratioPerLevel) + e.Y;
+            }
+
+            Console.WriteLine("휠.줌.커서_targetImgRect: " + Convert.ToString(targetImgRect));
+        }
+
+
+        //브러시 크기조절
+        private void SetBrushSize(int brushSize)
+        {
+            this.brush_Size = brushSize;
+
+            //만약 브러시모양을 표시해줄거면 여기서 갱신
+        }
+
+        private void SetAlpha(int alpha)
+        {
+
+            float a = alpha / (float)colorSlider_Opacity.Maximum;
+
+            //투명도 표시 인터페이스
+            lable_Opacity.Tag = (int)Math.Round(a * 100);
+            lable_Opacity.Refresh();
+
+            float[][] matrixItems = {
+                new float[] {1, 0, 0, 0, 0},
+                new float[] {0, 1, 0, 0, 0},
+                new float[] {0, 0, 1, 0, 0},
+                new float[] {0, 0, 0, a, 0},
+                new float[] {0, 0, 0, 0, 1}
+            };
+
+            ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
+
+            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+
+            return;
+        }
+
+
+        /// <summary>
+        /// pt2pt의 선
+        /// </summary>
+        /// <param name="myPen"></param>
+        /// <param name="g"></param>
+        private void DrawFreeLine(Pen myPen, Graphics g)
+        {
+            g.DrawLine(myPen, pen_startpt, pen_endpt);
+        }
+
+        /// <summary>
+        /// isPaint를 확인하고 값이 True면,
+        /// 펜 생성->그리기->새로고침 실행합니다.
+        /// </summary>
+        private void DrawShape()
+        {
+            if (false == isPaint)
+            {
+                return;
+            }
+
+            Color brush_Color = Color.Black;
+            Pen myPen = new Pen(brush_Color, brush_Size);
+            //TODO: myPen의 수명이 언제 끝나는지 확인해서 Dispose처리 해주기.
+            //TODO: 모든 disposable의 수명이 언제 끝나는지 미리 확인해서 라이프사이클 관리. 
+
+            //GC에 모든걸 맡기면 느려지거나 크래시날 확률 존재
+
+            myPen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+            myPen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+
+
+            using (Graphics g = Graphics.FromImage(sourceBitmapRgb))
+            {
+                DrawFreeLine(myPen, g);
+            }
+
+
+            RefreshAllPictureBox();
+        }
     }
 
 

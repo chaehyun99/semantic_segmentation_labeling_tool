@@ -49,7 +49,7 @@ namespace Semantic
         private int zoomLevel = 0;
         private double zoomScale = 1.0f;
 
-        bool ctrlKeyDown;
+        bool ctrlKeyDown=false;
 
         private ImageAttributes imageAtt = new ImageAttributes();
 
@@ -64,6 +64,17 @@ namespace Semantic
             Cursor,
             TopLeft
         }
+
+        int current_idx = 0;
+
+        LinkedList<Bitmap> stackUndo = new LinkedList<Bitmap>();
+        LinkedList<Bitmap> stackRedo = new LinkedList<Bitmap>();
+
+        /// <summary>
+        /// 이 값으로 저장할수 있는 UNDO,REDO횟수의 최댓값 조절.
+        /// </summary>
+        int _maxHistory_ = 20;
+
     }
 
     static class Constants

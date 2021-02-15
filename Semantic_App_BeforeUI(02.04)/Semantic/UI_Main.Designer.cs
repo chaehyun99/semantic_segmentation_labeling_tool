@@ -185,7 +185,6 @@ namespace Semantic
             // 
             this.splitContainer_MenuBar_Left.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.splitContainer_MenuBar_Left.Panel1.Controls.Add(this.flowPanel_Menu_LoadSave);
-            this.splitContainer_MenuBar_Left.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer_MenuBar_Left_Panel1_Paint);
             this.splitContainer_MenuBar_Left.Panel1MinSize = 192;
             // 
             // splitContainer_MenuBar_Left.Panel2
@@ -193,7 +192,7 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.splitContainer_MenuBar_Left.Panel2.Controls.Add(this.splitContainer_Menu_CenterRight);
             this.splitContainer_MenuBar_Left.Panel2MinSize = 516;
-            this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(777, 80);
+            this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(636, 80);
             this.splitContainer_MenuBar_Left.SplitterDistance = 192;
             this.splitContainer_MenuBar_Left.SplitterIncrement = 64;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
@@ -222,9 +221,10 @@ namespace Semantic
             this.button_Path.ImageKey = "file_Path";
             this.button_Path.ImageList = this.imageList_ButtonIcon;
             this.button_Path.Location = new System.Drawing.Point(22, 2);
-            this.button_Path.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Path.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Path.Name = "button_Path";
-            this.button_Path.Size = new System.Drawing.Size(44, 70);
+            this.button_Path.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_Path.Size = new System.Drawing.Size(44, 78);
             this.button_Path.TabIndex = 31;
             this.button_Path.Text = "path";
             this.button_Path.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -258,9 +258,10 @@ namespace Semantic
             this.button_RunModel.ImageKey = "segmentation.png";
             this.button_RunModel.ImageList = this.imageList_ButtonIcon;
             this.button_RunModel.Location = new System.Drawing.Point(70, 2);
-            this.button_RunModel.Margin = new System.Windows.Forms.Padding(2);
+            this.button_RunModel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_RunModel.Name = "button_RunModel";
-            this.button_RunModel.Size = new System.Drawing.Size(44, 70);
+            this.button_RunModel.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_RunModel.Size = new System.Drawing.Size(44, 78);
             this.button_RunModel.TabIndex = 16;
             this.button_RunModel.Text = "run";
             this.button_RunModel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -278,9 +279,10 @@ namespace Semantic
             this.button_Info.ImageKey = "Info.png";
             this.button_Info.ImageList = this.imageList_ButtonIcon;
             this.button_Info.Location = new System.Drawing.Point(118, 2);
-            this.button_Info.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Info.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Info.Name = "button_Info";
-            this.button_Info.Size = new System.Drawing.Size(44, 70);
+            this.button_Info.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_Info.Size = new System.Drawing.Size(44, 78);
             this.button_Info.TabIndex = 32;
             this.button_Info.Text = "info";
             this.button_Info.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -338,9 +340,10 @@ namespace Semantic
             this.button_Undo.ImageKey = "edit_Undo";
             this.button_Undo.ImageList = this.imageList_ButtonIcon;
             this.button_Undo.Location = new System.Drawing.Point(2, 2);
-            this.button_Undo.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Undo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Undo.Name = "button_Undo";
-            this.button_Undo.Size = new System.Drawing.Size(44, 70);
+            this.button_Undo.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_Undo.Size = new System.Drawing.Size(44, 78);
             this.button_Undo.TabIndex = 33;
             this.button_Undo.Text = "undo";
             this.button_Undo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -358,9 +361,10 @@ namespace Semantic
             this.button_Redo.ImageKey = "edit_Redo.png";
             this.button_Redo.ImageList = this.imageList_ButtonIcon;
             this.button_Redo.Location = new System.Drawing.Point(50, 2);
-            this.button_Redo.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Redo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Redo.Name = "button_Redo";
-            this.button_Redo.Size = new System.Drawing.Size(44, 70);
+            this.button_Redo.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_Redo.Size = new System.Drawing.Size(44, 78);
             this.button_Redo.TabIndex = 34;
             this.button_Redo.Text = "redo";
             this.button_Redo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -378,9 +382,10 @@ namespace Semantic
             this.button_PaintMode.ImageKey = "edit_Brush";
             this.button_PaintMode.ImageList = this.imageList_ButtonIcon;
             this.button_PaintMode.Location = new System.Drawing.Point(98, 2);
-            this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2);
+            this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_PaintMode.Name = "button_PaintMode";
-            this.button_PaintMode.Size = new System.Drawing.Size(44, 70);
+            this.button_PaintMode.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_PaintMode.Size = new System.Drawing.Size(44, 78);
             this.button_PaintMode.TabIndex = 28;
             this.button_PaintMode.Text = "brush";
             this.button_PaintMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -398,9 +403,10 @@ namespace Semantic
             this.button_ScrollMode.ImageKey = "edit_Scroll.png";
             this.button_ScrollMode.ImageList = this.imageList_ButtonIcon;
             this.button_ScrollMode.Location = new System.Drawing.Point(146, 2);
-            this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2);
+            this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_ScrollMode.Name = "button_ScrollMode";
-            this.button_ScrollMode.Size = new System.Drawing.Size(44, 70);
+            this.button_ScrollMode.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_ScrollMode.Size = new System.Drawing.Size(44, 78);
             this.button_ScrollMode.TabIndex = 28;
             this.button_ScrollMode.Text = "move";
             this.button_ScrollMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -431,7 +437,7 @@ namespace Semantic
             this.button_ZoomIn.ImageKey = "zoom_in.png";
             this.button_ZoomIn.ImageList = this.imageList_ButtonIcon;
             this.button_ZoomIn.Location = new System.Drawing.Point(2, 2);
-            this.button_ZoomIn.Margin = new System.Windows.Forms.Padding(2);
+            this.button_ZoomIn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_ZoomIn.Name = "button_ZoomIn";
             this.button_ZoomIn.Size = new System.Drawing.Size(44, 78);
             this.button_ZoomIn.TabIndex = 25;
@@ -451,9 +457,10 @@ namespace Semantic
             this.button_ZoomReset.ImageKey = "zoom_100_.png";
             this.button_ZoomReset.ImageList = this.imageList_ButtonIcon;
             this.button_ZoomReset.Location = new System.Drawing.Point(50, 2);
-            this.button_ZoomReset.Margin = new System.Windows.Forms.Padding(2);
+            this.button_ZoomReset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_ZoomReset.Name = "button_ZoomReset";
-            this.button_ZoomReset.Size = new System.Drawing.Size(44, 70);
+            this.button_ZoomReset.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_ZoomReset.Size = new System.Drawing.Size(44, 78);
             this.button_ZoomReset.TabIndex = 30;
             this.button_ZoomReset.Text = "reset";
             this.button_ZoomReset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -471,7 +478,7 @@ namespace Semantic
             this.button_ZoomOut.ImageKey = "zoom_out.png";
             this.button_ZoomOut.ImageList = this.imageList_ButtonIcon;
             this.button_ZoomOut.Location = new System.Drawing.Point(98, 2);
-            this.button_ZoomOut.Margin = new System.Windows.Forms.Padding(2);
+            this.button_ZoomOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_ZoomOut.Name = "button_ZoomOut";
             this.button_ZoomOut.Size = new System.Drawing.Size(44, 78);
             this.button_ZoomOut.TabIndex = 33;
@@ -491,13 +498,15 @@ namespace Semantic
             this.button_Save.ImageKey = "file_Save";
             this.button_Save.ImageList = this.imageList_ButtonIcon;
             this.button_Save.Location = new System.Drawing.Point(146, 2);
-            this.button_Save.Margin = new System.Windows.Forms.Padding(2);
+            this.button_Save.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(44, 70);
+            this.button_Save.Padding = new System.Windows.Forms.Padding(0, 0, 0, 8);
+            this.button_Save.Size = new System.Drawing.Size(44, 78);
             this.button_Save.TabIndex = 18;
             this.button_Save.Text = "save";
             this.button_Save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_Save.UseVisualStyleBackColor = false;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             // 
             // label_Class5
             // 
@@ -558,7 +567,7 @@ namespace Semantic
             // 
             this.panel22.BackColor = System.Drawing.Color.Blue;
             this.panel22.Location = new System.Drawing.Point(4, 4);
-            this.panel22.Margin = new System.Windows.Forms.Padding(4);
+            this.panel22.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(15, 16);
             this.panel22.TabIndex = 47;
@@ -584,7 +593,7 @@ namespace Semantic
             this.panel9.BackColor = System.Drawing.Color.Teal;
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(4, 4);
-            this.panel9.Margin = new System.Windows.Forms.Padding(4);
+            this.panel9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(16, 16);
             this.panel9.TabIndex = 39;
@@ -616,12 +625,11 @@ namespace Semantic
             this.flowPanel_ColorSelect.Controls.Add(this.tablePanel_Color_20);
             this.flowPanel_ColorSelect.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowPanel_ColorSelect.Location = new System.Drawing.Point(8, 120);
-            this.flowPanel_ColorSelect.Margin = new System.Windows.Forms.Padding(8);
+            this.flowPanel_ColorSelect.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.flowPanel_ColorSelect.Name = "flowPanel_ColorSelect";
             this.flowPanel_ColorSelect.Size = new System.Drawing.Size(168, 328);
             this.flowPanel_ColorSelect.TabIndex = 3;
             this.flowPanel_ColorSelect.WrapContents = false;
-            this.flowPanel_ColorSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.flowPanel_ColorSelect_Paint);
             // 
             // tablePanel_Color_0
             // 
@@ -644,7 +652,7 @@ namespace Semantic
             this.panel1.BackColor = System.Drawing.Color.Black;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(4, 4);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(16, 16);
             this.panel1.TabIndex = 43;
@@ -661,7 +669,6 @@ namespace Semantic
             this.label_Class0.TabIndex = 1;
             this.label_Class0.Text = "Background";
             this.label_Class0.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label_Class0.Click += new System.EventHandler(this.label_Class0_Click);
             // 
             // tablePanel_Color_2
             // 
@@ -684,7 +691,7 @@ namespace Semantic
             this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel13.Location = new System.Drawing.Point(4, 4);
-            this.panel13.Margin = new System.Windows.Forms.Padding(4);
+            this.panel13.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(16, 16);
             this.panel13.TabIndex = 58;
@@ -736,7 +743,7 @@ namespace Semantic
             this.panel20.BackColor = System.Drawing.Color.Blue;
             this.panel20.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel20.Location = new System.Drawing.Point(4, 4);
-            this.panel20.Margin = new System.Windows.Forms.Padding(4);
+            this.panel20.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(16, 16);
             this.panel20.TabIndex = 57;
@@ -775,7 +782,7 @@ namespace Semantic
             this.panel11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel11.Location = new System.Drawing.Point(4, 4);
-            this.panel11.Margin = new System.Windows.Forms.Padding(4);
+            this.panel11.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel11.Name = "panel11";
             this.panel11.Size = new System.Drawing.Size(16, 16);
             this.panel11.TabIndex = 46;
@@ -801,7 +808,7 @@ namespace Semantic
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(4, 4);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(16, 16);
             this.panel2.TabIndex = 48;
@@ -840,7 +847,7 @@ namespace Semantic
             this.panel17.BackColor = System.Drawing.Color.Gray;
             this.panel17.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel17.Location = new System.Drawing.Point(4, 4);
-            this.panel17.Margin = new System.Windows.Forms.Padding(4);
+            this.panel17.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(16, 16);
             this.panel17.TabIndex = 40;
@@ -879,7 +886,7 @@ namespace Semantic
             this.panel4.BackColor = System.Drawing.Color.Maroon;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(4, 4);
-            this.panel4.Margin = new System.Windows.Forms.Padding(4);
+            this.panel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(16, 16);
             this.panel4.TabIndex = 44;
@@ -918,7 +925,7 @@ namespace Semantic
             this.panel5.BackColor = System.Drawing.Color.Red;
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(4, 4);
-            this.panel5.Margin = new System.Windows.Forms.Padding(4);
+            this.panel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(16, 16);
             this.panel5.TabIndex = 42;
@@ -957,7 +964,7 @@ namespace Semantic
             this.panel18.BackColor = System.Drawing.Color.Red;
             this.panel18.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel18.Location = new System.Drawing.Point(4, 4);
-            this.panel18.Margin = new System.Windows.Forms.Padding(4);
+            this.panel18.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(16, 16);
             this.panel18.TabIndex = 56;
@@ -996,7 +1003,7 @@ namespace Semantic
             this.panel19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.panel19.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel19.Location = new System.Drawing.Point(4, 4);
-            this.panel19.Margin = new System.Windows.Forms.Padding(4);
+            this.panel19.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(16, 16);
             this.panel19.TabIndex = 41;
@@ -1035,7 +1042,7 @@ namespace Semantic
             this.panel7.BackColor = System.Drawing.Color.Green;
             this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(4, 4);
-            this.panel7.Margin = new System.Windows.Forms.Padding(4);
+            this.panel7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(16, 16);
             this.panel7.TabIndex = 45;
@@ -1074,7 +1081,7 @@ namespace Semantic
             this.panel21.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.panel21.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel21.Location = new System.Drawing.Point(4, 4);
-            this.panel21.Margin = new System.Windows.Forms.Padding(4);
+            this.panel21.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(16, 16);
             this.panel21.TabIndex = 49;
@@ -1113,7 +1120,7 @@ namespace Semantic
             this.panel6.BackColor = System.Drawing.Color.Green;
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(4, 4);
-            this.panel6.Margin = new System.Windows.Forms.Padding(4);
+            this.panel6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(16, 16);
             this.panel6.TabIndex = 50;
@@ -1152,7 +1159,7 @@ namespace Semantic
             this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel8.Location = new System.Drawing.Point(4, 4);
-            this.panel8.Margin = new System.Windows.Forms.Padding(4);
+            this.panel8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(16, 16);
             this.panel8.TabIndex = 51;
@@ -1191,7 +1198,7 @@ namespace Semantic
             this.panel10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel10.Location = new System.Drawing.Point(4, 4);
-            this.panel10.Margin = new System.Windows.Forms.Padding(4);
+            this.panel10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(16, 16);
             this.panel10.TabIndex = 52;
@@ -1230,7 +1237,7 @@ namespace Semantic
             this.panel12.BackColor = System.Drawing.Color.Teal;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel12.Location = new System.Drawing.Point(4, 4);
-            this.panel12.Margin = new System.Windows.Forms.Padding(4);
+            this.panel12.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(16, 16);
             this.panel12.TabIndex = 53;
@@ -1269,7 +1276,7 @@ namespace Semantic
             this.panel14.BackColor = System.Drawing.Color.Gray;
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(4, 4);
-            this.panel14.Margin = new System.Windows.Forms.Padding(4);
+            this.panel14.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(16, 16);
             this.panel14.TabIndex = 54;
@@ -1308,7 +1315,7 @@ namespace Semantic
             this.panel16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.panel16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel16.Location = new System.Drawing.Point(4, 4);
-            this.panel16.Margin = new System.Windows.Forms.Padding(4);
+            this.panel16.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel16.Name = "panel16";
             this.panel16.Size = new System.Drawing.Size(16, 16);
             this.panel16.TabIndex = 55;
@@ -1328,7 +1335,6 @@ namespace Semantic
             this.tablePanel_Color_20.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tablePanel_Color_20.Size = new System.Drawing.Size(150, 24);
             this.tablePanel_Color_20.TabIndex = 26;
-            this.tablePanel_Color_20.Paint += new System.Windows.Forms.PaintEventHandler(this.tablePanel_Color_20_Paint);
             // 
             // label_Class20
             // 
@@ -1348,7 +1354,7 @@ namespace Semantic
             this.panel3.BackColor = System.Drawing.Color.Maroon;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(4, 4);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(16, 16);
             this.panel3.TabIndex = 38;
@@ -1359,10 +1365,10 @@ namespace Semantic
             this.RightDock_panel_Brush.Controls.Add(this.flowPanel_ColorSelect);
             this.RightDock_panel_Brush.Controls.Add(this.panel_TrackBar);
             this.RightDock_panel_Brush.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RightDock_panel_Brush.Location = new System.Drawing.Point(856, 80);
+            this.RightDock_panel_Brush.Location = new System.Drawing.Point(715, 80);
             this.RightDock_panel_Brush.Margin = new System.Windows.Forms.Padding(0);
             this.RightDock_panel_Brush.Name = "RightDock_panel_Brush";
-            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 473);
+            this.RightDock_panel_Brush.Size = new System.Drawing.Size(184, 387);
             this.RightDock_panel_Brush.TabIndex = 36;
             // 
             // panel_TrackBar
@@ -1377,7 +1383,7 @@ namespace Semantic
             this.panel_TrackBar.Controls.Add(this.colorSlider_BrushSize);
             this.panel_TrackBar.Controls.Add(this.colorSlider_Opacity);
             this.panel_TrackBar.Location = new System.Drawing.Point(8, 8);
-            this.panel_TrackBar.Margin = new System.Windows.Forms.Padding(8);
+            this.panel_TrackBar.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.panel_TrackBar.Name = "panel_TrackBar";
             this.panel_TrackBar.Size = new System.Drawing.Size(168, 104);
             this.panel_TrackBar.TabIndex = 2;
@@ -1427,7 +1433,7 @@ namespace Semantic
             0,
             0});
             this.colorSlider_BrushSize.Location = new System.Drawing.Point(17, 69);
-            this.colorSlider_BrushSize.Margin = new System.Windows.Forms.Padding(8);
+            this.colorSlider_BrushSize.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.colorSlider_BrushSize.Maximum = new decimal(new int[] {
             10,
             0,
@@ -1471,6 +1477,7 @@ namespace Semantic
             0,
             0,
             0});
+            this.colorSlider_BrushSize.Scroll += new System.Windows.Forms.ScrollEventHandler(this.colorSlider_BrushSize_Scroll);
             // 
             // colorSlider_Opacity
             // 
@@ -1491,7 +1498,7 @@ namespace Semantic
             0,
             0});
             this.colorSlider_Opacity.Location = new System.Drawing.Point(16, 24);
-            this.colorSlider_Opacity.Margin = new System.Windows.Forms.Padding(8);
+            this.colorSlider_Opacity.Margin = new System.Windows.Forms.Padding(8, 8, 8, 8);
             this.colorSlider_Opacity.Maximum = new decimal(new int[] {
             100,
             0,
@@ -1536,6 +1543,7 @@ namespace Semantic
             0,
             0,
             0});
+            this.colorSlider_Opacity.Scroll += new System.Windows.Forms.ScrollEventHandler(this.colorSlider_Opacity_Scroll);
             // 
             // panel_Canvas
             // 
@@ -1548,20 +1556,21 @@ namespace Semantic
             this.panel_Canvas.Location = new System.Drawing.Point(263, 80);
             this.panel_Canvas.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Canvas.Name = "panel_Canvas";
-            this.panel_Canvas.Size = new System.Drawing.Size(593, 473);
+            this.panel_Canvas.Size = new System.Drawing.Size(452, 387);
             this.panel_Canvas.TabIndex = 36;
             // 
             // statusStrip1
             // 
             this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.statusStrip1.GripMargin = new System.Windows.Forms.Padding(0);
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CursorPosition_toolStripStatusLabel,
             this.BitmapSize_toolStripStatusLabel,
             this.Scale_toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 451);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 365);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(593, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(452, 22);
             this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 33;
             this.statusStrip1.Text = "statusStrip1";
@@ -1571,7 +1580,7 @@ namespace Semantic
             this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
             this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
-            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(184, 17);
+            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(137, 17);
             this.CursorPosition_toolStripStatusLabel.Spring = true;
             this.CursorPosition_toolStripStatusLabel.Text = "커서_x: ?, y: ?";
             this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1580,7 +1589,7 @@ namespace Semantic
             // 
             this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
-            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(145, 17);
             this.BitmapSize_toolStripStatusLabel.Spring = true;
             this.BitmapSize_toolStripStatusLabel.Text = "원본_x: ?, y: ?";
             this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1591,10 +1600,11 @@ namespace Semantic
             this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
             this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(192, 17);
+            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(135, 17);
             this.Scale_toolStripStatusLabel.Spring = true;
             this.Scale_toolStripStatusLabel.Text = "Scale: ? %";
             this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Scale_toolStripStatusLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.Scale_toolStripStatusLabel_Paint);
             // 
             // picBox_Cursor
             // 
@@ -1603,11 +1613,15 @@ namespace Semantic
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picBox_Cursor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(60)))));
             this.picBox_Cursor.Location = new System.Drawing.Point(4, 4);
-            this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(4);
+            this.picBox_Cursor.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picBox_Cursor.Name = "picBox_Cursor";
-            this.picBox_Cursor.Size = new System.Drawing.Size(585, 443);
+            this.picBox_Cursor.Size = new System.Drawing.Size(444, 357);
             this.picBox_Cursor.TabIndex = 32;
             this.picBox_Cursor.TabStop = false;
+            this.picBox_Cursor.Paint += new System.Windows.Forms.PaintEventHandler(this.picBox_Cursor_Paint);
+            this.picBox_Cursor.MouseEnter += new System.EventHandler(this.picBox_Cursor_MouseEnter);
+            this.picBox_Cursor.MouseLeave += new System.EventHandler(this.picBox_Cursor_MouseLeave);
+            this.picBox_Cursor.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picBox_Cursor_MouseMove);
             // 
             // picBox_Rgb
             // 
@@ -1617,12 +1631,15 @@ namespace Semantic
             this.picBox_Rgb.BackColor = System.Drawing.Color.Gainsboro;
             this.picBox_Rgb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picBox_Rgb.Location = new System.Drawing.Point(4, 4);
-            this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(4);
+            this.picBox_Rgb.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picBox_Rgb.MinimumSize = new System.Drawing.Size(100, 100);
             this.picBox_Rgb.Name = "picBox_Rgb";
-            this.picBox_Rgb.Size = new System.Drawing.Size(585, 443);
+            this.picBox_Rgb.Size = new System.Drawing.Size(444, 357);
             this.picBox_Rgb.TabIndex = 23;
             this.picBox_Rgb.TabStop = false;
+            this.picBox_Rgb.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseDown);
+            this.picBox_Rgb.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseMove);
+            this.picBox_Rgb.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picBox_Rgb_MouseUp);
             // 
             // picBox_Origin
             // 
@@ -1632,11 +1649,12 @@ namespace Semantic
             this.picBox_Origin.BackColor = System.Drawing.SystemColors.Info;
             this.picBox_Origin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picBox_Origin.Location = new System.Drawing.Point(4, 4);
-            this.picBox_Origin.Margin = new System.Windows.Forms.Padding(4);
+            this.picBox_Origin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.picBox_Origin.Name = "picBox_Origin";
-            this.picBox_Origin.Size = new System.Drawing.Size(585, 443);
+            this.picBox_Origin.Size = new System.Drawing.Size(444, 357);
             this.picBox_Origin.TabIndex = 17;
             this.picBox_Origin.TabStop = false;
+            this.picBox_Origin.Paint += new System.Windows.Forms.PaintEventHandler(this.picBox_Origin_Paint);
             // 
             // tablePanel_FullLayout
             // 
@@ -1655,7 +1673,7 @@ namespace Semantic
             this.tablePanel_FullLayout.RowCount = 2;
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tablePanel_FullLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tablePanel_FullLayout.Size = new System.Drawing.Size(1040, 553);
+            this.tablePanel_FullLayout.Size = new System.Drawing.Size(899, 467);
             this.tablePanel_FullLayout.TabIndex = 36;
             // 
             // LeftDock_flowPanel_Thumbnail
@@ -1667,20 +1685,22 @@ namespace Semantic
             this.LeftDock_flowPanel_Thumbnail.Margin = new System.Windows.Forms.Padding(0);
             this.LeftDock_flowPanel_Thumbnail.Name = "LeftDock_flowPanel_Thumbnail";
             this.tablePanel_FullLayout.SetRowSpan(this.LeftDock_flowPanel_Thumbnail, 2);
-            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 553);
+            this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 467);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
             // 
             // UI_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 553);
+            this.ClientSize = new System.Drawing.Size(899, 467);
             this.Controls.Add(this.tablePanel_FullLayout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MinimumSize = new System.Drawing.Size(991, 570);
+            this.MinimumSize = new System.Drawing.Size(899, 465);
             this.Name = "UI_Main";
             this.Text = "DeepLearning-Semantic Training Data Editor";
             this.Load += new System.EventHandler(this.UI_Main_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UI_Main_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.UI_Main_KeyUp);
             this.splitContainer_MenuBar_Left.Panel1.ResumeLayout(false);
             this.splitContainer_MenuBar_Left.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).EndInit();
