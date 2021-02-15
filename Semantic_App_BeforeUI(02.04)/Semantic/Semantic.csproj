@@ -81,6 +81,9 @@
     <Compile Include="Field.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Functions.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.SelectBrushColor.cs">
       <SubType>Form</SubType>
     </Compile>
