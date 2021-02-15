@@ -113,6 +113,11 @@ namespace Semantic
         {
 
         }
+
+        private void UI_Main_Load(object sender, EventArgs e)
+        {
+            InitBtnBrushColor();
+        }
     }
 }
 
