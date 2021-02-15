@@ -1419,7 +1419,7 @@ namespace Semantic
             this.colorSlider_BrushSize.ElapsedInnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.colorSlider_BrushSize.ElapsedPenColorBottom = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.colorSlider_BrushSize.ElapsedPenColorTop = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
-            this.colorSlider_BrushSize.Font = new System.Drawing.Font("HY강M", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.colorSlider_BrushSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.colorSlider_BrushSize.ForeColor = System.Drawing.Color.Black;
             this.colorSlider_BrushSize.LargeChange = new decimal(new int[] {
             5,
@@ -1680,6 +1680,7 @@ namespace Semantic
             this.MinimumSize = new System.Drawing.Size(991, 570);
             this.Name = "UI_Main";
             this.Text = "DeepLearning-Semantic Training Data Editor";
+            this.Load += new System.EventHandler(this.UI_Main_Load);
             this.splitContainer_MenuBar_Left.Panel1.ResumeLayout(false);
             this.splitContainer_MenuBar_Left.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).EndInit();
