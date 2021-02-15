@@ -194,7 +194,7 @@ namespace Semantic
             this.splitContainer_MenuBar_Left.Panel2.Controls.Add(this.splitContainer_Menu_CenterRight);
             this.splitContainer_MenuBar_Left.Panel2MinSize = 516;
             this.splitContainer_MenuBar_Left.Size = new System.Drawing.Size(777, 80);
-            this.splitContainer_MenuBar_Left.SplitterDistance = 253;
+            this.splitContainer_MenuBar_Left.SplitterDistance = 192;
             this.splitContainer_MenuBar_Left.SplitterIncrement = 64;
             this.splitContainer_MenuBar_Left.TabIndex = 38;
             // 
@@ -204,9 +204,10 @@ namespace Semantic
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Path);
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_RunModel);
             this.flowPanel_Menu_LoadSave.Controls.Add(this.button_Info);
-            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(0, 0);
+            this.flowPanel_Menu_LoadSave.Location = new System.Drawing.Point(1, 0);
             this.flowPanel_Menu_LoadSave.Margin = new System.Windows.Forms.Padding(0);
             this.flowPanel_Menu_LoadSave.Name = "flowPanel_Menu_LoadSave";
+            this.flowPanel_Menu_LoadSave.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.flowPanel_Menu_LoadSave.Size = new System.Drawing.Size(192, 80);
             this.flowPanel_Menu_LoadSave.TabIndex = 33;
             // 
@@ -220,10 +221,10 @@ namespace Semantic
             this.button_Path.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Path.ImageKey = "file_Path";
             this.button_Path.ImageList = this.imageList_ButtonIcon;
-            this.button_Path.Location = new System.Drawing.Point(2, 2);
+            this.button_Path.Location = new System.Drawing.Point(22, 2);
             this.button_Path.Margin = new System.Windows.Forms.Padding(2);
             this.button_Path.Name = "button_Path";
-            this.button_Path.Size = new System.Drawing.Size(60, 76);
+            this.button_Path.Size = new System.Drawing.Size(44, 70);
             this.button_Path.TabIndex = 31;
             this.button_Path.Text = "path";
             this.button_Path.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -256,12 +257,12 @@ namespace Semantic
             this.button_RunModel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_RunModel.ImageKey = "segmentation.png";
             this.button_RunModel.ImageList = this.imageList_ButtonIcon;
-            this.button_RunModel.Location = new System.Drawing.Point(66, 2);
+            this.button_RunModel.Location = new System.Drawing.Point(70, 2);
             this.button_RunModel.Margin = new System.Windows.Forms.Padding(2);
             this.button_RunModel.Name = "button_RunModel";
-            this.button_RunModel.Size = new System.Drawing.Size(60, 76);
+            this.button_RunModel.Size = new System.Drawing.Size(44, 70);
             this.button_RunModel.TabIndex = 16;
-            this.button_RunModel.Text = "segment";
+            this.button_RunModel.Text = "run";
             this.button_RunModel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button_RunModel.UseVisualStyleBackColor = true;
             this.button_RunModel.Click += new System.EventHandler(this.button_RunModel_Click);
@@ -276,10 +277,10 @@ namespace Semantic
             this.button_Info.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Info.ImageKey = "Info.png";
             this.button_Info.ImageList = this.imageList_ButtonIcon;
-            this.button_Info.Location = new System.Drawing.Point(130, 2);
+            this.button_Info.Location = new System.Drawing.Point(118, 2);
             this.button_Info.Margin = new System.Windows.Forms.Padding(2);
             this.button_Info.Name = "button_Info";
-            this.button_Info.Size = new System.Drawing.Size(60, 76);
+            this.button_Info.Size = new System.Drawing.Size(44, 70);
             this.button_Info.TabIndex = 32;
             this.button_Info.Text = "info";
             this.button_Info.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -309,7 +310,7 @@ namespace Semantic
             this.splitContainer_Menu_CenterRight.Panel2.Controls.Add(this.flowPanel_Menu_Zoom);
             this.splitContainer_Menu_CenterRight.Panel2MinSize = 192;
             this.splitContainer_Menu_CenterRight.Size = new System.Drawing.Size(767, 80);
-            this.splitContainer_Menu_CenterRight.SplitterDistance = 256;
+            this.splitContainer_Menu_CenterRight.SplitterDistance = 192;
             this.splitContainer_Menu_CenterRight.SplitterIncrement = 64;
             this.splitContainer_Menu_CenterRight.TabIndex = 0;
             // 
@@ -323,7 +324,7 @@ namespace Semantic
             this.flowPanel_Menu_Edit.Location = new System.Drawing.Point(0, 0);
             this.flowPanel_Menu_Edit.Margin = new System.Windows.Forms.Padding(0);
             this.flowPanel_Menu_Edit.Name = "flowPanel_Menu_Edit";
-            this.flowPanel_Menu_Edit.Size = new System.Drawing.Size(256, 80);
+            this.flowPanel_Menu_Edit.Size = new System.Drawing.Size(192, 80);
             this.flowPanel_Menu_Edit.TabIndex = 38;
             // 
             // button_Undo
@@ -339,7 +340,7 @@ namespace Semantic
             this.button_Undo.Location = new System.Drawing.Point(2, 2);
             this.button_Undo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Undo.Name = "button_Undo";
-            this.button_Undo.Size = new System.Drawing.Size(60, 76);
+            this.button_Undo.Size = new System.Drawing.Size(44, 70);
             this.button_Undo.TabIndex = 33;
             this.button_Undo.Text = "undo";
             this.button_Undo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -356,10 +357,10 @@ namespace Semantic
             this.button_Redo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Redo.ImageKey = "edit_Redo.png";
             this.button_Redo.ImageList = this.imageList_ButtonIcon;
-            this.button_Redo.Location = new System.Drawing.Point(66, 2);
+            this.button_Redo.Location = new System.Drawing.Point(50, 2);
             this.button_Redo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Redo.Name = "button_Redo";
-            this.button_Redo.Size = new System.Drawing.Size(60, 76);
+            this.button_Redo.Size = new System.Drawing.Size(44, 70);
             this.button_Redo.TabIndex = 34;
             this.button_Redo.Text = "redo";
             this.button_Redo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -376,10 +377,10 @@ namespace Semantic
             this.button_PaintMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_PaintMode.ImageKey = "edit_Brush";
             this.button_PaintMode.ImageList = this.imageList_ButtonIcon;
-            this.button_PaintMode.Location = new System.Drawing.Point(130, 2);
+            this.button_PaintMode.Location = new System.Drawing.Point(98, 2);
             this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_PaintMode.Name = "button_PaintMode";
-            this.button_PaintMode.Size = new System.Drawing.Size(60, 76);
+            this.button_PaintMode.Size = new System.Drawing.Size(44, 70);
             this.button_PaintMode.TabIndex = 28;
             this.button_PaintMode.Text = "brush";
             this.button_PaintMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -396,10 +397,10 @@ namespace Semantic
             this.button_ScrollMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ScrollMode.ImageKey = "edit_Scroll.png";
             this.button_ScrollMode.ImageList = this.imageList_ButtonIcon;
-            this.button_ScrollMode.Location = new System.Drawing.Point(194, 2);
+            this.button_ScrollMode.Location = new System.Drawing.Point(146, 2);
             this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_ScrollMode.Name = "button_ScrollMode";
-            this.button_ScrollMode.Size = new System.Drawing.Size(60, 76);
+            this.button_ScrollMode.Size = new System.Drawing.Size(44, 70);
             this.button_ScrollMode.TabIndex = 28;
             this.button_ScrollMode.Text = "move";
             this.button_ScrollMode.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -416,7 +417,7 @@ namespace Semantic
             this.flowPanel_Menu_Zoom.Location = new System.Drawing.Point(0, 0);
             this.flowPanel_Menu_Zoom.Margin = new System.Windows.Forms.Padding(0);
             this.flowPanel_Menu_Zoom.Name = "flowPanel_Menu_Zoom";
-            this.flowPanel_Menu_Zoom.Size = new System.Drawing.Size(256, 80);
+            this.flowPanel_Menu_Zoom.Size = new System.Drawing.Size(192, 80);
             this.flowPanel_Menu_Zoom.TabIndex = 39;
             // 
             // button_ZoomIn
@@ -432,7 +433,7 @@ namespace Semantic
             this.button_ZoomIn.Location = new System.Drawing.Point(2, 2);
             this.button_ZoomIn.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomIn.Name = "button_ZoomIn";
-            this.button_ZoomIn.Size = new System.Drawing.Size(60, 76);
+            this.button_ZoomIn.Size = new System.Drawing.Size(44, 78);
             this.button_ZoomIn.TabIndex = 25;
             this.button_ZoomIn.Text = "zoom in";
             this.button_ZoomIn.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -449,10 +450,10 @@ namespace Semantic
             this.button_ZoomReset.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ZoomReset.ImageKey = "zoom_100_.png";
             this.button_ZoomReset.ImageList = this.imageList_ButtonIcon;
-            this.button_ZoomReset.Location = new System.Drawing.Point(66, 2);
+            this.button_ZoomReset.Location = new System.Drawing.Point(50, 2);
             this.button_ZoomReset.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomReset.Name = "button_ZoomReset";
-            this.button_ZoomReset.Size = new System.Drawing.Size(60, 76);
+            this.button_ZoomReset.Size = new System.Drawing.Size(44, 70);
             this.button_ZoomReset.TabIndex = 30;
             this.button_ZoomReset.Text = "reset";
             this.button_ZoomReset.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -469,10 +470,10 @@ namespace Semantic
             this.button_ZoomOut.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ZoomOut.ImageKey = "zoom_out.png";
             this.button_ZoomOut.ImageList = this.imageList_ButtonIcon;
-            this.button_ZoomOut.Location = new System.Drawing.Point(130, 2);
+            this.button_ZoomOut.Location = new System.Drawing.Point(98, 2);
             this.button_ZoomOut.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomOut.Name = "button_ZoomOut";
-            this.button_ZoomOut.Size = new System.Drawing.Size(60, 76);
+            this.button_ZoomOut.Size = new System.Drawing.Size(44, 78);
             this.button_ZoomOut.TabIndex = 33;
             this.button_ZoomOut.Text = "zoom out";
             this.button_ZoomOut.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -489,10 +490,10 @@ namespace Semantic
             this.button_Save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Save.ImageKey = "file_Save";
             this.button_Save.ImageList = this.imageList_ButtonIcon;
-            this.button_Save.Location = new System.Drawing.Point(194, 2);
+            this.button_Save.Location = new System.Drawing.Point(146, 2);
             this.button_Save.Margin = new System.Windows.Forms.Padding(2);
             this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(60, 76);
+            this.button_Save.Size = new System.Drawing.Size(44, 70);
             this.button_Save.TabIndex = 18;
             this.button_Save.Text = "save";
             this.button_Save.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
