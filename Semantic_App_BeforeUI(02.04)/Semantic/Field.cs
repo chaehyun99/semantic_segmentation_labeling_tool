@@ -52,5 +52,40 @@ namespace Semantic
         bool ctrlKeyDown;
 
         private ImageAttributes imageAtt = new ImageAttributes();
+
+
+        bool isOnPicBox3 = false;
+        private Bitmap cursorBoardBitmap = null;
+
+
+        enum zoomMode
+        {
+            Center,
+            Cursor,
+            TopLeft
+        }
     }
+
+    static class Constants
+    {
+        public const int Thumbnail_Width = 243;
+        public const int Thumbnail_Height = 150;
+
+        public const double ratioPerLevel = 1.1;
+
+        public const int Max_brush_Size = 10;
+
+        //
+        public const bool isTestmode = false;                     //원본이미지만 필요
+        //
+        public const bool isTest_NoLabel_mode = true;               //모델구동 생략. 레이블링해놓은 GrayScale 이미지를 경로에 둔채로 테스트.                          
+                                                                    //
+                                                                    //public const bool isTest_NoLabel_mode = true;
+                                                                    // public const bool isTestmode = true;                       //모델구동+rgb 전부 생략. GraysCale&RGB 이미지를 경로에 둔채로 테스트.                   
+                                                                    //
+
+        ///모델구동, rgb변환없이 작업 시작할 때 키고, 
+        ///모델구동, rgb변환해야되거나 공식적으로 올릴땐 false
+    }
+
 }
