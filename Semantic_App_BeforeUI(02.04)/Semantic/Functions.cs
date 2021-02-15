@@ -32,7 +32,26 @@ namespace Semantic
 
             Console.WriteLine("pbox2위치;" + Convert.ToString(picBox_Cursor.Location));
 
+
+
+
+
+
             //커서그려줄 패널 겹치기
+
+            picBox_Cursor.Parent = picBox_Rgb;
+            picBox_Cursor.BackColor = Color.Transparent;
+            // thePointRelativeToTheBackImage;
+            picBox_Cursor.Location = new Point(0, 0);
+            Console.WriteLine("pbox3위치;" + Convert.ToString(picBox_Cursor.Location));
+
+            // TODO:현재 위의 코드가 여기에 있는건작동은 되지만 상당히 이상한 구조임. 개선필요.
+
+
+
+
+
+
 
 
 
