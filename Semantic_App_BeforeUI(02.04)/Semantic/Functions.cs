@@ -259,6 +259,10 @@ namespace Semantic
             int idx = Convert.ToInt32(pb.Tag.ToString());
             sourceBitmapOrigin = new Bitmap(input_file_path.SelectedPath + imgList[idx]);
 
+            // 하단 상태바 이미지크기표시 라벨 갱신.
+            BitmapSize_toolStripStatusLabel.Text = string.Format("ImageSize x: {0} y: {1}", sourceBitmapOrigin.Width, sourceBitmapOrigin.Height);
+
+
             //픽쳐박스2에 띄워질 비트맵 변경. (+ 커서가 그려질 비트맵 크기조절)
             if (null == rgb_imglist || 0 == rgb_imglist.Count())
             {
@@ -656,6 +660,16 @@ namespace Semantic
 
             RefreshAllPictureBox();
         }
+
+        private void RefreshLabel_CursorPosition()
+        {
+            if (null == sourceBitmapOrigin)
+            {
+                return;
+            }
+            CursorPosition_toolStripStatusLabel.Text = string.Format("Cursor X:{0} Y: {1}", (int)Math.Round((picBox_Origin.PointToClient(Cursor.Position).X - targetImgRect.X) / zoomScale), (int)Math.Round((picBox_Origin.PointToClient(Cursor.Position).Y - targetImgRect.Y) / zoomScale));
+        }
+
     }
 
 

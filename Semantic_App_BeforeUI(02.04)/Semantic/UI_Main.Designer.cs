@@ -332,6 +332,7 @@ namespace Semantic
             // button_Undo
             // 
             this.button_Undo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button_Undo.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.button_Undo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(63)))), ((int)(((byte)(80)))));
             this.button_Undo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Undo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
@@ -1580,18 +1581,18 @@ namespace Semantic
             this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
             this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
-            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(137, 17);
+            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(127, 17);
             this.CursorPosition_toolStripStatusLabel.Spring = true;
-            this.CursorPosition_toolStripStatusLabel.Text = "커서_x: ?, y: ?";
+            this.CursorPosition_toolStripStatusLabel.Text = "Cursor x: ?  y: ?";
             this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // BitmapSize_toolStripStatusLabel
             // 
             this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
-            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(145, 17);
+            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(135, 17);
             this.BitmapSize_toolStripStatusLabel.Spring = true;
-            this.BitmapSize_toolStripStatusLabel.Text = "원본_x: ?, y: ?";
+            this.BitmapSize_toolStripStatusLabel.Text = "ImageSize x: ? y: ?";
             this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Scale_toolStripStatusLabel
@@ -1600,11 +1601,10 @@ namespace Semantic
             this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
             this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(145, 17);
+            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(135, 17);
             this.Scale_toolStripStatusLabel.Spring = true;
-            this.Scale_toolStripStatusLabel.Text = "Scale: ? %";
+            this.Scale_toolStripStatusLabel.Text = "Scale: 100 %";
             this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Scale_toolStripStatusLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.Scale_toolStripStatusLabel_Paint);
             // 
             // picBox_Cursor
             // 
@@ -1647,7 +1647,7 @@ namespace Semantic
             this.picBox_Origin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBox_Origin.BackColor = System.Drawing.SystemColors.Info;
+            this.picBox_Origin.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.picBox_Origin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picBox_Origin.Location = new System.Drawing.Point(4, 4);
             this.picBox_Origin.Margin = new System.Windows.Forms.Padding(4);
@@ -1659,7 +1659,7 @@ namespace Semantic
             // 
             // tablePanel_FullLayout
             // 
-            this.tablePanel_FullLayout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tablePanel_FullLayout.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.tablePanel_FullLayout.ColumnCount = 3;
             this.tablePanel_FullLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 263F));
             this.tablePanel_FullLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));

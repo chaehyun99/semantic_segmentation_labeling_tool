@@ -207,6 +207,11 @@ namespace Semantic
             zoomLevel++;
             SetScale(Math.Pow(Constants.ratioPerLevel, zoomLevel)); //윈도우 그림판은 첫번째 인자가 2로 잡혀있는 셈( 25%/ 50%/ 100%/ 200%/ 400%)
 
+            Scale_toolStripStatusLabel.Text =
+                "Scale:"
+                + Convert.ToString(Math.Round(zoomScale * 100))
+                + "%"
+                ;
         }
 
         private void button_ZoomReset_Click(object sender, EventArgs e)
@@ -217,12 +222,24 @@ namespace Semantic
 
             zoomLevel = 0;
             SetScale(Math.Pow(1.5, zoomLevel));
+
+            Scale_toolStripStatusLabel.Text =
+                "Scale:"
+                + Convert.ToString(Math.Round(zoomScale * 100))
+                + "%"
+                ;
         }
 
         private void button_ZoomOut_Click(object sender, EventArgs e)
         {
             zoomLevel--;
             SetScale(Math.Pow(Constants.ratioPerLevel, zoomLevel));
+
+            Scale_toolStripStatusLabel.Text =
+                "Scale:"
+                + Convert.ToString(Math.Round(zoomScale * 100))
+                + "%"
+                ;
         }
 
         private void UI_Main_Load(object sender, EventArgs e)
@@ -311,15 +328,6 @@ namespace Semantic
                 default:
                     break;
             }
-        }
-
-        private void Scale_toolStripStatusLabel_Paint(object sender, PaintEventArgs e)
-        {
-            Scale_toolStripStatusLabel.Text =
-                "Scale:"
-                + Convert.ToString(Math.Round(zoomScale * 100))
-                + "%"
-                ;
         }
 
         private void picBox_Rgb_MouseDown(object sender, MouseEventArgs e)
@@ -475,15 +483,13 @@ namespace Semantic
 
         private void picBox_Cursor_MouseEnter(object sender, EventArgs e)
         {
+            RefreshLabel_CursorPosition();
             //화면에 띄울 커서의 종류, 픽쳐박스에서 따라다닐 브러시의 표시유무(isOnpicBox3).
             //둘 다 isPaint, isScroll, cursor_mode에 따라 변경.
-
-            //TODO:어찌하다보니 쓸모가 없어짐. 적절히 써먹든지 삭제.
         }
 
         private void picBox_Cursor_MouseLeave(object sender, EventArgs e)
         {
-
 
             PictureBox picBox = (PictureBox)sender;
             if ((CursorMode.Paint != cursor_mode) || (null == cursorBoardBitmap))
@@ -503,6 +509,8 @@ namespace Semantic
         {
             //picBox3.MouseMove 의 delegate로 picBox2_MouseMove를 줘도 되고,
             //아예 여기서 picBox2_MouseMove를 발생시켜도 됨.
+
+            RefreshLabel_CursorPosition();
 
             if ((CursorMode.Paint != cursor_mode) || (null == cursorBoardBitmap))
             {
@@ -535,6 +543,12 @@ namespace Semantic
             {
                 SetTargetRectByZoomAt(zoomMode.Center, e);
             }
+
+            Scale_toolStripStatusLabel.Text =
+                "Scale:"
+                + Convert.ToString(Math.Round(zoomScale * 100))
+                + "%"
+                ;
 
             RefreshAllPictureBox();
             //TODO:Scale_toolStripStatusLabel 갱신여부 확인하기. (zoomScale 변수와, 해당레이블의 Paint 이벤트 참조.).
