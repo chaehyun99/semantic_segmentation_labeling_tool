@@ -34,7 +34,7 @@ namespace Semantic
             this.splitContainer_MenuBar_Left = new System.Windows.Forms.SplitContainer();
             this.flowPanel_Menu_LoadSave = new System.Windows.Forms.FlowLayoutPanel();
             this.button_Path = new System.Windows.Forms.Button();
-            this.imageList_ButtonIcon = new System.Windows.Forms.ImageList(this.components);
+            this.imageList_ButtonIcon_4040 = new System.Windows.Forms.ImageList(this.components);
             this.button_RunModel = new System.Windows.Forms.Button();
             this.button_Info = new System.Windows.Forms.Button();
             this.splitContainer_Menu_CenterRight = new System.Windows.Forms.SplitContainer();
@@ -128,6 +128,7 @@ namespace Semantic
             this.picBox_Origin = new System.Windows.Forms.PictureBox();
             this.tablePanel_FullLayout = new System.Windows.Forms.TableLayoutPanel();
             this.LeftDock_flowPanel_Thumbnail = new System.Windows.Forms.FlowLayoutPanel();
+            this.imageList_ButtonIcon_3636 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer_MenuBar_Left)).BeginInit();
             this.splitContainer_MenuBar_Left.Panel1.SuspendLayout();
             this.splitContainer_MenuBar_Left.Panel2.SuspendLayout();
@@ -219,7 +220,7 @@ namespace Semantic
             this.button_Path.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Path.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Path.ImageKey = "path.png";
-            this.button_Path.ImageList = this.imageList_ButtonIcon;
+            this.button_Path.ImageList = this.imageList_ButtonIcon_4040;
             this.button_Path.Location = new System.Drawing.Point(22, 2);
             this.button_Path.Margin = new System.Windows.Forms.Padding(2);
             this.button_Path.Name = "button_Path";
@@ -231,21 +232,22 @@ namespace Semantic
             this.button_Path.UseVisualStyleBackColor = true;
             this.button_Path.Click += new System.EventHandler(this.button_Path_Click);
             // 
-            // imageList_ButtonIcon
+            // imageList_ButtonIcon_4040
             // 
-            this.imageList_ButtonIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_ButtonIcon.ImageStream")));
-            this.imageList_ButtonIcon.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList_ButtonIcon.Images.SetKeyName(0, "file_Save");
-            this.imageList_ButtonIcon.Images.SetKeyName(1, "Info.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(2, "zoom_100_.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(3, "zoom_in.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(4, "zoom_out.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(5, "edit_Undo");
-            this.imageList_ButtonIcon.Images.SetKeyName(6, "edit_Redo.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(7, "segmentation.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(8, "path.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(9, "move.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(10, "pen.png");
+            this.imageList_ButtonIcon_4040.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_ButtonIcon_4040.ImageStream")));
+            this.imageList_ButtonIcon_4040.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(0, "segmentation.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(1, "path.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(2, "move.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(3, "pen.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(4, "eraser.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(5, "info.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(6, "redo.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(7, "save.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(8, "undo.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(9, "zoom_in.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(10, "zoom_out.png");
+            this.imageList_ButtonIcon_4040.Images.SetKeyName(11, "zoom100.png");
             // 
             // button_RunModel
             // 
@@ -256,7 +258,7 @@ namespace Semantic
             this.button_RunModel.ForeColor = System.Drawing.SystemColors.Window;
             this.button_RunModel.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_RunModel.ImageKey = "segmentation.png";
-            this.button_RunModel.ImageList = this.imageList_ButtonIcon;
+            this.button_RunModel.ImageList = this.imageList_ButtonIcon_4040;
             this.button_RunModel.Location = new System.Drawing.Point(70, 2);
             this.button_RunModel.Margin = new System.Windows.Forms.Padding(2);
             this.button_RunModel.Name = "button_RunModel";
@@ -277,7 +279,7 @@ namespace Semantic
             this.button_Info.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Info.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_Info.ImageKey = "Info.png";
-            this.button_Info.ImageList = this.imageList_ButtonIcon;
+            this.button_Info.ImageList = this.imageList_ButtonIcon_4040;
             this.button_Info.Location = new System.Drawing.Point(118, 2);
             this.button_Info.Margin = new System.Windows.Forms.Padding(2);
             this.button_Info.Name = "button_Info";
@@ -338,8 +340,8 @@ namespace Semantic
             this.button_Undo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Undo.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Undo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_Undo.ImageKey = "edit_Undo";
-            this.button_Undo.ImageList = this.imageList_ButtonIcon;
+            this.button_Undo.ImageKey = "undo.png";
+            this.button_Undo.ImageList = this.imageList_ButtonIcon_3636;
             this.button_Undo.Location = new System.Drawing.Point(2, 2);
             this.button_Undo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Undo.Name = "button_Undo";
@@ -359,8 +361,8 @@ namespace Semantic
             this.button_Redo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Redo.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Redo.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_Redo.ImageKey = "edit_Redo.png";
-            this.button_Redo.ImageList = this.imageList_ButtonIcon;
+            this.button_Redo.ImageKey = "redo.png";
+            this.button_Redo.ImageList = this.imageList_ButtonIcon_3636;
             this.button_Redo.Location = new System.Drawing.Point(50, 2);
             this.button_Redo.Margin = new System.Windows.Forms.Padding(2);
             this.button_Redo.Name = "button_Redo";
@@ -381,7 +383,7 @@ namespace Semantic
             this.button_PaintMode.ForeColor = System.Drawing.SystemColors.Window;
             this.button_PaintMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_PaintMode.ImageKey = "pen.png";
-            this.button_PaintMode.ImageList = this.imageList_ButtonIcon;
+            this.button_PaintMode.ImageList = this.imageList_ButtonIcon_3636;
             this.button_PaintMode.Location = new System.Drawing.Point(98, 2);
             this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_PaintMode.Name = "button_PaintMode";
@@ -402,7 +404,7 @@ namespace Semantic
             this.button_ScrollMode.ForeColor = System.Drawing.SystemColors.Window;
             this.button_ScrollMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ScrollMode.ImageKey = "move.png";
-            this.button_ScrollMode.ImageList = this.imageList_ButtonIcon;
+            this.button_ScrollMode.ImageList = this.imageList_ButtonIcon_3636;
             this.button_ScrollMode.Location = new System.Drawing.Point(146, 2);
             this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2);
             this.button_ScrollMode.Name = "button_ScrollMode";
@@ -436,7 +438,7 @@ namespace Semantic
             this.button_ZoomIn.ForeColor = System.Drawing.SystemColors.Window;
             this.button_ZoomIn.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ZoomIn.ImageKey = "zoom_in.png";
-            this.button_ZoomIn.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomIn.ImageList = this.imageList_ButtonIcon_4040;
             this.button_ZoomIn.Location = new System.Drawing.Point(2, 2);
             this.button_ZoomIn.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomIn.Name = "button_ZoomIn";
@@ -455,8 +457,8 @@ namespace Semantic
             this.button_ZoomReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ZoomReset.ForeColor = System.Drawing.SystemColors.Window;
             this.button_ZoomReset.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_ZoomReset.ImageKey = "zoom_100_.png";
-            this.button_ZoomReset.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomReset.ImageKey = "zoom100.png";
+            this.button_ZoomReset.ImageList = this.imageList_ButtonIcon_4040;
             this.button_ZoomReset.Location = new System.Drawing.Point(50, 2);
             this.button_ZoomReset.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomReset.Name = "button_ZoomReset";
@@ -477,7 +479,7 @@ namespace Semantic
             this.button_ZoomOut.ForeColor = System.Drawing.SystemColors.Window;
             this.button_ZoomOut.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.button_ZoomOut.ImageKey = "zoom_out.png";
-            this.button_ZoomOut.ImageList = this.imageList_ButtonIcon;
+            this.button_ZoomOut.ImageList = this.imageList_ButtonIcon_4040;
             this.button_ZoomOut.Location = new System.Drawing.Point(98, 2);
             this.button_ZoomOut.Margin = new System.Windows.Forms.Padding(2);
             this.button_ZoomOut.Name = "button_ZoomOut";
@@ -496,8 +498,8 @@ namespace Semantic
             this.button_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Save.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Save.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_Save.ImageKey = "file_Save";
-            this.button_Save.ImageList = this.imageList_ButtonIcon;
+            this.button_Save.ImageKey = "save.png";
+            this.button_Save.ImageList = this.imageList_ButtonIcon_4040;
             this.button_Save.Location = new System.Drawing.Point(146, 2);
             this.button_Save.Margin = new System.Windows.Forms.Padding(2);
             this.button_Save.Name = "button_Save";
@@ -1581,7 +1583,7 @@ namespace Semantic
             this.CursorPosition_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.CursorPosition_toolStripStatusLabel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 2);
             this.CursorPosition_toolStripStatusLabel.Name = "CursorPosition_toolStripStatusLabel";
-            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(127, 17);
+            this.CursorPosition_toolStripStatusLabel.Size = new System.Drawing.Size(137, 17);
             this.CursorPosition_toolStripStatusLabel.Spring = true;
             this.CursorPosition_toolStripStatusLabel.Text = "Cursor x: ?  y: ?";
             this.CursorPosition_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1590,7 +1592,7 @@ namespace Semantic
             // 
             this.BitmapSize_toolStripStatusLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.BitmapSize_toolStripStatusLabel.Name = "BitmapSize_toolStripStatusLabel";
-            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(135, 17);
+            this.BitmapSize_toolStripStatusLabel.Size = new System.Drawing.Size(145, 17);
             this.BitmapSize_toolStripStatusLabel.Spring = true;
             this.BitmapSize_toolStripStatusLabel.Text = "ImageSize x: ? y: ?";
             this.BitmapSize_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1601,7 +1603,7 @@ namespace Semantic
             this.Scale_toolStripStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Scale_toolStripStatusLabel.Name = "Scale_toolStripStatusLabel";
             this.Scale_toolStripStatusLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(135, 17);
+            this.Scale_toolStripStatusLabel.Size = new System.Drawing.Size(145, 17);
             this.Scale_toolStripStatusLabel.Spring = true;
             this.Scale_toolStripStatusLabel.Text = "Scale: 100 %";
             this.Scale_toolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1688,6 +1690,23 @@ namespace Semantic
             this.tablePanel_FullLayout.SetRowSpan(this.LeftDock_flowPanel_Thumbnail, 2);
             this.LeftDock_flowPanel_Thumbnail.Size = new System.Drawing.Size(263, 467);
             this.LeftDock_flowPanel_Thumbnail.TabIndex = 19;
+            // 
+            // imageList_ButtonIcon_3636
+            // 
+            this.imageList_ButtonIcon_3636.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_ButtonIcon_3636.ImageStream")));
+            this.imageList_ButtonIcon_3636.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(0, "segmentation.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(1, "path.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(2, "move.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(3, "pen.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(4, "eraser.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(5, "info.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(6, "redo.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(7, "save.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(8, "undo.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(9, "zoom_in.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(10, "zoom_out.png");
+            this.imageList_ButtonIcon_3636.Images.SetKeyName(11, "zoom100.png");
             // 
             // UI_Main
             // 
@@ -1819,7 +1838,7 @@ namespace Semantic
         private System.Windows.Forms.Label label_Class20;
         private System.Windows.Forms.TableLayoutPanel tablePanel_Color_0;
         private System.Windows.Forms.Label label_Class0;
-        private System.Windows.Forms.ImageList imageList_ButtonIcon;
+        private System.Windows.Forms.ImageList imageList_ButtonIcon_4040;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_Edit;
         private System.Windows.Forms.FlowLayoutPanel flowPanel_Menu_Zoom;
         private System.Windows.Forms.Panel panel3;
@@ -1848,5 +1867,6 @@ namespace Semantic
         private System.Windows.Forms.ToolStripStatusLabel Scale_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel BitmapSize_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel CursorPosition_toolStripStatusLabel;
+        private System.Windows.Forms.ImageList imageList_ButtonIcon_3636;
     }
 }
