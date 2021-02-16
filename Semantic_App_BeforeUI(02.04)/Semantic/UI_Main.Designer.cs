@@ -218,7 +218,7 @@ namespace Semantic
             this.button_Path.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_Path.ForeColor = System.Drawing.SystemColors.Window;
             this.button_Path.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_Path.ImageKey = "file_Path";
+            this.button_Path.ImageKey = "path.png";
             this.button_Path.ImageList = this.imageList_ButtonIcon;
             this.button_Path.Location = new System.Drawing.Point(22, 2);
             this.button_Path.Margin = new System.Windows.Forms.Padding(2);
@@ -235,17 +235,17 @@ namespace Semantic
             // 
             this.imageList_ButtonIcon.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_ButtonIcon.ImageStream")));
             this.imageList_ButtonIcon.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList_ButtonIcon.Images.SetKeyName(0, "edit_Scroll.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(1, "edit_Brush");
-            this.imageList_ButtonIcon.Images.SetKeyName(2, "file_Save");
-            this.imageList_ButtonIcon.Images.SetKeyName(3, "file_Path");
-            this.imageList_ButtonIcon.Images.SetKeyName(4, "Info.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(5, "segmentation.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(6, "zoom_100_.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(7, "zoom_in.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(8, "zoom_out.png");
-            this.imageList_ButtonIcon.Images.SetKeyName(9, "edit_Undo");
-            this.imageList_ButtonIcon.Images.SetKeyName(10, "edit_Redo.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(0, "file_Save");
+            this.imageList_ButtonIcon.Images.SetKeyName(1, "Info.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(2, "zoom_100_.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(3, "zoom_in.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(4, "zoom_out.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(5, "edit_Undo");
+            this.imageList_ButtonIcon.Images.SetKeyName(6, "edit_Redo.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(7, "segmentation.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(8, "path.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(9, "move.png");
+            this.imageList_ButtonIcon.Images.SetKeyName(10, "pen.png");
             // 
             // button_RunModel
             // 
@@ -379,7 +379,7 @@ namespace Semantic
             this.button_PaintMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_PaintMode.ForeColor = System.Drawing.SystemColors.Window;
             this.button_PaintMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_PaintMode.ImageKey = "edit_Brush";
+            this.button_PaintMode.ImageKey = "pen.png";
             this.button_PaintMode.ImageList = this.imageList_ButtonIcon;
             this.button_PaintMode.Location = new System.Drawing.Point(98, 2);
             this.button_PaintMode.Margin = new System.Windows.Forms.Padding(2);
@@ -400,7 +400,7 @@ namespace Semantic
             this.button_ScrollMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.button_ScrollMode.ForeColor = System.Drawing.SystemColors.Window;
             this.button_ScrollMode.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button_ScrollMode.ImageKey = "edit_Scroll.png";
+            this.button_ScrollMode.ImageKey = "move.png";
             this.button_ScrollMode.ImageList = this.imageList_ButtonIcon;
             this.button_ScrollMode.Location = new System.Drawing.Point(146, 2);
             this.button_ScrollMode.Margin = new System.Windows.Forms.Padding(2);

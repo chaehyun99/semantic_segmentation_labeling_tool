@@ -178,5 +178,10 @@
   <ItemGroup>
     <None Include="Resources\icon_Zoom100_32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\move.png" />
+    <Content Include="Resources\path.png" />
+    <Content Include="Resources\pen.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
